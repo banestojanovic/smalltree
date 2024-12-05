@@ -11,6 +11,9 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "spatie/laravel-data": "^4.11",
+        "spatie/laravel-medialibrary": "^11.10",
+        "spatie/laravel-sluggable": "^3.6",
+        "spatie/laravel-translatable": "^6.8",
         "spatie/laravel-typescript-transformer": "^2.5",
         "tightenco/ziggy": "^2.0"
     },

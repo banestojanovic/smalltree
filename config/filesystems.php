@@ -57,6 +57,12 @@ return [
             'throw' => false,
         ],
 
+        \App\Support\Disk::ProductImages => [
+            'prefix' => 'product/images',
+            'driver' => 'scoped',
+            'disk' => 'public',
+        ],
+
     ],
 
     /*
