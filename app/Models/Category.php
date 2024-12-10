@@ -7,27 +7,33 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
-class Category extends Model implements HasMedia
+class Category extends Model implements HasMedia, Sortable
 {
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
 
+    use HasRecursiveRelationships;
     use HasSlug;
     use HasTranslations;
     use InteractsWithMedia;
+    use SortableTrait;
 
     protected $fillable = [
         'parent_id',
         'name',
         'slug',
         'description',
+        'order_column',
     ];
 
     public array $translatable = ['name', 'description'];

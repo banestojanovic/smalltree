@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('variation_id')->constrained()->cascadeOnDelete();
             $table->longText('value');
+            $table->integer('is_default')->default(0);
+            $table->bigInteger('order_column')->nullable();
             $table->timestamps();
         });
     }

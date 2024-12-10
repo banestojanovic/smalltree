@@ -14,4 +14,7 @@ export type PageProps<
         user: User;
     };
     ziggy: Config & { location: string };
+    global: {
+        categories: App.Data.CategoryData;
+    };
 };

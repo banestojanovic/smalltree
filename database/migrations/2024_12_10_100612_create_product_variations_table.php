@@ -18,7 +18,6 @@ return new class extends Migration
             $table->bigInteger('price')->index()->nullable();
             $table->integer('stock')->nullable();
             $table->integer('stock_status')->default(1);
-            $table->integer('is_default')->default(0);
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('attribute_id')->constrained()->cascadeOnDelete();
             $table->longText('value');
+            $table->bigInteger('order_column')->nullable();
             $table->timestamps();
         });
     }

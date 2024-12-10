@@ -2,8 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\Attribute;
+use App\Models\AttributeValue;
+use App\Models\Cart;
+use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\ProductVariation;
 use App\Models\User;
+use App\Models\Variation;
+use App\Models\VariationValue;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -38,6 +46,14 @@ class AppServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
             'user' => User::class,
             'product' => Product::class,
+            'product_variation' => ProductVariation::class,
+            'category' => Category::class,
+            'attribute' => Attribute::class,
+            'attribute_value' => AttributeValue::class,
+            'variation' => Variation::class,
+            'variation_value' => VariationValue::class,
+            'order' => Order::class,
+            'cart' => Cart::class,
         ]);
         Date::use(CarbonImmutable::class);
     }

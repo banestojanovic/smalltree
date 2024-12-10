@@ -20,7 +20,6 @@ class ProductVariationSeeder extends Seeder
                 'sku' => $product->sku,
                 'price' => $product->price / 2,
                 'stock' => $product->stock,
-                'is_default' => false,
             ]);
 
             $variation->variations()->attach(1);
@@ -30,7 +29,6 @@ class ProductVariationSeeder extends Seeder
                 'sku' => $product->sku,
                 'price' => $product->price,
                 'stock' => $product->stock,
-                'is_default' => true,
             ]);
 
             $variation->variations()->attach(2);
@@ -40,7 +38,6 @@ class ProductVariationSeeder extends Seeder
                 'sku' => $product->sku,
                 'price' => $product->price * 2.5,
                 'stock' => $product->stock,
-                'is_default' => false,
             ]);
 
             $variation->variations()->attach(3);

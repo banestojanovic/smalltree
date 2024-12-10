@@ -28,15 +28,13 @@ class AttributeValueSeeder extends Seeder
 
         $data = $values->flatMap(function ($valueArray, $attributeId) {
             return collect($valueArray)->map(function ($value) use ($attributeId) {
-                return [
+                AttributeValue::create([
                     'attribute_id' => $attributeId,
                     'value' => $value,
                     'created_at' => now(),
                     'updated_at' => now(),
-                ];
+                ]);
             });
         })->toArray();
-
-        AttributeValue::insert($data);
     }
 }

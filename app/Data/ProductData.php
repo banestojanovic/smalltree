@@ -2,6 +2,8 @@
 
 namespace App\Data;
 
+use App\ProductStatus;
+use App\ProductStockStatus;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
@@ -17,9 +19,9 @@ class ProductData extends Data
         public string $sku,
         public ?float $price,
         public ?int $stock,
-        public string $stock_status,
+        public ProductStockStatus $stock_status,
         public ?string $description,
-        public ?string $status,
+        public ?ProductStatus $status,
         public ?array $data,
         public ?Media $cover,
         public ?MediaCollection $images,

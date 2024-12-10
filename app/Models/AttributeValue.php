@@ -6,21 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 
-class AttributeValue extends Model
+class AttributeValue extends Model implements Sortable
 {
     /** @use HasFactory<\Database\Factories\AttributeValueFactory> */
     use HasFactory;
 
     use HasTranslations;
+    use SortableTrait;
 
     protected $fillable = [
         'attribute_id',
         'value',
+        'order_column',
     ];
 
-    protected $translatable = ['value'];
+    protected array $translatable = ['value'];
 
     public function attribute(): BelongsTo
     {

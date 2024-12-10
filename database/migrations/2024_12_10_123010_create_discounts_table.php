@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('product_variation_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->bigInteger('price');
-            $table->integer('percentage');
+            $table->bigInteger('price')->nullable();
+            $table->integer('percentage')->nullable();
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
             $table->timestamps();

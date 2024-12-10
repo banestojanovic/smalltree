@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description')->nullable();
             $table->longText('data')->nullable();
+            $table->bigInteger('order_column')->nullable();
             $table->timestamps();
         });
     }

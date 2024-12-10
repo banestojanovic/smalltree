@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('type')->default(1);
             $table->longText('description')->nullable();
             $table->longText('data')->nullable();
+            $table->bigInteger('order_column')->nullable();
             $table->timestamps();
         });
     }

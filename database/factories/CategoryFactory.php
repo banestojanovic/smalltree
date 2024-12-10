@@ -29,7 +29,7 @@ class CategoryFactory extends Factory
     {
         return $this->afterCreating(function (Category $category) {
 
-            $img = array_rand(1, 10);
+            $img = rand(1, 10);
 
             $category->addMediaFromDisk("products/$img.jpg", 'dummy')
                 ->preservingOriginal()

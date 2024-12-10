@@ -21,7 +21,6 @@ class ProductVariation extends Model
         'price',
         'stock',
         'stock_status',
-        'is_default',
         'data',
     ];
 
@@ -29,6 +28,8 @@ class ProductVariation extends Model
         'stock_status' => ProductStockStatus::class,
         'data' => 'array',
     ];
+
+    protected $with = ['variations', 'discount'];
 
     protected function price(): Attribute
     {

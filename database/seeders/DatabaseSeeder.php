@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
         Storage::disk('public')->deleteDirectory('product');
         Storage::disk('public')->deleteDirectory('category');
 
-        User::factory()->superAdmin()->create();
+        User::factory()->superAdmin()->create([
+            'email' => 'admin@test.com',
+        ]);
 
         //        User::factory()->create([
         //            'name' => 'Test User',

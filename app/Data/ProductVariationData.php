@@ -2,6 +2,7 @@
 
 namespace App\Data;
 
+use App\ProductStockStatus;
 use Spatie\LaravelData\Data;
 
 class ProductVariationData extends Data
@@ -12,7 +13,7 @@ class ProductVariationData extends Data
         public string $sku,
         public ?float $price,
         public ?int $stock,
-        public string $stock_status,
+        public ProductStockStatus $stock_status,
         public ?VariationValueData $variation,
     ) {}
 }

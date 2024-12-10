@@ -15,7 +15,7 @@ class VariationValueSeeder extends Seeder
     {
         VariationValue::factory()->count(3)
             ->state(new Sequence(fn ($sequence) => ['value' => '50g'],
-                ['value' => '100g'],
+                ['value' => '100g', 'is_default' => true],
                 ['value' => '250g'],
             ))
             ->create();

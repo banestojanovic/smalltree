@@ -1,0 +1,24 @@
+{
+    "enums": {
+        "user": {
+            "roles": {
+                "super_admin": "Super administrator",
+                "admin": "Administrator",
+                "support": "Podrška",
+                "user": "Korisnik"
+            }
+        },
+        "product": {
+            "status": {
+                "inactive": "Neaktivan",
+                "active": "Aktivan",
+                "draft": "Nacrt",
+                "trashed": "Obrisano"
+            },
+            "stock_status": {
+                "out_of_stock": "Nema na stanju",
+                "in_stock": "Na stanju"
+            }
+        }
+    }
+}

@@ -4,18 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 
-class Variation extends Model
+class Variation extends Model implements Sortable
 {
     /** @use HasFactory<\Database\Factories\VariationFactory> */
     use HasFactory;
 
     use HasTranslations;
+    use SortableTrait;
 
     protected $fillable = [
         'name',
         'description',
+        'order_column',
         'data',
     ];
 
@@ -24,4 +29,9 @@ class Variation extends Model
     ];
 
     public array $translatable = ['name'];
+
+    public function values(): HasMany
+    {
+        return $this->hasMany(VariationValue::class);
+    }
 }
