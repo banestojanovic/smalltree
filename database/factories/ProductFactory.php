@@ -21,8 +21,10 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'description' => $this->faker->text(),
+            'sku' => $this->faker->numberBetween(1000, 10000),
             'price' => $this->faker->numberBetween(1000, 10000),
+            'stock' => $this->faker->numberBetween(1, 100),
+            'description' => $this->faker->text(),
         ];
     }
 
@@ -30,9 +32,9 @@ class ProductFactory extends Factory
     {
         return $this->afterCreating(function (Product $product) {
             for ($i = 1; $i <= 10; $i++) {
-                $img = rand(1, 11);
+                $img = rand(1, 10);
 
-                $product->addMediaFromDisk("cars/$img.jpg", 'dummy')
+                $product->addMediaFromDisk("products/$img.jpg", 'dummy')
                     ->preservingOriginal()
                     ->withProperties(['uuid' => Str::uuid()])
                     ->setOrder($i)

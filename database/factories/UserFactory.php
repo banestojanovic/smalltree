@@ -43,7 +43,6 @@ class UserFactory extends Factory
         ]);
     }
 
-
     /**
      * Indicate that the model's role should be super admin.
      */

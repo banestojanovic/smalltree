@@ -57,8 +57,26 @@ return [
             'throw' => false,
         ],
 
+        'dummy' => [
+            'prefix' => 'dummy',
+            'driver' => 'scoped',
+            'disk' => 'public',
+        ],
+
+        \App\Support\Disk::UserImage => [
+            'prefix' => 'user/images',
+            'driver' => 'scoped',
+            'disk' => 'public',
+        ],
+
         \App\Support\Disk::ProductImages => [
             'prefix' => 'product/images',
+            'driver' => 'scoped',
+            'disk' => 'public',
+        ],
+
+        \App\Support\Disk::CategoryImage => [
+            'prefix' => 'category/images',
             'driver' => 'scoped',
             'disk' => 'public',
         ],
