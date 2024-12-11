@@ -55,6 +55,7 @@ When new component is being built it should be checked if it is already availabl
   ```
   
 - To share the data globally on every page the data is shared using the inertia share method. The data is shared in the HandleInertiaRequest.php file. You can share the data in the same way as already explained.
+- The data is shared in the following way: [Inertia share](https://inertiajs.com/shared-data). It is strongly recommended to read the inertia documentation and use all the features and helpers where appropriate like useForm() and others.
   
 - Vite is used for the front-end development. The front-end files are located in the resources/js folder. The files are compiled using the following command:
   
