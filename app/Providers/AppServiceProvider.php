@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -56,5 +57,10 @@ class AppServiceProvider extends ServiceProvider
             'cart' => Cart::class,
         ]);
         Date::use(CarbonImmutable::class);
+
+        Schema::defaultStringLength(191);
+
     }
+
+
 }

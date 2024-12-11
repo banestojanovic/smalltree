@@ -25,6 +25,7 @@ name: string;
 slug: string;
 description: string | null;
 cover: any | null;
+products: Array<App.Data.ProductData> | null;
 };
 export type GlobalData = {
 categories: Array<App.Data.CategoryData> | null;

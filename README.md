@@ -1,4 +1,4 @@
-## SmallTree Laravel eCommere project
+# SmallTree Laravel eCommere project
 
 ### Tech stack
 
