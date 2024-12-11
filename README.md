@@ -24,7 +24,7 @@ The guidelines can be found at the following links:
 
 Shadcn should be used for every component that is created as for example: form fields, modals, dialogs, sheets, datepickers, sonnet/toast, alerts, button, accordion etc.
 
-When new component is being built it should be checked if it is already available in the shadcn/ui package. If it is not available then it should be created using the shadcn/ui package.
+When new component is being built it should be checked if it is already available in the shadcn/ui package.
 
 #### Help guides
 - The basic models, seeders and the code setup is already completed. You can freely reset the database at any point and all the data will be regenerated.
