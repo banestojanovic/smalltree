@@ -54,6 +54,8 @@ When new component is being built it should be checked if it is already availabl
   password: password
   ```
   
+- To share the data globally on every page the data is shared using the inertia share method. The data is shared in the HandleInertiaRequest.php file. You can share the data in the same way as already explained.
+  
 - Vite is used for the front-end development. The front-end files are located in the resources/js folder. The files are compiled using the following command:
   
 - ```
