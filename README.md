@@ -24,10 +24,9 @@ The guidelines can be found at the following links:
 
 #### Help guides
 - The basic models, seeders and the code setup is already completed. You can freely reset the database at any point and all the data will be regenerated.
-  ```php
-    php artisan migrate:refresh --seed
-    ```
-```
+  ```php 
+  php artisan migrate:refresh --seed
+  ```
 - Laravel Data package: For the backend queries spatie's laravel data package is used. The documentation can be found [here](https://spatie.be/docs/laravel-data/v4/introduction)
   For all the current models it has already been implemented. The documentation is for future reference.
   
@@ -36,6 +35,7 @@ The guidelines can be found at the following links:
   // to get multiple products with their variations, discount and cover image.
   ProductData::collect(Product::with('variations', 'discount', 'cover')->limit(12)->get()),
   ```
+  
   ```php 
   // to get a single product with its variations, discount and cover image.
   ProductData::from(Product::with('variations', 'discount', 'cover')->limit(12)->get()),
@@ -44,13 +44,15 @@ The guidelines can be found at the following links:
 - The code from the data package is already implemented in the HomeController.php. You can use it as a guide to implement it in other controllers. The data will automatically be transformed to the typescript format and ready to use in react files.
 - The data is passed to the react files using the inertia.js. The data is passed as props
 - Admin panel is built using the filamentPHP and is available on the /admin route. The default login credentials are:
-  ```
+  
+- ```
   email: admin@test.com
   password: password
   ```
   
 - Vite is used for the front-end development. The front-end files are located in the resources/js folder. The files are compiled using the following command:
-  ```
+  
+- ```
   development: npm run dev
   production: npm run build
   ```
