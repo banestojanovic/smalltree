@@ -2,14 +2,9 @@ import ApplicationLogo from '@/app/components/ApplicationLogo';
 import NavLink from '@/app/components/NavLink';
 import ResponsiveNavLink from '@/app/components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
-import { PropsWithChildren, ReactNode, useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 
-export default function DefaultLayout({
-    header,
-    children,
-}: PropsWithChildren<{ header?: ReactNode }>) {
-    // const user = usePage().props.auth.user;
-
+export default function DefaultLayout({ children }: PropsWithChildren) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -94,14 +89,6 @@ export default function DefaultLayout({
                     </div>
                 </div>
             </nav>
-
-            {header && (
-                <header className="bg-white shadow dark:bg-gray-800">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        {header}
-                    </div>
-                </header>
-            )}
 
             <main>{children}</main>
         </div>

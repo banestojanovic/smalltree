@@ -15,6 +15,24 @@ export type PageProps<
     };
     ziggy: Config & { location: string };
     global: {
-        categories: App.Data.CategoryData;
+        categories: App.Data.CategoryData[];
+    };
+};
+
+export type Paginated<
+    T extends Record<string, unkown> = Record<string, unkown>,
+> = T & {
+    data: T[App.Data][];
+    meta?: {
+        current_page: number;
+        last_page: number;
+        per_page: number;
+        total: number;
+    };
+    links?: {
+        first: string;
+        last: string;
+        next?: string;
+        prev?: string;
     };
 };

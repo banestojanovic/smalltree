@@ -31,6 +31,7 @@ export type GlobalData = {
 categories: Array<App.Data.CategoryData> | null;
 };
 export type ProductData = {
+category: App.Data.CategoryData | null;
 id: number;
 name: string;
 slug: string;
@@ -45,6 +46,7 @@ cover: any | null;
 images: any | null;
 variations: Array<App.Data.ProductVariationData> | null;
 attributes: Array<App.Data.AttributeValueData> | null;
+categories: Array<App.Data.CategoryData> | null;
 };
 export type ProductVariationData = {
 id: number;

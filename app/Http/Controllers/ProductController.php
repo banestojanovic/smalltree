@@ -2,32 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\CategoryData;
 use App\Data\ProductData;
-use App\Models\Category;
 use App\Models\Product;
+use Spatie\LaravelData\PaginatedDataCollection;
 
 class ProductController extends Controller
 {
-//    public function __invoke()
-//    {
-//        return inertia('home', [
-//            'products' => ProductData::collect(Product::with('variations', 'discount', 'cover')->limit(12)->get()),
-//        ]);
-//    }
-
-    public function index()
+    public function index(): \Inertia\Response|\Inertia\ResponseFactory
     {
-        $selectedCategory = request()->get('selectedCategory') ?? null;
-
-        $products = CategoryData::collect(Category::query()
-            ->with('products.cover')
-            ->when($selectedCategory ?? null, fn($query, $categoryId) => $query->where('id', $categoryId))
-            ->get()
-        );
-
         return inertia('product/index', [
-            'products' => $products,
+            'products' => ProductData::collect(Product::with('variations', 'discount', 'cover', 'categories')
+                ->when(! empty(request('selectedCategory')), function ($query) {
+                    $query->whereHas('categories', function ($q) {
+                        $q->whereIn('categories.id', request('selectedCategory'));
+                    });
+                })
+                ->paginate(12)),
+            'query' => [
+                'selectedCategory' => request('selectedCategory') ?? [],
+            ],
         ]);
     }
 }
