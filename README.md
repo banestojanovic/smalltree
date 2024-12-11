@@ -33,12 +33,12 @@ The guidelines can be found at the following links:
   To query the data the following code example from HomeController.php can be used for guide:
   ```php 
   // to get multiple products with their variations, discount and cover image.
-  ProductData::collect(Product::with('variations', 'discount', 'cover')->limit(12)->get()),
+  ProductData::collect(Product::with('variations', 'discount', 'cover')->limit(12)->get());
   ```
   
   ```php 
   // to get a single product with its variations, discount and cover image.
-  ProductData::from(Product::with('variations', 'discount', 'cover')->limit(12)->get()),
+  ProductData::from(Product::with('variations', 'discount', 'cover')->limit(12)->get());
   ```
 
 - The code from the data package is already implemented in the HomeController.php. You can use it as a guide to implement it in other controllers. The data will automatically be transformed to the typescript format and ready to use in react files.
