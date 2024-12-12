@@ -57,7 +57,7 @@ class Post extends Model implements HasMedia, Sortable
 
     public function cover(): MorphOne
     {
-        return $this->morphOne(Media::class, 'model')->where('collection_name', Disk::ProductImages)->orderBy('order_column');
+        return $this->morphOne(Media::class, 'model')->where('collection_name', Disk::PostImages)->orderBy('order_column');
     }
 
     public function photos(): MorphMany

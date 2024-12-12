@@ -26,15 +26,11 @@ class DatabaseSeeder extends Seeder
         Storage::disk('public')->deleteDirectory('category');
         Storage::disk('public')->deleteDirectory('post');
         Storage::disk('public')->deleteDirectory('post_category');
+        Storage::disk('public')->deleteDirectory('attachments');
 
         User::factory()->superAdmin()->create([
             'email' => 'admin@test.com',
         ]);
-
-        //        User::factory()->create([
-        //            'name' => 'Test User',
-        //            'email' => 'test@example.com',
-        //        ]);
 
         (new CategorySeeder)->run();
 
@@ -63,6 +59,12 @@ class DatabaseSeeder extends Seeder
 
         Discount::factory()->count(4)->create();
 
-        Post::factory()->count(50)->gallery()->create();
+        (new PostCategorySeeder)->run();
+        $posts = Post::factory()->count(50)->gallery()->create();
+
+        $posts->each(function ($post) {
+            $post->categories()->attach(Category::inRandomOrder()->first()->id);
+            $post->attachTags(Tag::inRandomOrder()->limit(3)->get()->pluck('name')->toArray());
+        });
     }
 }

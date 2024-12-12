@@ -2,27 +2,32 @@
 
 namespace App\Filament\Resources;
 
-use App\AttributeType;
-use App\Filament\Resources\AttributeResource\Pages;
-use App\Filament\Resources\AttributeResource\RelationManagers\ValuesRelationManager;
-use App\Models\Attribute;
+use App\Filament\Resources\PostCategoryResource\Pages;
+use App\Filament\Resources\PostCategoryResource\RelationManagers;
+use App\Models\PostCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
-class AttributeResource extends Resource
+class PostCategoryResource extends Resource
 {
     use Translatable;
 
-    protected static ?string $model = Attribute::class;
+    protected static ?string $model = PostCategory::class;
 
-    protected static ?string $navigationGroup = 'Products Manager';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?int $navigationSort = 30;
+    protected static ?string $navigationParentItem = 'Posts';
+
+    protected static ?string $navigationGroup = 'Blog';
+
+    protected static ?int $navigationSort = 20;
 
     public static function form(Form $form): Form
     {
@@ -30,19 +35,18 @@ class AttributeResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->required()
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn ($get, $set) => $set('slug', Str::slug($get('name')))),
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->disabled()
-                    ->unique(Attribute::class, 'slug', ignoreRecord: true)
+                    ->unique(PostCategory::class, 'slug', ignoreRecord: true)
                     ->maxLength(255),
-                Forms\Components\Select::make('type')
-                    ->required()
-                    ->options(AttributeType::class)
-                    ->default(1),
-                Forms\Components\Textarea::make('description')
-                    ->columnSpanFull(),
+                Forms\Components\Select::make('parent_id')
+                    ->preload()
+                    ->searchable()
+                    ->options(fn () => PostCategory::where('parent_id', null)->pluck('name', 'id')),
             ]);
     }
 
@@ -51,9 +55,11 @@ class AttributeResource extends Resource
         return $table
             ->reorderable('order_column')
             ->columns([
+                Tables\Columns\ImageColumn::make('cover.original_url')->circular(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('type')
+                Tables\Columns\TextColumn::make('parent.name')
+                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -80,16 +86,16 @@ class AttributeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ValuesRelationManager::class,
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAttributes::route('/'),
-            'create' => Pages\CreateAttribute::route('/create'),
-            'edit' => Pages\EditAttribute::route('/{record}/edit'),
+            'index' => Pages\ListPostCategories::route('/'),
+            'create' => Pages\CreatePostCategory::route('/create'),
+            'edit' => Pages\EditPostCategory::route('/{record}/edit'),
         ];
     }
 }

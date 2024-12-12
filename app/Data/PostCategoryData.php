@@ -5,7 +5,7 @@ namespace App\Data;
 use Spatie\LaravelData\Data;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class CategoryData extends Data
+class PostCategoryData extends Data
 {
     public function __construct(
         public int $id,

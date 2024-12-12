@@ -26,6 +26,10 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-bolt';
 
+    protected static ?string $navigationGroup = 'Products';
+
+    protected static ?int $navigationSort = 10;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -90,6 +94,8 @@ class ProductResource extends Resource
                         ->searchable()
                         ->relationship(name: 'categories', titleAttribute: 'name'),
 
+                    Forms\Components\SpatieTagsInput::make('tags'),
+
                     Forms\Components\SpatieMediaLibraryFileUpload::make('images')
                         ->openable()
                         ->reorderable()
@@ -102,7 +108,7 @@ class ProductResource extends Resource
                         ->columnSpanFull(),
                 ])->columnSpan(['lg' => 1]),
 
-                Forms\Components\Section::make('Attributes')->columns(3)->schema(function () {
+                Forms\Components\Section::make('Attributes')->columns(2)->schema(function () {
                     $attributes = Attribute::with('values')->get();
 
                     return $attributes->map(function ($attribute) {

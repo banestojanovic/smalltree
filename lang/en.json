@@ -27,6 +27,14 @@
                 "draft": "Nacrt",
                 "trashed": "Obrisano"
             }
+        },
+        "page": {
+            "status": {
+                "inactive": "Neaktivan",
+                "active": "Aktivan",
+                "draft": "Nacrt",
+                "trashed": "Obrisano"
+            }
         }
     }
 }

@@ -47,8 +47,7 @@ class Category extends Model implements HasMedia, Sortable
 
     public function cover(): MorphOne
     {
-        return $this->morphOne(Media::class, 'model')->where('collection_name',
-            Disk::CategoryImages)->orderBy('order_column');
+        return $this->morphOne(Media::class, 'model')->where('collection_name', Disk::CategoryImages)->orderBy('order_column');
     }
 
     public function products(): BelongsToMany

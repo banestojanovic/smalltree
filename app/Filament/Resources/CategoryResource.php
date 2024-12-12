@@ -23,6 +23,8 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationParentItem = 'Products';
 
+    protected static ?string $navigationGroup = 'Products';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -35,7 +37,7 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->disabled()
-                    ->unique(Product::class, 'slug', ignoreRecord: true)
+                    ->unique(Category::class, 'slug', ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\Select::make('parent_id')
                     ->preload()

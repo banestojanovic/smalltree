@@ -2,27 +2,27 @@
 
 namespace App\Filament\Resources;
 
-use App\AttributeType;
-use App\Filament\Resources\AttributeResource\Pages;
-use App\Filament\Resources\AttributeResource\RelationManagers\ValuesRelationManager;
-use App\Models\Attribute;
+use App\Filament\Resources\PageResource\Pages;
+use App\Filament\Resources\PageResource\RelationManagers;
+use App\Models\Page;
+use App\PageStatus;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
-class AttributeResource extends Resource
+class PageResource extends Resource
 {
     use Translatable;
 
-    protected static ?string $model = Attribute::class;
+    protected static ?string $model = Page::class;
 
-    protected static ?string $navigationGroup = 'Products Manager';
-
-    protected static ?int $navigationSort = 30;
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -35,26 +35,30 @@ class AttributeResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->disabled()
-                    ->unique(Attribute::class, 'slug', ignoreRecord: true)
+                    ->unique(Page::class, 'slug', ignoreRecord: true)
                     ->maxLength(255),
-                Forms\Components\Select::make('type')
-                    ->required()
-                    ->options(AttributeType::class)
-                    ->default(1),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\RichEditor::make('content')
+                    ->fileAttachmentsDirectory('attachments')
                     ->columnSpanFull(),
+                Forms\Components\Select::make('status')
+                    ->required()
+                    ->options(PageStatus::class)
+                    ->default(1),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->reorderable('order_column')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('type')
+                Tables\Columns\TextColumn::make('status')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -80,16 +84,16 @@ class AttributeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ValuesRelationManager::class,
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAttributes::route('/'),
-            'create' => Pages\CreateAttribute::route('/create'),
-            'edit' => Pages\EditAttribute::route('/{record}/edit'),
+            'index' => Pages\ListPages::route('/'),
+            'create' => Pages\CreatePage::route('/create'),
+            'edit' => Pages\EditPage::route('/{record}/edit'),
         ];
     }
 }

@@ -41,23 +41,29 @@ class CategorySeeder extends Seeder
                 ->create();
         });
 
-        Tag::create(['name' => 'Crni čaj']);
-        Tag::create(['name' => 'Aromatizovani crni čaj']);
-        Tag::create(['name' => 'Zeleni čaj']);
-        Tag::create(['name' => 'Aromatizovani zeleni čaj']);
-        Tag::create(['name' => 'Beli čaj']);
-        Tag::create(['name' => 'Oolong čaj']);
-        Tag::create(['name' => 'Aromatizovani Oolong čaj']);
-        Tag::create(['name' => 'Biljni Mate čaj']);
-        Tag::create(['name' => 'Aromatizovani biljni Mate']);
-        Tag::create(['name' => 'Rooibos']);
-        Tag::create(['name' => 'Biljni ayurvedic čaj']);
-        Tag::create(['name' => 'Aromatizovani voćni čaj']);
-        Tag::create(['name' => 'Artisan Tea']);
-        Tag::create(['name' => 'Vaš Matcha ritual']);
-        Tag::create(['name' => 'Med Bagrem']);
-        Tag::create(['name' => 'Med Suncokret']);
-        Tag::create(['name' => 'bez dodate arome']);
-        Tag::create(['name' => 'organski čajevi']);
+        $tags = collect([
+            'Crni čaj',
+            'Aromatizovani crni čaj',
+            'Zeleni čaj',
+            'Aromatizovani zeleni čaj',
+            'Beli čaj',
+            'Oolong čaj',
+            'Aromatizovani Oolong čaj',
+            'Biljni Mate čaj',
+            'Aromatizovani biljni Mate',
+            'Rooibos',
+            'Biljni ayurvedic čaj',
+            'Aromatizovani voćni čaj',
+            'Artisan Tea',
+            'Vaš Matcha ritual',
+            'Med Bagrem',
+            'Med Suncokret',
+            'bez dodate arome',
+            'organski čajevi',
+        ]);
+
+        $tags->each(function ($tag) {
+            Tag::findOrCreate($tag);
+        });
     }
 }

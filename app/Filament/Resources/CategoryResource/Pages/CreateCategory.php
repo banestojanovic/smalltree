@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\CategoryResource\Pages;
 
 use App\Filament\Resources\CategoryResource;
-use Filament\Actions\LocaleSwitcher;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateCategory extends CreateRecord
@@ -15,7 +14,6 @@ class CreateCategory extends CreateRecord
     protected function getHeaderActions(): array
     {
         return [
-            LocaleSwitcher::make(),
         ];
     }
 }

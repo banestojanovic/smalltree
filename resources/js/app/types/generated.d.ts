@@ -30,6 +30,10 @@ cover: any | null;
 export type GlobalData = {
 categories: Array<App.Data.CategoryData> | null;
 };
+export type PageData = {
+};
+export type PostCategoryData = {
+};
 export type PostData = {
 id: number;
 name: string;
