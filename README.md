@@ -29,7 +29,7 @@ When new component is being built it should be checked if it is already availabl
 #### Help guides
 - The basic models, seeders and the code setup is already completed. You can freely reset the database at any point and all the data will be regenerated.
   ```php 
-  php artisan migrate:refresh --seed
+  php artisan migrate:fresh --seed
   ```
 - Laravel Data package: For the backend queries spatie's laravel data package is used. The documentation can be found [here](https://spatie.be/docs/laravel-data/v4/introduction)
   For all the current models it has already been implemented. The documentation is for future reference.

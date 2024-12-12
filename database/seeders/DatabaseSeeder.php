@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\AttributeValue;
 use App\Models\Category;
 use App\Models\Discount;
+use App\Models\Post;
 use App\Models\Product;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -23,6 +24,8 @@ class DatabaseSeeder extends Seeder
         Storage::disk('public')->deleteDirectory('user');
         Storage::disk('public')->deleteDirectory('product');
         Storage::disk('public')->deleteDirectory('category');
+        Storage::disk('public')->deleteDirectory('post');
+        Storage::disk('public')->deleteDirectory('post_category');
 
         User::factory()->superAdmin()->create([
             'email' => 'admin@test.com',
@@ -59,5 +62,7 @@ class DatabaseSeeder extends Seeder
         (new ProductVariationSeeder)->run();
 
         Discount::factory()->count(4)->create();
+
+        Post::factory()->count(50)->gallery()->create();
     }
 }

@@ -75,8 +75,20 @@ return [
             'disk' => 'public',
         ],
 
-        \App\Support\Disk::CategoryImage => [
+        \App\Support\Disk::PostImages => [
+            'prefix' => 'post/images',
+            'driver' => 'scoped',
+            'disk' => 'public',
+        ],
+
+        \App\Support\Disk::CategoryImages => [
             'prefix' => 'category/images',
+            'driver' => 'scoped',
+            'disk' => 'public',
+        ],
+
+        \App\Support\Disk::PostCategoryImages => [
+            'prefix' => 'post_category/images',
             'driver' => 'scoped',
             'disk' => 'public',
         ],

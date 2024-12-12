@@ -19,6 +19,14 @@
                 "out_of_stock": "Nema na stanju",
                 "in_stock": "Na stanju"
             }
+        },
+        "post": {
+            "status": {
+                "inactive": "Neaktivan",
+                "active": "Aktivan",
+                "draft": "Nacrt",
+                "trashed": "Obrisano"
+            }
         }
     }
 }

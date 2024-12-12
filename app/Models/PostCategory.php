@@ -14,17 +14,14 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Spatie\Translatable\HasTranslations;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
-class Category extends Model implements HasMedia, Sortable
+class PostCategory extends Model implements HasMedia, Sortable
 {
-    /** @use HasFactory<\Database\Factories\CategoryFactory> */
+    /** @use HasFactory<\Database\Factories\PostCategoryFactory> */
     use HasFactory;
-
     use HasRecursiveRelationships;
     use HasSlug;
-    use HasTranslations;
     use InteractsWithMedia;
     use SortableTrait;
 
@@ -47,12 +44,11 @@ class Category extends Model implements HasMedia, Sortable
 
     public function cover(): MorphOne
     {
-        return $this->morphOne(Media::class, 'model')->where('collection_name',
-            Disk::CategoryImages)->orderBy('order_column');
+        return $this->morphOne(Media::class, 'model')->where('collection_name', Disk::PostCategoryImages)->orderBy('order_column');
     }
 
-    public function products(): BelongsToMany
+    public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Post::class);
     }
 }

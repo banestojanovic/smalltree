@@ -24,7 +24,7 @@ class ProductData extends Data
         public ?ProductStatus $status,
         public ?array $data,
         public ?Media $cover,
-        public ?MediaCollection $images,
+        public ?MediaCollection $photos,
         #[DataCollectionOf(ProductVariationData::class)]
         public ?Collection $variations,
         #[DataCollectionOf(AttributeValueData::class)]

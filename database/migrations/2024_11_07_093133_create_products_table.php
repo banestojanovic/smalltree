@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('stock_status')->default(1);
             $table->integer('status')->default(1);
             $table->longText('description')->nullable();
-            $table->bigInteger('order_column')->nullable();
+            $table->bigInteger('order_column')->index()->nullable();
             $table->longText('data')->nullable();
             $table->softDeletes();
             $table->timestamps();

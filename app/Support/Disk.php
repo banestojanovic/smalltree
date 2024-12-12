@@ -8,5 +8,9 @@ class Disk
 
     public const ProductImages = 'product:images';
 
-    public const CategoryImage = 'category:images';
+    public const PostImages = 'post:images';
+
+    public const CategoryImages = 'category:images';
+
+    public const PostCategoryImages = 'post_category:images';
 }

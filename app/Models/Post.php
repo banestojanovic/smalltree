@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\PostStatus;
 use App\Support\Disk;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -14,29 +17,35 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
-use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
-class Category extends Model implements HasMedia, Sortable
+class Post extends Model implements HasMedia, Sortable
 {
-    /** @use HasFactory<\Database\Factories\CategoryFactory> */
+    /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
-
-    use HasRecursiveRelationships;
     use HasSlug;
-    use HasTranslations;
+    use HasTags;
     use InteractsWithMedia;
+    use HasTranslations;
+    use SoftDeletes;
     use SortableTrait;
 
     protected $fillable = [
-        'parent_id',
         'name',
         'slug',
-        'description',
+        'content',
+        'status',
         'order_column',
+        'data',
     ];
 
-    public array $translatable = ['name', 'description'];
+    protected $casts = [
+        'status' => PostStatus::class,
+        'data' => 'array',
+    ];
+
+    protected array $translatable = ['name', 'content'];
 
     public function getSlugOptions(): SlugOptions
     {
@@ -45,14 +54,19 @@ class Category extends Model implements HasMedia, Sortable
             ->saveSlugsTo('slug');
     }
 
+
     public function cover(): MorphOne
     {
-        return $this->morphOne(Media::class, 'model')->where('collection_name',
-            Disk::CategoryImages)->orderBy('order_column');
+        return $this->morphOne(Media::class, 'model')->where('collection_name', Disk::ProductImages)->orderBy('order_column');
     }
 
-    public function products(): BelongsToMany
+    public function photos(): MorphMany
     {
-        return $this->belongsToMany(Product::class);
+        return $this->morphMany(Media::class, 'model')->where('collection_name', Disk::PostImages)->orderBy('order_column');
+    }
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(PostCategory::class);
     }
 }

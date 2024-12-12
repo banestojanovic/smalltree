@@ -7,6 +7,8 @@ use App\Models\AttributeValue;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\Product;
 use App\Models\ProductVariation;
 use App\Models\User;
@@ -54,6 +56,8 @@ class AppServiceProvider extends ServiceProvider
             'variation_value' => VariationValue::class,
             'order' => Order::class,
             'cart' => Cart::class,
+            'post' => Post::class,
+            'post_category' => PostCategory::class,
         ]);
         Date::use(CarbonImmutable::class);
     }
