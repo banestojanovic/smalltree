@@ -1,6 +1,7 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
+import laravel from 'laravel-vite-plugin';
+import path from 'path';
+import { defineConfig } from 'vite';
 import run from 'vite-plugin-run';
 
 export default defineConfig({
@@ -17,6 +18,16 @@ export default defineConfig({
                 run: ['php', 'artisan', 'typescript:transform'],
                 pattern: ['app/**/*Data.php', 'app/**/Enums/**/*.php'],
             },
+            {
+                name: 'combine language files',
+                run: ['php', 'artisan', 'app:i18n'],
+                pattern: ['lang/**/*.json'],
+            },
         ]),
     ],
+    resolve: {
+        alias: {
+            '@lang': path.resolve('resources/lang'),
+        },
+    },
 });

@@ -2,6 +2,7 @@ declare namespace App {
 export type AttributeType = 1 | 2;
 export type CartStatus = 0 | 1;
 export type OrderStatus = 0 | 1 | 2 | 3 | 4 | 5;
+export type PageStatus = 0 | 1 | 2 | 3;
 export type PostStatus = 0 | 1 | 2 | 3;
 export type ProductStatus = 0 | 1 | 2 | 3;
 export type ProductStockStatus = 0 | 1;
@@ -33,6 +34,11 @@ categories: Array<App.Data.CategoryData> | null;
 export type PageData = {
 };
 export type PostCategoryData = {
+id: number;
+name: string;
+slug: string;
+description: string | null;
+cover: any | null;
 };
 export type PostData = {
 id: number;
