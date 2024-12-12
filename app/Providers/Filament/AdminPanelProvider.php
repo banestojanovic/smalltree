@@ -61,6 +61,10 @@ class AdminPanelProvider extends PanelProvider
                     ->label('Products Manager')
                     ->icon('heroicon-o-squares-plus')
                     ->collapsed(),
+                NavigationGroup::make('Settings')
+                    ->label('Settings')
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->collapsed(),
             ])
             ->plugin(SpatieLaravelTranslatablePlugin::make()->defaultLocales(['sr', 'en']));
     }
