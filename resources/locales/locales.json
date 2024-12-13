@@ -80,7 +80,8 @@
                         "trashed": "Obrisano"
                     }
                 }
-            }
+            },
+            "test": "Ovo je test prevod"
         }
     }
 }

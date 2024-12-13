@@ -27,7 +27,7 @@ class CombineLanguageFiles extends Command
     public function handle(): int
     {
         $langDir = 'lang';
-        $outputDir = resource_path('lang');
+        $outputDir = resource_path('locales');
         $outputFile = $outputDir.'/locales.json';
 
         if (! File::exists($langDir)) {

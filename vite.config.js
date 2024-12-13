@@ -14,20 +14,20 @@ export default defineConfig({
         react(),
         run([
             {
+                name: 'combine language files',
+                run: ['php', 'artisan', 'app:i18n'],
+                pattern: ['locales/**/*.json'],
+            },
+            {
                 name: 'typescript transform',
                 run: ['php', 'artisan', 'typescript:transform'],
                 pattern: ['app/**/*Data.php', 'app/**/Enums/**/*.php'],
-            },
-            {
-                name: 'combine language files',
-                run: ['php', 'artisan', 'app:i18n'],
-                pattern: ['lang/**/*.json'],
             },
         ]),
     ],
     resolve: {
         alias: {
-            '@lang': path.resolve('resources/lang'),
+            '@lang': path.resolve('resources/locales'),
         },
     },
 });
