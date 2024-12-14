@@ -29,5 +29,7 @@ class ProductData extends Data
         public ?Collection $variations,
         #[DataCollectionOf(AttributeValueData::class)]
         public ?Collection $attributes,
+        #[DataCollectionOf(CategoryData::class)]
+        public ?Collection $categories,
     ) {}
 }

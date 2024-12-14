@@ -48,6 +48,7 @@ content: string | null;
 status: App.PostStatus;
 cover: any | null;
 photos: any | null;
+categories: Array<App.Data.PostCategoryData> | null;
 };
 export type ProductData = {
 id: number;
@@ -64,6 +65,7 @@ cover: any | null;
 photos: any | null;
 variations: Array<App.Data.ProductVariationData> | null;
 attributes: Array<App.Data.AttributeValueData> | null;
+categories: Array<App.Data.CategoryData> | null;
 };
 export type ProductVariationData = {
 id: number;

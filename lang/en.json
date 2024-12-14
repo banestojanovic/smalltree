@@ -4,36 +4,77 @@
             "roles": {
                 "super_admin": "Super administrator",
                 "admin": "Administrator",
-                "support": "Podrška",
-                "user": "Korisnik"
+                "support": "Support",
+                "user": "User"
             }
         },
         "product": {
             "status": {
-                "inactive": "Neaktivan",
-                "active": "Aktivan",
-                "draft": "Nacrt",
-                "trashed": "Obrisano"
+                "inactive": "Inactive",
+                "active": "Active",
+                "draft": "Draft",
+                "trashed": "Trashed"
             },
             "stock_status": {
-                "out_of_stock": "Nema na stanju",
-                "in_stock": "Na stanju"
+                "out_of_stock": "Out of Stock",
+                "in_stock": "In Stock"
             }
         },
         "post": {
             "status": {
-                "inactive": "Neaktivan",
-                "active": "Aktivan",
-                "draft": "Nacrt",
-                "trashed": "Obrisano"
+                "inactive": "Inactive",
+                "active": "Active",
+                "draft": "Draft",
+                "trashed": "Trashed"
             }
         },
         "page": {
+            "titles": {
+                "home": "Home"
+            },
             "status": {
-                "inactive": "Neaktivan",
-                "active": "Aktivan",
-                "draft": "Nacrt",
-                "trashed": "Obrisano"
+                "inactive": "Inactive",
+                "active": "Active",
+                "draft": "Draft",
+                "trashed": "Trashed"
+            }
+        },
+        "menu": {
+            "top": {
+                "locations": "Locations",
+                "favorites": "Favorites",
+                "cart": "Cart",
+                "products": "Products",
+                "teas": "Teas",
+                "accessories": "Accessories",
+                "blog": "Blog",
+                "contact": "Contact",
+                "search": "Search"
+            }
+        },
+        "homepage": {
+            "hero": {
+                "buy_now": "Buy Now"
+            },
+            "promotions": {
+                "tea_of_the_month": "Tea of the Month",
+                "special_offer": "Special Offer"
+            },
+            "sections": {
+                "most_popular_tea": "Most Popular Tea",
+                "staff_recommended": "Our Staff Recommended",
+                "stores_with_tea": "Chat and Stories with tea",
+                "see_all": "See All",
+                "read_more": "Rad more"
+            },
+            "tea_ritual": {
+                "your_matcha": "Your MATCHA",
+                "your_mate": "Your MATE",
+                "tea_ritual": "tea ritual",
+                "tea": "Tea",
+                "tea_mug": "Tea mug",
+                "set": "Set",
+                "purchase": "Purchase"
             }
         }
     }
