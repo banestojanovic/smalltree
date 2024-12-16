@@ -7,41 +7,44 @@ import {
     CardHeader,
     CardTitle,
 } from '@/app/components/ui/card';
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/app/components/ui/badge';
 import { Typography } from '@/app/components/ui/typography';
-import { PageProps } from '@/app/types';
 import { ShoppingCart } from 'lucide-react';
 
-const RecommendedProducts = () => {
+const RelatedProducts = () => {
     const { t } = useTranslation();
-    const {
-        staffRecommendedProducts,
-    }: PageProps<{ staffRecommendedProducts?: App.Data.ProductData[] }> =
-        usePage().props;
+
+    const { similarProducts } = usePage<{
+        similarProducts: App.Data.ProductData[];
+    }>().props;
 
     return (
-        <section className="mt-10 sm:mt-20">
+        <section className="mt-10">
             <div className="container">
-                <Typography as="h2">
-                    {t('enums.homepage.sections.staff_recommended')}
+                <Typography as="h3">
+                    {t('enums.product.similar_products')}
                 </Typography>
 
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-                    {staffRecommendedProducts &&
-                    staffRecommendedProducts.length > 0 ? (
-                        staffRecommendedProducts.map((product) => (
+                <div className="mt-7 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5">
+                    {similarProducts && similarProducts.length > 0 ? (
+                        similarProducts.map((product: App.Data.ProductData) => (
                             <Card key={product.id}>
                                 <CardHeader>
-                                    <div className="">
+                                    <Link
+                                        href={route(
+                                            'products.show',
+                                            product.slug,
+                                        )}
+                                    >
                                         <img
-                                            className="h-40 w-full object-cover sm:h-60"
+                                            className="h-28 w-full rounded-t-lg object-cover sm:h-40"
                                             src={product.cover.original_url}
                                             alt={product.name}
                                         />
-                                    </div>
+                                    </Link>
 
                                     <CardDescription>
                                         {product.categories?.map((category) => (
@@ -54,16 +57,23 @@ const RecommendedProducts = () => {
                                         ))}
                                     </CardDescription>
                                     <CardTitle>
-                                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                                            {product.name}
-                                        </h4>
+                                        <Link
+                                            href={route(
+                                                'products.show',
+                                                product.slug,
+                                            )}
+                                        >
+                                            <Typography as="h4">
+                                                {product.name}
+                                            </Typography>
+                                        </Link>
                                     </CardTitle>
                                 </CardHeader>
 
                                 <CardContent>
-                                    <p className="h-40 overflow-hidden">
+                                    <Typography as="p">
                                         {product.description}
-                                    </p>
+                                    </Typography>
                                 </CardContent>
 
                                 <CardFooter className="mt-auto flex items-center justify-between">
@@ -82,13 +92,9 @@ const RecommendedProducts = () => {
                         </p>
                     )}
                 </div>
-
-                <div className="mt-10 flex items-center justify-center">
-                    <Button>{t('enums.homepage.sections.see_all')}</Button>
-                </div>
             </div>
         </section>
     );
 };
 
-export default RecommendedProducts;
+export default RelatedProducts;

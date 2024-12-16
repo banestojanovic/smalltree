@@ -20,7 +20,11 @@
                     "stock_status": {
                         "out_of_stock": "Out of Stock",
                         "in_stock": "In Stock"
-                    }
+                    },
+                    "no_products_available": "No products available",
+                    "variations": "Variations",
+                    "free_shipping_over": "Free Shipping Over",
+                    "similar_products": "Similar Products"
                 },
                 "post": {
                     "status": {
@@ -77,6 +81,14 @@
                         "tea_mug": "Tea mug",
                         "set": "Set",
                         "purchase": "Purchase"
+                    }
+                },
+                "category_show": {
+                    "filters": {
+                        "filters": "Filters",
+                        "tea_variety": "Tea variety",
+                        "origin_country": "Origin Country",
+                        "tea_taste": "Tea taste"
                     }
                 }
             }

@@ -15,13 +15,13 @@ class HomeController extends Controller
     {
         $popularProducts = ProductData::collect(Product::query()
             ->with('variations', 'discount', 'cover', 'categories')
-            ->where('status', ProductStatus::ACTIVE)
+            ->active()
             ->limit(8)
             ->get());
 
         $staffRecommendedProducts = ProductData::collect(Product::query()
             ->with('variations', 'discount', 'cover', 'categories')
-            ->where('status', ProductStatus::ACTIVE)
+            ->active()
             ->skip(8)
             ->limit(8)
             ->get());

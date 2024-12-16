@@ -1,15 +1,15 @@
-import { useTranslation } from 'react-i18next';
 import { Head } from '@inertiajs/react';
 import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
+import CategoriesSlider from '@/app/components/application/category/CategoriesSlider';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
-import CategoriesSlider from './_partials/CategoriesSlider';
 import Hero from './_partials/Hero';
 import PopularProducts from './_partials/PopularProducts';
 import Promotions from './_partials/Promotions';
 import RecommendedProducts from './_partials/RecommendedProducts';
-import TeaRituals from './_partials/TeaRituals';
 import TopPosts from './_partials/TopPosts';
+import TeaRituals from '@/app/components/application/TeaRituals';
 
 const Home = () => {
     const { t } = useTranslation();

@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Data\ProductData;
+use App\Models\Product;
+
+class ProductController extends Controller
+{
+    public function show($slug)
+    {
+        $product = ProductData::from(Product::query()
+            ->with(['variations', 'discount', 'cover', 'categories'])
+            ->active()
+            ->where('slug', $slug)
+            ->firstOrFail()
+        );
+
+        $categoryIds = $product->categories?->pluck('id')->toArray();
+        $similarProducts = ProductData::collect(Product::query()
+            ->with(['discount', 'cover', 'categories'])
+            ->active()
+            ->whereHas('categories', function ($q) use ($categoryIds) {
+                $q->whereIn('categories.id', $categoryIds);
+            })
+            ->take(22)
+            ->latest()
+            ->get()
+        );
+
+        //        'products' => ProductData::collect
+        //    (Product::with('variations', 'discount', 'cover', 'categories')
+        //        ->when(! empty(request('selectedCategory')), function ($query) {
+        //            $query->whereHas('categories', function ($q) {
+        //                $q->whereIn('categories.id', request('selectedCategory'));
+        //            });
+        //        })
+        //        ->paginate(12)),
+
+        return inertia('product/show', [
+            'product' => $product,
+            'similarProducts' => $similarProducts,
+        ]);
+    }
+}

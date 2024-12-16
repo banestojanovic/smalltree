@@ -1,7 +1,8 @@
+import TeaShopBenefits from '@/app/layouts/_partials/frontendLayout/TeaShopBenefits';
 import { PropsWithChildren, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import MainNavbar from './_partials/FrontendLayout/MainNavbar';
-import TopNavbar from './_partials/FrontendLayout/TopNavbar';
+import MainNavbar from './_partials/frontendLayout/MainNavbar';
+import TopNavbar from './_partials/frontendLayout/TopNavbar';
 
 export default function FrontendLayout({
     header,
@@ -10,7 +11,7 @@ export default function FrontendLayout({
     const { t } = useTranslation();
 
     return (
-        <div className="min-h-screen bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+        <div className="min-h-screen bg-gray-50 pb-20 text-black/50 dark:bg-black dark:text-white/50">
             <nav className="bg-white">
                 <TopNavbar />
                 <MainNavbar />
@@ -25,6 +26,10 @@ export default function FrontendLayout({
             )}
 
             <main>{children}</main>
+
+            <footer>
+                <TeaShopBenefits />
+            </footer>
         </div>
     );
 }

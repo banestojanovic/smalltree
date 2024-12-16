@@ -173,4 +173,9 @@ class Product extends Model implements HasMedia, Sortable
             }
         });
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', ProductStatus::ACTIVE);
+    }
 }

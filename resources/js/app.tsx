@@ -6,6 +6,7 @@ import '../css/app.css';
 import './bootstrap';
 import i18n from './i18n'; // Import the i18n instance
 
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
