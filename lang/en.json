@@ -88,6 +88,17 @@
                 "origin_country": "Origin Country",
                 "tea_taste": "Tea taste"
             }
+        },
+        "cart": {
+            "item_added_to_cart": "Item added to the cart"
+        },
+        "flash": {
+            "success": "Success",
+            "error": "Error",
+            "errors": "Errors",
+            "form_errors": "Form Errors",
+            "there_are_some_form_errors": "There are some form errors",
+            "dismiss": "Dismiss"
         }
     }
 }

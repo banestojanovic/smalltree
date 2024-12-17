@@ -46,6 +46,12 @@ class HandleInertiaRequests extends Middleware
             'global' => GlobalData::optional([
                 'categories' => CategoryData::collect(Category::with('cover')->get()),
             ]),
+            'flash' => function () use ($request) {
+                return [
+                    'success' => $request->session()->get('success'),
+                    'error' => $request->session()->get('error'),
+                ];
+            },
         ];
     }
 }

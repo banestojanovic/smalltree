@@ -43,4 +43,8 @@ export type PageProps<
     global: {
         categories: App.Data.CategoryData;
     };
+    flash: {
+        success: string;
+        error: string;
+    };
 };

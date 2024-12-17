@@ -1,6 +1,7 @@
 import ApplicationLogo from '@/app/components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import CartButton from './CartButton';
 
 export default function TopNavbar() {
     const { t } = useTranslation();
@@ -27,7 +28,7 @@ export default function TopNavbar() {
                         <p className="text-sm">
                             {t('enums.menu.top.favorites')}
                         </p>
-                        <p className="text-sm">{t('enums.menu.top.cart')}</p>
+                        <CartButton />
                     </div>
                 </div>
             </div>

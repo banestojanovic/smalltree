@@ -71,3 +71,12 @@
         @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
     }
 }
+
+
+.flash {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    width: 20rem;
+}
