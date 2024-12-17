@@ -10,7 +10,7 @@ use App\ProductStatus;
 
 class CategoryController extends Controller
 {
-    public function show($slug)
+    public function show($slug): \Inertia\Response|\Inertia\ResponseFactory
     {
         $category = CategoryData::from(Category::where('slug', $slug)->firstOrFail());
 
@@ -21,7 +21,7 @@ class CategoryController extends Controller
                 ->with(['variations', 'discount', 'cover', 'categories'])
                 ->active()
                 ->whereHas('categories', fn ($query) => $query->where('categories.id', $category->id))
-                ->paginate(22)
+                ->paginate(12)
         );
 
         return inertia('category/show', [

@@ -26,7 +26,7 @@ class CombineLanguageFiles extends Command
      */
     public function handle(): int
     {
-        $langDir = 'lang';
+        $langDir = resource_path('lang');
         $outputDir = resource_path('lang');
         $outputFile = $outputDir.'/locales.json';
 
@@ -45,10 +45,12 @@ class CombineLanguageFiles extends Command
 
         foreach (File::files($langDir) as $file) {
             if ($file->getExtension() === 'json') {
-                $key = $file->getFilenameWithoutExtension(); // e.g., "en", "sr"
-                $combined[$key] = [
-                    'translation' => json_decode($file->getContents(), true),
-                ];
+                $key = $file->getFilenameWithoutExtension();
+                if ($key !== 'locales') {
+                    $combined[$key] = [
+                        'translation' => json_decode($file->getContents(), true),
+                    ];
+                }
             }
         }
 

@@ -91,11 +91,6 @@
                         "tea_taste": "Tea taste"
                     }
                 },
-                "cart": {
-                    "cart": "Cart",
-                    "item_added_to_cart": "Item added to the cart",
-                    "check_out": "Check Out"
-                },
                 "flash": {
                     "success": "Success",
                     "error": "Error",
@@ -104,6 +99,16 @@
                     "there_are_some_form_errors": "There are some form errors",
                     "dismiss": "Dismiss"
                 }
+            },
+            "cart": {
+                "cart": "Cart",
+                "item_added_to_cart": "Item added to the cart",
+                "item_removed_from_cart": "Item removed from the cart",
+                "item_quantity_updated": "Item quantity updated",
+                "item_quantity_not_updated": "Item quantity not updated",
+                "item_quantity_exceeds_stock": "Item quantity exceeds stock",
+                "check_out": "Checkout",
+                "remove": "Remove"
             }
         }
     },
@@ -146,6 +151,16 @@
                         "trashed": "Obrisano"
                     }
                 }
+            },
+            "cart": {
+                "cart": "Korpa",
+                "item_added_to_cart": "Proizvod je dodat u korpu",
+                "item_removed_from_cart": "Proizvod je uklonjen iz korpe",
+                "item_quantity_updated": "Količina proizvoda je ažurirana",
+                "item_quantity_exceeds_stock": "Količina proizvoda premašuje zalihu",
+                "item_quantity_not_updated": "Količina proizvoda nije ažurirana",
+                "check_out": "Plaćanje",
+                "remove": "Ukloni"
             }
         }
     }

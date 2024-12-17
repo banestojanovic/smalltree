@@ -1,31 +1,26 @@
-import { Head, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import { ReactNode } from 'react';
 
+import { Separator } from '@/app/components/ui/separator';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import ProductDetails from '@/app/pages/product/_partials/ProductDetails';
-import { Separator } from '@/app/components/ui/separator';
 import SimilarProducts from '@/app/pages/product/_partials/SimilarProducts';
+import { PageProps } from '@/app/types';
 
-const ProductShowPage = () => {
-    const { product } = usePage<{
-        product: App.Data.CategoryData;
-    }>().props;
-
+const ProductShowPage = ({ product }: PageProps<{ product: App.Data.ProductData }>) => {
     return (
         <>
             <Head title={product.name} />
 
-            <ProductDetails />
+            <ProductDetails product={product} />
 
-            <Separator className='my-7' />
+            <Separator className="my-7" />
 
             <SimilarProducts />
         </>
     );
 };
 
-ProductShowPage.layout = (page: ReactNode) => (
-    <FrontendLayout>{page}</FrontendLayout>
-);
+ProductShowPage.layout = (page: ReactNode) => <FrontendLayout>{page}</FrontendLayout>;
 
 export default ProductShowPage;

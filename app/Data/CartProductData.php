@@ -2,14 +2,23 @@
 
 namespace App\Data;
 
-use App\Models\Product;
 use App\ProductStatus;
 use App\ProductStockStatus;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use Spatie\LaravelData\Attributes\Computed;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class CartProductData extends Data
 {
+    #[Computed]
+    public int $quantity;
+
+    #[Computed]
+    public float $realPrice;
+
     public function __construct(
         public readonly int $id,
         public readonly string $name,
@@ -21,23 +30,11 @@ class CartProductData extends Data
         public readonly ?string $description,
         public readonly ?ProductStatus $status,
         public readonly ?Media $cover,
-        public readonly int $quantity,
-    ) {}
-
-    public static function fromModel(Product $product): CartProductData
-    {
-        return new self(
-            $product->id,
-            $product->name,
-            $product->slug,
-            $product->sku,
-            $product->price,
-            $product->stock,
-            $product->stock_status,
-            $product->description,
-            $product->status,
-            $product->cover,
-            $product->pivot?->quantity,
-        );
+        #[DataCollectionOf(ProductVariationData::class)]
+        public ?Collection $variations,
+        public ?Pivot $pivot,
+    ) {
+        $this->quantity = $this->pivot->quantity ?? 1;
+        $this->realPrice = $this->quantity * ($this->variations->where('id', $this->pivot->product_variation_id)->first()->price ?? $this->price);
     }
 }

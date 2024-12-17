@@ -1,8 +1,4 @@
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-} from '@/app/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/app/components/ui/avatar';
 import { Link, usePage } from '@inertiajs/react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -13,32 +9,23 @@ import { ChevronRight } from 'lucide-react';
 
 // Import Swiper styles
 import { Button } from '@/app/components/ui/button';
+import { PageProps } from '@/app/types';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 const CategoriesSlider = () => {
-    const { categories } = usePage<{
-        global: {
-            categories: App.Data.CategoryData[];
-        };
-    }>().props.global;
+    const categories = usePage<PageProps<{ global?: App.Data.GlobalData }>>().props.global?.categories;
 
     return (
         <section className="mt-10">
             <div className="container">
                 <div className="relative">
-                    <Button
-                        variant={'outline'}
-                        className="swiper-button-prev absolute left-0 z-10"
-                    >
+                    <Button variant={'outline'} className="swiper-button-prev absolute left-0 z-10">
                         <ChevronRight className="rotate-180" />
                     </Button>
-                    <Button
-                        variant={'outline'}
-                        className="swiper-button-next absolute right-0 z-10"
-                    >
+                    <Button variant={'outline'} className="swiper-button-next absolute right-0 z-10">
                         <ChevronRight />
                     </Button>
 
@@ -52,27 +39,13 @@ const CategoriesSlider = () => {
                     >
                         {categories?.map((category) => (
                             <SwiperSlide key={category.id}>
-                                <div className="flex flex-col items-center">
+                                <Link href={route('categories.show', category.slug)} className="flex flex-col items-center">
                                     <Avatar>
-                                        <AvatarImage
-                                            src={category.cover.original_url}
-                                        />
-                                        <AvatarFallback className="text-lg">
-                                            {category.name
-                                                ?.slice(0, 2)
-                                                .toUpperCase()}
-                                        </AvatarFallback>
+                                        <AvatarImage src={category.cover.original_url} className="object-cover" />
+                                        <AvatarFallback className="text-lg">{category.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
                                     </Avatar>
-                                    <Link
-                                        href={route(
-                                            'categories.show',
-                                            category.slug,
-                                        )}
-                                        className="mt-4 text-xs font-semibold"
-                                    >
-                                        {category.name}
-                                    </Link>
-                                </div>
+                                    <span className="mt-4 text-xs font-semibold">{category.name}</span>
+                                </Link>
                             </SwiperSlide>
                         ))}
                     </Swiper>

@@ -13,7 +13,7 @@ class Cart
 
     public function getCart()
     {
-        return \App\Models\Cart::where('status', CartStatus::ACTIVE)->where('session', $this->cartSession())->first();
+        return \App\Models\Cart::with('products', 'products.variations')->where('status', CartStatus::ACTIVE)->where('session', $this->cartSession())->first();
     }
 
     public function getOrCreateCart()

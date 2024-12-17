@@ -17,37 +17,25 @@ const TeaRituals = () => {
                     <div className="flex items-center gap-x-5">
                         <Card>
                             <CardContent>
-                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                                    {t('enums.homepage.tea_ritual.tea')}
-                                </h3>
+                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{t('enums.homepage.tea_ritual.tea')}</h3>
                             </CardContent>
                         </Card>
-                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                            +
-                        </h4>
+                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">+</h4>
                         <Card>
                             <CardContent>
-                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                                    {t('enums.homepage.tea_ritual.tea_mug')}
-                                </h3>
+                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{t('enums.homepage.tea_ritual.tea_mug')}</h3>
                             </CardContent>
                         </Card>
-                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                            =
-                        </h4>
+                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">=</h4>
                         <Card>
                             <CardContent>
-                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                                    {t('enums.homepage.tea_ritual.set')}
-                                </h3>
+                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{t('enums.homepage.tea_ritual.set')}</h3>
                             </CardContent>
                         </Card>
                     </div>
 
                     <div className="">
-                        <Button>
-                            {t('enums.homepage.tea_ritual.purchase')}
-                        </Button>
+                        <Button>{t('enums.homepage.tea_ritual.purchase')}</Button>
                     </div>
                 </div>
 
@@ -60,37 +48,25 @@ const TeaRituals = () => {
                     <div className="flex items-center gap-x-5">
                         <Card>
                             <CardContent>
-                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                                    {t('enums.homepage.tea_ritual.tea')}
-                                </h3>
+                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{t('enums.homepage.tea_ritual.tea')}</h3>
                             </CardContent>
                         </Card>
-                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                            +
-                        </h4>
+                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">+</h4>
                         <Card>
                             <CardContent>
-                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                                    {t('enums.homepage.tea_ritual.tea_mug')}
-                                </h3>
+                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{t('enums.homepage.tea_ritual.tea_mug')}</h3>
                             </CardContent>
                         </Card>
-                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                            =
-                        </h4>
+                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">=</h4>
                         <Card>
                             <CardContent>
-                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                                    {t('enums.homepage.tea_ritual.set')}
-                                </h3>
+                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{t('enums.homepage.tea_ritual.set')}</h3>
                             </CardContent>
                         </Card>
                     </div>
 
                     <div className="">
-                        <Button>
-                            {t('enums.homepage.tea_ritual.purchase')}
-                        </Button>
+                        <Button>{t('enums.homepage.tea_ritual.purchase')}</Button>
                     </div>
                 </div>
             </div>

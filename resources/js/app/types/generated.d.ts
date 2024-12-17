@@ -22,11 +22,14 @@ value: string;
 attribute: App.Data.AttributeData;
 };
 export type CartData = {
+total: number;
 id: number;
 session: string;
 products: Array<App.Data.CartProductData> | null;
 };
 export type CartProductData = {
+quantity: number;
+realPrice: number;
 id: number;
 name: string;
 slug: string;
@@ -37,7 +40,8 @@ stock_status: App.ProductStockStatus;
 description: string | null;
 status: App.ProductStatus | null;
 cover: any | null;
-quantity: number;
+variations: Array<App.Data.ProductVariationData> | null;
+pivot: any | null;
 };
 export type CategoryData = {
 id: number;
@@ -47,6 +51,7 @@ description: string | null;
 cover: any | null;
 };
 export type GlobalData = {
+action: any | string | null;
 categories: Array<App.Data.CategoryData> | null;
 };
 export type PageData = {
@@ -100,6 +105,8 @@ user: App.Data.UserData | null;
 export type UserData = {
 id: number | null;
 name: string | null;
+email: string | null;
+email_verified_at: string | null;
 };
 export type VariationData = {
 id: number;

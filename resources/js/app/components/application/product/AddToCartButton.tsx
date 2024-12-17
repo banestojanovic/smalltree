@@ -1,37 +1,22 @@
 import { Button } from '@/app/components/ui/button';
-import { AppDispatch } from '@/app/store';
-import { addToCart } from '@/app/store/cartSlice';
+import { useForm } from '@inertiajs/react';
 import { ShoppingCart } from 'lucide-react';
-import { useDispatch } from 'react-redux';
 
-interface Props {
-    product: App.Data.ProductData;
-}
+const AddToCartButton = ({ product }: { product?: App.Data.ProductData }) => {
+    const { post } = useForm({
+        product_id: product?.id,
+        variation_id: product?.variations?.[0]?.id ?? null,
+        quantity: 1,
+    });
 
-const AddToCartButton = ({ product }: Props) => {
-    const dispatch = useDispatch<AppDispatch>();
-
-    const handleAddToCart = () => {
-        dispatch(
-            addToCart({
-                product_id: product.id,
-                variation_id: product.variations[0]?.id,
-                quantity: 1,
-            }),
-        );
+    const updateCart = () => {
+        post(route('cart.store'), {
+            preserveScroll: true,
+        });
     };
 
-    // function handleAddToCart() {
-    //
-    //     router.post(route('cart.store'), {
-    //         product_id: product.id,
-    //         variation_id: product.variations[0]?.id,
-    //         quantity: 1,
-    //     });
-    // }
-
     return (
-        <Button variant="secondary" size="sm" onClick={handleAddToCart}>
+        <Button variant="secondary" size="sm" onClick={updateCart}>
             <ShoppingCart />
         </Button>
     );

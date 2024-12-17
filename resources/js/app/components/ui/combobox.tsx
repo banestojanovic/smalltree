@@ -19,12 +19,14 @@ import {
 } from '@/app/components/ui/popover';
 import { cn } from '@/lib/utils';
 
+//@ts-ignore
 interface ComboboxOption {
-    [key: string]: any; // Allow flexible object structure
+    [key: string]: any;
 }
 
 interface ComboboxProps {
     options: ComboboxOption[];
+//@ts-ignore
     value: any;
     onChange: (item: ComboboxOption) => void;
     placeholder?: string;
@@ -57,7 +59,7 @@ export function Combobox({
                 >
                     {value
                         ? displayLabel
-                            ? displayLabel(value) // Use displayLabel for selected value rendering
+                            ? displayLabel(value)
                             : options.find((option) => option === value)
                                   ?.label || 'Custom'
                         : placeholder}

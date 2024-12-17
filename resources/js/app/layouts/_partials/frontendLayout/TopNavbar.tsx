@@ -13,9 +13,7 @@ export default function TopNavbar() {
                     <div className="flex items-center gap-x-5">
                         <p className="text-sm">+391 00 000 000</p>
                         <p className="text-sm">contact@smalltree.com</p>
-                        <p className="text-sm">
-                            {t('enums.menu.top.locations')}
-                        </p>
+                        <p className="text-sm">{t('enums.menu.top.locations')}</p>
                     </div>
 
                     <div className="flex items-center justify-center">
@@ -25,9 +23,7 @@ export default function TopNavbar() {
                     </div>
 
                     <div className="flex items-center justify-end gap-x-5">
-                        <p className="text-sm">
-                            {t('enums.menu.top.favorites')}
-                        </p>
+                        <p className="text-sm">{t('enums.menu.top.favorites')}</p>
                         <CartButton />
                     </div>
                 </div>

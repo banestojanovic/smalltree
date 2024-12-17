@@ -1,33 +1,23 @@
 import { Button } from '@/app/components/ui/button';
-import { usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 import ProductCard from '@/app/components/application/product/ProductCard';
 import { Typography } from '@/app/components/ui/typography';
 import { PageProps } from '@/app/types';
 
-const PopularProducts = () => {
+const PopularProducts = ({ products }: PageProps<{ products?: App.Data.ProductData[] }>) => {
     const { t } = useTranslation();
-    const {
-        popularProducts,
-    }: PageProps<{ popularProducts?: App.Data.ProductData[] }> =
-        usePage().props;
+
     return (
         <section className="mt-10 sm:mt-20">
             <div className="container">
-                <Typography as="h2">
-                    {t('enums.homepage.sections.most_popular_tea')}
-                </Typography>
+                <Typography as="h2">{t('enums.homepage.sections.most_popular_tea')}</Typography>
 
                 <div className="mt-7 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-                    {popularProducts && popularProducts.length > 0 ? (
-                        popularProducts.map((product) => (
-                            <ProductCard product={product} key={product.id} />
-                        ))
+                    {products && products.length > 0 ? (
+                        products.map((product) => <ProductCard product={product} key={product.id} />)
                     ) : (
-                        <p className="text-center text-gray-500 dark:text-gray-400">
-                            {t('enums.product.no_products_available')}.
-                        </p>
+                        <p className="text-center text-gray-500 dark:text-gray-400">{t('enums.product.no_products_available')}.</p>
                     )}
                 </div>
 

@@ -26,7 +26,7 @@ class HomeController extends Controller
             ->limit(8)
             ->get());
 
-        $blogs = PostData::collect(Post::query()
+        $posts = PostData::collect(Post::query()
             ->with('cover', 'categories')
             ->where('status', PostStatus::ACTIVE)
             ->take(3)
@@ -35,7 +35,7 @@ class HomeController extends Controller
         return inertia('home/index', [
             'popularProducts' => $popularProducts,
             'staffRecommendedProducts' => $staffRecommendedProducts,
-            'blogs' => $blogs,
+            'posts' => $posts,
         ]);
     }
 }

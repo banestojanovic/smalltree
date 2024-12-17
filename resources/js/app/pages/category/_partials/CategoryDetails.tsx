@@ -8,14 +8,16 @@ const CategoryDetails = () => {
         usePage().props;
 
     return (
-        <section className="mt-10 sm:mt-20">
-            <div className="container">
-                <Typography as="h2">{category.name}</Typography>
-                <Typography as="p" className="mt-7">
-                    {category.description}
-                </Typography>
-            </div>
-        </section>
+        category && (
+            <section className="mt-10 sm:mt-20">
+                <div className="container">
+                    <Typography as="h2">{category.name}</Typography>
+                    <Typography as="p" className="mt-7">
+                        {category.description}
+                    </Typography>
+                </div>
+            </section>
+        )
     );
 };
 

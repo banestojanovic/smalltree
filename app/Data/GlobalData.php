@@ -2,6 +2,7 @@
 
 namespace App\Data;
 
+use Closure;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
@@ -9,6 +10,7 @@ use Spatie\LaravelData\Data;
 class GlobalData extends Data
 {
     public function __construct(
+        public Closure|string|null $action,
         #[DataCollectionOf(CategoryData::class)]
         public ?Collection $categories,
     ) {}

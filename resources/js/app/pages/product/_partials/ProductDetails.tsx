@@ -1,24 +1,15 @@
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from '@/app/components/ui/accordion';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/app/components/ui/accordion';
 import { Button } from '@/app/components/ui/button';
 import { Combobox } from '@/app/components/ui/combobox';
 import { Typography } from '@/app/components/ui/typography';
-import { usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { PageProps } from '@/app/types';
 import { Minus, Plus } from 'lucide-react';
 
-const CategoryDetails = () => {
+const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }>) => {
     const { t } = useTranslation();
-
-    const { product } = usePage<{
-        product: App.Data.ProductData;
-    }>().props;
 
     const [selectedVariation, setSelectedVariation] = useState('');
     const [itemQuantity, setItemQuantity] = useState(1);
@@ -34,9 +25,9 @@ const CategoryDetails = () => {
                     </Typography>
 
                     <Combobox
-                        options={product.variations}
+                        options={product?.variations ?? []}
                         value={selectedVariation}
-                        onChange={setSelectedVariation}
+                        onChange={(item) => setSelectedVariation(item.value)}
                         placeholder={t('enums.product.variations')}
                         inputPlaceholder={t('enums.product.variations')}
                         displayLabel={(value) => <span>{value.sku}</span>}
@@ -67,9 +58,7 @@ const CategoryDetails = () => {
                             >
                                 <Minus />
                             </Button>
-                            <span className="mx-3 text-2xl font-semibold">
-                                {itemQuantity}
-                            </span>
+                            <span className="mx-3 text-2xl font-semibold">{itemQuantity}</span>
                             <Button
                                 type="button"
                                 variant="outline"
@@ -150,4 +139,4 @@ const CategoryDetails = () => {
     );
 };
 
-export default CategoryDetails;
+export default ProductDetails;

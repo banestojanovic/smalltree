@@ -89,11 +89,6 @@
                 "tea_taste": "Tea taste"
             }
         },
-        "cart": {
-            "cart": "Cart",
-            "item_added_to_cart": "Item added to the cart",
-            "check_out": "Check Out"
-        },
         "flash": {
             "success": "Success",
             "error": "Error",
@@ -102,5 +97,15 @@
             "there_are_some_form_errors": "There are some form errors",
             "dismiss": "Dismiss"
         }
+    },
+    "cart": {
+        "cart": "Cart",
+        "item_added_to_cart": "Item added to the cart",
+        "item_removed_from_cart": "Item removed from the cart",
+        "item_quantity_updated": "Item quantity updated",
+        "item_quantity_not_updated": "Item quantity not updated",
+        "item_quantity_exceeds_stock": "Item quantity exceeds stock",
+        "check_out": "Checkout",
+        "remove": "Remove"
     }
 }

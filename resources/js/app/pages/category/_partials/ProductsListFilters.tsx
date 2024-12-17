@@ -1,13 +1,10 @@
-import { usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 import { Combobox } from '@/app/components/ui/combobox';
-import { PageProps } from '@/app/types';
 import { useTranslation } from 'react-i18next';
 
 const ProductsListFilters = () => {
     const { t } = useTranslation();
-
 
     const [selectedVariety, setSelectedVariety] = useState('');
     const [selectedCountry, setSelectedCountry] = useState('');
@@ -35,7 +32,7 @@ const ProductsListFilters = () => {
                     <Combobox
                         options={teaVarieties}
                         value={selectedVariety}
-                        onChange={setSelectedVariety}
+                        onChange={(item) => setSelectedVariety(item.value)}
                         placeholder={t(
                             'enums.category_show.filters.tea_variety',
                         )}
@@ -47,7 +44,7 @@ const ProductsListFilters = () => {
                     <Combobox
                         options={countries}
                         value={selectedCountry}
-                        onChange={setSelectedCountry}
+                        onChange={(item) => setSelectedCountry(item.value)}
                         placeholder={t(
                             'enums.category_show.filters.origin_country',
                         )}
@@ -59,7 +56,7 @@ const ProductsListFilters = () => {
                     <Combobox
                         options={teaTastes}
                         value={selectedTaste}
-                        onChange={setSelectedTaste}
+                        onChange={(item) => setSelectedTaste(item.value)}
                         placeholder={t('enums.category_show.filters.tea_taste')}
                         inputPlaceholder={t(
                             'enums.category_show.filters.tea_taste',

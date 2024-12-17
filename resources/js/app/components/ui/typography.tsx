@@ -25,13 +25,16 @@ export function Typography<T extends ElementType = 'p'>({
     className,
     ...rest
 }: TypographyProps<T> & ComponentPropsWithoutRef<T>) {
-    const Component = as || 'p'; // Default to <p>
-    const combinedClasses = `${defaultStyles[Component] || defaultStyles.default} ${
+    const Component = (as || 'p') as ElementType; // Explicitly cast to ElementType
+    const combinedClasses = `${defaultStyles[Component as keyof typeof defaultStyles] || defaultStyles.default} ${
         className || ''
     }`;
 
     return (
-        <Component className={combinedClasses} {...rest}>
+        <Component
+            {...(rest as ComponentPropsWithoutRef<T>)}
+            className={combinedClasses}
+        >
             {children}
         </Component>
     );

@@ -1,58 +1,29 @@
 'use client';
 
-import { ToastAction } from '@/app/components/ui/toast';
-import { Toaster } from '@/app/components/ui/toaster';
-import { useToast } from '@/app/hooks/use-toast';
 import { PageProps } from '@/app/types';
+import { Toaster } from '@/components/ui/sonner';
 import { usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 
 export default function FlashedMessages() {
     const { t } = useTranslation();
-    const { flash, errors } = usePage<PageProps>().props;
-    const { toast } = useToast();
-    const formErrorsCount = Object.keys(errors).length;
+    const flash = usePage<PageProps<{ flash?: PageProps['flash'] }>>().props.flash;
 
     useEffect(() => {
-        if (flash.success) {
-            toast({
-                title: t('enums.flash.success'),
+        if (flash?.success) {
+            toast.success(t('enums.flash.success'), {
                 description: flash.success,
-                // action: (
-                //     <ToastAction altText={t('enums.flash.dismiss')}>
-                //         {t('enums.flash.dismiss')}
-                //     </ToastAction>
-                // ),
             });
         }
 
-        if (flash.error) {
-            toast({
-                title: t('enums.flash.error'),
+        if (flash?.error) {
+            toast.error(t('enums.flash.error'), {
                 description: flash.error,
-                variant: 'destructive',
-                // action: (
-                //     <ToastAction altText={t('enums.flash.dismiss')}>
-                //         {t('enums.flash.dismiss')}
-                //     </ToastAction>
-                // ),
             });
         }
-
-        if (formErrorsCount > 0) {
-            toast({
-                title: t('enums.flash.form_errors'),
-                description: t('enums.flash.there_are_some_form_errors'),
-                variant: 'destructive',
-                // action: (
-                //     <ToastAction altText={t('enums.flash.dismiss')}>
-                //         {t('enums.flash.dismiss')}
-                //     </ToastAction>
-                // ),
-            });
-        }
-    }, [flash, errors, formErrorsCount, toast, t]);
+    }, [flash, t]);
 
     return <Toaster />;
 }

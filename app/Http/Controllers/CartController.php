@@ -2,56 +2,98 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\CartData;
-use App\Models\Cart;
-use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function cartItems()
-    {
-        $cart = (new \App\Support\Cart)->getOrCreateCart();
-
-        return CartData::from($cart);
-    }
-
     public function store(Request $request)
     {
         $request->validate([
             'product_id' => 'required|integer',
-            'variation_id' => 'required|integer',
+            'variation_id' => 'nullable|integer',
             'quantity' => 'required|integer|min:1',
         ]);
 
         $cart = (new \App\Support\Cart)->getOrCreateCart();
 
-        $product = Product::active()->isAvailable()->findOrFail($request->get('product_id'));
+        $qty = request('quantity', 1);
 
-        // Check if the product with the variation already exists in the cart
-        $cartProduct = $cart->products()
-            ->wherePivot('variation_id', $request->get('variation_id'))
-            ->wherePivot('product_id', $product->id)
+        $existing = $cart->products()
+            ->wherePivot('product_id', request('product_id'))
+            ->wherePivot('product_variation_id', request('variation_id'))
             ->first();
 
-        if ($cartProduct) {
-            // Update quantity if product already exists in the cart
-            $cart->products()->updateExistingPivot($product->id, [
-                'variation_id' => $request->get('variation_id'),
-                'quantity' => $cartProduct->pivot->quantity + $request->get('quantity'),
+        if ($existing) {
+
+            if ($existing->pivot->quantity + $qty > $existing->stock) {
+                return back()->with('error', __('cart')['item_quantity_exceeds_stock']);
+            }
+
+            $cart->products()->updateExistingPivot(request('product_id'), [
+                'product_variation_id' => request('variation_id'),
+                'quantity' => $existing->pivot->quantity + $qty,
             ]);
         } else {
-            // Add new product to the cart
-            $cart->products()->attach($product->id, [
-                'variation_id' => $request->get('variation_id'),
-                'quantity' => $request->get('quantity'),
+            $cart->products()->syncWithoutDetaching([
+                request('product_id') => [
+                    'product_variation_id' => request('variation_id'),
+                    'quantity' => $qty,
+                ],
             ]);
         }
 
-        if ($request->wantsJson()) {
-            return $cart;
+        return back()->with(['success' => __('cart')['item_added_to_cart'], 'action' => 'cart.updated']);
+    }
+
+    public function remove(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|integer',
+            'variation_id' => 'nullable|integer',
+        ]);
+
+        $cart = (new \App\Support\Cart)->getOrCreateCart();
+
+        if ($request->has('variation_id')) {
+            $cart->products()
+                ->wherePivot('product_id', request('product_id'))
+                ->wherePivot('product_variation_id', request('variation_id'))
+                ->detach();
+        } else {
+            $cart->products()
+                ->wherePivot('product_id', request('product_id'))
+                ->detach();
         }
 
-        return back()->with('success', __('enums.cart.item_added_to_cart'));
+        return back()->with('success', __('cart')['item_removed_from_cart']);
+    }
+
+    public function updateQuantity(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|integer',
+            'variation_id' => 'nullable|integer',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $cart = (new \App\Support\Cart)->getOrCreateCart();
+
+        $existing = $cart->products()
+            ->wherePivot('product_id', request('product_id'))
+            ->when(request()->has('product_variation_id'), function ($query) {
+                return $query->wherePivot('product_variation_id', request('variation_id'));
+            })
+            ->first();
+
+        if (! $existing) {
+            return back()->with('error', __('cart')['item_quantity_not_updated']);
+        }
+
+        $cart->products()->updateExistingPivot(request('product_id'), [
+            'product_variation_id' => request('variation_id'),
+            'quantity' => request('quantity'),
+        ]);
+
+        return back()->with('success', __('cart')['item_quantity_updated']);
     }
 }
