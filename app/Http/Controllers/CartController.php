@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\CartData;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function index()
+    public function cartItems()
     {
         $cart = (new \App\Support\Cart)->getOrCreateCart();
 
+        return CartData::from($cart);
     }
 
     public function store(Request $request)
@@ -44,6 +46,10 @@ class CartController extends Controller
                 'variation_id' => $request->get('variation_id'),
                 'quantity' => $request->get('quantity'),
             ]);
+        }
+
+        if ($request->wantsJson()) {
+            return $cart;
         }
 
         return back()->with('success', __('enums.cart.item_added_to_cart'));

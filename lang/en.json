@@ -90,7 +90,9 @@
             }
         },
         "cart": {
-            "item_added_to_cart": "Item added to the cart"
+            "cart": "Cart",
+            "item_added_to_cart": "Item added to the cart",
+            "check_out": "Check Out"
         },
         "flash": {
             "success": "Success",

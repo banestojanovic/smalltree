@@ -21,6 +21,24 @@ attribute_id: number;
 value: string;
 attribute: App.Data.AttributeData;
 };
+export type CartData = {
+id: number;
+session: string;
+products: Array<App.Data.CartProductData> | null;
+};
+export type CartProductData = {
+id: number;
+name: string;
+slug: string;
+sku: string;
+price: number | null;
+stock: number | null;
+stock_status: App.ProductStockStatus;
+description: string | null;
+status: App.ProductStatus | null;
+cover: any | null;
+quantity: number;
+};
 export type CategoryData = {
 id: number;
 name: string;
