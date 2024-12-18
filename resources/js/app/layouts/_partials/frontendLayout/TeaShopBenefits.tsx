@@ -6,8 +6,8 @@ const RelatedProducts = () => {
     const { t } = useTranslation();
 
     return (
-        <div className="container flex min-h-40 items-center">
-            <div className="grid grid-cols-1 gap-7 sm:grid-cols-4">
+        <div className="container mt-7 flex min-h-40 w-full items-center lg:justify-center">
+            <div className="grid w-full grid-cols-1 place-items-center gap-7 sm:grid-cols-4">
                 <div className="">
                     <Typography as="h2" className="m-auto max-h-10">
                         Tea Shop Benefits

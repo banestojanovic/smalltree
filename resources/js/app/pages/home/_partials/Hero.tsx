@@ -9,10 +9,8 @@ const Hero = () => {
             <div className="container grid grid-cols-1 md:grid-cols-2">
                 <div className="flex items-center">
                     <div className="">
-                        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-                            Special Promotion or event or anything important
-                        </h1>
-                        <div className="mt-7">
+                        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Special Promotion or event or anything important</h1>
+                        <div className="mb-7 mt-7 md:mb-0">
                             <Button>{t('enums.homepage.hero.buy_now')}</Button>
                         </div>
                     </div>
@@ -20,11 +18,7 @@ const Hero = () => {
 
                 <div className="flex items-center justify-center">
                     <div className="">
-                        <img
-                            className="h-80 w-full rounded-md object-cover sm:h-[25rem]"
-                            src="/images/image-placeholder.jpg"
-                            alt="imge placeholder"
-                        />
+                        <img className="h-80 w-full rounded-md object-cover sm:h-[25rem]" src="/images/image-placeholder.jpg" alt="imge placeholder" />
                     </div>
                 </div>
             </div>

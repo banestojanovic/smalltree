@@ -10,7 +10,7 @@ import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
 import { Separator } from '@/app/components/ui/separator';
 import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
-import ProducsList from '@/app/pages/checkout/_partials/ProducsList';
+import ProductsList from '@/app/pages/checkout/_partials/ProductsList';
 import { PageProps } from '@/app/types';
 import { useTranslation } from 'react-i18next';
 
@@ -45,7 +45,7 @@ const CheckoutIndex = () => {
 
     return (
         <>
-            <Head title="Checkout" />
+            <Head title={t('checkout.checkout')} />
             <div className="container mx-auto w-full md:max-w-5xl">
                 <div className="bg-gray-50">
                     <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -80,13 +80,13 @@ const CheckoutIndex = () => {
                                     <Card>
                                         <CardContent>
                                             <div className="gap-x-5 md:flex md:items-center">
-                                                <div className="">
+                                                <div className="w-full">
                                                     <FieldGroup label="First Name" name="first_name" error={errors.first_name}>
                                                         <Input id="first_name" placeholder="First name" value={data.first_name} onChange={(e) => setData('first_name', e.target.value)} />
                                                     </FieldGroup>
                                                 </div>
 
-                                                <div className="mt-5 md:mt-0">
+                                                <div className="mt-5 md:mt-0 w-full">
                                                     <FieldGroup label="Last Name" name="last_name" error={errors.last_name}>
                                                         <Input id="last_name" placeholder="First name" value={data.last_name} onChange={(e) => setData('last_name', e.target.value)} />
                                                     </FieldGroup>
@@ -112,12 +112,12 @@ const CheckoutIndex = () => {
                                             </div>
 
                                             <div className="mt-5 gap-x-5 md:flex md:items-center">
-                                                <div className="">
+                                                <div className="w-full">
                                                     <FieldGroup label="City" name="city" error={errors.city}>
                                                         <Input id="city" placeholder="City" value={data.city} onChange={(e) => setData('city', e.target.value)} />
                                                     </FieldGroup>
                                                 </div>
-                                                <div className="mt-5 md:mt-0">
+                                                <div className="mt-5 md:mt-0 w-full">
                                                     <FieldGroup label="Postal Code" name="postal_code" error={errors.postal_code}>
                                                         <Input id="postal_code" placeholder="Postal Code" value={data.postal_code} onChange={(e) => setData('postal_code', e.target.value)} />
                                                     </FieldGroup>
@@ -159,7 +159,7 @@ const CheckoutIndex = () => {
 
                                 <Card>
                                     <CardContent>
-                                        <ProducsList cart={cart} />
+                                        <ProductsList cart={cart} />
 
                                         <Separator />
 
