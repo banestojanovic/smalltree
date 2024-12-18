@@ -85,7 +85,7 @@ class CartController extends Controller
             })
             ->first();
 
-        if (!$existing) {
+        if (! $existing) {
             return back()->with('error', __('cart')['item_quantity_not_updated']);
         }
 
@@ -95,5 +95,10 @@ class CartController extends Controller
         ]);
 
         return back()->with('success', __('cart')['item_quantity_updated']);
+    }
+
+    public function open(Request $request)
+    {
+        return back()->with('action', 'cart.updated');
     }
 }

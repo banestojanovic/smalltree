@@ -31,6 +31,7 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     ziggy?: Config & { location: string };
     cart?: CartData;
     global?: {
+        env: string;
         action: string;
         categories?: App.Data.CategoryData[];
     };

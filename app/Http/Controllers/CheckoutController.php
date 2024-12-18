@@ -13,5 +13,4 @@ class CheckoutController extends Controller
         return inertia('checkout/show');
     }
 
-
 }

@@ -47,6 +47,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'cart' => CartData::optional((new Cart)->getCart()),
             'global' => fn () => GlobalData::optional([
+                'env' => config('app.env'),
                 'action' => session()->get('action'),
                 'categories' => CategoryData::collect(Category::with('cover')->get()),
             ]),

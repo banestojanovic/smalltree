@@ -127,6 +127,7 @@
         "city": "City",
         "postal_code": "Postal Code",
         "payment": "Payment",
-        "order_summary": "Order Summary"
+        "order_summary": "Order Summary",
+        "fill_with_test_data": "Fill with test data"
     }
 }

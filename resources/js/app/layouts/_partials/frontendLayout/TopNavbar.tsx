@@ -1,16 +1,24 @@
 import ApplicationLogo from '@/app/components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
+import { Badge } from '@/app/components/ui/badge';
+import { Button } from '@/app/components/ui/button';
+import { PageProps } from '@/app/types';
+import { Link, router, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import CartButton from './CartButton';
 
 export default function TopNavbar() {
+    const cart = usePage<PageProps<{ cart?: App.Data.CartData }>>().props.cart;
+
     const { t } = useTranslation();
+
+    const openCart = () => {
+        router.get(route('cart.open'));
+    };
 
     return (
         <div className="border-b-2 border-gray-200">
             <div className="container">
                 <div className="hidden h-24 grid-cols-3 gap-x-4 lg:grid">
-                    <div className="flex items-center gap-x-5 flex-wrap">
+                    <div className="flex flex-wrap items-center gap-x-5">
                         <p className="text-sm">+391 00 000 000</p>
                         <p className="text-sm">contact@smalltree.com</p>
                         <p className="text-sm">{t('enums.menu.top.locations')}</p>
@@ -24,7 +32,12 @@ export default function TopNavbar() {
 
                     <div className="flex items-center justify-end gap-x-5">
                         <p className="text-sm">{t('enums.menu.top.favorites')}</p>
-                        <CartButton />
+                        <div className="relative">
+                            {cart?.products && cart.products.length > 0 && <Badge className="absolute -right-1 -top-1">{cart.products.length}</Badge>}
+                            <Button variant="outline" onClick={openCart}>
+                                {t('enums.menu.top.cart')}
+                            </Button>
+                        </div>
                     </div>
                 </div>
 
@@ -40,7 +53,12 @@ export default function TopNavbar() {
                         </Link>
                         <div className="flex flex-col justify-between gap-x-5">
                             <p className="mb-1 text-xs">{t('enums.menu.top.favorites')}</p>
-                            <CartButton />
+                            <div className="relative">
+                                {cart?.products && cart.products.length > 0 && <Badge className="absolute -right-1 -top-1">{cart.products.length}</Badge>}
+                                <Button variant="outline" onClick={openCart}>
+                                    {t('enums.menu.top.cart')}
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </div>

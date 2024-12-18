@@ -51,6 +51,7 @@ description: string | null;
 cover: any | null;
 };
 export type GlobalData = {
+env: string;
 action: any | string | null;
 categories: Array<App.Data.CategoryData> | null;
 };

@@ -1,3 +1,4 @@
+import Cart from '@/app/layouts/_partials/frontendLayout/Cart';
 import TeaShopBenefits from '@/app/layouts/_partials/frontendLayout/TeaShopBenefits';
 import { PropsWithChildren, ReactNode } from 'react';
 import FlashMessages from '../components/ui/FlashMessages';
@@ -25,6 +26,7 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
             </footer>
 
             <FlashMessages />
+            <Cart />
         </div>
     );
 }

@@ -6,9 +6,9 @@ const ProductsLists = ({ cart }: { cart: App.Data.CartData }) => {
     return (
         <>
             <h3 className="sr-only">Items in your cart</h3>
-            {cart.products ? (
+            {cart?.products ? (
                 <ul className="space-y-4">
-                    {cart.products?.map((product) => {
+                    {cart?.products?.map((product) => {
                         return (
                             <li key={product.id} className="flex items-center justify-between">
                                 <div>

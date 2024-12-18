@@ -21,7 +21,7 @@ export default defineConfig({
             {
                 name: 'combine language files',
                 run: ['php', 'artisan', 'app:i18n'],
-                pattern: ['lang/**/*.json'],
+                pattern: ['resources/lang/**/*.json'],
             },
         ]),
     ],

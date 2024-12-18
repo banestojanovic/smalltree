@@ -46,6 +46,7 @@
                     }
                 },
                 "menu": {
+                    "menu": "Menu",
                     "top": {
                         "locations": "Locations",
                         "favorites": "Favorites",
@@ -107,9 +108,29 @@
                 "item_quantity_updated": "Item quantity updated",
                 "item_quantity_not_updated": "Item quantity not updated",
                 "item_quantity_exceeds_stock": "Item quantity exceeds stock",
+                "cart_empty": "Cart is empty",
                 "check_out": "Checkout",
                 "remove": "Remove",
                 "pay_now": "Pay Now"
+            },
+            "order": {
+                "order_created": "Order is created successfully"
+            },
+            "checkout": {
+                "checkout": "Checkout",
+                "contact_info": "Contact information",
+                "shipping_info": "Shipping information",
+                "email": "Email",
+                "Phone": "Phone",
+                "first_name": "First Name",
+                "last_name": "Last Name",
+                "company": "Company",
+                "address_line": "Address Line",
+                "city": "City",
+                "postal_code": "Postal Code",
+                "payment": "Payment",
+                "order_summary": "Order Summary",
+                "fill_with_test_data": "Fill with test data"
             }
         }
     },
@@ -134,7 +155,11 @@
                     "stock_status": {
                         "out_of_stock": "Nema na stanju",
                         "in_stock": "Na stanju"
-                    }
+                    },
+                    "no_products_available": "Nema dostupnih proizvoda",
+                    "variations": "Varijacije",
+                    "free_shipping_over": "Besplatna dostava preko",
+                    "similar_products": "Slični proizvodi"
                 },
                 "post": {
                     "status": {
@@ -145,23 +170,102 @@
                     }
                 },
                 "page": {
+                    "titles": {
+                        "home": "Početna"
+                    },
                     "status": {
                         "inactive": "Neaktivan",
                         "active": "Aktivan",
                         "draft": "Nacrt",
                         "trashed": "Obrisano"
                     }
+                },
+                "menu": {
+                    "menu": "Meni",
+                    "top": {
+                        "locations": "Lokacije",
+                        "favorites": "Omiljeno",
+                        "cart": "Korpa",
+                        "products": "Proizvodi",
+                        "teas": "Čajevi",
+                        "accessories": "Dodaci",
+                        "blog": "Blog",
+                        "contact": "Kontakt",
+                        "search": "Pretraga"
+                    }
+                },
+                "homepage": {
+                    "hero": {
+                        "buy_now": "Kupi odmah"
+                    },
+                    "promotions": {
+                        "tea_of_the_month": "Čaj meseca",
+                        "special_offer": "Posebna ponuda"
+                    },
+                    "sections": {
+                        "most_popular_tea": "Najpopularniji čaj",
+                        "staff_recommended": "Preporuka osoblja",
+                        "stores_with_tea": "Priče uz čaj",
+                        "see_all": "Pogledaj sve",
+                        "read_more": "Pročitaj više"
+                    },
+                    "tea_ritual": {
+                        "your_matcha": "Vaša MATCHA",
+                        "your_mate": "Vaš MATE",
+                        "tea_ritual": "čajni ritual",
+                        "tea": "Čaj",
+                        "tea_mug": "Šolja za čaj",
+                        "set": "Set",
+                        "purchase": "Kupi"
+                    }
+                },
+                "category_show": {
+                    "filters": {
+                        "filters": "Filteri",
+                        "tea_variety": "Vrsta čaja",
+                        "origin_country": "Zemlja porekla",
+                        "tea_taste": "Ukus čaja"
+                    }
+                },
+                "flash": {
+                    "success": "Uspeh",
+                    "error": "Greška",
+                    "errors": "Greške",
+                    "form_errors": "Greške u formi",
+                    "there_are_some_form_errors": "Postoje greške u formi",
+                    "dismiss": "Zatvori"
                 }
             },
             "cart": {
                 "cart": "Korpa",
-                "item_added_to_cart": "Proizvod je dodat u korpu",
-                "item_removed_from_cart": "Proizvod je uklonjen iz korpe",
-                "item_quantity_updated": "Količina proizvoda je ažurirana",
-                "item_quantity_exceeds_stock": "Količina proizvoda premašuje zalihu",
+                "item_added_to_cart": "Proizvod dodat u korpu",
+                "item_removed_from_cart": "Proizvod uklonjen iz korpe",
+                "item_quantity_updated": "Količina proizvoda ažurirana",
                 "item_quantity_not_updated": "Količina proizvoda nije ažurirana",
+                "item_quantity_exceeds_stock": "Količina premašuje stanje",
+                "cart_empty": "Korpa je prazna",
                 "check_out": "Plaćanje",
-                "remove": "Ukloni"
+                "remove": "Ukloni",
+                "pay_now": "Plati odmah"
+            },
+            "order": {
+                "order_created": "Porudžbina je uspešno kreirana"
+            },
+            "checkout": {
+                "checkout": "Plaćanje",
+                "contact_info": "Kontakt informacije",
+                "shipping_info": "Informacije o dostavi",
+                "email": "Email",
+                "Phone": "Telefon",
+                "first_name": "Ime",
+                "last_name": "Prezime",
+                "company": "Kompanija",
+                "address_line": "Adresa",
+                "city": "Grad",
+                "postal_code": "Poštanski broj",
+                "payment": "Plaćanje",
+                "order_summary": "Pregled porudžbine",
+                "fill_with_test_data": "Popuni test podacima"
             }
         }
     }

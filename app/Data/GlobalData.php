@@ -10,6 +10,7 @@ use Spatie\LaravelData\Data;
 class GlobalData extends Data
 {
     public function __construct(
+        public string $env,
         public Closure|string|null $action,
         #[DataCollectionOf(CategoryData::class)]
         public ?Collection $categories,

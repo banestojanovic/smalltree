@@ -1,6 +1,5 @@
-import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/app/components/ui/sheet';
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@/app/components/ui/sheet';
 import RemoveFromCartButton from '@/app/layouts/_partials/frontendLayout/RemoveFromCartButton';
 import UpdateCartQuantity from '@/app/layouts/_partials/frontendLayout/UpdateCartQuantity';
 import { PageProps } from '@/app/types';
@@ -8,7 +7,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export default function CartButton() {
+export default function Cart() {
     const [open, setOpen] = useState(false);
     const cart = usePage<PageProps<{ cart?: App.Data.CartData }>>().props.cart;
     const global = usePage<PageProps<{ global?: PageProps['global'] }>>().props.global;
@@ -23,12 +22,6 @@ export default function CartButton() {
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-                <div className="relative">
-                    {cart?.products && cart.products.length > 0 && <Badge className="absolute -right-1 -top-1">{cart.products.length}</Badge>}
-                    <Button variant="outline">{t('enums.menu.top.cart')}</Button>
-                </div>
-            </SheetTrigger>
             <SheetContent>
                 <SheetHeader>
                     <SheetTitle>{t('cart.cart')}</SheetTitle>

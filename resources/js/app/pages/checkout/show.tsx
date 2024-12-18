@@ -15,16 +15,17 @@ import { PageProps } from '@/app/types';
 import { useTranslation } from 'react-i18next';
 
 const paymentMethods = [
-    { id: 1, title: 'Credit card' },
-    { id: 2, title: 'Cash on Delivery' },
+    { id: '1', title: 'Credit card' },
+    { id: '2', title: 'Cash on Delivery' },
 ];
 
 const CheckoutIndex = () => {
     const { t } = useTranslation();
 
-    const cart = usePage<PageProps<{ cart?: App.Data.CartData }>>().props.cart;
+    const cart = usePage<PageProps<{ cart: App.Data.CartData }>>().props.cart;
+    const global = usePage<PageProps<{ global: App.Data.GlobalData }>>().props.global;
 
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, errors } = useForm({
         email: '',
         phone: '',
         first_name: '',
@@ -34,13 +35,28 @@ const CheckoutIndex = () => {
         address_line_2: '',
         city: '',
         postal_code: '',
-        payment_method: 2,
+        payment_method: '2',
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
         post(route('orders.store'));
+    };
+
+    const fillWithTestData = () => {
+        setData({
+            email: 'test@example.com',
+            phone: '+1234567890',
+            first_name: 'John',
+            last_name: 'Doe',
+            company: 'Test Company Ltd',
+            address_line_1: '123 Test Street',
+            address_line_2: 'Apt 4B',
+            city: 'Test City',
+            postal_code: '12345',
+            payment_method: '2',
+        });
     };
 
     return (
@@ -50,6 +66,12 @@ const CheckoutIndex = () => {
                 <div className="bg-gray-50">
                     <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
                         <h2 className="sr-only">{t('checkout.checkout')}</h2>
+
+                        {global?.env === 'local' && (
+                            <Button variant={'outline'} type={'button'} onClick={fillWithTestData}>
+                                {t('checkout.fill_with_test_data')}
+                            </Button>
+                        )}
 
                         <form onSubmit={submit} className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-12">
                             <div>
@@ -86,7 +108,7 @@ const CheckoutIndex = () => {
                                                     </FieldGroup>
                                                 </div>
 
-                                                <div className="mt-5 md:mt-0 w-full">
+                                                <div className="mt-5 w-full md:mt-0">
                                                     <FieldGroup label="Last Name" name="last_name" error={errors.last_name}>
                                                         <Input id="last_name" placeholder="First name" value={data.last_name} onChange={(e) => setData('last_name', e.target.value)} />
                                                     </FieldGroup>
@@ -117,7 +139,7 @@ const CheckoutIndex = () => {
                                                         <Input id="city" placeholder="City" value={data.city} onChange={(e) => setData('city', e.target.value)} />
                                                     </FieldGroup>
                                                 </div>
-                                                <div className="mt-5 md:mt-0 w-full">
+                                                <div className="mt-5 w-full md:mt-0">
                                                     <FieldGroup label="Postal Code" name="postal_code" error={errors.postal_code}>
                                                         <Input id="postal_code" placeholder="Postal Code" value={data.postal_code} onChange={(e) => setData('postal_code', e.target.value)} />
                                                     </FieldGroup>
@@ -133,11 +155,7 @@ const CheckoutIndex = () => {
                                 <div className="mt-10">
                                     <Typography as="h3">{t('checkout.payment')}</Typography>
 
-                                    <RadioGroup
-                                        onValueChange={(e) => setData('payment_method', parseInt(e))}
-                                        defaultValue={data.payment_method}
-                                        className="flex w-full flex-col items-center gap-3 md:flex-row"
-                                    >
+                                    <RadioGroup onValueChange={(e) => setData('payment_method', e)} defaultValue={data.payment_method} className="flex w-full flex-col items-center gap-3 md:flex-row">
                                         {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
                                             <Card className="w-full" key={paymentMethodIdx}>
                                                 <CardContent>
