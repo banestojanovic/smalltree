@@ -24,18 +24,28 @@ class OrderController extends Controller
 
         $cart = (new \App\Support\Cart)->getCart();
 
-        if (!$cart)
+        if (! $cart) {
             return back()->with('error', __('cart')['cart_empty']);
-
+        }
 
         $user = User::where('email', $request->email)->first();
-        if (!$user) {
+        if (! $user) {
             $user = User::create([
                 'email' => $request->email,
                 'name' => "$request->first_name $request->last_name",
                 'password' => Hash::make('password'),
             ]);
         }
+
+        $user->address()->updateOrCreate([
+            'company' => $request->company,
+            'phone' => $request->phone,
+            'address_line_1' => $request->address_line_1,
+            'address_line_2' => $request->address_line_2,
+            'city' => $request->city,
+            'postal_code' => $request->postal_code,
+            'is_default' => $request->is_default,
+        ]);
 
         $totalAmount = 0;
         $totalDiscount = 0; // TODO: get the real discount
@@ -44,10 +54,11 @@ class OrderController extends Controller
             $productVariation = $product->variations->where('id', $product->pivot->product_variation_id)->first();
 
             $totalAmount += $productVariation->price ?? $product->price;
-//            $totalAmount += $productVariation->discount ?? $product->discount;
+            //            $totalAmount += $productVariation->discount ?? $product->discount;
 
-            if ($product->pivot->quantity > $product->stock)
+            if ($product->pivot->quantity > $product->stock) {
                 return back()->with('error', __('cart')['item_quantity_exceeds_stock']);
+            }
         }
 
         // Save Order

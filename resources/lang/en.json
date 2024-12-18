@@ -112,5 +112,20 @@
     },
     "order": {
         "order_created": "Order is created successfully"
+    },
+    "checkout": {
+        "checkout": "Checkout",
+        "contact_info": "Contact information",
+        "shipping_info": "Shipping information",
+        "email": "Email",
+        "Phone": "Phone",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "company": "Company",
+        "address_line": "Address Line",
+        "city": "City",
+        "postal_code": "Postal Code",
+        "payment": "Payment",
+        "order_summary": "Order Summary"
     }
 }

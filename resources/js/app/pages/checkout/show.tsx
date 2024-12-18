@@ -3,6 +3,7 @@ import { FormEventHandler, ReactNode } from 'react';
 
 import { Button } from '@/app/components/ui/button';
 import { Card, CardContent } from '@/app/components/ui/card';
+import FieldGroup from '@/app/components/ui/FieldGroup';
 import { Input } from '@/app/components/ui/input';
 import { Label } from '@/app/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
@@ -36,8 +37,6 @@ const CheckoutIndex = () => {
         payment_method: 2,
     });
 
-    console.log(errors);
-
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
@@ -50,23 +49,23 @@ const CheckoutIndex = () => {
             <div className="container mx-auto w-full md:max-w-5xl">
                 <div className="bg-gray-50">
                     <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
-                        <h2 className="sr-only">Checkout</h2>
+                        <h2 className="sr-only">{t('checkout.checkout')}</h2>
 
                         <form onSubmit={submit} className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-12">
                             <div>
                                 <div>
-                                    <Typography as="h3">Contact information</Typography>
+                                    <Typography as="h3">{t('checkout.contact_info')}</Typography>
 
                                     <Card>
                                         <CardContent>
-                                            <div className="grid w-full max-w-sm items-center gap-1.5">
-                                                <Label htmlFor="email">Email</Label>
-                                                <Input type="email" id="email" placeholder="Email" value={data.email} onChange={(e) => setData('email', e.target.value)} />
-                                            </div>
+                                            <FieldGroup label="Email" name="email" error={errors.email}>
+                                                <Input id="email" type="email" placeholder="Email" value={data.email} onChange={(e) => setData('email', e.target.value)} />
+                                            </FieldGroup>
 
-                                            <div className="mt-5 grid w-full max-w-sm items-center gap-1.5">
-                                                <Label htmlFor="phone">Phone</Label>
-                                                <Input id="phone" placeholder="Telephone" value={data.phone} onChange={(e) => setData('phone', e.target.value)} />
+                                            <div className="mt-5">
+                                                <FieldGroup label="Phone" name="phone" error={errors.phone}>
+                                                    <Input id="phone" placeholder="Phone" value={data.phone} onChange={(e) => setData('phone', e.target.value)} />
+                                                </FieldGroup>
                                             </div>
                                         </CardContent>
                                     </Card>
@@ -76,45 +75,52 @@ const CheckoutIndex = () => {
 
                                 {/* Shipping Info */}
                                 <div className="mt-10">
-                                    <Typography as="h3">Shipping information</Typography>
+                                    <Typography as="h3">{t('checkout.shipping_info')}</Typography>
 
                                     <Card>
                                         <CardContent>
-                                            <div className="md:flex md:items-center gap-x-5">
+                                            <div className="gap-x-5 md:flex md:items-center">
                                                 <div className="">
-                                                    <Label htmlFor="first_name">First name</Label>
-                                                    <Input id="first_name" placeholder="First name" value={data.first_name} onChange={(e) => setData('first_name', e.target.value)} />
+                                                    <FieldGroup label="First Name" name="first_name" error={errors.first_name}>
+                                                        <Input id="first_name" placeholder="First name" value={data.first_name} onChange={(e) => setData('first_name', e.target.value)} />
+                                                    </FieldGroup>
                                                 </div>
 
                                                 <div className="mt-5 md:mt-0">
-                                                    <Label htmlFor="last_name">Last name</Label>
-                                                    <Input id="last_name" placeholder="Last name" value={data.last_name} onChange={(e) => setData('last_name', e.target.value)} />
+                                                    <FieldGroup label="Last Name" name="last_name" error={errors.last_name}>
+                                                        <Input id="last_name" placeholder="First name" value={data.last_name} onChange={(e) => setData('last_name', e.target.value)} />
+                                                    </FieldGroup>
                                                 </div>
                                             </div>
 
                                             <div className="mt-5">
-                                                <Label htmlFor="copmpany">Company</Label>
-                                                <Input id="copmpany" placeholder="Company" value={data.company} onChange={(e) => setData('copmpany', e.target.value)} />
+                                                <FieldGroup label="Company" name="company" error={errors.company}>
+                                                    <Input id="company" placeholder="Company" value={data.company} onChange={(e) => setData('company', e.target.value)} />
+                                                </FieldGroup>
                                             </div>
 
                                             <div className="mt-5">
-                                                <Label htmlFor="address_line_1">Address Line 1</Label>
-                                                <Input id="address_line_1" placeholder="Address Line 1" value={data.address_line_1} onChange={(e) => setData('address_line_1', e.target.value)} />
+                                                <FieldGroup label="Address Line 1" name="address_line_1" error={errors.address_line_1}>
+                                                    <Input id="address_line_1" placeholder="Address Line 1" value={data.address_line_1} onChange={(e) => setData('address_line_1', e.target.value)} />
+                                                </FieldGroup>
                                             </div>
 
                                             <div className="mt-5">
-                                                <Label htmlFor="address_line_2">Address Line 2</Label>
-                                                <Input id="address_line_2" placeholder="Address Line 2" value={data.address_line_2} onChange={(e) => setData('address_line_2', e.target.value)} />
+                                                <FieldGroup label="Address Line 2" name="address_line_2" error={errors.address_line_2}>
+                                                    <Input id="address_line_2" placeholder="Address Line 2" value={data.address_line_2} onChange={(e) => setData('address_line_2', e.target.value)} />
+                                                </FieldGroup>
                                             </div>
 
-                                            <div className="mt-5 md:flex md:items-center gap-x-5">
+                                            <div className="mt-5 gap-x-5 md:flex md:items-center">
                                                 <div className="">
-                                                    <Label htmlFor="city">City</Label>
-                                                    <Input id="city" placeholder="City" value={data.city} onChange={(e) => setData('city', e.target.value)} />
+                                                    <FieldGroup label="City" name="city" error={errors.city}>
+                                                        <Input id="city" placeholder="City" value={data.city} onChange={(e) => setData('city', e.target.value)} />
+                                                    </FieldGroup>
                                                 </div>
                                                 <div className="mt-5 md:mt-0">
-                                                    <Label htmlFor="postal_code">Postal Code / Zip</Label>
-                                                    <Input id="postal_code" placeholder="Postal Code" value={data.postal_code} onChange={(e) => setData('postal_code', e.target.value)} />
+                                                    <FieldGroup label="Postal Code" name="postal_code" error={errors.postal_code}>
+                                                        <Input id="postal_code" placeholder="Postal Code" value={data.postal_code} onChange={(e) => setData('postal_code', e.target.value)} />
+                                                    </FieldGroup>
                                                 </div>
                                             </div>
                                         </CardContent>
@@ -125,9 +131,13 @@ const CheckoutIndex = () => {
 
                                 {/* Payment Method */}
                                 <div className="mt-10">
-                                    <Typography as="h3">Payment</Typography>
+                                    <Typography as="h3">{t('checkout.payment')}</Typography>
 
-                                    <RadioGroup onValueChange={(e) => setData('payment_method', parseInt(e))} defaultValue={data.payment_method} className="flex w-full flex-wrap items-center gap-3">
+                                    <RadioGroup
+                                        onValueChange={(e) => setData('payment_method', parseInt(e))}
+                                        defaultValue={data.payment_method}
+                                        className="flex w-full flex-col items-center gap-3 md:flex-row"
+                                    >
                                         {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
                                             <Card className="w-full" key={paymentMethodIdx}>
                                                 <CardContent>
@@ -139,12 +149,13 @@ const CheckoutIndex = () => {
                                             </Card>
                                         ))}
                                     </RadioGroup>
+                                    {errors.payment_method && <div className="mt-2 text-sm text-red-500">{errors.payment_method}</div>}
                                 </div>
                             </div>
 
                             {/* Order summary */}
                             <div className="mt-10 lg:mt-0">
-                                <Typography as="h3">Order Summery</Typography>
+                                <Typography as="h3">{t('checkout.order_summary')}</Typography>
 
                                 <Card>
                                     <CardContent>
