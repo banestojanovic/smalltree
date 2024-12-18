@@ -4,7 +4,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 import RemoveFromCartButton from '@/app/layouts/_partials/frontendLayout/RemoveFromCartButton';
 import UpdateCartQuantity from '@/app/layouts/_partials/frontendLayout/UpdateCartQuantity';
 import { PageProps } from '@/app/types';
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -75,8 +75,8 @@ export default function CartButton() {
                 </div>
                 <SheetFooter>
                     <SheetClose asChild>
-                        <Button className="block w-full" type="submit">
-                            {t('cart.check_out')}
+                        <Button asChild className="block w-full" type="submit">
+                            <Link href={route('checkout.show')}>{t('cart.check_out')}</Link>
                         </Button>
                     </SheetClose>
                 </SheetFooter>

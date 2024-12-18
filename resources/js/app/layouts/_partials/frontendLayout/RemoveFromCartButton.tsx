@@ -11,6 +11,7 @@ import {
     AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { useForm } from '@inertiajs/react';
+import { Trash2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function RemoveFromCartButton({ product }: { product: App.Data.CartProductData }) {
@@ -31,6 +32,7 @@ export default function RemoveFromCartButton({ product }: { product: App.Data.Ca
         <AlertDialog>
             <AlertDialogTrigger asChild>
                 <Button variant="outline" size="sm">
+                    <Trash2 />
                     {t('cart.remove')}
                 </Button>
             </AlertDialogTrigger>

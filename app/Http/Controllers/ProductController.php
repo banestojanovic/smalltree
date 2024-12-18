@@ -28,15 +28,6 @@ class ProductController extends Controller
             ->get()
         );
 
-        //        'products' => ProductData::collect
-        //    (Product::with('variations', 'discount', 'cover', 'categories')
-        //        ->when(! empty(request('selectedCategory')), function ($query) {
-        //            $query->whereHas('categories', function ($q) {
-        //                $q->whereIn('categories.id', request('selectedCategory'));
-        //            });
-        //        })
-        //        ->paginate(12)),
-
         return inertia('product/show', [
             'product' => $product,
             'similarProducts' => $similarProducts,

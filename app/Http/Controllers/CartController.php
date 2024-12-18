@@ -85,7 +85,7 @@ class CartController extends Controller
             })
             ->first();
 
-        if (! $existing) {
+        if (!$existing) {
             return back()->with('error', __('cart')['item_quantity_not_updated']);
         }
 

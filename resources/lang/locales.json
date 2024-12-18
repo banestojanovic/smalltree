@@ -108,7 +108,8 @@
                 "item_quantity_not_updated": "Item quantity not updated",
                 "item_quantity_exceeds_stock": "Item quantity exceeds stock",
                 "check_out": "Checkout",
-                "remove": "Remove"
+                "remove": "Remove",
+                "pay_now": "Pay Now"
             }
         }
     },

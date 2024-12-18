@@ -105,7 +105,12 @@
         "item_quantity_updated": "Item quantity updated",
         "item_quantity_not_updated": "Item quantity not updated",
         "item_quantity_exceeds_stock": "Item quantity exceeds stock",
+        "cart_empty": "Cart is empty",
         "check_out": "Checkout",
-        "remove": "Remove"
+        "remove": "Remove",
+        "pay_now": "Pay Now"
+    },
+    "order": {
+        "order_created": "Order is created successfully"
     }
 }
