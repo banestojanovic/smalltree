@@ -4,65 +4,43 @@ import { Check, ChevronsUpDown } from 'lucide-react';
 import * as React from 'react';
 
 import { Button } from '@/app/components/ui/button';
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-} from '@/app/components/ui/command';
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from '@/app/components/ui/popover';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/app/components/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/app/components/ui/popover';
 import { cn } from '@/lib/utils';
 
-//@ts-ignore
-interface ComboboxOption {
-    [key: string]: any;
-}
-
 interface ComboboxProps {
-    options: ComboboxOption[];
-//@ts-ignore
     value: any;
-    onChange: (item: ComboboxOption) => void;
+    onChange: (value: any) => void;
     placeholder?: string;
-    className?: string;
     inputPlaceholder?: string;
-    displayLabel?: (value: ComboboxOption) => React.ReactNode; // Render prop for displaying selected value
-    children?: (item: ComboboxOption) => React.ReactNode; // Render prop for item customization
+    className?: string;
+    children: React.ReactNode;
 }
 
-export function Combobox({
-    options,
-    value,
-    onChange,
-    placeholder = 'Select an option...',
-    className,
-    inputPlaceholder = 'Search...',
-    displayLabel,
-    children,
-}: ComboboxProps) {
+interface ComboboxItemProps {
+    value: any;
+    children: React.ReactNode;
+}
+
+export function Combobox({ value, onChange, placeholder = 'Select an option...', inputPlaceholder = 'Search...', className, children }: ComboboxProps) {
     const [open, setOpen] = React.useState(false);
+
+    const options = React.Children.map(children, (child) => {
+        if (React.isValidElement(child) && child.type === ComboboxItem) {
+            return {
+                value: child.props.value,
+                label: child.props.children,
+                element: child,
+            };
+        }
+        return null;
+    })?.filter(Boolean);
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={open}
-                    className={cn('w-[200px] justify-between', className)}
-                >
-                    {value
-                        ? displayLabel
-                            ? displayLabel(value)
-                            : options.find((option) => option === value)
-                                  ?.label || 'Custom'
-                        : placeholder}
+                <Button variant="outline" role="combobox" aria-expanded={open} className={cn('w-[200px] justify-between', className)}>
+                    {value ? options?.find((option) => option.value === value)?.label : placeholder}
                     <ChevronsUpDown className="opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -72,22 +50,16 @@ export function Combobox({
                     <CommandList>
                         <CommandEmpty>No options found.</CommandEmpty>
                         <CommandGroup>
-                            {options.map((option) => (
+                            {options?.map((option) => (
                                 <CommandItem
-                                    key={option.id || option.value}
+                                    key={option.value}
                                     onSelect={() => {
-                                        onChange(option);
+                                        onChange(option.value);
                                         setOpen(false);
                                     }}
                                 >
-                                    {children ? children(option) : option.label}
-                                    {value === option && (
-                                        <Check
-                                            className={cn(
-                                                'ml-auto opacity-100',
-                                            )}
-                                        />
-                                    )}
+                                    {option.label}
+                                    {value === option.value && <Check className={cn('ml-auto opacity-100')} />}
                                 </CommandItem>
                             ))}
                         </CommandGroup>
@@ -96,4 +68,8 @@ export function Combobox({
             </PopoverContent>
         </Popover>
     );
+}
+
+export function ComboboxItem({ value, children }: ComboboxItemProps) {
+    return <>{children}</>; // Just a marker component
 }

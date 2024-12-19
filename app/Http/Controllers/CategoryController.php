@@ -16,6 +16,8 @@ class CategoryController extends Controller
 
         $promotionProduct = ProductData::from(Product::query()->active()->inRandomOrder()->first());
 
+        $selectedVariation = request('selectedVariation') ?? '';
+
         $products = ProductData::collect(
             Product::query()
                 ->with(['variations', 'discount', 'cover', 'categories'])
@@ -28,6 +30,9 @@ class CategoryController extends Controller
             'category' => $category,
             'products' => $products,
             'promotionProduct' => $promotionProduct,
+            'query' => [
+                'selectedVariation' => $selectedVariation,
+            ],
         ]);
     }
 }
