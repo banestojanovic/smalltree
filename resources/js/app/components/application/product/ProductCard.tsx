@@ -1,10 +1,9 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
 
-import AddToCartButton from '@/app/components/application/product/AddToCartButton';
+import { ProductQuickViewModal } from '@/app/components/application/product/ProductQuickViewModal';
 import { Badge } from '@/app/components/ui/badge';
 import { PageProps } from '@/app/types';
 import { Link } from '@inertiajs/react';
-import { ProductQuickViewModal } from '@/app/components/application/product/ProductQuickViewModal';
 
 const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) => {
     return (
@@ -34,7 +33,9 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
 
             <CardFooter className="mt-auto flex items-center justify-between">
                 <span className="font-semibold">${product.price}</span>
-                <ProductQuickViewModal product={product} />
+                <div className="inline-flex items-center justify-end">
+                    <ProductQuickViewModal product={product} />
+                </div>
             </CardFooter>
         </Card>
     );

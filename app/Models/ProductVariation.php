@@ -53,4 +53,9 @@ class ProductVariation extends Model
     {
         return $this->hasOne(Discount::class);
     }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

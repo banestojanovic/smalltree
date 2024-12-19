@@ -11,9 +11,11 @@ interface queryProps {
 
 const ProductsListFilters = ({
     category,
+    variations,
     query,
 }: PageProps<{
     category: App.Data.CategoryData;
+    variations: App.Data.ProductVariationData[];
     query: queryProps;
 }>) => {
     const { t } = useTranslation();
@@ -24,6 +26,8 @@ const ProductsListFilters = ({
     const { data, setData, get, processing, errors, reset } = useForm({
         selectedVariation: query?.selectedVariation ?? null,
     });
+
+    console.log(query);
 
     // track initial load
     const [isInitialLoad, setIsInitialLoad] = useState(true);
@@ -54,9 +58,13 @@ const ProductsListFilters = ({
                         placeholder={t('enums.product.variations')}
                         inputPlaceholder={t('enums.product.variations')}
                     >
-                        <ComboboxItem value="1">Value 1</ComboboxItem>
-                        <ComboboxItem value="2">Value 2</ComboboxItem>
-                        <ComboboxItem value="3">Value 3</ComboboxItem>
+                        <ComboboxItem value={null}>Select All</ComboboxItem>
+
+                        {variations.map((variation) => (
+                            <ComboboxItem value={variation.id} key={variation.id}>
+                                {variation.sku} - {variation.id}
+                            </ComboboxItem>
+                        ))}
                     </Combobox>
 
                     <Combobox
@@ -65,12 +73,14 @@ const ProductsListFilters = ({
                         placeholder={t('enums.product.origin_country')}
                         inputPlaceholder={t('enums.product.origin_country')}
                     >
+                        <ComboboxItem value={null}>Select All</ComboboxItem>
                         <ComboboxItem value="c1">County Value 1</ComboboxItem>
                         <ComboboxItem value="c2">County Value 2</ComboboxItem>
                         <ComboboxItem value="c3">County Value 3</ComboboxItem>
                     </Combobox>
 
                     <Combobox value={selectedTaste} onChange={(value) => setSelectedTaste(value)} placeholder={t('enums.product.tea_taste')} inputPlaceholder={t('enums.product.tea_taste')}>
+                        <ComboboxItem value={null}>Select All</ComboboxItem>
                         <ComboboxItem value="t1">Taste Value 1</ComboboxItem>
                         <ComboboxItem value="t2">Taste Value 2</ComboboxItem>
                         <ComboboxItem value="t3">Taste Value 3</ComboboxItem>

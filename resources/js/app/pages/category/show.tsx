@@ -13,7 +13,17 @@ interface queryProps {
     selectedVariation: string | number | null;
 }
 
-const CategoryShowPage = ({ category, products, query }: { category: App.Data.CategoryData; products: PaginatedData<App.Data.ProductData>; query: queryProps }) => {
+const CategoryShowPage = ({
+    category,
+    products,
+    variations,
+    query,
+}: {
+    category: App.Data.CategoryData;
+    products: PaginatedData<App.Data.ProductData>;
+    variations: App.Data.ProductVariationData[];
+    query: queryProps;
+}) => {
     return (
         <>
             <Head title={category.name} />
@@ -22,7 +32,7 @@ const CategoryShowPage = ({ category, products, query }: { category: App.Data.Ca
 
             <CategoryDetails />
 
-            <ProductsListFilters category={category} query={query} />
+            <ProductsListFilters category={category} variations={variations} query={query} />
 
             <RelatedProducts products={products} />
 
