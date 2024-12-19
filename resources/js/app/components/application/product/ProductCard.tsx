@@ -4,6 +4,7 @@ import AddToCartButton from '@/app/components/application/product/AddToCartButto
 import { Badge } from '@/app/components/ui/badge';
 import { PageProps } from '@/app/types';
 import { Link } from '@inertiajs/react';
+import { ProductQuickViewModal } from '@/app/components/application/product/ProductQuickViewModal';
 
 const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) => {
     return (
@@ -33,7 +34,7 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
 
             <CardFooter className="mt-auto flex items-center justify-between">
                 <span className="font-semibold">${product.price}</span>
-                <AddToCartButton product={product} />
+                <ProductQuickViewModal product={product} />
             </CardFooter>
         </Card>
     );
