@@ -29,7 +29,6 @@ const CheckoutIndex = () => {
         phone: '',
         first_name: '',
         last_name: '',
-        company: '',
         address_line_1: '',
         address_line_2: '',
         city: '',
@@ -86,17 +85,11 @@ const CheckoutIndex = () => {
                                                     </FieldGroup>
                                                 </div>
 
-                                                <div className="mt-5 md:mt-0 w-full">
+                                                <div className="mt-5 w-full md:mt-0">
                                                     <FieldGroup label="Last Name" name="last_name" error={errors.last_name}>
                                                         <Input id="last_name" placeholder="First name" value={data.last_name} onChange={(e) => setData('last_name', e.target.value)} />
                                                     </FieldGroup>
                                                 </div>
-                                            </div>
-
-                                            <div className="mt-5">
-                                                <FieldGroup label="Company" name="company" error={errors.company}>
-                                                    <Input id="company" placeholder="Company" value={data.company} onChange={(e) => setData('company', e.target.value)} />
-                                                </FieldGroup>
                                             </div>
 
                                             <div className="mt-5">
@@ -117,7 +110,7 @@ const CheckoutIndex = () => {
                                                         <Input id="city" placeholder="City" value={data.city} onChange={(e) => setData('city', e.target.value)} />
                                                     </FieldGroup>
                                                 </div>
-                                                <div className="mt-5 md:mt-0 w-full">
+                                                <div className="mt-5 w-full md:mt-0">
                                                     <FieldGroup label="Postal Code" name="postal_code" error={errors.postal_code}>
                                                         <Input id="postal_code" placeholder="Postal Code" value={data.postal_code} onChange={(e) => setData('postal_code', e.target.value)} />
                                                     </FieldGroup>
