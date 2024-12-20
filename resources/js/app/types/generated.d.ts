@@ -14,12 +14,13 @@ id: number;
 name: string;
 slug: string;
 description: string | null;
+values: Array<App.Data.AttributeValueData> | null;
 };
 export type AttributeValueData = {
 id: number;
 attribute_id: number;
 value: string;
-attribute: App.Data.AttributeData;
+attribute: App.Data.AttributeData | null;
 };
 export type CartData = {
 total: number;
@@ -30,6 +31,7 @@ products: Array<App.Data.CartProductData> | null;
 export type CartProductData = {
 quantity: number;
 realPrice: number;
+chosenId: number;
 id: number;
 name: string;
 slug: string;
@@ -75,6 +77,7 @@ photos: any | null;
 categories: Array<App.Data.PostCategoryData> | null;
 };
 export type ProductData = {
+grouped_variations: any | Array<any> | null;
 id: number;
 name: string;
 slug: string;
@@ -99,6 +102,7 @@ price: number | null;
 stock: number | null;
 stock_status: App.ProductStockStatus;
 variation: App.Data.VariationValueData | null;
+variations: Array<App.Data.VariationValueData> | null;
 };
 export type SharedData = {
 user: App.Data.UserData | null;
@@ -113,12 +117,14 @@ export type VariationData = {
 id: number;
 name: string;
 description: string | null;
+values: Array<App.Data.VariationValueData> | null;
 };
 export type VariationValueData = {
 id: number;
 variation_id: number;
 value: string;
-variation: App.Data.VariationData;
+variation: App.Data.VariationData | null;
+pivot: any | null;
 };
 }
 declare namespace App.Support.Data {

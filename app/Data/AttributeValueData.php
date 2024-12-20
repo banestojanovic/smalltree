@@ -10,6 +10,6 @@ class AttributeValueData extends Data
         public int $id,
         public int $attribute_id,
         public string $value,
-        public AttributeData $attribute,
+        public ?AttributeData $attribute,
     ) {}
 }

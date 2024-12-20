@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -18,23 +19,28 @@ class CartController extends Controller
 
         $qty = request('quantity', 1);
 
-        $existing = $cart->products()
-            ->wherePivot('product_id', request('product_id'))
-            ->wherePivot('product_variation_id', request('variation_id'))
-            ->first();
+        $query = $cart->products()->wherePivot('product_id', request('product_id'));
+
+        if (request('variation_id')) {
+            $query->wherePivot('product_variation_id', request('variation_id'));
+        }
+
+        $existing = $query->first();
 
         if ($existing) {
-
             if ($existing->pivot->quantity + $qty > $existing->stock) {
                 return back()->with('error', __('cart')['item_quantity_exceeds_stock']);
             }
 
-            $cart->products()->updateExistingPivot(request('product_id'), [
-                'product_variation_id' => request('variation_id'),
-                'quantity' => $existing->pivot->quantity + $qty,
-            ]);
+            DB::transaction(fn () => DB::table('cart_product')
+                ->where('id', $existing->pivot->id)
+                ->update([
+                    'product_variation_id' => request('variation_id'),
+                    'quantity' => $existing->pivot->quantity + $qty,
+                ])
+            );
         } else {
-            $cart->products()->syncWithoutDetaching([
+            $cart->products()->attach([
                 request('product_id') => [
                     'product_variation_id' => request('variation_id'),
                     'quantity' => $qty,
@@ -78,21 +84,29 @@ class CartController extends Controller
 
         $cart = (new \App\Support\Cart)->getOrCreateCart();
 
-        $existing = $cart->products()
-            ->wherePivot('product_id', request('product_id'))
-            ->when(request()->has('product_variation_id'), function ($query) {
-                return $query->wherePivot('product_variation_id', request('variation_id'));
-            })
-            ->first();
+        $query = $cart->products()->wherePivot('product_id', request('product_id'));
+
+        if (request('variation_id')) {
+            $query->wherePivot('product_variation_id', request('variation_id'));
+        }
+
+        $existing = $query->first();
 
         if (! $existing) {
             return back()->with('error', __('cart')['item_quantity_not_updated']);
         }
 
-        $cart->products()->updateExistingPivot(request('product_id'), [
-            'product_variation_id' => request('variation_id'),
-            'quantity' => request('quantity'),
-        ]);
+        if ($existing->pivot->quantity + request('quantity') > $existing->stock) {
+            return back()->with('error', __('cart')['item_quantity_exceeds_stock']);
+        }
+
+        DB::transaction(fn () => DB::table('cart_product')
+            ->where('id', $existing->pivot->id)
+            ->update([
+                'product_variation_id' => request('variation_id'),
+                'quantity' => request('quantity'),
+            ])
+        );
 
         return back()->with('success', __('cart')['item_quantity_updated']);
     }

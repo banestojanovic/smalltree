@@ -1,18 +1,25 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/app/components/ui/accordion';
 import { Button } from '@/app/components/ui/button';
-import { Combobox, ComboboxItem } from '@/app/components/ui/combobox';
 import { Typography } from '@/app/components/ui/typography';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import AddToCartButton from '@/app/components/application/product/AddToCartButton';
+import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
 import { PageProps } from '@/app/types';
 import { Minus, Plus } from 'lucide-react';
+import VariationValueData = App.Data.VariationValueData;
+import ProductVariationData = App.Data.ProductVariationData;
 
 const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }>) => {
     const { t } = useTranslation();
 
-    const [selectedVariation, setSelectedVariation] = useState('');
+    const [selectedVariation, setSelectedVariation] = useState<string | null>(product?.variations?.[1]?.variations?.[0]?.id.toString() ?? null);
     const [itemQuantity, setItemQuantity] = useState(1);
+
+    const matchingVariation = product?.variations?.find((variation: ProductVariationData) =>
+        variation?.variations?.some((variationDetail: VariationValueData) => variationDetail?.pivot?.variation_value_id == selectedVariation),
+    );
 
     return (
         <section className="container mt-5 sm:mt-10">
@@ -24,34 +31,32 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         {product.description}
                     </Typography>
 
-                    <Combobox value={selectedVariation} onChange={(value) => setSelectedVariation(value)} placeholder={t('enums.product.variations')} inputPlaceholder={t('enums.product.variations')}>
-                        <ComboboxItem value="v1">Variation Value 1</ComboboxItem>
-                        <ComboboxItem value="v2">Variation Value 2</ComboboxItem>
-                        <ComboboxItem value="v3">Variation Value 3</ComboboxItem>
-                    </Combobox>
-
-                    {/*<Combobox*/}
-                    {/*    options={product?.variations ?? []}*/}
-                    {/*    value={selectedVariation}*/}
-                    {/*    onChange={(item) => setSelectedVariation(item.value)}*/}
-                    {/*    placeholder={t('enums.product.variations')}*/}
-                    {/*    inputPlaceholder={t('enums.product.variations')}*/}
-                    {/*    displayLabel={(value) => <span>{value.sku}</span>}*/}
-                    {/*>*/}
-                    {/*    {(item) => (*/}
-                    {/*        <div className="flex items-center justify-between">*/}
-                    {/*            <span>{item.sku}</span>*/}
-                    {/*        </div>*/}
-                    {/*    )}*/}
-                    {/*</Combobox>*/}
-
                     <Typography as="h2" className="mt-7 !text-3xl !font-bold">
-                        ${product.price}
+                        ${matchingVariation?.price ?? product.price}
                     </Typography>
 
                     <Typography as="p" className="mt-7">
                         {t('enums.product.free_shipping_over')} $100
                     </Typography>
+
+                    {product?.grouped_variations && (
+                        <div className="mt-7">
+                            <ToggleGroup type="single" className="justify-start" value={selectedVariation ?? undefined} onValueChange={(value) => setSelectedVariation(value)}>
+                                {Object.keys(product?.grouped_variations ?? {}).map((group) => (
+                                    <div key={group} className={'flex flex-col space-y-1'}>
+                                        <Typography as="h4"> {group} </Typography>
+                                        <div className={'flex gap-2'}>
+                                            {product?.grouped_variations[group].map((variation: VariationValueData) => (
+                                                <ToggleGroupItem variant="default" value={variation.id.toString()} aria-label="Toggle bold" key={variation.id}>
+                                                    {variation.value}
+                                                </ToggleGroupItem>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </ToggleGroup>
+                        </div>
+                    )}
 
                     <div className="mt-7 flex items-center gap-x-5">
                         <div className="flex items-center">
@@ -68,6 +73,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                             <Button
                                 type="button"
                                 variant="outline"
+                                disabled={itemQuantity >= (product?.stock ?? 99)}
                                 onClick={() => {
                                     setItemQuantity((q) => q + 1);
                                 }}
@@ -76,7 +82,14 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                             </Button>
                         </div>
 
-                        <Button> Add to Cart</Button>
+                        <AddToCartButton
+                            product={product}
+                            productVariantId={selectedVariation}
+                            quantity={itemQuantity}
+                            disabled={Object.keys(product?.variations ?? [])?.length > 0 && !selectedVariation}
+                            variant="default"
+                            className="inline-flex w-full items-center justify-center"
+                        />
 
                         <Button className="block w-full"> Checkout </Button>
                     </div>

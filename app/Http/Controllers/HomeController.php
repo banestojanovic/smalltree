@@ -6,15 +6,23 @@ use App\Data\PostData;
 use App\Data\ProductData;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Variation;
 use App\PostStatus;
-use App\ProductStatus;
 
 class HomeController extends Controller
 {
     public function __invoke()
     {
+        $variations = Variation::all();
+
         $popularProducts = ProductData::collect(Product::query()
-            ->with('variations', 'discount', 'cover', 'categories')
+            ->with('discount', 'cover', 'categories')
+            ->with([
+                'variations' => function ($query) {
+                    $query->with('variations')
+                        ->select('product_variations.*');
+                },
+            ])
             ->active()
             ->limit(8)
             ->get());

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\AttributeData;
 use App\Data\CategoryData;
 use App\Data\ProductData;
-use App\Data\ProductVariationData;
+use App\Data\VariationData;
+use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\ProductVariation;
-use App\ProductStatus;
+use App\Models\Variation;
 
 class CategoryController extends Controller
 {
@@ -18,34 +19,52 @@ class CategoryController extends Controller
 
         $promotionProduct = ProductData::from(Product::query()->active()->inRandomOrder()->first());
 
-        $selectedVariation = request('selectedVariation') ?? '';
+        $selectedAttributesValues = request('attributes') ?? [];
+        $selectedVariationValues = request('variations') ?? [];
 
         $products = ProductData::collect(
-            Product::query()
-                ->with(['variations', 'discount', 'cover', 'categories'])
+            Product::with(['variations', 'discount', 'cover', 'categories'])
                 ->active()
-                ->whereHas('categories', fn($query) => $query->where('categories.id', $category->id))
-                ->when($selectedVariation, function ($query, $selectedVariation) {
-                    $query->whereHas('variations', function ($q) use ($selectedVariation) {
-                        $q->where('product_variations.id', $selectedVariation);
-                    });
+                ->whereHas('categories', fn ($query) => $query->where('categories.id', $category->id))
+                ->when($selectedAttributesValues && count($selectedAttributesValues) > 0, function ($query) use ($selectedAttributesValues) {
+                    foreach ($selectedAttributesValues as $attribute => $value) {
+                        if (! empty($value)) {
+                            $query->whereHas('attributes', function ($q) use ($value) {
+                                $q->whereIn('attribute_values.id', (array) $value);
+                            });
+                        }
+                    }
+                })
+                ->when($selectedVariationValues && count($selectedVariationValues) > 0, function ($query) use ($selectedVariationValues) {
+                    foreach ($selectedVariationValues as $variationId => $variationValue) {
+                        if (! empty($variationValue)) {
+                            $query->whereHas('variations', function ($q) use ($variationValue) {
+                                $q->whereHas('variations', function ($q2) use ($variationValue) {
+                                    $q2->whereIn('variation_values.id', (array) $variationValue);
+                                });
+                            });
+                        }
+                    }
                 })
                 ->paginate(12)
         );
 
-        $variations = ProductVariationData::collect(
-            ProductVariation::whereHas('product.categories', function ($query) use ($category) {
-                $query->where('categories.id', $category->id);
-            })->get()
-        );
+        $variations = VariationData::collect(Variation::with('values')->get());
+        $attributes = AttributeData::collect(Attribute::with('values')->get());
 
         return inertia('category/show', [
             'category' => $category,
             'products' => $products,
             'variations' => $variations,
+            'attributes' => $attributes,
             'promotionProduct' => $promotionProduct,
             'query' => [
-                'selectedVariation' => $selectedVariation,
+                'variations' => $variations->mapWithKeys(fn ($variation) => [
+                    $variation->id => request('variations')[$variation->id] ?? null,
+                ]),
+                'attributes' => $attributes->mapWithKeys(fn ($attribute) => [
+                    $attribute->slug => request('attributes')[$attribute->slug] ?? null,
+                ]),
             ],
         ]);
     }

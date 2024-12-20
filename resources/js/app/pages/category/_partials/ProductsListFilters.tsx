@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { Combobox, ComboboxItem } from '@/app/components/ui/combobox';
 import { PageProps } from '@/app/types';
@@ -6,85 +6,117 @@ import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 interface queryProps {
-    selectedVariation: string | number | null;
+    attributes: never;
+    variations: never;
 }
 
 const ProductsListFilters = ({
     category,
+    attributes,
     variations,
     query,
 }: PageProps<{
     category: App.Data.CategoryData;
-    variations: App.Data.ProductVariationData[];
+    attributes: App.Data.AttributeData[];
+    variations: App.Data.VariationData[];
     query: queryProps;
 }>) => {
     const { t } = useTranslation();
 
-    const [selectedCountry, setSelectedCountry] = useState('');
-    const [selectedTaste, setSelectedTaste] = useState('');
-
-    const { data, setData, get, processing, errors, reset } = useForm({
-        selectedVariation: query?.selectedVariation ?? null,
+    const { data, setData, get } = useForm({
+        attributes: attributes.reduce<Record<string, null>>((acc, attribute) => {
+            acc[attribute.slug] = query.attributes?.[attribute.slug] ?? null;
+            return acc;
+        }, {}),
+        variations: variations.reduce<Record<number, null>>((acc, variation) => {
+            acc[variation.id] = query.variations?.[variation.id] ?? null;
+            return acc;
+        }, {}),
     });
-
-    console.log(query);
-
-    // track initial load
-    const [isInitialLoad, setIsInitialLoad] = useState(true);
-
-    useEffect(() => {
-        if (isInitialLoad) {
-            // Skip calling handleSearch on the initial load
-            setIsInitialLoad(false);
-        } else {
-            // Trigger handleSearch only after the initial load
-            handleSearch();
-        }
-    }, [data.selectedVariation]);
 
     const handleSearch = () => {
         get(route('categories.show', category.slug), {
-            // onFinish: () => reset('selectedVariation'),
+            preserveScroll: true,
         });
     };
+
+    const prevData = useRef(data);
+
+    useEffect(() => {
+        if (JSON.stringify(prevData.current) !== JSON.stringify(data)) {
+            handleSearch();
+            prevData.current = data;
+        }
+    }, [data]);
 
     return (
         <section className="mt-10">
             <div className="container">
                 <div className="flex flex-wrap items-center gap-7">
-                    <Combobox
-                        value={data?.selectedVariation}
-                        onChange={(value) => setData('selectedVariation', value)}
-                        placeholder={t('enums.product.variations')}
-                        inputPlaceholder={t('enums.product.variations')}
-                    >
-                        <ComboboxItem value={null}>Select All</ComboboxItem>
+                    {variations.length > 0 &&
+                        variations.map((variation) => (
+                            <div className={'flex flex-col space-y-1'} key={variation.id}>
+                                <Combobox
+                                    value={data.variations[variation.id]}
+                                    onChange={(value) =>
+                                        setData('variations', {
+                                            ...data.variations,
+                                            [variation.id]: value,
+                                        })
+                                    }
+                                    placeholder={variation.name}
+                                    inputPlaceholder={variation.name}
+                                >
+                                    <ComboboxItem value={null}>{t('category_show.filters.not_selected')}</ComboboxItem>
 
-                        {variations.map((variation) => (
-                            <ComboboxItem value={variation.id} key={variation.id}>
-                                {variation.sku} - {variation.id}
-                            </ComboboxItem>
+                                    {variation?.values?.map((variation_value) => (
+                                        <ComboboxItem value={variation_value.id.toString()} key={variation_value.id}>
+                                            {variation_value.value}
+                                        </ComboboxItem>
+                                    ))}
+                                </Combobox>
+                            </div>
                         ))}
-                    </Combobox>
 
-                    <Combobox
-                        value={selectedCountry}
-                        onChange={(value) => setSelectedCountry(value)}
-                        placeholder={t('enums.product.origin_country')}
-                        inputPlaceholder={t('enums.product.origin_country')}
-                    >
-                        <ComboboxItem value={null}>Select All</ComboboxItem>
-                        <ComboboxItem value="c1">County Value 1</ComboboxItem>
-                        <ComboboxItem value="c2">County Value 2</ComboboxItem>
-                        <ComboboxItem value="c3">County Value 3</ComboboxItem>
-                    </Combobox>
+                    {attributes.length > 0 &&
+                        attributes.map((attribute) => (
+                            <div className={'flex flex-col space-y-1'} key={attribute.id}>
+                                <Combobox
+                                    value={data.attributes[attribute.slug]}
+                                    onChange={(value) =>
+                                        setData('attributes', {
+                                            ...data.attributes,
+                                            [attribute.slug]: value,
+                                        })
+                                    }
+                                    placeholder={attribute.name}
+                                    inputPlaceholder={attribute.name}
+                                >
+                                    <ComboboxItem value={null}>{t('category_show.filters.not_selected')}</ComboboxItem>
 
-                    <Combobox value={selectedTaste} onChange={(value) => setSelectedTaste(value)} placeholder={t('enums.product.tea_taste')} inputPlaceholder={t('enums.product.tea_taste')}>
-                        <ComboboxItem value={null}>Select All</ComboboxItem>
-                        <ComboboxItem value="t1">Taste Value 1</ComboboxItem>
-                        <ComboboxItem value="t2">Taste Value 2</ComboboxItem>
-                        <ComboboxItem value="t3">Taste Value 3</ComboboxItem>
-                    </Combobox>
+                                    {attribute?.values?.map((attribute_value) => (
+                                        <ComboboxItem value={attribute_value.id.toString()} key={attribute_value.id}>
+                                            {attribute_value.value}
+                                        </ComboboxItem>
+                                    ))}
+                                </Combobox>
+                            </div>
+                        ))}
+
+                    {/*<div className={'flex flex-col space-y-1'}>*/}
+                    {/*    <span>{t('category_show.filters.origin_country')}</span>*/}
+                    {/*    <Combobox*/}
+                    {/*        value={selectedCountry}*/}
+                    {/*        onChange={(value) => setSelectedCountry(value)}*/}
+                    {/*        placeholder={t('category_show.filters.origin_country')}*/}
+                    {/*        inputPlaceholder={t('category_show.filters.origin_country')}*/}
+                    {/*    >*/}
+                    {/*        <ComboboxItem value={null}>Select All</ComboboxItem>*/}
+                    {/*        <ComboboxItem value="c1">County Value 1</ComboboxItem>*/}
+                    {/*        <ComboboxItem value="c2">County Value 2</ComboboxItem>*/}
+                    {/*        <ComboboxItem value="c3">County Value 3</ComboboxItem>*/}
+                    {/*    </Combobox>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </section>

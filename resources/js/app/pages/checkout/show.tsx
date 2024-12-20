@@ -49,7 +49,6 @@ const CheckoutIndex = () => {
             phone: '+1234567890',
             first_name: 'John',
             last_name: 'Doe',
-            company: 'Test Company Ltd',
             address_line_1: '123 Test Street',
             address_line_2: 'Apt 4B',
             city: 'Test City',

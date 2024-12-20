@@ -19,22 +19,12 @@ const defaultStyles: Record<string, string> = {
     default: '', // Fallback for unsupported elements
 };
 
-export function Typography<T extends ElementType = 'p'>({
-    as,
-    children,
-    className,
-    ...rest
-}: TypographyProps<T> & ComponentPropsWithoutRef<T>) {
+export function Typography<T extends ElementType = 'p'>({ as, children, className, ...rest }: TypographyProps<T> & ComponentPropsWithoutRef<T>) {
     const Component = (as || 'p') as ElementType; // Explicitly cast to ElementType
-    const combinedClasses = `${defaultStyles[Component as keyof typeof defaultStyles] || defaultStyles.default} ${
-        className || ''
-    }`;
+    const combinedClasses = `${defaultStyles[Component as keyof typeof defaultStyles] || defaultStyles.default} ${className || ''}`;
 
     return (
-        <Component
-            {...(rest as ComponentPropsWithoutRef<T>)}
-            className={combinedClasses}
-        >
+        <Component {...(rest as ComponentPropsWithoutRef<T>)} className={combinedClasses}>
             {children}
         </Component>
     );

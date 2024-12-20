@@ -19,6 +19,9 @@ class CartProductData extends Data
     #[Computed]
     public float $realPrice;
 
+    #[Computed]
+    public float $chosenId;
+
     public function __construct(
         public readonly int $id,
         public readonly string $name,
@@ -36,5 +39,6 @@ class CartProductData extends Data
     ) {
         $this->quantity = $this->pivot->quantity ?? 1;
         $this->realPrice = $this->quantity * ($this->variations->where('id', $this->pivot->product_variation_id)->first()->price ?? $this->price);
+        $this->chosenId = $this->pivot->product_variation_id ?? $this->id;
     }
 }

@@ -99,6 +99,13 @@ class Product extends Model implements HasMedia, Sortable
         return $this->hasMany(ProductVariation::class);
     }
 
+    public function variationValues(): BelongsToMany
+    {
+        return $this->belongsToMany(VariationValue::class, 'product_variation_variation_value', 'product_id', 'variation_value_id')
+            ->withPivot('product_variation_id')
+            ->with('variation');
+    }
+
     public function discount(): HasOne
     {
         return $this->hasOne(Discount::class);
