@@ -2,10 +2,11 @@ import { Button } from '@/app/components/ui/button';
 import { useForm } from '@inertiajs/react';
 import { ShoppingCart } from 'lucide-react';
 
-const AddToCartButton = ({ product }: { product?: App.Data.ProductData }) => {
+const AddToCartButton = ({ product, productVariantId, ...props }: { product?: App.Data.ProductData; productVariantId: string | number | null }) => {
+
     const { post } = useForm({
         product_id: product?.id,
-        variation_id: product?.variations?.[0]?.id ?? null,
+        variation_id: productVariantId,
         quantity: 1,
     });
 
@@ -16,7 +17,7 @@ const AddToCartButton = ({ product }: { product?: App.Data.ProductData }) => {
     };
 
     return (
-        <Button variant="secondary" size="sm" onClick={updateCart}>
+        <Button variant="secondary" onClick={updateCart} {...props}>
             <ShoppingCart />
         </Button>
     );

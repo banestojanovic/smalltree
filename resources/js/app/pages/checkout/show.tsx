@@ -30,7 +30,6 @@ const CheckoutIndex = () => {
         phone: '',
         first_name: '',
         last_name: '',
-        company: '',
         address_line_1: '',
         address_line_2: '',
         city: '',
@@ -113,12 +112,6 @@ const CheckoutIndex = () => {
                                                         <Input id="last_name" placeholder="First name" value={data.last_name} onChange={(e) => setData('last_name', e.target.value)} />
                                                     </FieldGroup>
                                                 </div>
-                                            </div>
-
-                                            <div className="mt-5">
-                                                <FieldGroup label="Company" name="company" error={errors.company}>
-                                                    <Input id="company" placeholder="Company" value={data.company} onChange={(e) => setData('company', e.target.value)} />
-                                                </FieldGroup>
                                             </div>
 
                                             <div className="mt-5">

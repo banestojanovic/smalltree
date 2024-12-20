@@ -1,6 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/app/components/ui/accordion';
 import { Button } from '@/app/components/ui/button';
-import { Combobox } from '@/app/components/ui/combobox';
+import { Combobox, ComboboxItem } from '@/app/components/ui/combobox';
 import { Typography } from '@/app/components/ui/typography';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -24,20 +24,26 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         {product.description}
                     </Typography>
 
-                    <Combobox
-                        options={product?.variations ?? []}
-                        value={selectedVariation}
-                        onChange={(item) => setSelectedVariation(item.value)}
-                        placeholder={t('enums.product.variations')}
-                        inputPlaceholder={t('enums.product.variations')}
-                        displayLabel={(value) => <span>{value.sku}</span>}
-                    >
-                        {(item) => (
-                            <div className="flex items-center justify-between">
-                                <span>{item.sku}</span>
-                            </div>
-                        )}
+                    <Combobox value={selectedVariation} onChange={(value) => setSelectedVariation(value)} placeholder={t('enums.product.variations')} inputPlaceholder={t('enums.product.variations')}>
+                        <ComboboxItem value="v1">Variation Value 1</ComboboxItem>
+                        <ComboboxItem value="v2">Variation Value 2</ComboboxItem>
+                        <ComboboxItem value="v3">Variation Value 3</ComboboxItem>
                     </Combobox>
+
+                    {/*<Combobox*/}
+                    {/*    options={product?.variations ?? []}*/}
+                    {/*    value={selectedVariation}*/}
+                    {/*    onChange={(item) => setSelectedVariation(item.value)}*/}
+                    {/*    placeholder={t('enums.product.variations')}*/}
+                    {/*    inputPlaceholder={t('enums.product.variations')}*/}
+                    {/*    displayLabel={(value) => <span>{value.sku}</span>}*/}
+                    {/*>*/}
+                    {/*    {(item) => (*/}
+                    {/*        <div className="flex items-center justify-between">*/}
+                    {/*            <span>{item.sku}</span>*/}
+                    {/*        </div>*/}
+                    {/*    )}*/}
+                    {/*</Combobox>*/}
 
                     <Typography as="h2" className="mt-7 !text-3xl !font-bold">
                         ${product.price}

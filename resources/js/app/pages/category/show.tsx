@@ -9,7 +9,21 @@ import ProductsListFilters from '@/app/pages/category/_partials/ProductsListFilt
 import { PaginatedData } from '@/app/types';
 import RelatedProducts from './_partials/RelatedProducts';
 
-const CategoryShowPage = ({ category, products }: { category: App.Data.CategoryData; products: PaginatedData<App.Data.ProductData> }) => {
+interface queryProps {
+    selectedVariation: string | number | null;
+}
+
+const CategoryShowPage = ({
+    category,
+    products,
+    variations,
+    query,
+}: {
+    category: App.Data.CategoryData;
+    products: PaginatedData<App.Data.ProductData>;
+    variations: App.Data.ProductVariationData[];
+    query: queryProps;
+}) => {
     return (
         <>
             <Head title={category.name} />
@@ -18,7 +32,7 @@ const CategoryShowPage = ({ category, products }: { category: App.Data.CategoryD
 
             <CategoryDetails />
 
-            <ProductsListFilters />
+            <ProductsListFilters category={category} variations={variations} query={query} />
 
             <RelatedProducts products={products} />
 
