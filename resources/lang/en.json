@@ -113,7 +113,19 @@
         "pay_now": "Pay Now"
     },
     "order": {
-        "order_created": "Order is created successfully"
+        "order_created": "Order is created successfully",
+        "order_summary": "Order Summary",
+        "thank_you": "Thank You",
+        "its_on_the_way": "It's on the way!",
+        "order_received": "Your order has been received and will be shipped very soon.",
+        "shipping_address": "Shipping Address",
+        "billing_address": "Billing Address",
+        "payment_method": "Payment method",
+        "shipping_method": "Shipping method",
+        "subtotal": "Subtotal",
+        "discount": "Discount",
+        "shipping": "Shipping",
+        "total": "Total"
     },
     "checkout": {
         "checkout": "Checkout",
@@ -130,5 +142,13 @@
         "payment": "Payment",
         "order_summary": "Order Summary",
         "fill_with_test_data": "Fill with test data"
+    },
+    "posts": {
+        "blogs": "Blogs",
+        "posts": "Posts",
+        "stories": "Stories",
+        "featured_post": "Featured Post",
+        "recommended_stories": "Recommended Stories",
+        "no_story_available": "No story available"
     }
 }

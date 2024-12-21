@@ -12,6 +12,7 @@ class Order extends Model
 {
     public $fillable = [
         'user_id',
+        'shipping_address_id',
         'cart_id',
         'user_ip',
         'amount',
@@ -32,24 +33,24 @@ class Order extends Model
     protected function amount(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
         );
     }
 
     protected function total(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
         );
     }
 
     protected function shipping(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
         );
     }
 
@@ -66,5 +67,10 @@ class Order extends Model
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function shippingAddress(): BelongsTo
+    {
+        return $this->belongsTo(Address::class, 'shipping_address_id', 'id');
     }
 }

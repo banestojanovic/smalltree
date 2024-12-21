@@ -9,6 +9,15 @@ export type ProductStockStatus = 0 | 1;
 export type UserRole = 1 | 2 | 3 | 4;
 }
 declare namespace App.Data {
+export type AddressData = {
+id: number;
+user_id: number;
+phone: string;
+address_line_1: string;
+address_line_2: string;
+city: string;
+postal_code: string;
+};
 export type AttributeData = {
 id: number;
 name: string;
@@ -57,6 +66,32 @@ env: string;
 action: any | string | null;
 categories: Array<App.Data.CategoryData> | null;
 };
+export type OrderData = {
+id: number;
+user_id: number;
+shipping_address_id: number;
+cart_id: number;
+user_ip: string;
+amount: number;
+shipping: number;
+discount: number;
+total: number;
+status: App.OrderStatus | null;
+shipping_address: App.Data.AddressData | null;
+user: App.Data.UserData | null;
+items: Array<App.Data.OrderItemData> | null;
+};
+export type OrderItemData = {
+id: number;
+order_id: number;
+product_id: number;
+product_variation_id: number;
+quantity: number;
+price: number;
+discount: number;
+tax: number;
+product: App.Data.ProductData | null;
+};
 export type PageData = {
 };
 export type PostCategoryData = {
@@ -74,6 +109,7 @@ content: string | null;
 status: App.PostStatus;
 cover: any | null;
 photos: any | null;
+date_created: string;
 categories: Array<App.Data.PostCategoryData> | null;
 };
 export type ProductData = {

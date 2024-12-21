@@ -36,7 +36,7 @@ class HomeController extends Controller
 
         $posts = PostData::collect(Post::query()
             ->with('cover', 'categories')
-            ->where('status', PostStatus::ACTIVE)
+            ->active()
             ->take(3)
             ->get());
 

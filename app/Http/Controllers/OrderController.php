@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CartStatus;
+use App\Data\OrderData;
 use App\Models\Order;
 use App\Models\User;
 use App\OrderStatus;
@@ -24,12 +25,12 @@ class OrderController extends Controller
 
         $cart = (new \App\Support\Cart)->getCart();
 
-        if (! $cart) {
+        if (!$cart) {
             return back()->with('error', __('cart')['cart_empty']);
         }
 
         $user = User::where('email', $request->email)->first();
-        if (! $user) {
+        if (!$user) {
             $user = User::create([
                 'email' => $request->email,
                 'name' => "$request->first_name $request->last_name",
@@ -37,7 +38,7 @@ class OrderController extends Controller
             ]);
         }
 
-        $user->address()->updateOrCreate([
+        $address = $user->address()->updateOrCreate([
             'company' => $request->company,
             'phone' => $request->phone,
             'address_line_1' => $request->address_line_1,
@@ -64,6 +65,7 @@ class OrderController extends Controller
         // Save Order
         $order = Order::create([
             'user_id' => $user->id,
+            'shipping_address_id' => $address->id,
             'cart_id' => $cart->id,
             'user_ip' => $request->ip(),
             'amount' => $totalAmount,
@@ -95,6 +97,15 @@ class OrderController extends Controller
 
         $cart->update(['status' => CartStatus::INACTIVE]);
 
-        return redirect()->route('home')->with('success', __('order')['order_created']);
+        return redirect()->route('orders.summary', $order->id)->with('success', __('order')['order_created']);
+    }
+
+    public function summary($orderId)
+    {
+        $order = Order::with('items.product.cover', 'user', 'shippingAddress')->findOrFail($orderId);
+
+        return inertia('order/summary', [
+            'order' => OrderData::from($order),
+        ]);
     }
 }

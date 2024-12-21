@@ -26,7 +26,6 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
             </footer>
 
             <FlashMessages />
-            <Cart />
         </div>
     );
 }

@@ -54,6 +54,10 @@ class Post extends Model implements HasMedia, Sortable
             ->saveSlugsTo('slug');
     }
 
+    protected $appends = [
+        'date_created',
+    ];
+
 
     public function cover(): MorphOne
     {
@@ -68,5 +72,15 @@ class Post extends Model implements HasMedia, Sortable
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(PostCategory::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', PostStatus::ACTIVE);
+    }
+
+    public function getDateCreatedAttribute(): string
+    {
+        return $this->created_at?->format('F j, Y'); // e.g., "November 23, 2024"
     }
 }
