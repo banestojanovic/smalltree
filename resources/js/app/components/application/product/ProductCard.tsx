@@ -29,7 +29,7 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
             </CardHeader>
 
             <CardContent>
-                <p className="h-40 overflow-hidden">{product.description}</p>
+                <p className="h-32 overflow-hidden sm:h-40">{product.description}</p>
             </CardContent>
 
             <CardFooter className="mt-auto flex items-center justify-between">

@@ -10,7 +10,7 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = ProductData::from(Product::query()
-            ->with(['variations', 'discount', 'cover', 'categories'])
+            ->with(['variations', 'photos',  'discount', 'cover', 'categories'])
             ->active()
             ->where('slug', $slug)
             ->firstOrFail()

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import AddToCartButton from '@/app/components/application/product/AddToCartButton';
 import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
+import PhotoSlider from '@/app/pages/product/_partials/PhotoSlider';
 import { PageProps } from '@/app/types';
 import { Minus, Plus } from 'lucide-react';
 import VariationValueData = App.Data.VariationValueData;
@@ -23,8 +24,10 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
 
     return (
         <section className="container mt-5 sm:mt-10">
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                <div>Slider</div>
+            <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+                <div>
+                    <PhotoSlider product={product} />
+                </div>
                 <div className="">
                     <Typography as="h2">{product.name}</Typography>
                     <Typography as="p" className="mt-5">

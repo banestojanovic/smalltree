@@ -14,19 +14,13 @@ const RelatedProducts = () => {
     return (
         <section className="mt-10">
             <div className="container">
-                <Typography as="h3">
-                    {t('enums.product.similar_products')}
-                </Typography>
+                <Typography as="h3">{t('enums.product.similar_products')}</Typography>
 
-                <div className="mt-7 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5">
+                <div className="mt-7 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                     {similarProducts && similarProducts.length > 0 ? (
-                        similarProducts.map((product: App.Data.ProductData) => (
-                            <ProductCard product={product} key={product.id} />
-                        ))
+                        similarProducts.map((product: App.Data.ProductData) => <ProductCard product={product} key={product.id} />)
                     ) : (
-                        <p className="text-center text-gray-500 dark:text-gray-400">
-                            {t('enums.product.no_products_available')}.
-                        </p>
+                        <p className="text-center text-gray-500 dark:text-gray-400">{t('enums.product.no_products_available')}.</p>
                     )}
                 </div>
             </div>
