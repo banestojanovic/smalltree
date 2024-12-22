@@ -13,7 +13,7 @@ const PopularProducts = ({ products }: PageProps<{ products?: App.Data.ProductDa
             <div className="container">
                 <Typography as="h2">{t('enums.homepage.sections.most_popular_tea')}</Typography>
 
-                <div className="mt-7 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                <div className="mt-7 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                     {products && products.length > 0 ? (
                         products.map((product) => <ProductCard product={product} key={product.id} />)
                     ) : (

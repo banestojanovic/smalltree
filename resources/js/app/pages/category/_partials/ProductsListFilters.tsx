@@ -52,7 +52,7 @@ const ProductsListFilters = ({
     return (
         <section className="mt-10">
             <div className="container">
-                <div className="flex flex-wrap items-center gap-7">
+                <div className="flex w-full flex-wrap items-center gap-7">
                     {variations.length > 0 &&
                         variations.map((variation) => (
                             <div className={'flex flex-col space-y-1'} key={variation.id}>
@@ -66,6 +66,7 @@ const ProductsListFilters = ({
                                     }
                                     placeholder={variation.name}
                                     inputPlaceholder={variation.name}
+                                    className='w-full'
                                 >
                                     <ComboboxItem value={null}>{t('category_show.filters.not_selected')}</ComboboxItem>
 
@@ -80,7 +81,7 @@ const ProductsListFilters = ({
 
                     {attributes.length > 0 &&
                         attributes.map((attribute) => (
-                            <div className={'flex flex-col space-y-1'} key={attribute.id}>
+                            <div className={'flex  flex-col space-y-1'} key={attribute.id}>
                                 <Combobox
                                     value={data.attributes[attribute.slug]}
                                     onChange={(value) =>
@@ -91,6 +92,7 @@ const ProductsListFilters = ({
                                     }
                                     placeholder={attribute.name}
                                     inputPlaceholder={attribute.name}
+                                    className='w-full '
                                 >
                                     <ComboboxItem value={null}>{t('category_show.filters.not_selected')}</ComboboxItem>
 

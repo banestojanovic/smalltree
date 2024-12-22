@@ -4,10 +4,11 @@ import { PropsWithChildren, ReactNode } from 'react';
 import FlashMessages from '../components/ui/FlashMessages';
 import MainNavbar from './_partials/frontendLayout/MainNavbar';
 import TopNavbar from './_partials/frontendLayout/TopNavbar';
+import FooterNavlinks from '@/app/layouts/_partials/frontendLayout/FooterNavbar';
 
 export default function FrontendLayout({ header, children }: PropsWithChildren<{ header?: ReactNode }>) {
     return (
-        <div className="min-h-screen bg-gray-50 pb-20 text-black/50 dark:bg-black dark:text-white/50">
+        <div className="min-h-screen bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
             <nav className="bg-white">
                 <TopNavbar />
                 <MainNavbar />
@@ -23,6 +24,7 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
 
             <footer>
                 <TeaShopBenefits />
+                <FooterNavlinks />
             </footer>
 
             <FlashMessages />
