@@ -21,3 +21,5 @@ Route::get('/blog', [\App\Http\Controllers\PostController::class, 'index'])->nam
 Route::get('/blog/{slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 
 Route::post('/subscribers', [\App\Http\Controllers\SubscriberController::class, 'store'])->name('subscribers.store');
+
+Route::get('/{slug}', [\App\Http\Controllers\PageController::class, 'show'])->name('pages.show');

@@ -94,6 +94,11 @@ tax: number;
 product: App.Data.ProductData | null;
 };
 export type PageData = {
+id: number;
+name: string;
+slug: string;
+content: string | null;
+status: App.PageStatus | null;
 };
 export type PostCategoryData = {
 id: number;

@@ -7,7 +7,7 @@ import MainNavbar from './_partials/frontendLayout/MainNavbar';
 import TopNavbar from './_partials/frontendLayout/TopNavbar';
 
 export default function FrontendLayout({ header, children }: PropsWithChildren<{ header?: ReactNode }>) {
-    console.log(route().current());
+
     return (
         <div className="min-h-screen bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
             <nav className="bg-white">
