@@ -40,7 +40,9 @@ const CheckoutIndex = () => {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('orders.store'));
+        post(route('orders.store'), {
+            preserveScroll: true,
+        });
     };
 
     const fillWithTestData = () => {

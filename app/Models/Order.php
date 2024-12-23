@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
     public $fillable = [
+        'uuid',
         'user_id',
         'shipping_address_id',
         'cart_id',
@@ -33,24 +35,24 @@ class Order extends Model
     protected function amount(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value / 100,
-            set: fn($value) => $value * 100,
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
         );
     }
 
     protected function total(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value / 100,
-            set: fn($value) => $value * 100,
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
         );
     }
 
     protected function shipping(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value / 100,
-            set: fn($value) => $value * 100,
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
         );
     }
 
@@ -72,5 +74,14 @@ class Order extends Model
     public function shippingAddress(): BelongsTo
     {
         return $this->belongsTo(Address::class, 'shipping_address_id', 'id');
+    }
+
+    public static function booted()
+    {
+        static::creating(function (Order $order) {
+            if (empty($order->uuid)) {
+                $order->uuid = Str::orderedUuid();
+            }
+        });
     }
 }

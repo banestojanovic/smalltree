@@ -1,10 +1,10 @@
+import ApplicationLogo from '@/app/components/ApplicationLogo';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Typography } from '@/app/components/ui/typography';
 import { Link } from '@inertiajs/react';
 import { Mail, Star } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import ApplicationLogo from '@/app/components/ApplicationLogo';
 
 const FooterNavlinks = () => {
     const { t } = useTranslation();
@@ -13,8 +13,8 @@ const FooterNavlinks = () => {
         <>
             <div className="mt-7 border-b border-t border-gray-300 bg-gray-100 pb-5 sm:pb-0">
                 <div className="container flex w-full items-center lg:justify-center">
-                    <div className="grid w-full grid-cols-1 sm:place-items-center gap-7 sm:grid-cols-[40%_auto_auto]">
-                        <div className="md:border-l md:border-r border-gray-300 p-5">
+                    <div className="grid w-full grid-cols-1 gap-7 sm:grid-cols-[40%_auto_auto] sm:place-items-center">
+                        <div className="border-gray-300 p-5 md:border-l md:border-r">
                             <Typography as="h3" className="m-auto inline-flex gap-x-2">
                                 <Mail className="mt-2 shrink-0" />
                                 <span>Save 10% on your next purchase!</span>
@@ -64,16 +64,16 @@ const FooterNavlinks = () => {
 
                             <ul className="mt-5 flex flex-col gap-3">
                                 <li>
-                                    <Link>About us</Link>
+                                    <Link href={'#'}>About us</Link>
                                 </li>
                                 <li>
-                                    <Link>Networking</Link>
+                                    <Link href={'#'}>Networking</Link>
                                 </li>
                                 <li>
-                                    <Link>Stories</Link>
+                                    <Link href={'#'}>Stories</Link>
                                 </li>
                                 <li>
-                                    <Link>Contact</Link>
+                                    <Link href={'#'}>Contact</Link>
                                 </li>
                             </ul>
                         </div>
@@ -81,8 +81,8 @@ const FooterNavlinks = () => {
                 </div>
             </div>
 
-            <div className="py-7 sm:py-0 bg-gray-200 h-32 md:h-20 flex items-center">
-                <div className="container gap-3 flex flex-col md:flex-row w-full items-center justify-center lg:justify-between">
+            <div className="flex h-32 items-center bg-gray-200 py-7 sm:py-0 md:h-20">
+                <div className="container flex w-full flex-col items-center justify-center gap-3 md:flex-row lg:justify-between">
                     <div>
                         <Link href="/">
                             <ApplicationLogo className="block h-12 w-auto fill-current text-gray-800 dark:text-gray-200" />
@@ -91,15 +91,15 @@ const FooterNavlinks = () => {
 
                     <ul className="flex items-center justify-end gap-5">
                         <li>
-                            <Link>Terms & Conditions</Link>
+                            <Link href={'#'}>Terms & Conditions</Link>
                         </li>
 
                         <li>
-                            <Link>Privacy Policy</Link>
+                            <Link href={'#'}>Privacy Policy</Link>
                         </li>
 
                         <li>
-                            <Link>All rights Reserved 2025</Link>
+                            <Link href={'#'}>All rights Reserved 2025</Link>
                         </li>
                     </ul>
                 </div>

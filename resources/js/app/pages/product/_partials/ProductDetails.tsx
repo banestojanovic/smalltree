@@ -8,12 +8,15 @@ import AddToCartButton from '@/app/components/application/product/AddToCartButto
 import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
 import PhotoSlider from '@/app/pages/product/_partials/PhotoSlider';
 import { PageProps } from '@/app/types';
+import { Link, usePage } from '@inertiajs/react';
 import { Minus, Plus } from 'lucide-react';
 import VariationValueData = App.Data.VariationValueData;
 import ProductVariationData = App.Data.ProductVariationData;
 
 const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }>) => {
     const { t } = useTranslation();
+
+    const cart = usePage<PageProps<{ cart?: App.Data.CartData }>>().props.cart;
 
     const [selectedVariation, setSelectedVariation] = useState<string | null>(product?.variations?.[1]?.variations?.[0]?.id.toString() ?? null);
     const [itemQuantity, setItemQuantity] = useState(1);
@@ -22,6 +25,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
         variation?.variations?.some((variationDetail: VariationValueData) => variationDetail?.pivot?.variation_value_id == selectedVariation),
     );
 
+    // @ts-ignore
     return (
         <section className="container mt-5 sm:mt-10">
             <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
@@ -94,7 +98,9 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                             className="inline-flex w-full items-center justify-center"
                         />
 
-                        <Button className="block w-full"> Checkout </Button>
+                        <Button asChild={cart && (cart?.products ?? []).length > 0} disabled={!cart || (cart?.products ?? []).length === 0} className={'flex w-full'}>
+                            {!cart || cart?.products?.length === 0 ? 'Checkout' : <Link href={route('checkout.show')}>Checkout</Link>}
+                        </Button>
                     </div>
 
                     <div className="mt-7">

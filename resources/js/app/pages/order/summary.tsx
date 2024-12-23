@@ -11,6 +11,8 @@ const OrderSummaryPage = () => {
     const { t } = useTranslation();
     const order = usePage<PageProps<{ order: App.Data.OrderData }>>().props.order;
 
+    console.log(order);
+
     return (
         <>
             <Head title={t('order.order_summary')} />
@@ -37,35 +39,40 @@ const OrderSummaryPage = () => {
                             <h2 className="sr-only">Your order</h2>
 
                             <h3 className="sr-only">Items</h3>
-                            {order.items?.map((item) => (
-                                <div key={item.id} className="flex space-x-6 border-b border-gray-200 py-10">
-                                    <img
-                                        src={item.product.cover?.original_url}
-                                        alt={item.product.name}
-                                        className="h-20 w-20 flex-none rounded-lg bg-gray-100 object-cover object-center sm:h-40 sm:w-40"
-                                    />
-                                    <div className="flex flex-auto flex-col">
-                                        <div>
-                                            <h4 className="font-medium text-gray-900">
-                                                <Link href={route('products.show', item.product.slug)}>{item.product.name}</Link>
-                                            </h4>
-                                            <p className="mt-2 text-sm text-gray-600">{item.product.description}</p>
-                                        </div>
-                                        <div className="mt-6 flex flex-1 items-end">
-                                            <dl className="flex space-x-4 divide-x divide-gray-200 text-sm sm:space-x-6">
-                                                <div className="flex">
-                                                    <dt className="font-medium text-gray-900">Quantity</dt>
-                                                    <dd className="ml-2 text-gray-700">{item.quantity}</dd>
+                            {order?.items?.map(
+                                (item) =>
+                                    item?.product && (
+                                        <div key={item.id} className="flex space-x-6 border-b border-gray-200 py-10">
+                                            {item?.product?.cover?.original_url && (
+                                                <img
+                                                    src={item?.product.cover?.original_url}
+                                                    alt={item?.product.name}
+                                                    className="h-20 w-20 flex-none rounded-lg bg-gray-100 object-cover object-center sm:h-40 sm:w-40"
+                                                />
+                                            )}
+                                            <div className="flex flex-auto flex-col">
+                                                <div>
+                                                    <h4 className="font-medium text-gray-900">
+                                                        <Link href={route('products.show', item?.product?.slug)}>{item.product.name}</Link>
+                                                    </h4>
+                                                    <p className="mt-2 text-sm text-gray-600">{item.product.description}</p>
                                                 </div>
-                                                <div className="flex pl-4 sm:pl-6">
-                                                    <dt className="font-medium text-gray-900">Price</dt>
-                                                    <dd className="ml-2 text-gray-700">${item.price}</dd>
+                                                <div className="mt-6 flex flex-1 items-end">
+                                                    <dl className="flex space-x-4 divide-x divide-gray-200 text-sm sm:space-x-6">
+                                                        <div className="flex">
+                                                            <dt className="font-medium text-gray-900">Quantity</dt>
+                                                            <dd className="ml-2 text-gray-700">{item.quantity}</dd>
+                                                        </div>
+                                                        <div className="flex pl-4 sm:pl-6">
+                                                            <dt className="font-medium text-gray-900">Price</dt>
+                                                            <dd className="ml-2 text-gray-700">${item.price}</dd>
+                                                        </div>
+                                                    </dl>
                                                 </div>
-                                            </dl>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            ))}
+                                    ),
+                            )}
 
                             <div className="sm:ml-40 sm:pl-6">
                                 <h3 className="sr-only">Your information</h3>
@@ -76,7 +83,7 @@ const OrderSummaryPage = () => {
                                         <dt className="font-medium text-gray-900">{t('order.shipping_address')}</dt>
                                         <dd className="mt-2 text-gray-700">
                                             <address className="not-italic">
-                                                <span className="block">{order.user.name}</span>
+                                                <span className="block">{order?.user?.name}</span>
                                                 <span className="block">
                                                     {order.shipping_address?.address_line_1} {order.shipping_address?.address_line_2}
                                                 </span>
@@ -86,35 +93,10 @@ const OrderSummaryPage = () => {
                                             </address>
                                         </dd>
                                     </div>
-                                    <div>
-                                        <dt className="font-medium text-gray-900">{t('order.billing_address')}</dt>
-                                        <dd className="mt-2 text-gray-700">
-                                            <address className="not-italic">
-                                                <span className="block">{order.user.name}</span>
-                                                <span className="block">
-                                                    {order.shipping_address?.address_line_1} {order.shipping_address?.address_line_2}
-                                                </span>
-                                                <span className="block">
-                                                    {order.shipping_address?.city} {order.shipping_address?.postal_code}
-                                                </span>
-                                            </address>
-                                        </dd>
-                                    </div>
-                                </dl>
-
-                                <h4 className="sr-only">Payment</h4>
-                                <dl className="grid grid-cols-2 gap-x-6 border-t border-gray-200 py-10 text-sm">
                                     <div>
                                         <dt className="font-medium text-gray-900">{t('order.payment_method')}</dt>
                                         <dd className="mt-2 text-gray-700">
                                             <p>Cash on delivery</p>
-                                        </dd>
-                                    </div>
-                                    <div>
-                                        <dt className="font-medium text-gray-900">{t('order.shipping_method')}</dt>
-                                        <dd className="mt-2 text-gray-700">
-                                            <p>DHL</p>
-                                            <p>Takes up to 3 working days</p>
                                         </dd>
                                     </div>
                                 </dl>
@@ -125,15 +107,6 @@ const OrderSummaryPage = () => {
                                     <div className="flex justify-between">
                                         <dt className="font-medium text-gray-900">{t('order.subtotal')}</dt>
                                         <dd className="text-gray-700">${order.amount}</dd>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <dt className="flex font-medium text-gray-900">
-                                            {t('order.discount')}
-                                            <Badge variant="secondary" className="ml-1">
-                                                ANNUALSALE50
-                                            </Badge>
-                                        </dt>
-                                        <dd className="text-gray-700">-${order.discount}</dd>
                                     </div>
                                     <div className="flex justify-between">
                                         <dt className="font-medium text-gray-900">{t('order.shipping')}</dt>

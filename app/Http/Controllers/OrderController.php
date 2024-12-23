@@ -10,12 +10,13 @@ use App\OrderStatus;
 use App\ProductStockStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
+        $validation = Validator::make($request->all(), [
             'first_name' => 'required|string',
             'email' => 'required|email',
             'city' => 'required',
@@ -23,14 +24,18 @@ class OrderController extends Controller
             'payment_method' => 'required|integer',
         ]);
 
+        if ($validation->fails()) {
+            return back()->with(['error' => $validation->errors()->first()]);
+        }
+
         $cart = (new \App\Support\Cart)->getCart();
 
-        if (!$cart) {
+        if (! $cart) {
             return back()->with('error', __('cart')['cart_empty']);
         }
 
         $user = User::where('email', $request->email)->first();
-        if (!$user) {
+        if (! $user) {
             $user = User::create([
                 'email' => $request->email,
                 'name' => "$request->first_name $request->last_name",
@@ -97,12 +102,12 @@ class OrderController extends Controller
 
         $cart->update(['status' => CartStatus::INACTIVE]);
 
-        return redirect()->route('orders.summary', $order->id)->with('success', __('order')['order_created']);
+        return redirect()->route('orders.summary', $order->uuid)->with('success', __('order')['order_created']);
     }
 
-    public function summary($orderId)
+    public function summary($uuid): \Inertia\Response|\Inertia\ResponseFactory
     {
-        $order = Order::with('items.product.cover', 'user', 'shippingAddress')->findOrFail($orderId);
+        $order = Order::where('uuid', $uuid)->with('items.product.cover', 'user', 'shippingAddress')->firstOrFail();
 
         return inertia('order/summary', [
             'order' => OrderData::from($order),

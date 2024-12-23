@@ -13,50 +13,67 @@ import { PageProps } from '@/app/types';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperClass } from 'swiper/types';
+
+interface PhotoSliderProps {
+    id: string | number;
+    original_url?: string;
+}
 
 export default function PhotoSlider({ product }: PageProps<{ product: App.Data.ProductData }>) {
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
 
     return (
         <>
             <div className="">
                 {/*Main Slider*/}
                 <div className="h-full">
-                    <Swiper spaceBetween={10} thumbs={{ swiper: thumbsSwiper }} modules={[FreeMode, Thumbs]} className="h-full w-full">
-                        {product.photos?.map((photo) => (
-                            <SwiperSlide key={photo.id}>
-                                <img className="h-96 w-full rounded-lg object-contain" src={photo.original_url} />
-                            </SwiperSlide>
-                        ))}
+                    <Swiper
+                        spaceBetween={10}
+                        thumbs={{ swiper: thumbsSwiper }}
+                        modules={[FreeMode, Thumbs, Navigation]}
+                        navigation={{
+                            nextEl: '.slider-next',
+                            prevEl: '.slider-prev',
+                        }}
+                        className="h-full w-full"
+                    >
+                        {product.photos?.map(
+                            (photo: PhotoSliderProps) =>
+                                photo?.original_url && (
+                                    <SwiperSlide key={photo?.id}>
+                                        <img className="h-96 w-full rounded-lg object-cover" src={photo?.original_url} alt={'Product slider image'} />
+                                    </SwiperSlide>
+                                ),
+                        )}
                     </Swiper>
                 </div>
 
                 {/*Thumbnails */}
                 <div className="mt-5 flex items-center justify-between gap-x-5">
-                    <Button className="thumb-slider-prev" variant="outline">
+                    <Button className="slider-prev" variant="outline">
                         <ArrowLeft />
                     </Button>
 
                     <Swiper
-                        onSwiper={setThumbsSwiper}
-                        spaceBetween={10}
+                        onSwiper={(swiper) => setThumbsSwiper(swiper)}
+                        spaceBetween={4}
                         slidesPerView="auto"
                         freeMode={true}
                         watchSlidesProgress={true}
-                        modules={[FreeMode, Navigation, Thumbs]}
+                        modules={[FreeMode, Thumbs]}
                         className="mySwiper"
-                        navigation={{
-                            nextEl: '.thumb-slider-next',
-                            prevEl: '.thumb-slider-prev',
-                        }}
                     >
-                        {product.photos?.map((photo) => (
-                            <SwiperSlide key={photo.id}>
-                                <img className="h-20 cursor-pointer rounded-lg" src={photo.original_url} />
-                            </SwiperSlide>
-                        ))}
+                        {product.photos?.map(
+                            (photo: PhotoSliderProps) =>
+                                photo?.original_url && (
+                                    <SwiperSlide key={photo.id}>
+                                        <img className="aspect-square h-20 w-[calc(100%-10px)] cursor-pointer rounded-lg object-cover" src={photo?.original_url} alt={'Product slider image'} />
+                                    </SwiperSlide>
+                                ),
+                        )}
                     </Swiper>
-                    <Button className="thumb-slider-next" variant="outline">
+                    <Button className="slider-next" variant="outline">
                         <ArrowRight />
                     </Button>
                 </div>
