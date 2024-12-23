@@ -104,7 +104,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                     </div>
 
                     <div className="mt-7">
-                        <Accordion type="single" collapsible>
+                        <Accordion type="single" collapsible defaultValue="item-1">
                             <AccordionItem value="item-1">
                                 <AccordionTrigger>
                                     <Typography as="h4" className="mt-0">
@@ -118,48 +118,22 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
-                        <Accordion type="single" collapsible>
-                            <AccordionItem value="item-2">
-                                <AccordionTrigger>
-                                    <Typography as="h4" className="mt-0">
-                                        Features
-                                    </Typography>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <Typography as="p" className="mt-0">
-                                        {product.description}
-                                    </Typography>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                        <Accordion type="single" collapsible>
-                            <AccordionItem value="item-3">
-                                <AccordionTrigger>
-                                    <Typography as="h4" className="mt-0">
-                                        Usage
-                                    </Typography>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <Typography as="p" className="mt-0">
-                                        {product.description}
-                                    </Typography>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                        <Accordion type="single" collapsible>
-                            <AccordionItem value="item-4">
-                                <AccordionTrigger>
-                                    <Typography as="h4" className="mt-0">
-                                        Ingredients
-                                    </Typography>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <Typography as="p" className="mt-0">
-                                        {product.description}
-                                    </Typography>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
+                        {product.attributes?.map((attribute) => (
+                            <Accordion type="single" collapsible key={attribute.id}>
+                                <AccordionItem value={attribute.id}>
+                                    <AccordionTrigger>
+                                        <Typography as="h4" className="mt-0">
+                                            {attribute.value}
+                                        </Typography>
+                                    </AccordionTrigger>
+                                    <AccordionContent>
+                                        <Typography as="p" className="mt-0">
+                                            {attribute.attribute?.description}
+                                        </Typography>
+                                    </AccordionContent>
+                                </AccordionItem>
+                            </Accordion>
+                        ))}
                     </div>
                 </div>
             </div>
