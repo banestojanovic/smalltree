@@ -1,0 +1,15 @@
+import:
+  - recipe/laravel.php
+
+config:
+  remote_user: master_pjsevwmwxc
+  repository: 'git@github.com:banestojanovic/smalltree.git'
+
+hosts:
+  production:
+    hostname: '172.104.147.112'
+    deploy_path: '/home/master/applications/aabsbqvthj/public_html'
+    branch: main
+
+after:
+  deploy:failed: deploy:unlock
