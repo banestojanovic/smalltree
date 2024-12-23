@@ -6,6 +6,7 @@ export type PageStatus = 0 | 1 | 2 | 3;
 export type PostStatus = 0 | 1 | 2 | 3;
 export type ProductStatus = 0 | 1 | 2 | 3;
 export type ProductStockStatus = 0 | 1;
+export type SubscriberStatus = 0 | 1;
 export type UserRole = 1 | 2 | 3 | 4;
 }
 declare namespace App.Data {
@@ -142,6 +143,11 @@ variations: Array<App.Data.VariationValueData> | null;
 };
 export type SharedData = {
 user: App.Data.UserData | null;
+};
+export type SubscriberData = {
+id: number;
+email: string;
+status: App.SubscriberStatus | null;
 };
 export type UserData = {
 id: number | null;

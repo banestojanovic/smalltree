@@ -1,10 +1,8 @@
 import ApplicationLogo from '@/app/components/ApplicationLogo';
-import { Button } from '@/app/components/ui/button';
-import { Input } from '@/app/components/ui/input';
 import { Typography } from '@/app/components/ui/typography';
 import { Link } from '@inertiajs/react';
-import { Mail, Star } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import NewsletterSubscription from '@/app/layouts/_partials/frontendLayout/NewsletterSubscription';
 
 const FooterNavlinks = () => {
     const { t } = useTranslation();
@@ -15,20 +13,7 @@ const FooterNavlinks = () => {
                 <div className="container flex w-full items-center lg:justify-center">
                     <div className="grid w-full grid-cols-1 gap-7 sm:grid-cols-[40%_auto_auto] sm:place-items-center">
                         <div className="border-gray-300 p-5 md:border-l md:border-r">
-                            <Typography as="h3" className="m-auto inline-flex gap-x-2">
-                                <Mail className="mt-2 shrink-0" />
-                                <span>Save 10% on your next purchase!</span>
-                            </Typography>
-
-                            <div className="mt-2 flex items-center">
-                                <Input placeholder="Email.." className="bg-white" />
-                                <Button size="sm">Subscribe</Button>
-                            </div>
-
-                            <Typography as="p" className="mt-5 inline-flex gap-x-2 font-semibold">
-                                <Star className="mt-2 shrink-0 fill-black" />
-                                <span>Special offer for the member of our Tea Shop club in your inbox</span>
-                            </Typography>
+                            <NewsletterSubscription />
                         </div>
 
                         <div className="">
