@@ -46,11 +46,16 @@ class ProductVariation extends Model
 
     public function variations(): BelongsToMany
     {
-        return $this->belongsToMany(VariationValue::class);
+        return $this->belongsToMany(VariationValue::class)->withPivot('variation_value_id')->with('variation');
     }
 
     public function discount(): HasOne
     {
         return $this->hasOne(Discount::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
     }
 }

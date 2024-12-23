@@ -3,7 +3,6 @@
 namespace App\Support;
 
 use App\CartStatus;
-use Illuminate\Support\Str;
 
 class Cart
 {
@@ -14,13 +13,19 @@ class Cart
 
     public function getCart()
     {
-        return \App\Models\Cart::where('status', CartStatus::ACTIVE)->where('session', $this->cartSession())->first();
+        return \App\Models\Cart::with('products.discount', 'products.variations.discount')
+            ->where('status', CartStatus::ACTIVE)
+            ->where('session', $this->cartSession())
+            ->first();
     }
 
     public function getOrCreateCart()
     {
-        return \App\Models\Cart::with('products')
+        return \App\Models\Cart::query()
+            ->with('products')
             ->where('status', CartStatus::ACTIVE)
-            ->firstOrCreate(['session' => $this->cartSession()], ['hash' => Str::random()]);
+            ->firstOrCreate([
+                'session' => $this->cartSession(),
+            ]);
     }
 }

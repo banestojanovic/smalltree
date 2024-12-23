@@ -12,17 +12,15 @@ createServer((page) =>
         page,
         render: ReactDOMServer.renderToString,
         title: (title) => `${title} - ${appName}`,
-        resolve: (name) =>
-            resolvePageComponent(
-                `./app/pages/${name}.tsx`,
-                import.meta.glob('./app/pages/**/*.tsx'),
-            ),
+        resolve: (name) => resolvePageComponent(`./app/pages/${name}.tsx`, import.meta.glob('./app/pages/**/*.tsx')),
         setup: ({ App, props }) => {
             /* eslint-disable */
-            // @ts-expect-error
+            // @ts-ignore
             global.route<RouteName> = (name, params, absolute) =>
+                // @ts-ignore
                 route(name, params as any, absolute, {
                     ...page.props.ziggy,
+                    // @ts-ignore
                     location: new URL(page.props.ziggy.location),
                 });
             /* eslint-enable */

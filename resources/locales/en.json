@@ -1,0 +1,154 @@
+{
+    "enums": {
+        "user": {
+            "roles": {
+                "super_admin": "Super administrator",
+                "admin": "Administrator",
+                "support": "Support",
+                "user": "User"
+            }
+        },
+        "product": {
+            "status": {
+                "inactive": "Inactive",
+                "active": "Active",
+                "draft": "Draft",
+                "trashed": "Trashed"
+            },
+            "stock_status": {
+                "out_of_stock": "Out of Stock",
+                "in_stock": "In Stock"
+            },
+            "no_products_available": "No products available",
+            "variations": "Variations",
+            "free_shipping_over": "Free Shipping Over",
+            "similar_products": "Similar Products"
+        },
+        "post": {
+            "status": {
+                "inactive": "Inactive",
+                "active": "Active",
+                "draft": "Draft",
+                "trashed": "Trashed"
+            }
+        },
+        "page": {
+            "titles": {
+                "home": "Home"
+            },
+            "status": {
+                "inactive": "Inactive",
+                "active": "Active",
+                "draft": "Draft",
+                "trashed": "Trashed"
+            }
+        },
+        "menu": {
+            "menu": "Menu",
+            "top": {
+                "locations": "Locations",
+                "favorites": "Favorites",
+                "cart": "Cart",
+                "products": "Products",
+                "teas": "Teas",
+                "accessories": "Accessories",
+                "blog": "Blog",
+                "contact": "Contact",
+                "search": "Search"
+            }
+        },
+        "homepage": {
+            "hero": {
+                "buy_now": "Buy Now"
+            },
+            "promotions": {
+                "tea_of_the_month": "Tea of the Month",
+                "special_offer": "Special Offer"
+            },
+            "sections": {
+                "most_popular_tea": "Most Popular Tea",
+                "staff_recommended": "Our Staff Recommended",
+                "stores_with_tea": "Chat and Stories with tea",
+                "see_all": "See All",
+                "read_more": "Rad more"
+            },
+            "tea_ritual": {
+                "your_matcha": "Your MATCHA",
+                "your_mate": "Your MATE",
+                "tea_ritual": "tea ritual",
+                "tea": "Tea",
+                "tea_mug": "Tea mug",
+                "set": "Set",
+                "purchase": "Purchase"
+            }
+        },
+        "flash": {
+            "success": "Success",
+            "error": "Error",
+            "errors": "Errors",
+            "form_errors": "Form Errors",
+            "there_are_some_form_errors": "There are some form errors",
+            "dismiss": "Dismiss"
+        }
+    },
+    "category_show": {
+        "filters": {
+            "filters": "Filters",
+            "tea_variety": "Tea variety",
+            "origin_country": "Origin country",
+            "tea_taste": "Tea taste",
+            "not_selected": "Not selected"
+        }
+    },
+    "cart": {
+        "cart": "Cart",
+        "item_added_to_cart": "Item added to the cart",
+        "item_removed_from_cart": "Item removed from the cart",
+        "item_quantity_updated": "Item quantity updated",
+        "item_quantity_not_updated": "Item quantity not updated",
+        "item_quantity_exceeds_stock": "Item quantity exceeds stock",
+        "cart_empty": "Cart is empty",
+        "check_out": "Checkout",
+        "remove": "Remove",
+        "pay_now": "Pay Now"
+    },
+    "order": {
+        "order_created": "Order is created successfully",
+        "order_summary": "Order Summary",
+        "thank_you": "Thank You",
+        "its_on_the_way": "It's on the way!",
+        "order_received": "Your order has been received and will be shipped very soon.",
+        "shipping_address": "Shipping Address",
+        "billing_address": "Billing Address",
+        "payment_method": "Payment method",
+        "shipping_method": "Shipping method",
+        "subtotal": "Subtotal",
+        "discount": "Discount",
+        "shipping": "Shipping",
+        "total": "Total"
+    },
+    "checkout": {
+        "checkout": "Checkout",
+        "contact_info": "Contact information",
+        "shipping_info": "Shipping information",
+        "email": "Email",
+        "Phone": "Phone",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "company": "Company",
+        "address_line": "Address Line",
+        "city": "City",
+        "postal_code": "Postal Code",
+        "payment": "Payment",
+        "order_summary": "Order Summary",
+        "fill_with_test_data": "Fill with test data"
+    },
+    "posts": {
+        "blogs": "Blogs",
+        "posts": "Posts",
+        "stories": "Stories",
+        "featured_post": "Featured Post",
+        "recommended_stories": "Recommended Stories",
+        "no_story_available": "No story available"
+    }
+}

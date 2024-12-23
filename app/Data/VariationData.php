@@ -2,6 +2,8 @@
 
 namespace App\Data;
 
+use Illuminate\Database\Eloquent\Collection;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 
 class VariationData extends Data
@@ -10,5 +12,7 @@ class VariationData extends Data
         public int $id,
         public string $name,
         public ?string $description,
+        #[DataCollectionOf(VariationValueData::class)]
+        public ?Collection $values,
     ) {}
 }

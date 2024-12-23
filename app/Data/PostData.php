@@ -3,6 +3,11 @@
 namespace App\Data;
 
 use App\PostStatus;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
 use Spatie\MediaLibrary\MediaCollections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -17,5 +22,8 @@ class PostData extends Data
         public PostStatus $status,
         public ?Media $cover,
         public ?MediaCollection $photos,
+        public string $date_created,
+        #[DataCollectionOf(PostCategoryData::class)]
+        public ?Collection $categories,
     ) {}
 }

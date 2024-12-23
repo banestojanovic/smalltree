@@ -13,9 +13,8 @@ class AttributeSeeder extends Seeder
      */
     public function run(): void
     {
-        Attribute::factory()->count(6)
+        Attribute::factory()->count(5)
             ->state(new Sequence(fn ($sequence) => ['name' => 'Country'],
-                ['name' => 'Size'],
                 ['name' => 'Caffeine'],
                 ['name' => 'Preparation'],
                 ['name' => 'Infusions'],

@@ -1,4 +1,5 @@
 import { Config } from 'ziggy-js';
+import CartData = App.Data.CartData;
 
 export interface User {
     id: number;
@@ -7,14 +8,35 @@ export interface User {
     email_verified_at?: string;
 }
 
-export type PageProps<
-    T extends Record<string, unknown> = Record<string, unknown>,
-> = T & {
-    auth: {
-        user: User;
+export type PaginatedData<T> = {
+    data: T[];
+    current_page: number;
+    from: number;
+    last_page: number;
+    path: string;
+    per_page: number;
+    to: number;
+    total: number;
+    links: {
+        url?: string;
+        label: string;
+        active: boolean;
+    }[];
+};
+
+export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
+    auth?: {
+        user?: User;
     };
-    ziggy: Config & { location: string };
-    global: {
-        categories: App.Data.CategoryData;
+    ziggy?: Config & { location: string };
+    cart?: CartData;
+    global?: {
+        env: string;
+        action: string;
+        categories?: App.Data.CategoryData[];
+    };
+    flash?: {
+        success: string;
+        error: string;
     };
 };
