@@ -14,7 +14,7 @@ const ProductShowPage = ({ product }: PageProps<{ product: App.Data.ProductData 
 
             <ProductDetails product={product} />
 
-            <Separator className="my-7" />
+            <Separator className="my-7 hidden lg:block" />
 
             <SimilarProducts />
         </>

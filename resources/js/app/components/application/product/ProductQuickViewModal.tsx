@@ -4,13 +4,24 @@ import { Typography } from '@/app/components/ui/typography';
 import { ShoppingCart } from 'lucide-react';
 
 import AddToCartButton from '@/app/components/application/product/AddToCartButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '../../ui/toggle-group';
 import VariationValueData = App.Data.VariationValueData;
 import ProductVariationData = App.Data.ProductVariationData;
 
 export function ProductQuickViewModal({ product }: { product: App.Data.ProductData }) {
     const [selectedVariation, setSelectedVariation] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (product?.grouped_variations) {
+            // Find the first group and select the second variation in that group
+            const firstGroup = Object.keys(product.grouped_variations)[0];
+            if (firstGroup && product.grouped_variations[firstGroup]?.[1]) {
+                setSelectedVariation(product.grouped_variations[firstGroup][1]?.id.toString());
+            }
+        }
+    }, [product]);
+
 
     const matchingVariation = product?.variations?.find((variation: ProductVariationData) =>
         variation?.variations?.some((variationDetail: VariationValueData) => variationDetail?.pivot?.variation_value_id == selectedVariation),
@@ -29,7 +40,7 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
                 <DialogDescription className={'sr-only'}>Product Variations</DialogDescription>
             </DialogHeader>
 
-            <DialogContent className="sm:max-w-[600px]">
+            <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-[600px]">
                 <div className="grid grid-cols-1 gap-4 py-4 sm:grid-cols-[40%_auto]">
                     <section>
                         <img className="h-60 w-full rounded-lg object-cover sm:aspect-auto sm:size-80 sm:h-80 sm:w-auto" src={product.cover.original_url} alt="" />

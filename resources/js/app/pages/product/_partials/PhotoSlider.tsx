@@ -58,10 +58,24 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
                     <Swiper
                         onSwiper={(swiper) => setThumbsSwiper(swiper)}
                         spaceBetween={4}
-                        slidesPerView="auto"
                         freeMode={true}
                         watchSlidesProgress={true}
                         modules={[FreeMode, Thumbs]}
+                        slidesPerView={2}
+                        breakpoints={{
+                            640: {
+                                slidesPerView: 2,
+                                spaceBetween: 4,
+                            },
+                            768: {
+                                slidesPerView: 'auto',
+                                spaceBetween: 4,
+                            },
+                            1024: {
+                                slidesPerView: 'auto',
+                                spaceBetween: 4,
+                            },
+                        }}
                         className="mySwiper"
                     >
                         {product.photos?.map(

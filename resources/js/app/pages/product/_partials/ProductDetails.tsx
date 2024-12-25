@@ -32,7 +32,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                 <div>
                     <PhotoSlider product={product} />
                 </div>
-                <div className="">
+                <div className="mt-7 lg:mt-0">
                     <Typography as="h2">{product.name}</Typography>
                     <Typography as="p" className="mt-5">
                         {product.description}
@@ -50,7 +50,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         <div className="mt-7">
                             <ToggleGroup type="single" className="justify-start" value={selectedVariation ?? undefined} onValueChange={(value) => setSelectedVariation(value)}>
                                 {Object.keys(product?.grouped_variations ?? {}).map((group) => (
-                                    <div key={group} className={'flex flex-col space-y-1'}>
+                                    <div key={group} className={'flex flex-wrap flex-col space-y-1'}>
                                         <Typography as="h4"> {group} </Typography>
                                         <div className={'flex gap-2'}>
                                             {product?.grouped_variations[group].map((variation: VariationValueData) => (
@@ -65,7 +65,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         </div>
                     )}
 
-                    <div className="mt-7 flex items-center gap-x-5">
+                    <div className="mt-7 flex flex-col md:flex-row md:items-center gap-5">
                         <div className="flex items-center">
                             <Button
                                 type="button"

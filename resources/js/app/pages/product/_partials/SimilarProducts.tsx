@@ -16,7 +16,7 @@ const RelatedProducts = () => {
             <div className="container">
                 <Typography as="h3">{t('enums.product.similar_products')}</Typography>
 
-                <div className="mt-7 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                <div className="mt-7 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {similarProducts && similarProducts.length > 0 ? (
                         similarProducts.map((product: App.Data.ProductData) => <ProductCard product={product} key={product.id} />)
                     ) : (

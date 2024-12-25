@@ -34,6 +34,10 @@ class HomeController extends Controller
             ->limit(8)
             ->get());
 
+        $specialOffer = ProductData::from(Product::with('cover')->active()->inRandomOrder()->first());
+        $productOfTheMonth = ProductData::from(Product::with('cover')->active()->inRandomOrder()->first());
+
+
         $posts = PostData::collect(Post::query()
             ->with('cover', 'categories')
             ->active()
@@ -44,6 +48,8 @@ class HomeController extends Controller
             'popularProducts' => $popularProducts,
             'staffRecommendedProducts' => $staffRecommendedProducts,
             'posts' => $posts,
+            'specialOffer' => $specialOffer,
+            'productOfTheMonth' => $productOfTheMonth,
         ]);
     }
 }

@@ -23,7 +23,7 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
 
             <main>{children}</main>
 
-            <footer className={route().current() !== 'home' ? 'mt-16' : ''}>
+            <footer className={route().current() !== 'home' ? '' : ''}>
                 <TeaShopBenefits />
                 <FooterNavlinks />
             </footer>

@@ -23,14 +23,14 @@ const NewsletterSubscription = () => {
     };
 
     return (
-        <div>
-            <Typography as="h3" className="m-auto inline-flex gap-x-2">
+        <div className='p-0 sm:p-5'>
+            <Typography as="h3" className="m-auto inline-flex gap-x-2 !leading-8">
                 <Mail className="mt-2 shrink-0" />
                 <span>Save 10% on your next purchase!</span>
             </Typography>
 
             <div>
-                <form onSubmit={submit} className="mt-2 flex items-center">
+                <form onSubmit={submit} className="mt-2 flex items-center gap-x-2">
                     <Input type="email" value={data.email} onChange={(e) => setData('email', e.target.value)} placeholder="Email.." className="bg-white" />
                     <InputError message={errors.email} className="mt-1" />
                     <Button size="sm" type="submit">

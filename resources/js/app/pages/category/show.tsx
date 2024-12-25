@@ -12,6 +12,7 @@ import RelatedProducts from './_partials/RelatedProducts';
 interface queryProps {
     attributes: never;
     variations: never;
+    priceRange: number[] | never;
 }
 
 const CategoryShowPage = ({
@@ -19,12 +20,14 @@ const CategoryShowPage = ({
     products,
     attributes,
     variations,
+    promotionProduct,
     query,
 }: {
     category: App.Data.CategoryData;
     products: PaginatedData<App.Data.ProductData>;
     attributes: App.Data.AttributeData[];
     variations: App.Data.VariationData[];
+    promotionProduct: App.Data.ProductData;
     query: queryProps;
 }) => {
     return (
@@ -37,7 +40,7 @@ const CategoryShowPage = ({
 
             <ProductsListFilters category={category} attributes={attributes} variations={variations} query={query} />
 
-            <RelatedProducts products={products} />
+            <RelatedProducts products={products} promotionProduct={promotionProduct} />
 
             <TeaRituals />
         </>

@@ -1,8 +1,8 @@
 import ApplicationLogo from '@/app/components/ApplicationLogo';
 import { Typography } from '@/app/components/ui/typography';
+import NewsletterSubscription from '@/app/layouts/_partials/frontendLayout/NewsletterSubscription';
 import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import NewsletterSubscription from '@/app/layouts/_partials/frontendLayout/NewsletterSubscription';
 
 const FooterNavlinks = () => {
     const { t } = useTranslation();
@@ -10,14 +10,14 @@ const FooterNavlinks = () => {
     return (
         <>
             <div className="mt-7 border-b border-t border-gray-300 bg-gray-100 pb-5 sm:pb-0">
-                <div className="container flex w-full items-center lg:justify-center">
+                <div className="container mt-7 flex w-full items-center md:mt-0 lg:justify-center">
                     <div className="grid w-full grid-cols-1 gap-7 sm:grid-cols-[40%_auto_auto] sm:place-items-center">
-                        <div className="border-gray-300 p-5 md:border-l md:border-r">
+                        <div className="border-gray-300 md:border-l md:border-r">
                             <NewsletterSubscription />
                         </div>
 
                         <div className="">
-                            <Typography as="h3" className="">
+                            <Typography as="h4" className="">
                                 OUR STORES
                             </Typography>
 
@@ -43,7 +43,7 @@ const FooterNavlinks = () => {
                         </div>
 
                         <div className="">
-                            <Typography as="h3" className="">
+                            <Typography as="h4" className="">
                                 ADDITIONAL INFO
                             </Typography>
 
