@@ -1,1 +1,0 @@
-import{q as r,j as s}from"./app-DW12WSyT.js";import{T as e}from"./typography-g_YZJ8iM.js";const c=()=>{const{category:a}=r().props;return a&&s.jsx("section",{className:"mt-10 sm:mt-20",children:s.jsxs("div",{className:"container",children:[s.jsx(e,{as:"h2",children:a.name}),s.jsx(e,{as:"p",className:"mt-7",children:a.description})]})})};export{c as default};
