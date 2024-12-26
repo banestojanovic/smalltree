@@ -17,7 +17,7 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
                 <CardDescription>
                     {product.categories?.map((category: App.Data.CategoryData) => (
                         <Badge key={category.id} variant="outline">
-                            {category.name}
+                            <Link href={route('categories.show', category.slug)}>{category.name}</Link>
                         </Badge>
                     ))}
                 </CardDescription>

@@ -22,9 +22,15 @@ class AttributeValue extends Model implements Sortable
         'attribute_id',
         'value',
         'order_column',
+        'data',
     ];
 
     protected array $translatable = ['value'];
+
+    protected $casts = [
+        'value' => 'array',
+        'data' => 'array',
+    ];
 
     public function attribute(): BelongsTo
     {

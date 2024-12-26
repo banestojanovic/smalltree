@@ -10,7 +10,7 @@ const ProductsLists = ({ cart }: { cart: App.Data.CartData }) => {
                 <ul className="space-y-4">
                     {cart?.products?.map((product) => {
                         return (
-                            <li key={product.id} className="flex items-center justify-between">
+                            <li key={product.id} className="flex flex-col md:flex-row md:items-center md:justify-between">
                                 <div>
                                     <div className="flex items-center gap-x-3 font-medium">
                                         <img src={product.cover.original_url} alt={product.name} className="aspect-square size-12 rounded-lg object-cover" />
@@ -23,7 +23,7 @@ const ProductsLists = ({ cart }: { cart: App.Data.CartData }) => {
                                     </div>
                                 </div>
                                 <div className="flex flex-col text-sm font-medium">
-                                    <p className="text-right text-lg font-semibold">${(product?.realPrice ?? 0).toFixed(2)}</p>
+                                    <p className="text-center md:text-right text-lg font-semibold">${(product?.realPrice ?? 0).toFixed(2)}</p>
                                     <RemoveFromCartButton product={product} />
                                 </div>
                             </li>
@@ -33,7 +33,7 @@ const ProductsLists = ({ cart }: { cart: App.Data.CartData }) => {
             ) : (
                 <p className="text-sm text-gray-500">Your cart is empty.</p>
             )}
-            <Separator />
+            <Separator className='mt-5' />
             <dl className="space-y-6 px-4 py-6 sm:px-6">
                 <div className="flex items-center justify-between">
                     <dt className="text-sm">Subtotal</dt>

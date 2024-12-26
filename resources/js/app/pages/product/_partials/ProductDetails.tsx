@@ -25,14 +25,13 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
         variation?.variations?.some((variationDetail: VariationValueData) => variationDetail?.pivot?.variation_value_id == selectedVariation),
     );
 
-    // @ts-ignore
     return (
         <section className="container mt-5 sm:mt-10">
             <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
                 <div>
                     <PhotoSlider product={product} />
                 </div>
-                <div className="">
+                <div className="mt-7 lg:mt-0">
                     <Typography as="h2">{product.name}</Typography>
                     <Typography as="p" className="mt-5">
                         {product.description}
@@ -50,7 +49,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         <div className="mt-7">
                             <ToggleGroup type="single" className="justify-start" value={selectedVariation ?? undefined} onValueChange={(value) => setSelectedVariation(value)}>
                                 {Object.keys(product?.grouped_variations ?? {}).map((group) => (
-                                    <div key={group} className={'flex flex-col space-y-1'}>
+                                    <div key={group} className={'flex flex-col flex-wrap space-y-1'}>
                                         <Typography as="h4"> {group} </Typography>
                                         <div className={'flex gap-2'}>
                                             {product?.grouped_variations[group].map((variation: VariationValueData) => (
@@ -65,7 +64,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         </div>
                     )}
 
-                    <div className="mt-7 flex items-center gap-x-5">
+                    <div className="mt-7 flex flex-col gap-5 md:flex-row md:items-center">
                         <div className="flex items-center">
                             <Button
                                 type="button"
@@ -104,7 +103,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                     </div>
 
                     <div className="mt-7">
-                        <Accordion type="single" collapsible>
+                        <Accordion type="single" collapsible defaultValue="item-1">
                             <AccordionItem value="item-1">
                                 <AccordionTrigger>
                                     <Typography as="h4" className="mt-0">
@@ -118,48 +117,24 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
-                        <Accordion type="single" collapsible>
-                            <AccordionItem value="item-2">
-                                <AccordionTrigger>
-                                    <Typography as="h4" className="mt-0">
-                                        Features
-                                    </Typography>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <Typography as="p" className="mt-0">
-                                        {product.description}
-                                    </Typography>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                        <Accordion type="single" collapsible>
-                            <AccordionItem value="item-3">
-                                <AccordionTrigger>
-                                    <Typography as="h4" className="mt-0">
-                                        Usage
-                                    </Typography>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <Typography as="p" className="mt-0">
-                                        {product.description}
-                                    </Typography>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                        <Accordion type="single" collapsible>
-                            <AccordionItem value="item-4">
-                                <AccordionTrigger>
-                                    <Typography as="h4" className="mt-0">
-                                        Ingredients
-                                    </Typography>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <Typography as="p" className="mt-0">
-                                        {product.description}
-                                    </Typography>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
+                        {Object.entries((product?.grouped_attributes as Record<string, App.Data.AttributeValueData[]>) || {}).map(([group, attributes]) => (
+                            <Accordion type="single" collapsible key={group}>
+                                <AccordionItem value={group}>
+                                    <AccordionTrigger>
+                                        <Typography as="h4" className="mt-0">
+                                            {group}
+                                        </Typography>
+                                    </AccordionTrigger>
+                                    <AccordionContent>
+                                        {attributes.map((attribute: App.Data.AttributeValueData) => (
+                                            <Typography as="p" className="mt-0" key={attribute.id}>
+                                                {Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value}{' '}
+                                            </Typography>
+                                        ))}
+                                    </AccordionContent>
+                                </AccordionItem>
+                            </Accordion>
+                        ))}
                     </div>
                 </div>
             </div>

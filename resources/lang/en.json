@@ -150,5 +150,8 @@
         "featured_post": "Featured Post",
         "recommended_stories": "Recommended Stories",
         "no_story_available": "No story available"
+    },
+    "subscription": {
+        "you_are_subscribed": "You are subscribed successfully"
     }
 }

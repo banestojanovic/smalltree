@@ -16,10 +16,14 @@ const Home = ({
     popularProducts,
     staffRecommendedProducts,
     posts,
+    specialOffer,
+    productOfTheMonth,
 }: PageProps<{
     popularProducts?: App.Data.ProductData[];
     staffRecommendedProducts?: App.Data.ProductData[];
     posts?: App.Data.PostData[];
+    specialOffer: App.Data.ProductData;
+    productOfTheMonth: App.Data.ProductData;
 }>) => {
     const { t } = useTranslation();
 
@@ -28,12 +32,11 @@ const Home = ({
             <Head title={t('enums.page.titles.home')} />
             <Hero />
             <CategoriesSlider />
-            <Promotions />
+            <Promotions specialOffer={specialOffer} productOfTheMonth={productOfTheMonth} />
             <PopularProducts products={popularProducts} />
             <RecommendedProducts products={staffRecommendedProducts} />
             <TeaRituals />
             <TopPosts posts={posts} />
-            <p className="py-20"></p>;
         </>
     );
 };

@@ -32,7 +32,7 @@ export default function Cart() {
                         {cart?.products ? (
                             <ul className="space-y-4">
                                 {cart?.products?.map((product: App.Data.CartProductData) => (
-                                    <li key={product.chosenId} className="flex items-center justify-between">
+                                    <li key={product.chosenId} className="flex flex-col md:flex-row md:items-center md:justify-between">
                                         <div>
                                             <div className="flex items-center gap-x-3 font-medium">
                                                 <img src={product.cover.original_url} alt={product.name} className="aspect-square size-14 rounded-lg object-cover" />

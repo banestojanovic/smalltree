@@ -1,7 +1,6 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { ReactNode } from 'react';
 
-import { Badge } from '@/app/components/ui/badge';
 import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import { PageProps } from '@/app/types';
@@ -17,15 +16,15 @@ const OrderSummaryPage = () => {
         <>
             <Head title={t('order.order_summary')} />
             <div className="container">
-                <div className="bg-white">
-                    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+                <div className="mt-5 md:mt-10">
+                    <div className="mx-auto max-w-3xl">
                         <div className="max-w-xl">
                             <Typography as="h4">{t('order.thank_you')}</Typography>
 
                             <Typography as="h2" className="!text-5xl">
                                 {t('order.its_on_the_way')}
                             </Typography>
-                            <Typography as="p" className="">
+                            <Typography as="p" className="mt-3">
                                 {t('order.order_received')}
                             </Typography>
 
@@ -58,13 +57,13 @@ const OrderSummaryPage = () => {
                                                     <p className="mt-2 text-sm text-gray-600">{item.product.description}</p>
                                                 </div>
                                                 <div className="mt-6 flex flex-1 items-end">
-                                                    <dl className="flex space-x-4 divide-x divide-gray-200 text-sm sm:space-x-6">
+                                                    <dl className="flex flex-col gap-x-4 divide-x divide-gray-200 text-sm sm:space-x-6 md:flex-row">
                                                         <div className="flex">
-                                                            <dt className="font-medium text-gray-900">Quantity</dt>
+                                                            <dt className="font-medium text-gray-900">Quantity:</dt>
                                                             <dd className="ml-2 text-gray-700">{item.quantity}</dd>
                                                         </div>
-                                                        <div className="flex pl-4 sm:pl-6">
-                                                            <dt className="font-medium text-gray-900">Price</dt>
+                                                        <div className="flex items-center">
+                                                            <dt className="font-medium text-gray-900">Price:</dt>
                                                             <dd className="ml-2 text-gray-700">${item.price}</dd>
                                                         </div>
                                                     </dl>

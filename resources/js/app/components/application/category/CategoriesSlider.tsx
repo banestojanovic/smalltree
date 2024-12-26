@@ -3,7 +3,7 @@ import { Link, usePage } from '@inertiajs/react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import Swiper core and required modules
-import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules';
+import { FreeMode, Navigation, Scrollbar, Thumbs } from 'swiper/modules';
 
 import { ChevronRight } from 'lucide-react';
 
@@ -21,20 +21,33 @@ const CategoriesSlider = () => {
     return (
         <section className="mt-10">
             <div className="container">
-                <div className="relative">
-                    <Button variant={'outline'} className="swiper-button-prev absolute left-0 z-10">
+                <div className="flex items-center justify-between gap-x-1">
+                    <Button variant="ghost" className="category-slider-button-prev">
                         <ChevronRight className="rotate-180" />
-                    </Button>
-                    <Button variant={'outline'} className="swiper-button-next absolute right-0 z-10">
-                        <ChevronRight />
                     </Button>
 
                     <Swiper
-                        modules={[Navigation, Pagination, Scrollbar, A11y]}
-                        slidesPerView={10}
+                        modules={[Navigation, Scrollbar, FreeMode, Thumbs]}
+                        spaceBetween={4}
+                        slidesPerView={3}
+                        breakpoints={{
+                            640: {
+                                slidesPerView: 2,
+                                spaceBetween: 20,
+                            },
+                            768: {
+                                slidesPerView: 5,
+                                spaceBetween: 40,
+                            },
+                            1024: {
+                                slidesPerView: 8,
+                                spaceBetween: 50,
+                            },
+                        }}
+                        freeMode={true}
                         navigation={{
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
+                            prevEl: '.category-slider-button-prev',
+                            nextEl: '.category-slider-button-next',
                         }}
                     >
                         {categories?.map((category) => (
@@ -44,11 +57,15 @@ const CategoriesSlider = () => {
                                         <AvatarImage src={category.cover.original_url} className="object-cover" />
                                         <AvatarFallback className="text-lg">{category.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
                                     </Avatar>
-                                    <span className="mt-4 text-xs font-semibold">{category.name}</span>
+                                    <span className="mt-4 text-center text-xs font-semibold">{category.name}</span>
                                 </Link>
                             </SwiperSlide>
                         ))}
                     </Swiper>
+
+                    <Button variant="ghost" className="category-slider-button-next">
+                        <ChevronRight />
+                    </Button>
                 </div>
             </div>
         </section>

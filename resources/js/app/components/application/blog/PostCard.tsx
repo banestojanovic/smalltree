@@ -13,9 +13,9 @@ const PostCard = ({ post }: PageProps<{ post: App.Data.PostData }>) => {
     return (
         <Card>
             <CardHeader>
-                <div className="">
+                <Link href={route('posts.show', post.slug)}>
                     <img className="h-40 w-full object-cover sm:h-60" src={post.cover.original_url} alt={post.name} />
-                </div>
+                </Link>
 
                 <CardDescription>
                     {post.categories?.map((category: App.Data.PostCategoryData) => (
@@ -25,7 +25,10 @@ const PostCard = ({ post }: PageProps<{ post: App.Data.PostData }>) => {
                     ))}
                 </CardDescription>
                 <CardTitle>
-                    <Typography as="h4">{post.name}</Typography>
+                    <Link href={route('posts.show', post.slug)}>
+                        <Typography as="h4">{post.name}</Typography>
+                    </Link>
+
                     <p className="mt-1 text-sm !font-normal tracking-widest">{post.date_created}</p>
                 </CardTitle>
             </CardHeader>

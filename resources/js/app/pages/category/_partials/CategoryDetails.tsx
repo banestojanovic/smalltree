@@ -9,7 +9,7 @@ const CategoryDetails = () => {
 
     return (
         category && (
-            <section className="mt-10 sm:mt-20">
+            <section className="mt-5 sm:mt-10">
                 <div className="container">
                     <Typography as="h2">{category.name}</Typography>
                     <Typography as="p" className="mt-7">

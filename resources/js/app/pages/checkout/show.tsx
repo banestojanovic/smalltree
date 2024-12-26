@@ -64,7 +64,7 @@ const CheckoutIndex = () => {
             <Head title={t('checkout.checkout')} />
             <div className="container mx-auto w-full md:max-w-5xl">
                 <div className="bg-gray-50">
-                    <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
+                    <div className="mx-auto max-w-2xl pt-7 lg:max-w-7xl lg:pt-12">
                         <h2 className="sr-only">{t('checkout.checkout')}</h2>
 
                         {global?.env === 'local' && (
@@ -78,7 +78,7 @@ const CheckoutIndex = () => {
                                 <div>
                                     <Typography as="h3">{t('checkout.contact_info')}</Typography>
 
-                                    <Card>
+                                    <Card className="mt-5">
                                         <CardContent>
                                             <FieldGroup label="Email" name="email" error={errors.email}>
                                                 <Input id="email" type="email" placeholder="Email" value={data.email} onChange={(e) => setData('email', e.target.value)} />
@@ -99,7 +99,7 @@ const CheckoutIndex = () => {
                                 <div className="mt-10">
                                     <Typography as="h3">{t('checkout.shipping_info')}</Typography>
 
-                                    <Card>
+                                    <Card className="mt-5">
                                         <CardContent>
                                             <div className="gap-x-5 md:flex md:items-center">
                                                 <div className="w-full">
@@ -147,7 +147,9 @@ const CheckoutIndex = () => {
 
                                 {/* Payment Method */}
                                 <div className="mt-10">
-                                    <Typography as="h3">{t('checkout.payment')}</Typography>
+                                    <Typography as="h3" className="mb-5">
+                                        {t('checkout.payment')}
+                                    </Typography>
 
                                     <RadioGroup onValueChange={(e) => setData('payment_method', e)} defaultValue={data.payment_method} className="flex w-full flex-col items-center gap-3 md:flex-row">
                                         {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
@@ -167,7 +169,9 @@ const CheckoutIndex = () => {
 
                             {/* Order summary */}
                             <div className="mt-10 lg:mt-0">
-                                <Typography as="h3">{t('checkout.order_summary')}</Typography>
+                                <Typography as="h3" className="mb-5">
+                                    {t('checkout.order_summary')}
+                                </Typography>
 
                                 <Card>
                                     <CardContent>

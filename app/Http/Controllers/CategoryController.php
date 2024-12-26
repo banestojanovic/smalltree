@@ -15,9 +15,11 @@ class CategoryController extends Controller
 {
     public function show($slug): \Inertia\Response|\Inertia\ResponseFactory
     {
+        //        dd(Product::all()->toArray());
+
         $category = CategoryData::from(Category::where('slug', $slug)->firstOrFail());
 
-        $promotionProduct = ProductData::from(Product::query()->active()->inRandomOrder()->first());
+        $promotionProduct = ProductData::from(Product::with('cover')->active()->inRandomOrder()->first());
 
         $selectedAttributesValues = request('attributes') ?? [];
         $selectedVariationValues = request('variations') ?? [];
@@ -46,6 +48,14 @@ class CategoryController extends Controller
                         }
                     }
                 })
+                ->when(request()->filled('priceRange') && count(request('priceRange')) === 2, function ($query) {
+                    $query->whereHas('variations', function ($q) {
+                        $priceRange = request('priceRange');
+                        $q->where('price', '>=', $priceRange[0] * 100)
+                            ->where('price', '<=', $priceRange[1] * 100);
+                    });
+
+                })
                 ->paginate(12)
         );
 
@@ -65,6 +75,7 @@ class CategoryController extends Controller
                 'attributes' => $attributes->mapWithKeys(fn ($attribute) => [
                     $attribute->slug => request('attributes')[$attribute->slug] ?? null,
                 ]),
+                'priceRange' => request('priceRange'),
             ],
         ]);
     }

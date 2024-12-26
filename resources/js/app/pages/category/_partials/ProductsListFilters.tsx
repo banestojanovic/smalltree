@@ -1,13 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Combobox, ComboboxItem } from '@/app/components/ui/combobox';
 import { PageProps } from '@/app/types';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
+import { Badge } from '@/app/components/ui/badge';
+import { Button } from '@/app/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/app/components/ui/dropdown-menu';
+import { Slider } from '@/app/components/ui/slider';
+import { ChevronsUpDown } from 'lucide-react';
+
 interface queryProps {
     attributes: never;
     variations: never;
+    priceRange: number[] | never;
 }
 
 const ProductsListFilters = ({
@@ -32,7 +39,16 @@ const ProductsListFilters = ({
             acc[variation.id] = query.variations?.[variation.id] ?? null;
             return acc;
         }, {}),
+        priceRange: query.priceRange ?? null,
     });
+
+    // Initial price range values
+    const [range, setRange] = useState<number[]>([10, 10000]);
+
+    const handleValueChange = (newRange: number[]) => {
+        setRange(newRange);
+        setData('priceRange', newRange);
+    };
 
     const handleSearch = () => {
         get(route('categories.show', category.slug), {
@@ -55,7 +71,7 @@ const ProductsListFilters = ({
                 <div className="flex w-full flex-wrap items-center gap-7">
                     {variations.length > 0 &&
                         variations.map((variation) => (
-                            <div className={'flex flex-col space-y-1'} key={variation.id}>
+                            <div className={''} key={variation.id}>
                                 <Combobox
                                     value={data.variations[variation.id]}
                                     onChange={(value) =>
@@ -66,7 +82,7 @@ const ProductsListFilters = ({
                                     }
                                     placeholder={variation.name}
                                     inputPlaceholder={variation.name}
-                                    className='w-full'
+                                    className=""
                                 >
                                     <ComboboxItem value={null}>{t('category_show.filters.not_selected')}</ComboboxItem>
 
@@ -81,7 +97,7 @@ const ProductsListFilters = ({
 
                     {attributes.length > 0 &&
                         attributes.map((attribute) => (
-                            <div className={'flex  flex-col space-y-1'} key={attribute.id}>
+                            <div className={''} key={attribute.id}>
                                 <Combobox
                                     value={data.attributes[attribute.slug]}
                                     onChange={(value) =>
@@ -92,7 +108,7 @@ const ProductsListFilters = ({
                                     }
                                     placeholder={attribute.name}
                                     inputPlaceholder={attribute.name}
-                                    className='w-full '
+                                    className=""
                                 >
                                     <ComboboxItem value={null}>{t('category_show.filters.not_selected')}</ComboboxItem>
 
@@ -105,20 +121,30 @@ const ProductsListFilters = ({
                             </div>
                         ))}
 
-                    {/*<div className={'flex flex-col space-y-1'}>*/}
-                    {/*    <span>{t('category_show.filters.origin_country')}</span>*/}
-                    {/*    <Combobox*/}
-                    {/*        value={selectedCountry}*/}
-                    {/*        onChange={(value) => setSelectedCountry(value)}*/}
-                    {/*        placeholder={t('category_show.filters.origin_country')}*/}
-                    {/*        inputPlaceholder={t('category_show.filters.origin_country')}*/}
-                    {/*    >*/}
-                    {/*        <ComboboxItem value={null}>Select All</ComboboxItem>*/}
-                    {/*        <ComboboxItem value="c1">County Value 1</ComboboxItem>*/}
-                    {/*        <ComboboxItem value="c2">County Value 2</ComboboxItem>*/}
-                    {/*        <ComboboxItem value="c3">County Value 3</ComboboxItem>*/}
-                    {/*    </Combobox>*/}
-                    {/*</div>*/}
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline">
+                                Price
+                                <ChevronsUpDown className="opacity-50" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-80">
+                            <div className="p-3">
+                                <h2 className="py-2 text-lg font-semibold">Price Range</h2>
+
+                                <Button onClick={() => setData('priceRange', [])}>Clear</Button>
+
+                                <p className="flex items-center justify-center">
+                                    {data.priceRange && data.priceRange?.length && (
+                                        <Badge variant="outline" className="text-lg">
+                                            ${data.priceRange[0] ?? 0} - ${data.priceRange[1] ?? 0}
+                                        </Badge>
+                                    )}
+                                </p>
+                                <Slider className="mt-4" value={range} onValueChange={handleValueChange} max={10000} min={0} step={10} aria-label="Price range" />
+                            </div>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
             </div>
         </section>
