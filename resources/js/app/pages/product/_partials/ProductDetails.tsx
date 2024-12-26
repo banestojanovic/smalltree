@@ -25,7 +25,6 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
         variation?.variations?.some((variationDetail: VariationValueData) => variationDetail?.pivot?.variation_value_id == selectedVariation),
     );
 
-    // @ts-ignore
     return (
         <section className="container mt-5 sm:mt-10">
             <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
@@ -50,7 +49,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         <div className="mt-7">
                             <ToggleGroup type="single" className="justify-start" value={selectedVariation ?? undefined} onValueChange={(value) => setSelectedVariation(value)}>
                                 {Object.keys(product?.grouped_variations ?? {}).map((group) => (
-                                    <div key={group} className={'flex flex-wrap flex-col space-y-1'}>
+                                    <div key={group} className={'flex flex-col flex-wrap space-y-1'}>
                                         <Typography as="h4"> {group} </Typography>
                                         <div className={'flex gap-2'}>
                                             {product?.grouped_variations[group].map((variation: VariationValueData) => (
@@ -65,7 +64,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         </div>
                     )}
 
-                    <div className="mt-7 flex flex-col md:flex-row md:items-center gap-5">
+                    <div className="mt-7 flex flex-col gap-5 md:flex-row md:items-center">
                         <div className="flex items-center">
                             <Button
                                 type="button"
@@ -118,18 +117,20 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
-                        {product.attributes?.map((attribute) => (
-                            <Accordion type="single" collapsible key={attribute.id}>
-                                <AccordionItem value={attribute.id}>
+                        {Object.entries((product?.grouped_attributes as Record<string, App.Data.AttributeValueData[]>) || {}).map(([group, attributes]) => (
+                            <Accordion type="single" collapsible key={group}>
+                                <AccordionItem value={group}>
                                     <AccordionTrigger>
                                         <Typography as="h4" className="mt-0">
-                                            {attribute.value}
+                                            {group}
                                         </Typography>
                                     </AccordionTrigger>
                                     <AccordionContent>
-                                        <Typography as="p" className="mt-0">
-                                            {attribute.attribute?.description}
-                                        </Typography>
+                                        {attributes.map((attribute: App.Data.AttributeValueData) => (
+                                            <Typography as="p" className="mt-0" key={attribute.id}>
+                                                {Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value}{' '}
+                                            </Typography>
+                                        ))}
                                     </AccordionContent>
                                 </AccordionItem>
                             </Accordion>

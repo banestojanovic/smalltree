@@ -16,6 +16,9 @@ class ProductData extends Data
     #[Computed]
     public \Illuminate\Support\Collection|array|null $grouped_variations;
 
+    #[Computed]
+    public \Illuminate\Support\Collection|array|null $grouped_attributes;
+
     public function __construct(
         public int $id,
         public string $name,
@@ -37,5 +40,6 @@ class ProductData extends Data
         public ?Collection $categories,
     ) {
         $this->grouped_variations = $variations?->flatMap(fn ($variation) => $variation->variations)->groupBy('variation.name') ?? [];
+        $this->grouped_attributes = $attributes?->groupBy('attribute.name') ?? [];
     }
 }

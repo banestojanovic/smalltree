@@ -6,14 +6,14 @@ import FrontendLayout from '@/app/layouts/FrontendLayout';
 import DOMPurify from 'dompurify';
 
 const PageShowPage = ({ page }: { page: App.Data.PageData }) => {
-    const sanitizedContent = DOMPurify.sanitize(page.content);
+    const sanitizedContent = DOMPurify.sanitize(page.content ?? '');
 
     return (
         <>
             <Head title={page.name} />
-            <div className="container mt-7 sm:mt-10">
+            <div className="container my-7 sm:my-10">
                 <Typography as="h2"> {page.name}</Typography>
-                <div className="prose mt-7" dangerouslySetInnerHTML={{ __html: sanitizedContent }}></div>;
+                <div className="prose my-7" dangerouslySetInnerHTML={{ __html: sanitizedContent }}></div>
             </div>
         </>
     );

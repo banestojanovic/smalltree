@@ -29,7 +29,7 @@ values: Array<App.Data.AttributeValueData> | null;
 export type AttributeValueData = {
 id: number;
 attribute_id: number;
-value: string;
+value: Array<any> | string;
 attribute: App.Data.AttributeData | null;
 };
 export type CartData = {
@@ -120,6 +120,7 @@ categories: Array<App.Data.PostCategoryData> | null;
 };
 export type ProductData = {
 grouped_variations: any | Array<any> | null;
+grouped_attributes: any | Array<any> | null;
 id: number;
 name: string;
 slug: string;

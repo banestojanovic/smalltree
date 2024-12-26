@@ -18,7 +18,7 @@ class AttributeValueSeeder extends Seeder
                 'Japan/Kagoshima prefektura', 'Japan/Uji Prefektura', 'Nemačka', 'Srbija',
             ],
             2 => ['Nema', 'Nizak', 'Srednji', 'Visok'],
-            3 => ['3g 100°C 3-5 min', '2.5g 100°C 3 min', '3g 70-80°C 2-3 min'],
+            3 => [['3g', '100°C', '3-5 min'], '2.5g 100°C 3 min', '3g 70-80°C 2-3 min'],
             4 => ['1', '2', '3', '4', '5'],
             5 => [
                 'Nema', 'Može sadržati orahe u tragovima', 'Mleko, soja, može sadržati orahe u tragovima',

@@ -9,7 +9,7 @@ class AttributeValueData extends Data
     public function __construct(
         public int $id,
         public int $attribute_id,
-        public string $value,
+        public string|array $value,
         public ?AttributeData $attribute,
     ) {}
 }
