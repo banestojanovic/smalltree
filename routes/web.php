@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
+Route::get('/products-search', [\App\Http\Controllers\ProductController::class, 'search'])->name('products.search');
+Route::get('/products/search', [\App\Http\Controllers\ProductController::class, 'searchPage'])->name('products.search-page');
 Route::get('/products/{slug}', [\App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 Route::get('/categories/{slug}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 

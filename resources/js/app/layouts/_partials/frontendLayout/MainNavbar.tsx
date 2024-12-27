@@ -1,6 +1,6 @@
 import NavLink from '@/app/components/NavLink';
-import { Input } from '@/app/components/ui/input';
 import MobileMenu from '@/app/layouts/_partials/frontendLayout/MobileMenu';
+import ProductSearch from '@/app/layouts/_partials/frontendLayout/ProductSearch';
 import { useTranslation } from 'react-i18next';
 
 export default function TopNavbar() {
@@ -16,15 +16,15 @@ export default function TopNavbar() {
                                     {t('enums.menu.top.products')}
                                 </NavLink>
 
-                                <NavLink href={route('home')} active={false}>
+                                <NavLink href={route('products.search-page')} active={route().current('products.search-page')}>
                                     {t('enums.menu.top.teas')}
                                 </NavLink>
 
-                                <NavLink href={route('home')} active={false}>
+                                <NavLink href={route('products.search-page')} active={false}>
                                     {t('enums.menu.top.accessories')}
                                 </NavLink>
 
-                                <NavLink href={route('posts.index')} active={false}>
+                                <NavLink href={route('posts.index')} active={route().current('posts.index')}>
                                     {t('enums.menu.top.blog')}
                                 </NavLink>
 
@@ -35,7 +35,7 @@ export default function TopNavbar() {
                         </div>
 
                         <div className="flex items-center justify-end">
-                            <Input type="search" placeholder={t('enums.menu.top.search')} />
+                            <ProductSearch />
                         </div>
 
                         {/* Hamburger */}

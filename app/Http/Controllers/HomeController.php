@@ -7,7 +7,7 @@ use App\Data\ProductData;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Variation;
-use App\PostStatus;
+use Illuminate\Support\Facades\Request;
 
 class HomeController extends Controller
 {
@@ -37,7 +37,6 @@ class HomeController extends Controller
         $specialOffer = ProductData::from(Product::with('cover')->active()->inRandomOrder()->first());
         $productOfTheMonth = ProductData::from(Product::with('cover')->active()->inRandomOrder()->first());
 
-
         $posts = PostData::collect(Post::query()
             ->with('cover', 'categories')
             ->active()
@@ -52,4 +51,6 @@ class HomeController extends Controller
             'productOfTheMonth' => $productOfTheMonth,
         ]);
     }
+
+
 }

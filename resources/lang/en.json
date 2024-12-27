@@ -54,7 +54,9 @@
                 "accessories": "Accessories",
                 "blog": "Blog",
                 "contact": "Contact",
-                "search": "Search"
+                "search": "Search",
+                "no_result_found": "No result found",
+                "loading": "Loading"
             }
         },
         "homepage": {
@@ -153,5 +155,8 @@
     },
     "subscription": {
         "you_are_subscribed": "You are subscribed successfully"
+    },
+    "products": {
+        "products_search": "Products Search"
     }
 }
