@@ -33,7 +33,7 @@ const ProductsListFilters = ({
     const categories = usePage<PageProps<{ global?: App.Data.GlobalData }>>().props.global?.categories;
     const formattedCategories = categories?.map((cat) => {
         return {
-            value: cat.id,
+            value: cat.id.toString(),
             label: cat.name,
         };
     });
