@@ -126,6 +126,7 @@ name: string;
 slug: string;
 sku: string;
 price: number | null;
+base_price: number | null;
 stock: number | null;
 stock_status: App.ProductStockStatus;
 description: string | null;

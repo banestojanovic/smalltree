@@ -25,6 +25,7 @@ class ProductData extends Data
         public string $slug,
         public string $sku,
         public ?float $price,
+        public ?float $base_price,
         public ?int $stock,
         public ProductStockStatus $stock_status,
         public ?string $description,

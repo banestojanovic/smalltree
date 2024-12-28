@@ -2,12 +2,13 @@ import { useEffect, useRef } from 'react';
 
 import { Combobox, ComboboxItem } from '@/app/components/ui/combobox';
 import { PageProps } from '@/app/types';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/app/components/ui/dropdown-menu';
+import { MultiSelect } from '@/app/components/ui/multi-select';
 import { Slider } from '@/app/components/ui/slider';
 import { ChevronsUpDown } from 'lucide-react';
 
@@ -15,20 +16,28 @@ interface queryProps {
     attributes: never;
     variations: never;
     priceRange: number[] | never;
+    search: string | number | never;
+    selectedCategories: string[] | [];
 }
 
 const ProductsListFilters = ({
-    category,
     attributes,
     variations,
     query,
 }: PageProps<{
-    category: App.Data.CategoryData;
     attributes: App.Data.AttributeData[];
     variations: App.Data.VariationData[];
     query: queryProps;
 }>) => {
     const { t } = useTranslation();
+    const categories = usePage<PageProps<{ global?: App.Data.GlobalData }>>().props.global?.categories;
+    const formattedCategories =
+        categories?.map((cat) => {
+            return {
+                value: cat.id.toString(),
+                label: cat.name,
+            };
+        }) ?? [];
 
     const { data, setData, get } = useForm({
         attributes: attributes.reduce<Record<string, null>>((acc, attribute) => {
@@ -40,6 +49,8 @@ const ProductsListFilters = ({
             return acc;
         }, {}),
         priceRange: query.priceRange ?? null,
+        search: query.search ?? null,
+        selectedCategories: query.selectedCategories ?? [],
     });
 
     const handleValueChange = (newRange: number[]) => {
@@ -47,7 +58,7 @@ const ProductsListFilters = ({
     };
 
     const handleSearch = () => {
-        get(route('categories.show', category.slug), {
+        get(route('products.search-page'), {
             preserveScroll: true,
             preserveState: true,
         });
@@ -66,9 +77,21 @@ const ProductsListFilters = ({
         <section className="mt-10">
             <div className="container">
                 <div className="flex w-full flex-wrap items-center gap-7">
+                    <div>
+                        <MultiSelect
+                            options={formattedCategories}
+                            onValueChange={(value) => setData('selectedCategories', value ?? [])}
+                            defaultValue={data?.selectedCategories}
+                            placeholder="Select Categories"
+                            variant="inverted"
+                            animation={2}
+                            maxCount={3}
+                            className={'bg-white shadow-sm'}
+                        />
+                    </div>
                     {variations.length > 0 &&
                         variations.map((variation) => (
-                            <div className={''} key={variation.id}>
+                            <div key={variation.id}>
                                 <Combobox
                                     value={data.variations[variation.id]}
                                     onChange={(value) =>
@@ -138,7 +161,16 @@ const ProductsListFilters = ({
                                         </Badge>
                                     )}
                                 </div>
-                                <Slider className="mt-4" defaultValue={query.priceRange ?? [0, 10000]} onValueCommit={handleValueChange} max={10000} min={0} step={10} aria-label="Price range" />
+                                <Slider
+                                    className="mt-4"
+                                    defaultValue={query.priceRange ?? [0, 10000]}
+                                    onValueCommit={handleValueChange}
+                                    max={10000}
+                                    min={0}
+                                    minStepsBetweenThumbs={10}
+                                    step={100}
+                                    aria-label="Price range"
+                                />
                             </div>
                         </DropdownMenuContent>
                     </DropdownMenu>

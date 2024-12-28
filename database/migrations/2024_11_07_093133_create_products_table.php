@@ -16,7 +16,8 @@ return new class extends Migration
             $table->longText('name');
             $table->string('slug')->index()->unique();
             $table->string('sku')->index()->nullable();
-            $table->bigInteger('price')->index()->nullable();
+            $table->unsignedBigInteger('price')->index()->nullable();
+            $table->unsignedBigInteger('base_price')->default(0)->index();
             $table->integer('stock')->nullable();
             $table->integer('stock_status')->default(1);
             $table->integer('status')->default(1);
