@@ -41,6 +41,7 @@ class Product extends Model implements HasMedia, Sortable
         'slug',
         'sku',
         'price',
+        'base_price',
         'stock',
         'stock_status',
         'description',
@@ -65,6 +66,14 @@ class Product extends Model implements HasMedia, Sortable
     }
 
     protected function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
+        );
+    }
+
+    protected function basePrice(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value / 100,
@@ -111,6 +120,21 @@ class Product extends Model implements HasMedia, Sortable
         return $this->hasOne(Discount::class);
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', ProductStatus::ACTIVE);
+    }
+
+    public function scopeIsAvailable($query)
+    {
+        return $query->where('stock_status', ProductStockStatus::IN_STOCK);
+    }
+
+    public function calculateMinimumPrice(): int
+    {
+        return min($this->price, $this->variations()->min('price') ?? PHP_INT_MAX);
+    }
+
     protected static function booted(): void
     {
         static::created(function (Product $product) {
@@ -135,7 +159,7 @@ class Product extends Model implements HasMedia, Sortable
             });
         });
 
-        static::saved(function (Product $product) {
+        static::saving(function (Product $product) {
             if ($product->variations()->exists()) {
                 $product->variations()->with('variations')->each(function (ProductVariation $variation) use ($product) {
                     $price = $product->price;
@@ -179,15 +203,9 @@ class Product extends Model implements HasMedia, Sortable
                 });
             }
         });
-    }
 
-    public function scopeActive($query)
-    {
-        return $query->where('status', ProductStatus::ACTIVE);
-    }
-
-    public function scopeIsAvailable($query)
-    {
-        return $query->where('stock_status', ProductStockStatus::IN_STOCK);
+        static::saving(function (Product $product) {
+            $product->base_price = $product->calculateMinimumPrice();
+        });
     }
 }

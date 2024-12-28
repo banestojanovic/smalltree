@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { Combobox, ComboboxItem } from '@/app/components/ui/combobox';
 import { PageProps } from '@/app/types';
@@ -31,12 +31,13 @@ const ProductsListFilters = ({
 }>) => {
     const { t } = useTranslation();
     const categories = usePage<PageProps<{ global?: App.Data.GlobalData }>>().props.global?.categories;
-    const formattedCategories = categories?.map((cat) => {
-        return {
-            value: cat.id.toString(),
-            label: cat.name,
-        };
-    });
+    const formattedCategories =
+        categories?.map((cat) => {
+            return {
+                value: cat.id.toString(),
+                label: cat.name,
+            };
+        }) ?? [];
 
     const { data, setData, get } = useForm({
         attributes: attributes.reduce<Record<string, null>>((acc, attribute) => {
@@ -52,17 +53,14 @@ const ProductsListFilters = ({
         selectedCategories: query.selectedCategories ?? [],
     });
 
-    // Initial price range values
-    const [range, setRange] = useState<number[]>([10, 10000]);
-
     const handleValueChange = (newRange: number[]) => {
-        setRange(newRange);
         setData('priceRange', newRange);
     };
 
     const handleSearch = () => {
         get(route('products.search-page'), {
             preserveScroll: true,
+            preserveState: true,
         });
     };
 
@@ -79,7 +77,18 @@ const ProductsListFilters = ({
         <section className="mt-10">
             <div className="container">
                 <div className="flex w-full flex-wrap items-center gap-7">
-
+                    <div>
+                        <MultiSelect
+                            options={formattedCategories}
+                            onValueChange={(value) => setData('selectedCategories', value ?? [])}
+                            defaultValue={data?.selectedCategories}
+                            placeholder="Select Categories"
+                            variant="inverted"
+                            animation={2}
+                            maxCount={3}
+                            className={'bg-white shadow-sm'}
+                        />
+                    </div>
                     {variations.length > 0 &&
                         variations.map((variation) => (
                             <div key={variation.id}>
@@ -145,32 +154,26 @@ const ProductsListFilters = ({
 
                                 <Button onClick={() => setData('priceRange', [])}>Clear</Button>
 
-                                <p className="flex items-center justify-center">
+                                <div className="flex items-center justify-center">
                                     {data.priceRange && data.priceRange?.length && (
                                         <Badge variant="outline" className="text-lg">
                                             ${data.priceRange[0] ?? 0} - ${data.priceRange[1] ?? 0}
                                         </Badge>
                                     )}
-                                </p>
-                                <Slider className="mt-4" value={range} onValueChange={handleValueChange} max={10000}
-                                        min={0} step={10} aria-label="Price range" />
+                                </div>
+                                <Slider
+                                    className="mt-4"
+                                    defaultValue={query.priceRange ?? [0, 10000]}
+                                    onValueCommit={handleValueChange}
+                                    max={10000}
+                                    min={0}
+                                    minStepsBetweenThumbs={10}
+                                    step={100}
+                                    aria-label="Price range"
+                                />
                             </div>
                         </DropdownMenuContent>
                     </DropdownMenu>
-
-
-                    <div>
-                        <MultiSelect
-                            options={formattedCategories}
-                            onValueChange={(value) => setData('selectedCategories', value ?? [])}
-                            defaultValue={data?.selectedCategories}
-                            placeholder="Select Categories"
-                            variant="inverted"
-                            animation={2}
-                            maxCount={3}
-                        />
-                    </div>
-
                 </div>
             </div>
         </section>

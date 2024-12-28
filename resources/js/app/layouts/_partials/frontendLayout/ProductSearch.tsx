@@ -1,6 +1,6 @@
 import { Button } from '@/app/components/ui/button';
-import { Input } from '@/app/components/ui/input'; // Adjust based on your ShadCN setup
-import { cn } from '@/lib/utils'; // ShadCN utility for conditional classnames
+import { Input } from '@/app/components/ui/input';
+import { cn } from '@/lib/utils';
 import { router } from '@inertiajs/react';
 import axios from 'axios';
 import { ArrowRight } from 'lucide-react';
@@ -118,7 +118,7 @@ const ProductSearch = () => {
                         >
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-x-1">
-                                    <img className="aspect-square size-12 rounded-md" src={product.cover?.original_url} alt={product.name} />
+                                    <img className="aspect-square size-12 rounded-md object-cover" src={product.cover?.original_url} alt={product.name} />
                                     <span className="text-sm">{product.name}</span>
                                 </div>
                                 <span className="font-semibold">${product.price}</span>

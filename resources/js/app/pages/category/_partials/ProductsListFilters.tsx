@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { Combobox, ComboboxItem } from '@/app/components/ui/combobox';
 import { PageProps } from '@/app/types';
@@ -42,17 +42,14 @@ const ProductsListFilters = ({
         priceRange: query.priceRange ?? null,
     });
 
-    // Initial price range values
-    const [range, setRange] = useState<number[]>([10, 10000]);
-
     const handleValueChange = (newRange: number[]) => {
-        setRange(newRange);
         setData('priceRange', newRange);
     };
 
     const handleSearch = () => {
         get(route('categories.show', category.slug), {
             preserveScroll: true,
+            preserveState: true,
         });
     };
 
@@ -134,14 +131,14 @@ const ProductsListFilters = ({
 
                                 <Button onClick={() => setData('priceRange', [])}>Clear</Button>
 
-                                <p className="flex items-center justify-center">
+                                <div className="flex items-center justify-center">
                                     {data.priceRange && data.priceRange?.length && (
                                         <Badge variant="outline" className="text-lg">
                                             ${data.priceRange[0] ?? 0} - ${data.priceRange[1] ?? 0}
                                         </Badge>
                                     )}
-                                </p>
-                                <Slider className="mt-4" value={range} onValueChange={handleValueChange} max={10000} min={0} step={10} aria-label="Price range" />
+                                </div>
+                                <Slider className="mt-4" defaultValue={query.priceRange ?? [0, 10000]} onValueCommit={handleValueChange} max={10000} min={0} step={10} aria-label="Price range" />
                             </div>
                         </DropdownMenuContent>
                     </DropdownMenu>

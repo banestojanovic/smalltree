@@ -58,4 +58,15 @@ class ProductVariation extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    protected static function booted()
+    {
+        static::saved(function ($variation) {
+            $variation->product->updateQuietly(['base_price' => $variation->product->calculateMinimumPrice()]);
+        });
+
+        static::deleted(function ($variation) {
+            $variation->product->updateQuietly(['base_price' => $variation->product->calculateMinimumPrice()]);
+        });
+    }
 }

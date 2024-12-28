@@ -14,8 +14,7 @@ interface queryProps {
     variations: never;
     priceRange: number[] | never;
     search: string | number | never;
-    selectedCategory: string[] | [];
-
+    selectedCategories: string[] | [];
 }
 
 const ProductsSearchPage = ({

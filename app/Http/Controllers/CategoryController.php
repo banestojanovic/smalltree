@@ -49,12 +49,8 @@ class CategoryController extends Controller
                     }
                 })
                 ->when(request()->filled('priceRange') && count(request('priceRange')) === 2, function ($query) {
-                    $query->whereHas('variations', function ($q) {
-                        $priceRange = request('priceRange');
-                        $q->where('price', '>=', $priceRange[0] * 100)
-                            ->where('price', '<=', $priceRange[1] * 100);
-                    });
-
+                    $priceRange = request('priceRange');
+                    $query->whereBetween('base_price', [$priceRange[0] * 100, $priceRange[1] * 100]);
                 })
                 ->paginate(12)
         );
