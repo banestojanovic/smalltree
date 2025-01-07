@@ -7,7 +7,7 @@ export default function TopNavbar() {
     const { t } = useTranslation();
     return (
         <>
-            <div className="border-b-2 border-gray-200">
+            <div className="bg-white">
                 <div className="container">
                     <div className="flex h-12 items-center justify-between">
                         <div className="hidden items-center justify-between sm:flex">

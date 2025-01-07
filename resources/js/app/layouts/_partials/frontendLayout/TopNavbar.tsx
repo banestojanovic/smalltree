@@ -3,6 +3,7 @@ import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { PageProps } from '@/app/types';
 import { Link, router, usePage } from '@inertiajs/react';
+import { Mail, MapPin, Phone, ShoppingBag } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function TopNavbar() {
@@ -15,48 +16,70 @@ export default function TopNavbar() {
     };
 
     return (
-        <div className="border-b-2 border-gray-200">
+        <div className="">
             <div className="container">
-                <div className="hidden h-24 grid-cols-3 gap-x-4 lg:grid">
-                    <div className="flex flex-wrap items-center gap-x-5">
-                        <p className="text-sm">+391 00 000 000</p>
-                        <p className="text-sm">contact@smalltree.com</p>
-                        <p className="text-sm">{t('enums.menu.top.locations')}</p>
+                <div className="hidden h-24 items-center gap-x-4 lg:flex">
+                    <div className="flex w-5/12 flex-wrap items-center gap-5">
+                        <a href="tel:+3811113820466" className="flex items-center gap-x-1 text-sm">
+                            <Phone className="size-5" />
+                            +381 111 3820466
+                        </a>
+                        <a href="mailto:office@smalltrees.rs" target="_blank" className="flex items-center gap-x-1 text-sm" rel="noreferrer">
+                            <Mail className="size-5" />
+                            office@smalltrees.rs
+                        </a>
+
+                        <a href="#" target="_blank" className="flex items-center gap-x-1 text-sm">
+                            <MapPin className="size-5" />
+                            {t('enums.menu.top.locations')}
+                        </a>
                     </div>
 
-                    <div className="flex items-center justify-center">
+                    <div className="flex w-2/12 items-center justify-center">
                         <Link href="/">
                             <ApplicationLogo className="block h-20 w-auto fill-current text-gray-800 dark:text-gray-200" />
                         </Link>
                     </div>
 
-                    <div className="flex items-center justify-end gap-x-5">
-                        <p className="text-sm">{t('enums.menu.top.favorites')}</p>
+                    <div className="flex w-5/12 items-center justify-end gap-x-5">
                         <div className="relative">
-                            {cart?.products && cart.products.length > 0 && <Badge className="absolute -right-1 -top-1">{cart.products.length}</Badge>}
-                            <Button variant="outline" onClick={openCart}>
-                                {t('enums.menu.top.cart')}
+                            {cart?.products && cart.products.length > 0 && (
+                                <Badge className="absolute -right-1 top-1 inline-flex size-4 items-center justify-center rounded-full text-xs">{cart.products.length}</Badge>
+                            )}
+                            <Button variant="outline" size="icon" onClick={openCart} className="inline-flex size-10 items-center justify-center rounded-full bg-white transition-colors">
+                                <ShoppingBag className="size-10" />
                             </Button>
                         </div>
                     </div>
                 </div>
 
-                <div className="block h-full lg:hidden">
+                <div className="block h-full lg:hidden py-2">
                     <div className="flex items-center justify-between">
-                        <div className="flex flex-col gap-x-5">
-                            <p className="text-xs">+391 00 000 000</p>
-                            <p className="text-xs">contact@smalltree.com</p>
-                            <p className="text-xs">{t('enums.menu.top.locations')}</p>
+                        <div className="flex flex-col gap-2">
+                            <a href="tel:+3811113820466" className="flex items-center gap-x-1 text-sm">
+                                <Phone className="size-4" />
+                                +381 111 3820466
+                            </a>
+                            <a href="mailto:office@smalltrees.rs" target="_blank" className="flex items-center gap-x-1 text-sm" rel="noreferrer">
+                                <Mail className="size-4" />
+                                office@smalltrees.rs
+                            </a>
+
+                            <a href="#" target="_blank" className="flex items-center gap-x-1 text-sm">
+                                <MapPin className="size-4" />
+                                {t('enums.menu.top.locations')}
+                            </a>
                         </div>
                         <Link href="/">
-                            <ApplicationLogo className="block h-20 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                            <ApplicationLogo className="block h-16 w-auto fill-current text-gray-800 dark:text-gray-200" />
                         </Link>
                         <div className="flex flex-col justify-between gap-x-5">
-                            <p className="mb-1 text-xs">{t('enums.menu.top.favorites')}</p>
                             <div className="relative">
-                                {cart?.products && cart.products.length > 0 && <Badge className="absolute -right-1 -top-1">{cart.products.length}</Badge>}
-                                <Button variant="outline" onClick={openCart}>
-                                    {t('enums.menu.top.cart')}
+                                {cart?.products && cart.products.length > 0 && (
+                                    <Badge className="absolute -right-1 top-1 inline-flex size-4 items-center justify-center rounded-full text-xs">{cart.products.length}</Badge>
+                                )}
+                                <Button variant="outline" size="icon" onClick={openCart} className="inline-flex size-10 items-center justify-center rounded-full bg-white transition-colors">
+                                    <ShoppingBag className="size-10" />
                                 </Button>
                             </div>
                         </div>
