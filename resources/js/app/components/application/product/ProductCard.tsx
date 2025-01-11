@@ -1,41 +1,50 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
 
 import AddToCartButton from '@/app/components/application/product/AddToCartButton';
+import ProductPrice from '@/app/components/application/product/ProductPrice';
 import { ProductQuickViewModal } from '@/app/components/application/product/ProductQuickViewModal';
-import { Badge } from '@/app/components/ui/badge';
 import { PageProps } from '@/app/types';
 import { Link } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
+import { Typography } from '../../ui/typography';
 
 const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) => {
+    const { t } = useTranslation();
+
     return (
-        <Card key={product.id}>
-            <CardHeader>
+        <Card key={product.id} className="relative flex flex-col justify-between !border-none">
+            {product.discount && (
+                <span className="absolute right-2 top-2 rounded-md bg-primary px-2 py-1.5 text-sm text-white">
+                    {t('order.discount')} {product.discount.percentage}%
+                </span>
+            )}
+            <CardHeader className="w-full pb-5">
                 <Link href={route('products.show', { slug: product.slug })}>
-                    <img className="h-40 w-full object-cover sm:h-60" src={product.cover.original_url} alt={product.name} />
+                    <img className="h-60 w-full rounded-lg object-cover p-2 sm:h-56" src={product.cover.original_url} alt={product.name} />
                 </Link>
 
                 <CardDescription>
                     {product.categories?.map((category: App.Data.CategoryData) => (
-                        <Badge key={category.id} variant="outline">
-                            <Link href={route('categories.show', category.slug)}>{category.name}</Link>
-                        </Badge>
+                        <Link key={category.id} href={route('categories.show', category.slug)}>
+                            {category.name}
+                        </Link>
                     ))}
                 </CardDescription>
                 <CardTitle>
-                    <Link href={route('products.show', { slug: product.slug })}>
-                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">{product.name}</h4>
-                    </Link>
+                    <Typography as="h4">
+                        <Link href={route('products.show', { slug: product.slug })}>{product.name}</Link>
+                    </Typography>
                 </CardTitle>
             </CardHeader>
 
-            <CardContent>
-                <p className="h-32 overflow-hidden sm:h-40">{product.description}</p>
-            </CardContent>
+            {/*<CardContent>*/}
+            {/*    <p className="h-32 overflow-hidden sm:h-40">{product.description}</p>*/}
+            {/*</CardContent>*/}
 
             <CardFooter className="mt-auto flex items-center justify-between">
-                <span className="font-semibold">${product.price}</span>
+                <ProductPrice product={product} />
                 <div className="inline-flex items-center justify-end">
-                    {product.variations && product.variations.length > 0 ? <ProductQuickViewModal product={product} /> : <AddToCartButton product={product} productVariantId={null} />}
+                    {product.variations && product.variations.length > 0 ? <ProductQuickViewModal product={product} /> : <AddToCartButton variant='secondary' product={product} productVariantId={null} />}
                 </div>
             </CardFooter>
         </Card>

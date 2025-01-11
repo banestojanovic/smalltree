@@ -8,7 +8,7 @@ import TopNavbar from './_partials/frontendLayout/TopNavbar';
 
 export default function FrontendLayout({ header, children }: PropsWithChildren<{ header?: ReactNode }>) {
     return (
-        <div className="min-h-screen bg-background text-black/50 dark:bg-black dark:text-white/50">
+        <div className="min-h-screen bg-background">
             <nav className="border-t-[8px] border-primary">
                 <TopNavbar />
                 <MainNavbar />

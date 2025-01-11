@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\PostCategoryData;
 use App\Data\PostData;
 use App\Models\Post;
+use App\Models\PostCategory;
 
 class PostController extends Controller
 {
@@ -15,10 +17,13 @@ class PostController extends Controller
             ->paginate(18)
         );
 
+        $categories = PostCategoryData::collect(PostCategory::all());
+
         $featurePost = PostData::from(Post::with('cover')->active()->inRandomOrder()->first());
 
         return inertia('post/index', [
             'posts' => $posts,
+            'categories' => $categories,
             'featurePost' => $featurePost,
         ]);
     }

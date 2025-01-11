@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { Check } from 'lucide-react';
 import * as React from 'react';
 
 import { Button } from '@/app/components/ui/button';
@@ -39,9 +39,14 @@ export function Combobox({ value, onChange, placeholder = 'Select an option...',
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button variant="outline" role="combobox" aria-expanded={open} className={cn('w-[200px] justify-between', className)}>
+                <Button variant="outline-white" role="combobox" aria-expanded={open} className={cn('w-[200px] justify-between !py-5', className)}>
                     {value ? options?.find((option) => option.value === value)?.label : placeholder}
-                    <ChevronsUpDown className="opacity-50" />
+
+                    <span className="opacity-50">
+                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.85 5.55L0 0.700001L0.7 0L4.85 4.15L9 0L9.7 0.700001L4.85 5.55Z" fill="black" />
+                        </svg>
+                    </span>
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">

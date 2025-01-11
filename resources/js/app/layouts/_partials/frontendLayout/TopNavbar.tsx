@@ -53,7 +53,7 @@ export default function TopNavbar() {
                     </div>
                 </div>
 
-                <div className="block h-full lg:hidden py-2">
+                <div className="block h-full py-2 lg:hidden">
                     <div className="flex items-center justify-between">
                         <div className="flex flex-col gap-2">
                             <a href="tel:+3811113820466" className="flex items-center gap-x-1 text-sm">

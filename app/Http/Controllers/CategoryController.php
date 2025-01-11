@@ -15,8 +15,6 @@ class CategoryController extends Controller
 {
     public function show($slug): \Inertia\Response|\Inertia\ResponseFactory
     {
-        //        dd(Product::all()->toArray());
-
         $category = CategoryData::from(Category::where('slug', $slug)->firstOrFail());
 
         $promotionProduct = ProductData::from(Product::with('cover')->active()->inRandomOrder()->first());

@@ -23,7 +23,7 @@ export default function Cart() {
     return (
         <>
             <Sheet open={open} onOpenChange={setOpen}>
-                <SheetContent>
+                <SheetContent className="bg-white">
                     <SheetHeader>
                         <SheetTitle>{t('cart.cart')}</SheetTitle>
                     </SheetHeader>
@@ -36,8 +36,8 @@ export default function Cart() {
                                         <div>
                                             <div className="flex items-center gap-x-3 font-medium">
                                                 <img src={product.cover.original_url} alt={product.name} className="aspect-square size-14 rounded-lg object-cover" />
-                                                <div className="flex flex-col text-gray-500">
-                                                    <span>{product.name}</span>
+                                                <div className="flex flex-col">
+                                                    <span className="font-merriweather">{product.name}</span>
                                                     <div className="w-24">
                                                         <UpdateCartQuantity product={product} />
                                                     </div>
@@ -45,8 +45,9 @@ export default function Cart() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col text-sm font-medium">
-                                            <p>${(product?.realPrice ?? 0).toFixed(2)}</p>
-
+                                            <p>
+                                                <span className={'font-semibold'}>{(product?.realPrice ?? 0).toFixed(2)}</span> rsd
+                                            </p>
                                             <RemoveFromCartButton product={product} />
                                         </div>
                                     </li>
@@ -56,20 +57,24 @@ export default function Cart() {
                             <p className="text-sm text-gray-500">Your cart is empty.</p>
                         )}
 
-                        <div className="mt-7">
+                        <div className="mt-10 sm:mt-16">
                             <div className="flex items-center justify-between">
                                 <span>Shipping</span>
-                                <span className="text-lg font-bold">$0</span>
+                                <span>
+                                    <span className="text-lg font-bold">0</span> rsd
+                                </span>
                             </div>
-                            <div className="flex items-center justify-between">
+                            <div className="mt-5 flex items-center justify-between text-lg">
                                 <span>Total</span>
-                                <span className="text-lg font-bold">${(cart?.total ?? 0)?.toFixed(2)}</span>
+                                <span>
+                                    <span className="font-bold">{(cart?.total ?? 0)?.toFixed(2)}</span> rsd
+                                </span>
                             </div>
                         </div>
                     </div>
                     <SheetFooter>
                         <SheetClose asChild>
-                            <Button asChild className="block w-full" type="submit">
+                            <Button asChild className="block w-full text-center" type="submit">
                                 {cart?.products && cart.products.length > 0 ? <Link href={route('checkout.show')}>{t('cart.check_out')}</Link> : ''}
                             </Button>
                         </SheetClose>

@@ -39,6 +39,7 @@ class ProductData extends Data
         public ?Collection $attributes,
         #[DataCollectionOf(CategoryData::class)]
         public ?Collection $categories,
+        public ?DiscountData $discount,
     ) {
         $this->grouped_variations = $variations?->flatMap(fn ($variation) => $variation->variations)->groupBy('variation.name') ?? [];
         $this->grouped_attributes = $attributes?->groupBy('attribute.name') ?? [];

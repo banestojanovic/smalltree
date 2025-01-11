@@ -9,7 +9,7 @@ export default function TopNavbar() {
         <>
             <div className="bg-white">
                 <div className="container">
-                    <div className="flex h-12 items-center justify-between">
+                    <div className="flex h-16 items-center justify-between">
                         <div className="hidden items-center justify-between sm:flex">
                             <div className="flex space-x-8">
                                 <NavLink href={route('home')} active={route().current('home')}>

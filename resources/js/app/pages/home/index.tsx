@@ -32,10 +32,10 @@ const Home = ({
             <Head title={t('enums.page.titles.home')} />
             <Hero />
             <CategoriesSlider />
-            <Promotions specialOffer={specialOffer} productOfTheMonth={productOfTheMonth} />
             <PopularProducts products={popularProducts} />
+            <Promotions specialOffer={specialOffer} productOfTheMonth={productOfTheMonth} />
             <RecommendedProducts products={staffRecommendedProducts} />
-            <TeaRituals />
+            <TeaRituals matchRitual={staffRecommendedProducts} mateRitual={staffRecommendedProducts} />
             <TopPosts posts={posts} />
         </>
     );

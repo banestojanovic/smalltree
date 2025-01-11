@@ -1,8 +1,9 @@
+import PromotionCard from '@/app/components/application/product/PomotionCard';
+import PromotionCardItem from '@/app/components/application/product/PromotionCardItem';
 import { Button } from '@/app/components/ui/button';
-import { Card, CardContent } from '@/app/components/ui/card';
-import { Typography } from '@/app/components/ui/typography';
 import { PageProps } from '@/app/types';
 import { Link } from '@inertiajs/react';
+import { ShoppingBag } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Promotions = ({
@@ -16,63 +17,45 @@ const Promotions = ({
 
     return (
         <section className="mt-10 h-full sm:mt-20 md:h-80">
-            <div className="container grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-[30%_auto] lg:gap-7">
+            <div className="container grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-[40%_auto] lg:gap-7">
                 {productOfTheMonth && (
-                    <Card className="relative h-full bg-cover bg-center sm:h-80" style={{ backgroundImage: `url(${productOfTheMonth.cover.original_url})` }}>
-                        {/* Overlay */}
-                        <div className="absolute inset-0 z-0 rounded-lg bg-black bg-opacity-30"></div>
+                    <PromotionCard
+                        title={t('enums.homepage.promotions.tea_of_the_month')}
+                        description={t('enums.homepage.promotions.tea_of_the_month_description')}
+                        bgImageSrc={productOfTheMonth.cover.original_url}
+                    >
+                        <div className="mt-7 items-center justify-between md:mt-auto md:flex">
+                            <PromotionCardItem product={productOfTheMonth} />
 
-                        <CardContent className="relative z-10 h-full md:h-40">
-                            <Typography as="h2" className="text-white">
-                                {t('enums.homepage.promotions.tea_of_the_month')}
-                            </Typography>
-
-                            <Typography as="h3" className="mt-7 !leading-8 text-white">
-                                <Link href={route('products.show', productOfTheMonth.slug)}>{productOfTheMonth.name}</Link>
-                            </Typography>
-
-                            <div className="h-auto md:h-full">
-                                <Typography as="h2" className="text-white">
-                                    ${productOfTheMonth.price}
-                                </Typography>
-                            </div>
-
-                            <div className="mt-7 items-center justify-end md:mt-auto md:flex">
-                                <Button asChild>
-                                    <Link href={route('products.show', productOfTheMonth.slug)}>{t('enums.homepage.hero.buy_now')}</Link>
+                            <div className="flex items-center justify-end">
+                                <Button size="circle" variant="outline" asChild>
+                                    <Link href={route('products.show', productOfTheMonth.slug)}>
+                                        <ShoppingBag />
+                                    </Link>
                                 </Button>
                             </div>
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </PromotionCard>
                 )}
 
                 {specialOffer && (
-                    <Card className="relative h-full bg-cover bg-center sm:h-80" style={{ backgroundImage: `url(${specialOffer.cover.original_url})` }}>
-                        {/* Overlay */}
-                        <div className="absolute inset-0 z-0 rounded-lg bg-black bg-opacity-30"></div>
+                    <PromotionCard
+                        title={t('enums.homepage.promotions.special_offer')}
+                        description={t('enums.homepage.promotions.special_offer_description')}
+                        bgImageSrc={specialOffer.cover.original_url}
+                    >
+                        <div className="mt-7 items-center justify-between md:mt-auto md:flex">
+                            <PromotionCardItem product={specialOffer} />
 
-                        <CardContent className="relative z-10 h-full md:h-40">
-                            <Typography as="h2" className="text-white">
-                                {t('enums.homepage.promotions.special_offer')}
-                            </Typography>
-
-                            <Typography as="h3" className="mt-7 !leading-8 text-white">
-                                <Link href={route('products.show', specialOffer.slug)}>{specialOffer.name}</Link>
-                            </Typography>
-
-                            <div className="h-auto md:h-full">
-                                <Typography as="h2" className="text-white">
-                                    ${specialOffer.price}
-                                </Typography>
-                            </div>
-
-                            <div className="mt-7 items-center justify-end md:mt-auto md:flex">
-                                <Button asChild>
-                                    <Link href={route('products.show', specialOffer.slug)}>{t('enums.homepage.hero.buy_now')}</Link>
+                            <div className="flex items-center justify-end">
+                                <Button size="circle" variant="outline" asChild>
+                                    <Link href={route('products.show', specialOffer.slug)}>
+                                        <ShoppingBag />
+                                    </Link>
                                 </Button>
                             </div>
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </PromotionCard>
                 )}
             </div>
         </section>

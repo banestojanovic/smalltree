@@ -12,7 +12,7 @@ const CategoryDetails = () => {
             <section className="mt-5 sm:mt-10">
                 <div className="container">
                     <Typography as="h2">{category.name}</Typography>
-                    <Typography as="p" className="mt-7">
+                    <Typography as="p" className="mt-3">
                         {category.description}
                     </Typography>
                 </div>
