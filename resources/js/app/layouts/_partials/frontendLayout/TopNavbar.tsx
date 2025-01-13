@@ -37,7 +37,7 @@ export default function TopNavbar() {
 
                     <div className="flex w-2/12 items-center justify-center">
                         <Link href="/">
-                            <ApplicationLogo className="block h-20 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                            <ApplicationLogo className="block size-20 fill-current text-gray-800 dark:text-gray-200" />
                         </Link>
                     </div>
 
@@ -54,7 +54,7 @@ export default function TopNavbar() {
                 </div>
 
                 <div className="block h-full py-2 lg:hidden">
-                    <div className="flex items-center justify-between">
+                    <div className="grid grid-cols-3 gap-x-3">
                         <div className="flex flex-col gap-2">
                             <a href="tel:+3811113820466" className="flex items-center gap-x-1 text-sm">
                                 <Phone className="size-4" />
@@ -71,9 +71,9 @@ export default function TopNavbar() {
                             </a>
                         </div>
                         <Link href="/">
-                            <ApplicationLogo className="block h-16 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                            <ApplicationLogo className="block size-20 fill-current text-gray-800 dark:text-gray-200" />
                         </Link>
-                        <div className="flex flex-col justify-between gap-x-5">
+                        <div className="flex items-center justify-end">
                             <div className="relative">
                                 {cart?.products && cart.products.length > 0 && (
                                     <Badge className="absolute -right-1 top-1 inline-flex size-4 items-center justify-center rounded-full text-xs">{cart.products.length}</Badge>

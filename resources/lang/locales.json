@@ -186,6 +186,16 @@
                 "privacy": "Privacy Policy",
                 "all_rights_reserved": "All rights reserved 2025. Small Tree eCommerce by Dimaso DOO",
                 "safe_purchase": "Safe purchase enabled by"
+            },
+            "pagination": {
+                "next": "next",
+                "previous": "previous"
+            },
+            "pages": {
+                "not_found": "Not Found",
+                "not_found_error": "Error, this page does not exist.",
+                "not_found_message": "This page does not exist, you can return to the home page by",
+                "click_button": "clicking here"
             }
         }
     },
