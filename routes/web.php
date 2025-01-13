@@ -24,4 +24,7 @@ Route::get('/blog/{slug}', [\App\Http\Controllers\PostController::class, 'show']
 
 Route::post('/subscribers', [\App\Http\Controllers\SubscriberController::class, 'store'])->name('subscribers.store');
 
+Route::get('/contact-us', [\App\Http\Controllers\ContactUsController::class, 'show'])->name('contact.show');
+Route::post('/contact-us', [\App\Http\Controllers\ContactUsController::class, 'store'])->name('contact.store');
+
 Route::get('/{slug}', [\App\Http\Controllers\PageController::class, 'show'])->name('pages.show');

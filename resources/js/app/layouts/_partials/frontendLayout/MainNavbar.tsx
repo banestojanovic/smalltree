@@ -28,7 +28,7 @@ export default function TopNavbar() {
                                     {t('enums.menu.top.blog')}
                                 </NavLink>
 
-                                <NavLink href={route('home')} active={false}>
+                                <NavLink href={route('contact.show')} active={false}>
                                     {t('enums.menu.top.contact')}
                                 </NavLink>
                             </div>

@@ -62,7 +62,7 @@ const FooterNavlinks = () => {
                                     <Link href={'#'}>Stories</Link>
                                 </li>
                                 <li>
-                                    <Link href={'#'}>Contact</Link>
+                                    <Link href={route('contact.show')}>Contact</Link>
                                 </li>
                                 <li>
                                     <Link href={'#'}>{t('footer.toc')}</Link>

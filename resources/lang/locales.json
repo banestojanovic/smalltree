@@ -196,6 +196,10 @@
                 "not_found_error": "Error, this page does not exist.",
                 "not_found_message": "This page does not exist, you can return to the home page by",
                 "click_button": "clicking here"
+            },
+            "contact": {
+                "message_received": "Thank you. we have received your message.",
+                "submit_button": "Submit your message"
             }
         }
     },
