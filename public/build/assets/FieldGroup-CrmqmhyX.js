@@ -1,0 +1,1 @@
+import{j as s}from"./app-U85ioafX.js";import{L as m}from"./FrontendLayout-KtHsqMjD.js";function x({label:t,name:r,error:e,children:i}){return s.jsxs("div",{className:"space-y-2",children:[t&&s.jsx(m,{htmlFor:r,children:t}),i,e&&s.jsx("div",{className:"mt-2 text-sm text-red-500",children:e})]})}export{x as F};
