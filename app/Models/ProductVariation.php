@@ -29,7 +29,7 @@ class ProductVariation extends Model
         'data' => 'array',
     ];
 
-    protected $with = ['variations', 'discount'];
+    protected $with = ['product', 'variations', 'discount'];
 
     protected function price(): Attribute
     {
