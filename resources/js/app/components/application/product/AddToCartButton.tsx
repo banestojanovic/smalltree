@@ -47,7 +47,7 @@ const AddToCartButton = ({
     const price = matchingVariation ? matchingVariation.price : product?.price;
 
     return (
-        <Button size={label ? '' : 'circle'} variant={variant ?? 'secondary'} onClick={updateCart} {...props}>
+        <Button size={'circle'} variant={variant ?? 'secondary'} onClick={updateCart} {...props}>
             <span>
                 <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

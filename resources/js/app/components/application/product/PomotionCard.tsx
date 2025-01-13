@@ -1,7 +1,15 @@
 import { Card, CardContent } from '@/app/components/ui/card';
 import { Typography } from '../../ui/typography';
+import React from 'react';
 
-const PromotionCard = ({ title, description, bgImageSrc, children }) => {
+interface PromotionCardProps {
+    title: string;
+    description: string;
+    bgImageSrc: string;
+    children?: React.ReactNode;
+}
+
+const PromotionCard = ({ title, description, bgImageSrc, children }: PromotionCardProps) => {
     return (
         <Card className="relative h-full min-h-80 bg-cover bg-center" style={{ backgroundImage: `url(${bgImageSrc})` }}>
             {/* Overlay */}

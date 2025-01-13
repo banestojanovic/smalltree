@@ -2,7 +2,7 @@ import { SVGAttributes } from 'react';
 
 export default function ApplicationLogo(props: SVGAttributes<SVGElement>) {
     return (
-        <svg {...props} viewBox="0 0 107 90" fill="none" xmlns="http://www.w3.org/2000/svg" mlns:xlink="http://www.w3.org/1999/xlink">
+        <svg {...props} viewBox="0 0 107 90" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="106.8" height="90" fill="url(#pattern0_6_302)" />
             <defs>
                 <pattern id="pattern0_6_302" patternContentUnits="objectBoundingBox" width="1" height="1">

@@ -45,8 +45,8 @@ const NewsletterSubscription = () => {
                 <Typography as="p" className="">
                     {t('footer.follow_us')}
                 </Typography>
-                <Link className="ml-7 hover:underline">{t('footer.instagram')}</Link>
-                <Link className="ml-3 hover:underline">{t('footer.facebook')}</Link>
+                <Link href="https://instagram.com" className="ml-7 hover:underline">{t('footer.instagram')}</Link>
+                <Link href="https://facebook.com" className="ml-3 hover:underline">{t('footer.facebook')}</Link>
             </div>
         </div>
     );

@@ -10,6 +10,10 @@ import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import { useTranslation } from 'react-i18next';
 
+interface ShopAddressCardProps {
+    shop: { name: string; address: string; phone: string; email: string; working_hours: string };
+}
+
 const ContactUsPage = () => {
     const { t } = useTranslation();
     const { data, setData, post, reset, errors } = useForm({
@@ -79,7 +83,7 @@ const ContactUsPage = () => {
                 </div>
 
                 {/*    Shops Addresses */}
-                <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3 mt-7 sm:mt-10">
+                <div className="mt-7 grid grid-cols-1 gap-7 sm:mt-10 md:grid-cols-2 lg:grid-cols-3">
                     <ShopAddressCard
                         shop={{
                             name: '',
@@ -114,14 +118,11 @@ const ContactUsPage = () => {
     );
 };
 
-const ShopAddressCard = ({ shop }) => {
-    const { t } = useTranslation();
-
+const ShopAddressCard = ({ shop }: ShopAddressCardProps) => {
     return (
         <Card>
             <CardHeader>
                 <img className="h-60 w-full rounded-lg object-cover p-1.5 sm:h-72" src="/images/shop-map.png" alt="shop map" />
-
                 <CardTitle>
                     <Typography as="h4">{shop.name}</Typography>
                     {/*<p className="mt-1 text-sm !font-normal tracking-widest">{shop.date_created}</p>*/}

@@ -32,7 +32,7 @@ const TeaRituals = ({
 
                             <div className="flex items-center justify-end">
                                 <Button size="circle" variant="outline" asChild>
-                                    <Link href={route('products.show', mateRitual[0].slug)}>
+                                    <Link href={route('products.show', matchRitual[0].slug)}>
                                         <ShoppingBag />
                                     </Link>
                                 </Button>

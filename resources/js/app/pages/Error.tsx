@@ -5,10 +5,10 @@ import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import { useTranslation } from 'react-i18next';
 
-const Error = ({ status }) => {
+const Error = ({ status }: { status: string }) => {
     const { t } = useTranslation();
 
-    const messages = {
+    const messages: Record<string, string> = {
         404: t('pages.not_found_error'),
         500: 'Server Error',
         503: 'Service Unavailable',
@@ -21,7 +21,7 @@ const Error = ({ status }) => {
             <div className="container mx-auto w-full md:max-w-5xl">
                 <div className="mt-7 sm:mt-16">
                     <Typography as={'h2'}>{status}</Typography>
-                    <Typography as={'p'}>{messages[status] || 'An error occurred'}</Typography>
+                    <Typography as={'p'}>{messages?.[status] ?? 'An error occurred'}</Typography>
                 </div>
 
                 <div className="grid h-[screen] place-items-center">
