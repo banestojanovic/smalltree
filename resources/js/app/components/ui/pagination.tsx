@@ -1,5 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { cva } from 'class-variance-authority';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface PaginationProps {
     links: PaginationItem[];
@@ -23,11 +25,11 @@ interface PaginationItem {
     active: boolean;
 }
 
-const paginationItemClasses = cva('mr-1 mb-1 px-4 py-3 border border-solid border-gray-300 rounded text-sm focus:outline-none hover:bg-white', {
+const paginationItemClasses = cva('mr-1 mb-1 px-4 py-3 border border-solid border-gray-400 rounded-md text-sm focus:outline-none hover:bg-white', {
     variants: {
         active: {
-            true: 'bg-white focus:border-indigo-700 focus:text-indigo-700',
-            false: 'text-gray-700',
+            true: 'bg-primary text-white focus:border-primary',
+            false: 'text-gray-700 bg-white',
         },
     },
     defaultVariants: {
@@ -36,15 +38,51 @@ const paginationItemClasses = cva('mr-1 mb-1 px-4 py-3 border border-solid borde
 });
 
 function PaginationItem({ active, label, url }: PaginationItem) {
+    const isNext = label.toLowerCase().includes('next');
+    const isPrevious = label.toLowerCase().includes('previous');
+    const { t } = useTranslation();
+
     return (
         <Link className={paginationItemClasses({ active })} href={url as string}>
-            <span dangerouslySetInnerHTML={{ __html: label }}></span>
+            {isNext ? (
+                <span className={'flex items-center gap-1'}>
+                    {t('pagination.next')}
+                    <ChevronRight className="!h-auto !w-2 sm:!w-4" />
+                </span>
+            ) : isPrevious ? (
+                <span className={'flex items-center gap-1'}>
+                    <ChevronLeft className="!h-auto !w-2 sm:!w-4" />
+                    {t('pagination.previous')}
+                </span>
+            ) : (
+                <span dangerouslySetInnerHTML={{ __html: label }} />
+            )}
         </Link>
     );
 }
 
 function PageInactive({ label }: Pick<PaginationItem, 'label'>) {
-    const className = cva('mr-1 mb-1 px-4 py-3 text-sm border rounded border-solid border-gray-300 text-gray-500');
+    const className = cva('mr-1 bg-white mb-1 px-4 py-3 text-sm border rounded-md border-solid border-gray-400 text-gray-500');
 
-    return <div className={className()} dangerouslySetInnerHTML={{ __html: label }} />;
+    const isNext = label.toLowerCase().includes('next');
+    const isPrevious = label.toLowerCase().includes('previous');
+    const { t } = useTranslation();
+
+    return (
+        <div className={className()}>
+            {isNext ? (
+                <span className={'flex items-center gap-1'}>
+                    {t('pagination.next')}
+                    <ChevronRight className="!h-auto !w-2 sm:!w-4" />
+                </span>
+            ) : isPrevious ? (
+                <span className={'flex items-center gap-1'}>
+                    <ChevronLeft className="!h-auto !w-2 sm:!w-4" />
+                    {t('pagination.previous')}
+                </span>
+            ) : (
+                <span dangerouslySetInnerHTML={{ __html: label }} />
+            )}
+        </div>
+    );
 }

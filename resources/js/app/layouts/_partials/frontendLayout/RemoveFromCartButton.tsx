@@ -31,10 +31,11 @@ export default function RemoveFromCartButton({ product }: { product: App.Data.Ca
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button variant="outline" size="sm">
-                    <Trash2 />
-                    {t('cart.remove')}
-                </Button>
+                <div className="flex items-center justify-end">
+                    <Button variant="ghost" size="circle">
+                        <Trash2 className="text-destructive" />
+                    </Button>
+                </div>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>

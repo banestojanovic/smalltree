@@ -62,6 +62,15 @@ slug: string;
 description: string | null;
 cover: any | null;
 };
+export type DiscountData = {
+id: number;
+product_id: number | null;
+product_variation_id: number | null;
+price: number | null;
+percentage: number | null;
+starts_at: string | null;
+ends_at: string | null;
+};
 export type GlobalData = {
 env: string;
 action: any | string | null;
@@ -137,6 +146,7 @@ photos: any | null;
 variations: Array<App.Data.ProductVariationData> | null;
 attributes: Array<App.Data.AttributeValueData> | null;
 categories: Array<App.Data.CategoryData> | null;
+discount: App.Data.DiscountData | null;
 };
 export type ProductVariationData = {
 id: number;
@@ -145,6 +155,7 @@ sku: string;
 price: number | null;
 stock: number | null;
 stock_status: App.ProductStockStatus;
+discount: App.Data.DiscountData | null;
 variation: App.Data.VariationValueData | null;
 variations: Array<App.Data.VariationValueData> | null;
 };

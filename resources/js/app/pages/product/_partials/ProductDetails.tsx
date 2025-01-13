@@ -1,10 +1,10 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/app/components/ui/accordion';
 import { Button } from '@/app/components/ui/button';
 import { Typography } from '@/app/components/ui/typography';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AddToCartButton from '@/app/components/application/product/AddToCartButton';
+import ProductPrice from '@/app/components/application/product/ProductPrice';
 import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
 import PhotoSlider from '@/app/pages/product/_partials/PhotoSlider';
 import { PageProps } from '@/app/types';
@@ -27,30 +27,39 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
 
     return (
         <section className="container mt-5 sm:mt-10">
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
                 <div>
                     <PhotoSlider product={product} />
                 </div>
                 <div className="mt-7 lg:mt-0">
+                    <div className="mb-1 flex flex-wrap items-center gap-x-3">
+                        {product.categories?.map((category: App.Data.CategoryData) => (
+                            <Link key={category.id} href={route('categories.show', category.slug)}>
+                                {category.name}
+                            </Link>
+                        ))}
+                    </div>
                     <Typography as="h2">{product.name}</Typography>
                     <Typography as="p" className="mt-5">
                         {product.description}
                     </Typography>
 
-                    <Typography as="h2" className="mt-7 !text-3xl !font-bold">
-                        ${matchingVariation?.price ?? product.price}
-                    </Typography>
-
-                    <Typography as="p" className="mt-7">
-                        {t('enums.product.free_shipping_over')} $100
+                    <Typography as="p" className="mt-10 !text-3xl !font-bold">
+                        {matchingVariation?.price ? (
+                            <>
+                                {matchingVariation.price} <span className="!font-normal">rsd</span>
+                            </>
+                        ) : (
+                            <ProductPrice product={product} />
+                        )}
                     </Typography>
 
                     {product?.grouped_variations && (
-                        <div className="mt-7">
-                            <ToggleGroup type="single" className="justify-start" value={selectedVariation ?? undefined} onValueChange={(value) => setSelectedVariation(value)}>
+                        <div className="mt-5">
+                            <ToggleGroup variant="outline" type="single" className="justify-start" value={selectedVariation ?? undefined} onValueChange={(value) => setSelectedVariation(value)}>
                                 {Object.keys(product?.grouped_variations ?? {}).map((group) => (
                                     <div key={group} className={'flex flex-col flex-wrap space-y-1'}>
-                                        <Typography as="h4"> {group} </Typography>
+                                        {/*<Typography as="h4"> {group} </Typography>*/}
                                         <div className={'flex gap-2'}>
                                             {product?.grouped_variations[group].map((variation: VariationValueData) => (
                                                 <ToggleGroupItem variant="default" value={variation.id.toString()} aria-label="Toggle bold" key={variation.id}>
@@ -64,11 +73,11 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         </div>
                     )}
 
-                    <div className="mt-7 flex flex-col gap-5 md:flex-row md:items-center">
+                    <div className="mt-10 flex flex-col gap-5 md:flex-row md:items-center">
                         <div className="flex items-center">
                             <Button
                                 type="button"
-                                variant="outline"
+                                variant="outline-white"
                                 onClick={() => {
                                     setItemQuantity((q) => (q > 1 ? q - 1 : q));
                                 }}
@@ -78,7 +87,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                             <span className="mx-3 text-2xl font-semibold">{itemQuantity}</span>
                             <Button
                                 type="button"
-                                variant="outline"
+                                variant="outline-white"
                                 disabled={itemQuantity >= (product?.stock ?? 99)}
                                 onClick={() => {
                                     setItemQuantity((q) => q + 1);
@@ -93,47 +102,117 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                             productVariantId={selectedVariation}
                             quantity={itemQuantity}
                             disabled={Object.keys(product?.variations ?? [])?.length > 0 && !selectedVariation}
-                            variant="default"
-                            className="inline-flex w-full items-center justify-center"
+                            variant="outline-white"
+                            className="inline-flex items-center justify-center"
+                            label="Add to cart"
                         />
 
-                        <Button asChild={cart && (cart?.products ?? []).length > 0} disabled={!cart || (cart?.products ?? []).length === 0} className={'flex w-full'}>
-                            {!cart || cart?.products?.length === 0 ? 'Checkout' : <Link href={route('checkout.show')}>Checkout</Link>}
-                        </Button>
+                        {/*<Button asChild={cart && (cart?.products ?? []).length > 0} disabled={!cart || (cart?.products ?? []).length === 0} className={'flex w-full'}>*/}
+                        {/*    {!cart || cart?.products?.length === 0 ? 'Checkout' : <Link href={route('checkout.show')}>Checkout</Link>}*/}
+                        {/*</Button>*/}
                     </div>
 
-                    <div className="mt-7">
-                        <Accordion type="single" collapsible defaultValue="item-1">
-                            <AccordionItem value="item-1">
-                                <AccordionTrigger>
-                                    <Typography as="h4" className="mt-0">
-                                        Description
-                                    </Typography>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <Typography as="p" className="mt-0">
-                                        {product.description}
-                                    </Typography>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
+                    <Typography as="p" className="my-16 flex items-center gap-x-2">
+                        <span>
+                            <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.9375 22.75C9.87403 22.7498 10.7819 23.0732 11.5074 23.6654C12.2329 24.2577 12.7314 25.0824 12.9187 26H24.375V9.75H6.5C5.63805 9.75 4.8114 10.0924 4.2019 10.7019C3.59241 11.3114 3.25 12.138 3.25 13V26H4.95625C5.14356 25.0824 5.64215 24.2577 6.36764 23.6654C7.09314 23.0732 8.00097 22.7498 8.9375 22.75ZM8.9375 30.875C8.00097 30.8752 7.09314 30.5518 6.36764 29.9596C5.64215 29.3673 5.14356 28.5426 4.95625 27.625H1.625V13C1.625 11.7071 2.13861 10.4671 3.05285 9.55285C3.96709 8.63861 5.20707 8.125 6.5 8.125H24.375C24.806 8.125 25.2193 8.29621 25.524 8.60095C25.8288 8.9057 26 9.31902 26 9.75V13H30.875L35.75 19.5V27.625H32.4188C32.2323 28.5434 31.734 29.369 31.0085 29.9621C30.2829 30.5551 29.3746 30.8791 28.4375 30.8791C27.5004 30.8791 26.5921 30.5551 25.8665 29.9621C25.141 29.369 24.6427 28.5434 24.4563 27.625H12.9187C12.7314 28.5426 12.2329 29.3673 11.5074 29.9596C10.7819 30.5518 9.87403 30.8752 8.9375 30.875ZM8.9375 24.375C8.29103 24.375 7.67105 24.6318 7.21393 25.0889C6.75681 25.546 6.5 26.166 6.5 26.8125C6.5 27.459 6.75681 28.079 7.21393 28.5361C7.67105 28.9932 8.29103 29.25 8.9375 29.25C9.58397 29.25 10.204 28.9932 10.6611 28.5361C11.1182 28.079 11.375 27.459 11.375 26.8125C11.375 26.166 11.1182 25.546 10.6611 25.0889C10.204 24.6318 9.58397 24.375 8.9375 24.375ZM28.4375 22.75C29.374 22.7498 30.2819 23.0732 31.0074 23.6654C31.7329 24.2577 32.2314 25.0824 32.4188 26H34.125V20.02L33.735 19.5H26V23.5625C26.6825 23.0588 27.5275 22.75 28.4375 22.75ZM28.4375 24.375C27.791 24.375 27.171 24.6318 26.7139 25.0889C26.2568 25.546 26 26.166 26 26.8125C26 27.459 26.2568 28.079 26.7139 28.5361C27.171 28.9932 27.791 29.25 28.4375 29.25C29.084 29.25 29.704 28.9932 30.1611 28.5361C30.6182 28.079 30.875 27.459 30.875 26.8125C30.875 26.166 30.6182 25.546 30.1611 25.0889C29.704 24.6318 29.084 24.375 28.4375 24.375ZM26 14.625V17.875H32.5L30.0625 14.625H26Z"
+                                    fill="black"
+                                />
+                            </svg>
+                        </span>
+                        {t('enums.product.free_shipping_over')} 5,000 rsd
+                    </Typography>
+
+                    <div className="mt-10">
                         {Object.entries((product?.grouped_attributes as Record<string, App.Data.AttributeValueData[]>) || {}).map(([group, attributes]) => (
-                            <Accordion type="single" collapsible key={group}>
-                                <AccordionItem value={group}>
-                                    <AccordionTrigger>
-                                        <Typography as="h4" className="mt-0">
-                                            {group}
-                                        </Typography>
-                                    </AccordionTrigger>
-                                    <AccordionContent>
-                                        {attributes.map((attribute: App.Data.AttributeValueData) => (
-                                            <Typography as="p" className="mt-0" key={attribute.id}>
-                                                {Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value}{' '}
-                                            </Typography>
-                                        ))}
-                                    </AccordionContent>
-                                </AccordionItem>
-                            </Accordion>
+                            <div key={group} className="flex w-full items-center justify-between border-b border-gray-300 pb-7 pt-3">
+                                <Typography as="h3" className="mt-0">
+                                    {group}
+                                </Typography>
+
+                                {attributes.map((attribute: App.Data.AttributeValueData) => (
+                                    <Typography as="p" className="mt-0 flex items-center gap-x-2" key={attribute.id}>
+                                        {group === 'Country' && (
+                                            <p className="flex items-center justify-end gap-x-2 self-end text-right">
+                                                <span>
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            fillRule="evenodd"
+                                                            clipRule="evenodd"
+                                                            d="M5 4.41V13.844C5.193 13.777 5.418 13.702 5.663 13.628C6.42 13.398 7.417 13.15 8.25 13.15C9.628 13.15 10.918 13.571 12.121 13.964L12.155 13.974C13.394 14.379 14.545 14.75 15.75 14.75C16.809 14.75 18.308 14.314 19 14.09V4.758L18.994 4.752L18.981 4.747H18.971C18.191 4.984 16.821 5.35 15.75 5.35C14.372 5.35 13.082 4.929 11.879 4.536L11.845 4.526C10.606 4.121 9.455 3.75 8.25 3.75C7.564 3.75 6.68 3.935 5.938 4.133C5.62301 4.21727 5.31024 4.30963 5 4.41ZM5 14.906L5.045 14.889C5.273 14.806 5.591 14.695 5.955 14.584C6.695 14.359 7.573 14.15 8.25 14.15C9.456 14.15 10.606 14.521 11.845 14.925L11.879 14.936C13.082 15.329 14.372 15.75 15.75 15.75C16.994 15.75 18.647 15.256 19.321 15.038C19.5195 14.974 19.6923 14.8483 19.8144 14.6792C19.9366 14.5101 20.0016 14.3065 20 14.098V4.759C20 4.064 19.319 3.597 18.68 3.791C17.9 4.027 16.658 4.35 15.75 4.35C14.544 4.35 13.394 3.979 12.155 3.575L12.121 3.564C10.918 3.17 9.628 2.75 8.25 2.75C7.426 2.75 6.436 2.965 5.68 3.167C5.23551 3.28578 4.79525 3.41986 4.36 3.569L4.34 3.576L4.334 3.578C4.334 3.578 4.332 3.579 4.5 4.05L4.333 3.579C4.23564 3.6135 4.15136 3.6773 4.09173 3.76164C4.0321 3.84598 4.00006 3.94671 4 4.05V20.75C4 20.8826 4.05268 21.0098 4.14645 21.1036C4.24021 21.1973 4.36739 21.25 4.5 21.25C4.63261 21.25 4.75979 21.1973 4.85355 21.1036C4.94732 21.0098 5 20.8826 5 20.75V14.906Z"
+                                                            fill="black"
+                                                        />
+                                                    </svg>
+                                                </span>
+                                                <span className="w-full">{Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value} </span>
+                                            </p>
+                                        )}
+                                        {group === 'Caffeine' && (
+                                            <p className="flex items-center justify-end gap-x-2 self-end text-right">
+                                                <span>
+                                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M16.1143 1.82597C15.3284 1.08821 14.377 0.549707 13.34 0.255647C12.3029 -0.0384139 11.2105 -0.0794544 10.1543 0.135969C7.66306 0.574428 5.37408 1.78891 3.6143 3.60597C1.79173 5.36703 0.573516 7.65993 0.134298 10.156C-0.0794474 11.2106 -0.0375594 12.3011 0.256458 13.3363C0.550476 14.3714 1.08808 15.3211 1.8243 16.106C2.43876 16.6958 3.16479 17.1571 3.95984 17.4628C4.75488 17.7684 5.60293 17.9123 6.4543 17.886C9.44056 17.767 12.2632 16.4902 14.3243 14.326C18.2633 10.386 19.0633 4.77597 16.1143 1.82597ZM1.1243 10.306C1.53234 8.0239 2.64842 5.92818 4.3143 4.31597C5.92401 2.64679 8.02087 1.5301 10.3043 1.12597C10.6949 1.06688 11.0893 1.0368 11.4843 1.03597C12.204 1.01037 12.9216 1.12901 13.5948 1.3849C14.2681 1.64078 14.8833 2.02875 15.4043 2.52597C15.4461 2.56466 15.4831 2.60832 15.5143 2.65597C14.892 3.1967 14.1726 3.61412 13.3943 3.88597C12.2714 4.29115 11.258 4.95188 10.4343 5.81597C9.5702 6.63968 8.90948 7.65303 8.5043 8.77597C8.15395 9.77733 7.56739 10.6795 6.7943 11.406C6.06531 12.1761 5.16393 12.7621 4.1643 13.116C3.30475 13.4226 2.50837 13.8834 1.8143 14.476C1.10134 13.2103 0.857042 11.7339 1.1243 10.306ZM13.6143 13.616C10.0643 17.166 5.0943 17.966 2.5343 15.406C2.4924 15.3644 2.45236 15.3211 2.4143 15.276C3.04231 14.738 3.76448 14.321 4.5443 14.046C5.66403 13.6344 6.67601 12.9745 7.5043 12.116C8.36726 11.2913 9.02781 10.2783 9.4343 9.15597C9.78464 8.15461 10.3712 7.25246 11.1443 6.52597C11.8708 5.75288 12.7729 5.16631 13.7743 4.81597C14.6301 4.50326 15.4227 4.03921 16.1143 3.44597C17.7543 6.15797 16.7843 10.446 13.6143 13.616Z"
+                                                            fill="black"
+                                                        />
+                                                    </svg>
+                                                </span>
+                                                <span className="w-full">{Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value} </span>
+                                            </p>
+                                        )}
+
+                                        {group === 'Preparation' && (
+                                            <p className="flex items-center justify-end gap-x-2 self-end text-right">
+                                                <span>
+                                                    <svg width="14" height="29" viewBox="0 0 14 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7 2C6.25739 2 5.5452 2.295 5.0201 2.8201C4.495 3.3452 4.2 4.05739 4.2 4.8V17.4296L3.8336 17.7304C3.0354 18.3835 2.45871 19.2675 2.18256 20.2612C1.90641 21.2549 1.94431 22.3097 2.29107 23.2811C2.63783 24.2524 3.27647 25.0927 4.11949 25.6869C4.9625 26.2811 5.96863 26.6 7 26.6C8.03136 26.6 9.03749 26.2811 9.88051 25.6869C10.7235 25.0927 11.3622 24.2524 11.7089 23.2811C12.0557 22.3097 12.0936 21.2549 11.8174 20.2612C11.5413 19.2675 10.9646 18.3835 10.1664 17.7304L9.8 17.4296V4.8C9.8 4.4323 9.72757 4.0682 9.58686 3.72849C9.44615 3.38877 9.2399 3.0801 8.9799 2.8201C8.71989 2.5601 8.41122 2.35385 8.07151 2.21314C7.7318 2.07242 7.3677 2 7 2ZM2.2 4.8C2.2 3.52696 2.70571 2.30606 3.60589 1.40589C4.50606 0.505713 5.72696 0 7 0C8.27304 0 9.49394 0.505713 10.3941 1.40589C11.2943 2.30606 11.8 3.52696 11.8 4.8V16.5048C12.8207 17.4663 13.529 18.7123 13.8332 20.0811C14.1375 21.4499 14.0236 22.8786 13.5064 24.182C12.9891 25.4853 12.0924 26.6033 10.9323 27.391C9.77217 28.1787 8.40225 28.5999 7 28.5999C5.59775 28.5999 4.22782 28.1787 3.06774 27.391C1.90765 26.6033 1.01088 25.4853 0.493633 24.182C-0.023613 22.8786 -0.137491 21.4499 0.166755 20.0811C0.471001 18.7123 1.17935 17.4663 2.2 16.5048V4.8ZM10.2 21.6C10.1999 22.1896 10.037 22.7678 9.72909 23.2707C9.4212 23.7735 8.98035 24.1816 8.4552 24.4497C7.93006 24.7178 7.34104 24.8357 6.75315 24.7902C6.16527 24.7447 5.60138 24.5377 5.12373 24.1919C4.64608 23.8462 4.27324 23.3752 4.04636 22.831C3.81948 22.2867 3.74739 21.6904 3.83804 21.1078C3.9287 20.5251 4.17856 19.9789 4.56007 19.5293C4.94158 19.0797 5.43989 18.7443 6 18.56V9.8C6 9.53478 6.10536 9.28043 6.29289 9.09289C6.48043 8.90535 6.73478 8.8 7 8.8C7.26522 8.8 7.51957 8.90535 7.70711 9.09289C7.89464 9.28043 8 9.53478 8 9.8V18.56C8.64007 18.7706 9.19734 19.1778 9.59237 19.7237C9.98741 20.2695 10.2001 20.9262 10.2 21.6Z"
+                                                            fill="black"
+                                                        />
+                                                    </svg>
+                                                </span>
+                                                <span className="w-24 md:w-full">{Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value} </span>
+                                            </p>
+                                        )}
+
+                                        {group === 'Infusions' && (
+                                            <p className="flex items-center justify-end gap-x-2 self-end text-right">
+                                                <span>
+                                                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <g clipPath="url(#clip0_14_150)">
+                                                            <path
+                                                                d="M35.0037 21.8813C34.5466 21.8813 34.1082 21.6997 33.785 21.3765C33.4618 21.0533 33.2803 20.615 33.2803 20.1579V12.4983C33.2803 11.1271 32.7355 9.81205 31.7659 8.84245C30.7963 7.87284 29.4813 7.32812 28.11 7.32812C26.7388 7.32812 25.4238 7.87284 24.4541 8.84245C23.4845 9.81205 22.9398 11.1271 22.9398 12.4983V13.4558H20.8842C20.6529 13.4565 20.4257 13.5168 20.2245 13.6309C20.0232 13.7449 19.8548 13.9088 19.7353 14.1068L17.7696 17.3813C17.6443 17.5898 17.5781 17.8284 17.5781 18.0716V27.0515C17.5781 27.407 17.7193 27.748 17.9707 27.9994C18.2221 28.2507 18.563 28.392 18.9186 28.392H28.11C28.4655 28.392 28.8065 28.2507 29.0579 27.9994C29.3092 27.748 29.4505 27.407 29.4505 27.0515V18.0726C29.4504 17.8294 29.3843 17.5907 29.259 17.3823L27.2943 14.1068C27.1748 13.9088 27.0063 13.7449 26.8051 13.6309C26.6038 13.5168 26.3766 13.4565 26.1454 13.4558H24.0888V12.4983C24.0888 11.4318 24.5124 10.409 25.2666 9.65487C26.0207 8.90073 27.0435 8.47706 28.11 8.47706C29.1765 8.47706 30.1994 8.90073 30.9535 9.65487C31.7076 10.409 32.1313 11.4318 32.1313 12.4983V20.1579C32.1313 20.9197 32.4339 21.6503 32.9726 22.189C33.5113 22.7276 34.2419 23.0303 35.0037 23.0303C35.156 23.0303 35.3021 22.9697 35.4099 22.862C35.5176 22.7543 35.5781 22.6081 35.5781 22.4558C35.5781 22.3034 35.5176 22.1573 35.4099 22.0496C35.3021 21.9418 35.156 21.8813 35.0037 21.8813ZM26.1444 14.6047C26.1778 14.6049 26.2106 14.6139 26.2395 14.6307C26.2684 14.6475 26.2924 14.6715 26.3091 14.7005L28.2747 17.9768C28.2919 18.0058 28.3012 18.0389 28.3015 18.0726V27.0515C28.3015 27.1023 28.2814 27.151 28.2454 27.1869C28.2095 27.2228 28.1608 27.243 28.11 27.243H18.9186C18.8678 27.243 18.8191 27.2228 18.7831 27.1869C18.7472 27.151 18.7271 27.1023 18.7271 27.0515V18.0726C18.7277 18.0388 18.7373 18.0058 18.7548 17.9768L20.7195 14.7005C20.7362 14.6715 20.7602 14.6475 20.7891 14.6307C20.818 14.6139 20.8508 14.6049 20.8842 14.6047H22.9398V19.392C22.9398 19.5443 23.0004 19.6904 23.1081 19.7982C23.2158 19.9059 23.3619 19.9664 23.5143 19.9664C23.6667 19.9664 23.8128 19.9059 23.9205 19.7982C24.0282 19.6904 24.0888 19.5443 24.0888 19.392V14.6047H26.1444Z"
+                                                                fill="black"
+                                                            />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_14_150">
+                                                                <rect width="34" height="34" fill="white" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                </span>
+                                                <span className="w-full">{Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value} </span>
+                                            </p>
+                                        )}
+
+                                        {group === 'Allergens' && (
+                                            <p className="flex items-center justify-end gap-x-2 self-end text-right">
+                                                <span>
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M18.5766 21.866C18.3779 21.866 18.2022 21.817 18.0496 21.719C17.8969 21.621 17.7796 21.4853 17.6976 21.312C15.7449 20.9706 14.0396 20.0866 12.5816 18.66C11.1229 17.2333 10.0982 15.4376 9.50758 13.273C7.74091 13.985 6.32691 15.0733 5.26558 16.538C4.20424 18.0026 3.62158 19.6566 3.51758 21.5H2.51758C2.59424 19.382 3.23558 17.5023 4.44158 15.861C5.64758 14.2196 7.26258 13.0173 9.28658 12.254C8.93658 10.5166 8.86591 8.89331 9.07458 7.38397C9.28258 5.87397 9.76358 4.64397 10.5176 3.69397C10.4922 3.64264 10.4699 3.59131 10.4506 3.53997C10.4312 3.48864 10.4216 3.43097 10.4216 3.36697C10.4296 3.09497 10.5302 2.86331 10.7236 2.67197C10.9169 2.48064 11.1496 2.38464 11.4216 2.38397C11.6976 2.38397 11.9332 2.48197 12.1286 2.67797C12.3239 2.87331 12.4216 3.10864 12.4216 3.38397C12.4216 3.65997 12.3239 3.89564 12.1286 4.09097C11.9332 4.28631 11.6976 4.38397 11.4216 4.38397H11.3316C11.3049 4.38397 11.2729 4.37564 11.2356 4.35897C10.7402 5.03231 10.3909 5.80464 10.1876 6.67597C9.98424 7.54731 9.91925 8.58231 9.99258 9.78097C10.2106 9.22964 10.5246 8.75964 10.9346 8.37097C11.3439 7.98097 11.8409 7.66164 12.4256 7.41297C12.9122 7.21564 13.4529 7.07064 14.0476 6.97797C14.6422 6.88464 15.2946 6.84397 16.0046 6.85597C16.0992 6.72264 16.2139 6.61397 16.3486 6.52997C16.4832 6.44597 16.6359 6.40397 16.8066 6.40397C17.0819 6.40397 17.3176 6.50164 17.5136 6.69697C17.7089 6.89231 17.8066 7.12797 17.8066 7.40397C17.8066 7.67931 17.7089 7.91464 17.5136 8.10997C17.3182 8.30531 17.0826 8.40331 16.8066 8.40397C16.6119 8.40397 16.4372 8.35597 16.2826 8.25997C16.1279 8.16397 16.0096 8.02931 15.9276 7.85597C15.2622 7.84797 14.6562 7.88731 14.1096 7.97397C13.5629 8.06064 13.0766 8.19631 12.6506 8.38097C11.9239 8.68764 11.3859 9.13231 11.0366 9.71497C10.6872 10.2976 10.5139 11.017 10.5166 11.873C11.0339 11.7383 11.5512 11.6393 12.0686 11.576C12.5859 11.5126 13.1959 11.481 13.8986 11.481C13.9932 11.3396 14.1109 11.224 14.2516 11.134C14.3916 11.0446 14.5509 11 14.7296 11C15.0049 11 15.2402 11.0976 15.4356 11.293C15.6309 11.4883 15.7289 11.724 15.7296 12C15.7302 12.276 15.6326 12.5116 15.4366 12.707C15.2406 12.9023 15.0049 13 14.7296 13C14.5382 13 14.3692 12.9553 14.2226 12.866C14.0759 12.776 13.9616 12.6476 13.8796 12.481C13.2016 12.481 12.6156 12.5126 12.1216 12.576C11.6282 12.6393 11.1282 12.7446 10.6216 12.892C10.8129 13.754 11.2829 14.4023 12.0316 14.837C12.7802 15.2716 13.8169 15.4926 15.1416 15.5C15.5349 15.508 15.9592 15.4933 16.4146 15.456C16.8706 15.4186 17.3372 15.363 17.8146 15.289C17.8966 15.107 18.0189 14.962 18.1816 14.854C18.3442 14.746 18.5269 14.692 18.7296 14.692C19.0049 14.692 19.2402 14.79 19.4356 14.986C19.6309 15.182 19.7289 15.4173 19.7296 15.692C19.7302 15.9666 19.6322 16.2023 19.4356 16.399C19.2389 16.5956 19.0036 16.6933 18.7296 16.692C18.5756 16.692 18.4342 16.6576 18.3056 16.589C18.1769 16.5196 18.0649 16.422 17.9696 16.296C17.4669 16.3706 16.9899 16.4273 16.5386 16.466C16.0866 16.5053 15.6636 16.525 15.2696 16.525C14.4916 16.525 13.7929 16.4486 13.1736 16.296C12.5542 16.1433 12.0142 15.9083 11.5536 15.591C12.2389 16.8816 13.1189 17.9343 14.1936 18.749C15.2682 19.5636 16.4596 20.0883 17.7676 20.323C17.8629 20.1763 17.9786 20.0636 18.1146 19.985C18.2512 19.905 18.4049 19.865 18.5756 19.865C18.8516 19.865 19.0872 19.963 19.2826 20.159C19.4779 20.355 19.5756 20.5906 19.5756 20.866C19.5756 21.1413 19.4779 21.3766 19.2826 21.572C19.0872 21.768 18.8526 21.866 18.5766 21.866Z"
+                                                            fill="black"
+                                                        />
+                                                    </svg>
+                                                </span>
+                                                <span className="w-28 md:w-full">{Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value} </span>
+                                            </p>
+                                        )}
+                                    </Typography>
+                                ))}
+                            </div>
                         ))}
                     </div>
                 </div>

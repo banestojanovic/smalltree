@@ -1,83 +1,69 @@
+import PromotionCard from '@/app/components/application/product/PomotionCard';
+import { Avatar, AvatarFallback, AvatarImage } from '@/app/components/ui/avatar';
 import { Button } from '@/app/components/ui/button';
-import { Card, CardContent } from '@/app/components/ui/card';
+import { PageProps } from '@/app/types';
+import { Link } from '@inertiajs/react';
+import { ShoppingBag } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Separator } from '../ui/separator';
 import { Typography } from '../ui/typography';
+import PromotionCardItem from '@/app/components/application/product/PromotionCardItem';
 
-const TeaRituals = () => {
+const TeaRituals = ({
+    matchRitual,
+    mateRitual,
+}: PageProps<{
+    matchRitual?: App.Data.ProductData[];
+    mateRitual?: App.Data.ProductData[];
+}>) => {
     const { t } = useTranslation();
 
     return (
-        <section className="mt-5 border-b-2 border-t-2 border-gray-300 pt-7 sm:mt-10 md:pt-0">
-            <div className="container grid grid-cols-1 divide-gray-300 lg:grid-cols-2 lg:divide-x-2">
-                <div className="flex h-full flex-col items-center justify-center gap-5 md:h-72 lg:h-96">
-                    <h2 className="scroll-m-20 text-center text-3xl font-semibold tracking-tight first:mt-0">
-                        <p>{t('enums.homepage.tea_ritual.your_matcha')}</p>
-                        <p>{t('enums.homepage.tea_ritual.tea_ritual')}</p>
-                    </h2>
+        <section className="mt-10 h-full sm:mt-20 md:h-80">
+            <div className="container grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-2 lg:gap-7">
+                {matchRitual && matchRitual.length >= 2 && (
+                    <PromotionCard
+                        title={t('enums.homepage.tea_ritual.your_matcha_ritual')}
+                        description={t('enums.homepage.promotions.tea_of_the_month_description')}
+                        bgImageSrc={matchRitual[0].cover.original_url}
+                    >
+                        <div className="">
+                            <PromotionCardItem product={matchRitual[0]} />
+                            <PromotionCardItem product={matchRitual[1]} />
 
-                    <div className="flex flex-col items-center gap-x-5 md:flex-row">
-                        <Card>
-                            <CardContent>
-                                <Typography as="h3">{t('enums.homepage.tea_ritual.tea')}</Typography>
-                            </CardContent>
-                        </Card>
-                        <Typography as="h4">+</Typography>
-                        <Card>
-                            <CardContent>
-                                <Typography as="h3">{t('enums.homepage.tea_ritual.tea_mug')}</Typography>
-                            </CardContent>
-                        </Card>
+                            <div className="flex items-center justify-end">
+                                <Button size="circle" variant="outline" asChild>
+                                    <Link href={route('products.show', matchRitual[0].slug)}>
+                                        <ShoppingBag />
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </PromotionCard>
+                )}
 
-                        <Typography as="h4">=</Typography>
-
-                        <Card>
-                            <CardContent>
-                                <Typography as="h3">{t('enums.homepage.tea_ritual.set')}</Typography>
-                            </CardContent>
-                        </Card>
-                    </div>
-
-                    <div className="">
-                        <Button>{t('enums.homepage.tea_ritual.purchase')}</Button>
-                    </div>
-                </div>
-
-                <Separator className="my-7 block md:my-0 lg:hidden" />
-
-                <div className="flex h-full flex-col items-center justify-center gap-5 md:h-72 lg:h-96 pb-7 md:pb-0">
-                    <h2 className="scroll-m-20 text-center text-3xl font-semibold tracking-tight first:mt-0">
-                        <p>{t('enums.homepage.tea_ritual.your_mate')}</p>
-                        <p>{t('enums.homepage.tea_ritual.tea_ritual')}</p>
-                    </h2>
-
-                    <div className="flex flex-col items-center gap-x-5 md:flex-row">
-                        <Card>
-                            <CardContent>
-                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{t('enums.homepage.tea_ritual.tea')}</h3>
-                            </CardContent>
-                        </Card>
-                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">+</h4>
-                        <Card>
-                            <CardContent>
-                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{t('enums.homepage.tea_ritual.tea_mug')}</h3>
-                            </CardContent>
-                        </Card>
-                        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">=</h4>
-                        <Card>
-                            <CardContent>
-                                <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{t('enums.homepage.tea_ritual.set')}</h3>
-                            </CardContent>
-                        </Card>
-                    </div>
-
-                    <div className="">
-                        <Button>{t('enums.homepage.tea_ritual.purchase')}</Button>
-                    </div>
-                </div>
+                {mateRitual && mateRitual.length >= 2 && (
+                    <PromotionCard
+                        title={t('enums.homepage.tea_ritual.your_mate_ritual')}
+                        description={t('enums.homepage.promotions.special_offer_description')}
+                        bgImageSrc={mateRitual[0].cover.original_url}
+                    >
+                        <div className="">
+                            <PromotionCardItem product={mateRitual[0]} />
+                            <PromotionCardItem product={mateRitual[1]} />
+                            <div className="flex items-center justify-end">
+                                <Button size="circle" variant="outline" asChild>
+                                    <Link href={route('products.show', mateRitual[0].slug)}>
+                                        <ShoppingBag />
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </PromotionCard>
+                )}
             </div>
         </section>
     );
 };
+
 
 export default TeaRituals;

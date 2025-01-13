@@ -10,10 +10,11 @@ import 'swiper/css/thumbs';
 // import required modules
 import { Button } from '@/app/components/ui/button';
 import { PageProps } from '@/app/types';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperClass } from 'swiper/types';
+import { useTranslation } from 'react-i18next';
 
 interface PhotoSliderProps {
     id: string | number;
@@ -22,6 +23,7 @@ interface PhotoSliderProps {
 
 export default function PhotoSlider({ product }: PageProps<{ product: App.Data.ProductData }>) {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
+    const { t } = useTranslation();
 
     return (
         <>
@@ -42,7 +44,14 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
                             (photo: PhotoSliderProps) =>
                                 photo?.original_url && (
                                     <SwiperSlide key={photo?.id}>
-                                        <img className="h-96 w-full rounded-lg object-cover" src={photo?.original_url} alt={'Product slider image'} />
+                                        <div className="relative">
+                                            {product.discount && (
+                                                <span className="absolute right-2 top-2 rounded-md bg-primary px-2 py-1.5 text-sm text-white">
+                                                    {t('order.discount')} {product.discount.percentage}%
+                                                </span>
+                                            )}
+                                            <img className="h-96 w-full rounded-lg object-cover" src={photo?.original_url} alt={'Product slider image'} />
+                                        </div>
                                     </SwiperSlide>
                                 ),
                         )}
@@ -51,8 +60,8 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
 
                 {/*Thumbnails */}
                 <div className="mt-5 flex items-center justify-between gap-x-5">
-                    <Button className="slider-prev" variant="outline">
-                        <ArrowLeft />
+                    <Button className="slider-prev flex size-5 items-center justify-center rounded-full bg-white p-3 md:size-7" variant="ghost">
+                        <ChevronRight className="!h-auto !w-2 rotate-180 sm:!w-4" />
                     </Button>
 
                     <Swiper
@@ -87,8 +96,9 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
                                 ),
                         )}
                     </Swiper>
-                    <Button className="slider-next" variant="outline">
-                        <ArrowRight />
+
+                    <Button className="slider-next flex size-5 items-center justify-center rounded-full bg-white p-3 md:size-7" variant="ghost">
+                        <ChevronRight className="!h-auto !w-2 sm:!w-4" />
                     </Button>
                 </div>
             </div>

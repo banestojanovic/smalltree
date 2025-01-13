@@ -7,9 +7,9 @@ export default function TopNavbar() {
     const { t } = useTranslation();
     return (
         <>
-            <div className="border-b-2 border-gray-200">
+            <div className="bg-white">
                 <div className="container">
-                    <div className="flex h-12 items-center justify-between">
+                    <div className="flex h-16 items-center justify-between">
                         <div className="hidden items-center justify-between sm:flex">
                             <div className="flex space-x-8">
                                 <NavLink href={route('home')} active={route().current('home')}>
@@ -28,7 +28,7 @@ export default function TopNavbar() {
                                     {t('enums.menu.top.blog')}
                                 </NavLink>
 
-                                <NavLink href={route('home')} active={false}>
+                                <NavLink href={route('contact.show')} active={false}>
                                     {t('enums.menu.top.contact')}
                                 </NavLink>
                             </div>

@@ -1,9 +1,10 @@
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
+import { Label } from '@/app/components/ui/label';
 import { cn } from '@/lib/utils';
 import { router } from '@inertiajs/react';
 import axios from 'axios';
-import { ArrowRight } from 'lucide-react';
+import { Search } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -69,18 +70,19 @@ const ProductSearch = () => {
 
     return (
         <div className="relative mx-auto w-full max-w-2xl" ref={dropdownRef}>
-            <div className="grid grid-cols-[auto_10%]">
+            <div className="flex items-center gap-x-1">
+                <Button variant="ghost" size="icon" onClick={gotoSearchPage}>
+                    <Search className="size-10" />
+                </Button>
+                <Label className="mr-2">{t('enums.menu.top.search')}</Label>
                 <Input
                     type="text"
                     value={query}
                     onChange={handleSearch}
                     onKeyDown={(event) => (event.key === 'Enter' ? gotoSearchPage() : '')}
-                    placeholder={t('enums.menu.top.search')}
+                    placeholder={t('enums.menu.top.search_in_products')}
                     className="w-full"
                 />
-                <Button variant="outline" onClick={gotoSearchPage}>
-                    <ArrowRight />
-                </Button>
             </div>
             {isLoading && (
                 <div className="absolute left-0 z-20 mt-2 w-full rounded-lg border border-gray-400 bg-white p-2 text-sm text-gray-500 md:left-auto md:right-0">

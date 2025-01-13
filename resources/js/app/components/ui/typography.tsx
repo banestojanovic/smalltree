@@ -8,11 +8,11 @@ interface TypographyProps<T extends ElementType = 'p'> {
 
 // Mapping of default classes for each HTML element
 const defaultStyles: Record<string, string> = {
-    p: 'leading-7',
-    h1: 'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl',
-    h2: 'scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0',
-    h3: 'scroll-m-20 text-2xl font-semibold leading-relaxed mt-2',
-    h4: 'scroll-m-20 text-xl font-semibold tracking-tight',
+    p: 'leading-7 text-[16px] sm:text-md',
+    h1: 'scroll-m-20 font-merriweather text-3xl sm:text-4xl tracking-tight lg:text-5xl',
+    h2: 'scroll-m-20 font-merriweather text-2xl sm:text-3xl tracking-tight first:mt-0',
+    h3: 'scroll-m-20 font-merriweather text-xl sm:text-2xl leading-relaxed',
+    h4: 'scroll-m-20 font-merriweather text-lg sm:text-xl tracking-tight',
     span: 'text-base inline-block',
     ul: 'list-disc ml-6',
     li: 'mb-2',

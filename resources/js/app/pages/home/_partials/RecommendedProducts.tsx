@@ -12,6 +12,7 @@ const RecommendedProducts = ({ products }: PageProps<{ products?: App.Data.Produ
         <section className="mt-10 sm:mt-20">
             <div className="container">
                 <Typography as="h2">{t('enums.homepage.sections.staff_recommended')}</Typography>
+                <Typography as="p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto</Typography>
 
                 <div className="mt-7 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {products && products.length > 0 ? (
@@ -22,7 +23,7 @@ const RecommendedProducts = ({ products }: PageProps<{ products?: App.Data.Produ
                 </div>
 
                 <div className="mt-10 flex items-center justify-center">
-                    <Button>{t('enums.homepage.sections.see_all')}</Button>
+                    <Button className="!px-10">{t('enums.homepage.sections.see_all')}</Button>
                 </div>
             </div>
         </section>

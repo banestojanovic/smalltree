@@ -17,6 +17,7 @@ class ProductVariationData extends Data
         public ?float $price,
         public ?int $stock,
         public ProductStockStatus $stock_status,
+        public ?DiscountData $discount,
         public ?VariationValueData $variation,
         #[DataCollectionOf(VariationValueData::class)]
         public ?Collection $variations,

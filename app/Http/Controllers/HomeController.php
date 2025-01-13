@@ -16,7 +16,7 @@ class HomeController extends Controller
         $variations = Variation::all();
 
         $popularProducts = ProductData::collect(Product::query()
-            ->with('discount', 'cover', 'categories')
+            ->with('variations.discount', 'discount', 'cover', 'categories')
             ->with([
                 'variations' => function ($query) {
                     $query->with('variations')
@@ -28,7 +28,7 @@ class HomeController extends Controller
             ->get());
 
         $staffRecommendedProducts = ProductData::collect(Product::query()
-            ->with('variations', 'discount', 'cover', 'categories')
+            ->with('variations.discount', 'discount', 'cover', 'categories')
             ->active()
             ->skip(8)
             ->limit(8)
@@ -43,12 +43,27 @@ class HomeController extends Controller
             ->take(3)
             ->get());
 
+        $matchRituals = ProductData::collect(Product::query()
+            ->with('variations.discount', 'discount', 'cover', 'categories')
+            ->active()
+            ->limit(2)
+            ->get());
+
+        $mateRituals = ProductData::collect(Product::query()
+            ->with('variations.discount', 'discount', 'cover', 'categories')
+            ->active()
+            ->skip(2)
+            ->limit(2)
+            ->get());
+
         return inertia('home/index', [
             'popularProducts' => $popularProducts,
             'staffRecommendedProducts' => $staffRecommendedProducts,
             'posts' => $posts,
             'specialOffer' => $specialOffer,
             'productOfTheMonth' => $productOfTheMonth,
+            'matchRituals' => $matchRituals,
+            'mateRituals' => $mateRituals,
         ]);
     }
 
