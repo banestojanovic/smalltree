@@ -7,7 +7,7 @@ import { initReactI18next } from 'react-i18next';
 i18n.use(HttpBackend)
     .use(initReactI18next)
     .init({
-        lng: 'en',
+        lng: 'sr',
         fallbackLng: 'en',
         debug: process.env.NODE_ENV === 'development',
         interpolation: {

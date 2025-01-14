@@ -10,10 +10,10 @@
         },
         "product": {
             "status": {
-                "inactive": "Neaktivan",
-                "active": "Aktivan",
+                "inactive": "Neaktivno",
+                "active": "Aktivno",
                 "draft": "Nacrt",
-                "trashed": "Obrisano"
+                "trashed": "Izbrisano"
             },
             "stock_status": {
                 "out_of_stock": "Nema na stanju",
@@ -21,15 +21,15 @@
             },
             "no_products_available": "Nema dostupnih proizvoda",
             "variations": "Varijacije",
-            "free_shipping_over": "Besplatna dostava preko",
+            "free_shipping_over": "Besplatna dostava za porudžbine preko",
             "similar_products": "Slični proizvodi"
         },
         "post": {
             "status": {
-                "inactive": "Neaktivan",
-                "active": "Aktivan",
+                "inactive": "Neaktivno",
+                "active": "Aktivno",
                 "draft": "Nacrt",
-                "trashed": "Obrisano"
+                "trashed": "Izbrisano"
             }
         },
         "page": {
@@ -37,10 +37,10 @@
                 "home": "Početna"
             },
             "status": {
-                "inactive": "Neaktivan",
-                "active": "Aktivan",
+                "inactive": "Neaktivno",
+                "active": "Aktivno",
                 "draft": "Nacrt",
-                "trashed": "Obrisano"
+                "trashed": "Izbrisano"
             }
         },
         "menu": {
@@ -54,40 +54,35 @@
                 "accessories": "Dodaci",
                 "blog": "Blog",
                 "contact": "Kontakt",
-                "search": "Pretraga"
+                "search": "Pretraga",
+                "search_in_products": "Pretraga u proizvodima",
+                "no_result_found": "Nema rezultata",
+                "loading": "Učitavanje"
             }
         },
         "homepage": {
             "hero": {
-                "buy_now": "Kupi odmah"
+                "buy_now": "Kupi sada"
             },
             "promotions": {
                 "tea_of_the_month": "Čaj meseca",
-                "special_offer": "Posebna ponuda"
+                "tea_of_the_month_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+                "special_offer": "Specijalna ponuda",
+                "special_offer_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
             },
             "sections": {
                 "most_popular_tea": "Najpopularniji čaj",
                 "staff_recommended": "Preporuka osoblja",
                 "stores_with_tea": "Priče uz čaj",
-                "see_all": "Pogledaj sve",
+                "see_all": "Prikaži sve",
                 "read_more": "Pročitaj više"
             },
             "tea_ritual": {
-                "your_matcha": "Vaša MATCHA",
-                "your_mate": "Vaš MATE",
-                "tea_ritual": "čajni ritual",
-                "tea": "Čaj",
+                "your_matcha_ritual": "Vaš MATCHA ritual",
+                "your_mate_ritual": "Vaš MATE ritual",
                 "tea_mug": "Šolja za čaj",
                 "set": "Set",
                 "purchase": "Kupi"
-            }
-        },
-        "category_show": {
-            "filters": {
-                "filters": "Filteri",
-                "tea_variety": "Vrsta čaja",
-                "origin_country": "Zemlja porekla",
-                "tea_taste": "Ukus čaja"
             }
         },
         "flash": {
@@ -99,26 +94,47 @@
             "dismiss": "Zatvori"
         }
     },
+    "category_show": {
+        "filters": {
+            "filters": "Filteri",
+            "tea_variety": "Vrsta čaja",
+            "origin_country": "Zemlja porekla",
+            "tea_taste": "Ukus čaja",
+            "not_selected": "Nije izabrano"
+        }
+    },
     "cart": {
         "cart": "Korpa",
-        "item_added_to_cart": "Proizvod dodat u korpu",
-        "item_removed_from_cart": "Proizvod uklonjen iz korpe",
-        "item_quantity_updated": "Količina proizvoda ažurirana",
+        "item_added_to_cart": "Proizvod je dodat u korpu",
+        "item_removed_from_cart": "Proizvod je uklonjen iz korpe",
+        "item_quantity_updated": "Količina proizvoda je ažurirana",
         "item_quantity_not_updated": "Količina proizvoda nije ažurirana",
-        "item_quantity_exceeds_stock": "Količina premašuje stanje",
+        "item_quantity_exceeds_stock": "Količina premašuje stanje na lageru",
         "cart_empty": "Korpa je prazna",
         "check_out": "Plaćanje",
         "remove": "Ukloni",
-        "pay_now": "Plati odmah"
+        "pay_now": "Plati sada"
     },
     "order": {
-        "order_created": "Porudžbina je uspešno kreirana"
+        "order_created": "Porudžbina je uspešno kreirana",
+        "order_summary": "Rezime porudžbine",
+        "thank_you": "Hvala",
+        "its_on_the_way": "Na putu je!",
+        "order_received": "Vaša porudžbina je primljena i uskoro će biti poslata.",
+        "shipping_address": "Adresa za dostavu",
+        "billing_address": "Adresa za naplatu",
+        "payment_method": "Način plaćanja",
+        "shipping_method": "Način dostave",
+        "subtotal": "Međuzbir",
+        "discount": "Popust",
+        "shipping": "Dostava",
+        "total": "Ukupno"
     },
     "checkout": {
         "checkout": "Plaćanje",
         "contact_info": "Kontakt informacije",
         "shipping_info": "Informacije o dostavi",
-        "email": "Email",
+        "email": "E-pošta",
         "Phone": "Telefon",
         "first_name": "Ime",
         "last_name": "Prezime",
@@ -127,7 +143,60 @@
         "city": "Grad",
         "postal_code": "Poštanski broj",
         "payment": "Plaćanje",
-        "order_summary": "Pregled porudžbine",
+        "order_summary": "Rezime porudžbine",
         "fill_with_test_data": "Popuni test podacima"
+    },
+    "posts": {
+        "blogs": "Blogovi",
+        "posts": "Postovi",
+        "stories": "Priče",
+        "featured_post": "Istaknuti post",
+        "recommended_stories": "Preporučene priče",
+        "no_story_available": "Nema dostupnih priča",
+        "share_with_social_network": "Podelite članak na društvenim mrežama"
+    },
+    "subscription": {
+        "you_are_subscribed": "Uspešno ste se prijavili"
+    },
+    "products": {
+        "products_search": "Pretraga proizvoda"
+    },
+    "shopping_benefits": {
+        "shop_with_us": "Kupujte kod nas",
+        "benefit_of_buying": "Prednosti kupovine SmallTree čajeva",
+        "benefit1": "Besplatna dostava za sve porudžbine preko 10,000",
+        "benefit2": "Povraćaj novca u roku od 14 dana od plaćanja",
+        "benefit3": "Sigurna kupovina"
+    },
+    "newsletter": {
+        "title": "Uštedite 10% na svakoj kupovini!",
+        "subscribe": "Prijavite se",
+        "email_placeholder": "Unesite vašu e-poštu",
+        "button_text": "Prijavite se na SmallTree newsletter"
+    },
+    "footer": {
+        "follow_us": "Pratite nas:",
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "our_stores": "Naše prodavnice",
+        "additional_info": "Dodatne informacije",
+        "toc": "Uslovi korišćenja",
+        "privacy": "Politika privatnosti",
+        "all_rights_reserved": "Sva prava zadržana 2025. SmallTree eCommerce by Dimaso DOO",
+        "safe_purchase": "Sigurna kupovina omogućena od strane"
+    },
+    "pagination": {
+        "next": "sledeće",
+        "previous": "prethodno"
+    },
+    "pages": {
+        "not_found": "Nije pronađeno",
+        "not_found_error": "Greška, ova stranica ne postoji.",
+        "not_found_message": "Ova stranica ne postoji, možete se vratiti na početnu stranicu",
+        "click_button": "klikom ovde"
+    },
+    "contact": {
+        "message_received": "Hvala. Primili smo vašu poruku.",
+        "submit_button": "Pošaljite poruku"
     }
 }
