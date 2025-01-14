@@ -7,7 +7,6 @@ use App\Data\ProductData;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Variation;
-use Illuminate\Support\Facades\Request;
 
 class HomeController extends Controller
 {

@@ -19,10 +19,11 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
                 </span>
             )}
             <CardHeader className="w-full pb-5">
-                <Link href={route('products.show', { slug: product.slug })}>
-                    <img className="h-60 w-full rounded-lg object-cover p-2 sm:h-56" src={product.cover.original_url} alt={product.name} />
-                </Link>
-
+                {product.cover?.original_url && (
+                    <Link href={route('products.show', { slug: product.slug })}>
+                        <img className="h-60 w-full rounded-lg object-cover p-2 sm:h-56" src={product.cover.original_url} alt={product.name} />
+                    </Link>
+                )}
                 <CardDescription>
                     {product.categories?.map((category: App.Data.CategoryData) => (
                         <Link key={category.id} href={route('categories.show', category.slug)}>
@@ -44,7 +45,11 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
             <CardFooter className="mt-auto flex items-center justify-between">
                 <ProductPrice product={product} />
                 <div className="inline-flex items-center justify-end">
-                    {product.variations && product.variations.length > 0 ? <ProductQuickViewModal product={product} /> : <AddToCartButton variant='secondary' product={product} productVariantId={null} />}
+                    {product.variations && product.variations.length > 0 ? (
+                        <ProductQuickViewModal product={product} />
+                    ) : (
+                        <AddToCartButton variant="secondary" product={product} productVariantId={null} />
+                    )}
                 </div>
             </CardFooter>
         </Card>

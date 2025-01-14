@@ -9,7 +9,7 @@ const PromotionProduct = ({ promotionProduct }: { promotionProduct: App.Data.Pro
     const { t } = useTranslation();
 
     return (
-        <PromotionCard title={t('enums.homepage.promotions.special_offer')} description={t('enums.homepage.promotions.special_offer_description')} bgImageSrc={promotionProduct.cover.original_url}>
+        <PromotionCard title={t('enums.homepage.promotions.special_offer')} description={t('enums.homepage.promotions.special_offer_description')} bgImageSrc={promotionProduct.cover?.original_url}>
             <div className="mt-7 items-center justify-between md:mt-auto md:flex">
                 <PromotionCardItem product={promotionProduct} />
 

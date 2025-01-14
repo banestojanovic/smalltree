@@ -12,7 +12,7 @@ const PromotionCardItem = ({
     <div className="flex items-start gap-x-3">
         <div className="">
             <Avatar className="size-14 bg-white">
-                <AvatarImage src={product.cover.original_url} className="object-cover" />
+                <AvatarImage src={product.cover?.original_url} className="object-cover" />
                 <AvatarFallback>{product.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
             </Avatar>
         </div>

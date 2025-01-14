@@ -49,7 +49,7 @@ class HandleInertiaRequests extends Middleware
             'global' => fn () => GlobalData::optional([
                 'env' => config('app.env'),
                 'action' => session()->get('action'),
-                'categories' => CategoryData::collect(Category::with('cover')->get()),
+                'categories' => CategoryData::collect(Category::with('cover')->whereNull('parent_id')->get()),
             ]),
             'flash' => fn () => [
                 'success' => session()->get('success'),

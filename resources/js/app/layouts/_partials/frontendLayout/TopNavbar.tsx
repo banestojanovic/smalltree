@@ -21,16 +21,16 @@ export default function TopNavbar() {
                 <div className="hidden h-24 items-center gap-x-4 lg:flex">
                     <div className="flex w-5/12 flex-wrap items-center gap-5">
                         <a href="tel:+3811113820466" className="flex items-center gap-x-1 text-sm">
-                            <Phone className="size-5" stroke-width={1} />
+                            <Phone className="size-5" strokeWidth={1} />
                             +381 111 3820466
                         </a>
                         <a href="mailto:office@smalltree.rs" target="_blank" className="flex items-center gap-x-2 text-sm" rel="noreferrer">
-                            <Mail className="size-5" stroke-width={1} />
+                            <Mail className="size-5" strokeWidth={1} />
                             office@smalltrees.rs
                         </a>
 
                         <a href="#" target="_blank" className="flex items-center gap-x-1 text-sm">
-                            <MapPin className="size-5" stroke-width={1} />
+                            <MapPin className="size-5" strokeWidth={1} />
                             {t('enums.menu.top.locations')}
                         </a>
                     </div>

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->longText('name');
             $table->string('slug')->index()->unique();
             $table->string('sku')->index()->nullable();
+            $table->foreignId('product_type_id')->nullable()->constrained('product_types')->nullOnDelete();
             $table->unsignedBigInteger('price')->index()->nullable();
             $table->unsignedBigInteger('base_price')->default(0)->index();
             $table->integer('stock')->nullable();

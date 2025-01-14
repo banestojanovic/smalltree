@@ -59,7 +59,7 @@ const CategoriesSlider = () => {
                                 <Link href={route('categories.show', category.slug)} className="flex flex-col items-center">
                                     <span className="inline-flex size-10 items-center justify-center rounded-full bg-white md:size-28">
                                         <Avatar className="size-10 border border-gray-300 md:size-24">
-                                            <AvatarImage src={category.cover.original_url} className="object-cover" />
+                                            <AvatarImage src={category.cover?.original_url} className="object-cover" />
                                             <AvatarFallback className="text-lg">{category.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
                                         </Avatar>
                                     </span>

@@ -52,7 +52,7 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
             <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-[400px]">
                 <div className="">
                     <section className={'flex items-center gap-6'}>
-                        <img className="size-20 rounded-full object-cover" src={product.cover.original_url} alt="" />
+                        {product.cover?.original_url && <img className="size-20 rounded-full object-cover" src={product.cover.original_url} alt="" />}
                         <Typography as="h3"> {product.name}</Typography>
                     </section>
                     <section>
@@ -95,7 +95,6 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
                                 showPrice={false}
                                 variant="outline-white"
                                 className="inline-flex items-center justify-center"
-                                label="Add to cart"
                             />
 
                             <Button asChild={cart && (cart?.products ?? []).length > 0} disabled={!cart || (cart?.products ?? []).length === 0} className={'flex w-full'}>

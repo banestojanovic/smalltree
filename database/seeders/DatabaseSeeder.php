@@ -6,9 +6,13 @@ use App\Models\AttributeValue;
 use App\Models\Category;
 use App\Models\Discount;
 use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\Product;
+use App\Models\ProductType;
 use App\Models\User;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Tags\Tag;
@@ -34,12 +38,31 @@ class DatabaseSeeder extends Seeder
 
         (new CategorySeeder)->run();
 
-        Product::factory()->count(50)->gallery()->create();
+        ProductType::factory()->count(3)
+            ->state(new Sequence(fn ($sequence) => ['name' => 'Čaj'],
+                ['name' => 'Pribor'],
+                ['name' => 'Med'],
+            ))
+            ->create();
 
         (new AttributeSeeder)->run();
-        (new AttributeValueSeeder)->run();
+        //        (new AttributeValueSeeder)->run();
         (new VariationSeeder)->run();
         (new VariationValueSeeder)->run();
+
+        (new PostCategorySeeder)->run();
+        $posts = Post::factory()->count(50)->gallery()->create();
+
+        $posts->each(function ($post) {
+            $post->categories()->attach(PostCategory::inRandomOrder()->first()->id);
+            $post->attachTags(Tag::inRandomOrder()->limit(3)->get()->pluck('name')->toArray());
+        });
+
+        return;
+
+        // just for testing.
+
+        Product::factory()->count(50)->gallery()->create();
 
         $products = Product::all();
         $products->each(function ($product) {

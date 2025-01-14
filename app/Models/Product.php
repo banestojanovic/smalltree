@@ -39,6 +39,7 @@ class Product extends Model implements HasMedia, Sortable
     protected $fillable = [
         'name',
         'slug',
+        'product_type_id',
         'sku',
         'price',
         'base_price',
@@ -160,6 +161,7 @@ class Product extends Model implements HasMedia, Sortable
         });
 
         static::saving(function (Product $product) {
+            return;
             if ($product->variations()->exists()) {
                 $product->variations()->with('variations')->each(function (ProductVariation $variation) use ($product) {
                     $price = $product->price;

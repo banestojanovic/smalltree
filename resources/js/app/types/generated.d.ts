@@ -20,11 +20,13 @@ city: string;
 postal_code: string;
 };
 export type AttributeData = {
+icon: string | null;
 id: number;
 name: string;
 slug: string;
 description: string | null;
 values: Array<App.Data.AttributeValueData> | null;
+data: Array<any> | null;
 };
 export type AttributeValueData = {
 id: number;
@@ -130,6 +132,7 @@ categories: Array<App.Data.PostCategoryData> | null;
 export type ProductData = {
 grouped_variations: any | Array<any> | null;
 grouped_attributes: any | Array<any> | null;
+additional: Array<any> | null;
 id: number;
 name: string;
 slug: string;

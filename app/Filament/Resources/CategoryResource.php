@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Models\Category;
 use App\Models\Product;
+use App\Support\Disk;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
@@ -45,6 +46,17 @@ class CategoryResource extends Resource
                     ->options(fn () => Category::where('parent_id', null)->pluck('name', 'id')),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
+
+
+                Forms\Components\SpatieMediaLibraryFileUpload::make('cover')
+                    ->openable()
+                    ->reorderable()
+                    ->image()
+                    ->appendFiles()
+                    ->disk(Disk::CategoryImages)
+                    ->collection(Disk::CategoryImages)
+                    ->columnSpanFull(),
+
             ]);
     }
 

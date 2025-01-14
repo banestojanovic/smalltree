@@ -22,7 +22,7 @@ const Promotions = ({
                     <PromotionCard
                         title={t('enums.homepage.promotions.tea_of_the_month')}
                         description={t('enums.homepage.promotions.tea_of_the_month_description')}
-                        bgImageSrc={productOfTheMonth.cover.original_url}
+                        bgImageSrc={productOfTheMonth.cover?.original_url ?? ''}
                     >
                         <div className="mt-7 items-center justify-between md:mt-auto md:flex">
                             <PromotionCardItem product={productOfTheMonth} />
@@ -42,7 +42,7 @@ const Promotions = ({
                     <PromotionCard
                         title={t('enums.homepage.promotions.special_offer')}
                         description={t('enums.homepage.promotions.special_offer_description')}
-                        bgImageSrc={specialOffer.cover.original_url}
+                        bgImageSrc={specialOffer.cover?.original_url ?? ''}
                     >
                         <div className="mt-7 items-center justify-between md:mt-auto md:flex">
                             <PromotionCardItem product={specialOffer} />

@@ -19,6 +19,9 @@ class ProductData extends Data
     #[Computed]
     public \Illuminate\Support\Collection|array|null $grouped_attributes;
 
+    #[Computed]
+    public ?array $additional;
+
     public function __construct(
         public int $id,
         public string $name,
@@ -43,5 +46,10 @@ class ProductData extends Data
     ) {
         $this->grouped_variations = $variations?->flatMap(fn ($variation) => $variation->variations)->groupBy('variation.name') ?? [];
         $this->grouped_attributes = $attributes?->groupBy('attribute.name') ?? [];
+
+        $this->additional = [
+            __('Sastojci') => $data['ingredients'] ?? '',
+            __('Najbolje upotrebiti do') => $data['valid_until'] ?? '',
+        ];
     }
 }
