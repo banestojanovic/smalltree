@@ -12,9 +12,11 @@ const PostCard = ({ post }: PageProps<{ post: App.Data.PostData }>) => {
     return (
         <Card>
             <CardHeader>
-                <Link href={route('posts.show', post.slug)} className="rounded-lg">
-                    <img className="h-60 w-full rounded-lg object-cover p-1.5 sm:h-72" src={post.cover.original_url} alt={post.name} />
-                </Link>
+                {post.cover?.original_url && (
+                    <Link href={route('posts.show', post.slug)} className="rounded-lg">
+                        <img className="h-60 w-full rounded-lg object-cover p-1.5 sm:h-72" src={post.cover.original_url} alt={post.name} />
+                    </Link>
+                )}
 
                 <CardDescription>{post.categories?.map((category: App.Data.PostCategoryData) => <span key={category.id}>{category.name}</span>)}</CardDescription>
                 <CardTitle>
@@ -27,7 +29,7 @@ const PostCard = ({ post }: PageProps<{ post: App.Data.PostData }>) => {
             </CardHeader>
 
             <CardContent>
-                <p className="font-merriweather line-clamp-4">{post.content}</p>
+                <p className="line-clamp-4 font-merriweather">{post.content}</p>
             </CardContent>
 
             <CardFooter className="mt-auto flex items-center">

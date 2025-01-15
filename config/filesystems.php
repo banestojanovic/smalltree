@@ -93,6 +93,12 @@ return [
             'disk' => 'public',
         ],
 
+        \App\Support\Disk::Attachments => [
+            'prefix' => 'attachments',
+            'driver' => 'scoped',
+            'disk' => 'public',
+        ],
+
     ],
 
     /*

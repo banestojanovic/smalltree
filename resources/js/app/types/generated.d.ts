@@ -133,6 +133,7 @@ export type ProductData = {
 grouped_variations: any | Array<any> | null;
 grouped_attributes: any | Array<any> | null;
 additional: Array<any> | null;
+category: App.Data.CategoryData | null;
 id: number;
 name: string;
 slug: string;
@@ -150,6 +151,7 @@ variations: Array<App.Data.ProductVariationData> | null;
 attributes: Array<App.Data.AttributeValueData> | null;
 categories: Array<App.Data.CategoryData> | null;
 discount: App.Data.DiscountData | null;
+discounts: Array<App.Data.DiscountData> | null;
 };
 export type ProductVariationData = {
 id: number;

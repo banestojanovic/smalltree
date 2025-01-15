@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Models\Category;
-use App\Models\Product;
 use App\Support\Disk;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -12,6 +11,7 @@ use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 class CategoryResource extends Resource
@@ -47,7 +47,6 @@ class CategoryResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
 
-
                 Forms\Components\SpatieMediaLibraryFileUpload::make('cover')
                     ->openable()
                     ->reorderable()
@@ -80,7 +79,11 @@ class CategoryResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('top_level')
+                    ->label(__('filters.top_level_categories'))
+                    ->query(fn (Builder $query): Builder => $query->whereNull('parent_id')),
+                Tables\Filters\SelectFilter::make('parent_id')
+                    ->options(fn () => Category::where('parent_id', null)->pluck('name', 'id')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

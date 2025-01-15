@@ -43,4 +43,61 @@ class Discount extends Model
     {
         return $this->belongsTo(ProductVariation::class);
     }
+
+    protected static function booted(): void
+    {
+        static::created(function (Discount $discount) {
+            if ($discount->price < 1) {
+                return;
+            }
+
+            $product = Product::with('variations')->find($discount->product_id);
+
+            if ($product === null) {
+                return;
+            }
+
+            $discount->withoutEvents(function () use ($product, $discount) {
+                $product->variations()->each(function (ProductVariation $productVariation) use ($product, $discount) {
+
+                    $variationValue = $productVariation->variations->first()->getTranslation('value', 'sr');
+
+                    if (! $productVariation->id) {
+                        return;
+                    }
+
+                    if ($variationValue === '50g') {
+                        Discount::create([
+                            'product_id' => $product->id,
+                            'product_variation_id' => $productVariation->id,
+                            'price' => $discount->price * 0.5,
+                            'percentage' => $discount->percentage,
+                            'starts_at' => $discount->starts_at,
+                            'ends_at' => $discount->ends_at,
+                        ]);
+                    }
+                    if ($variationValue === '100g') {
+                        Discount::create([
+                            'product_id' => $product->id,
+                            'product_variation_id' => $productVariation->id,
+                            'price' => $discount->price,
+                            'percentage' => $discount->percentage,
+                            'starts_at' => $discount->starts_at,
+                            'ends_at' => $discount->ends_at,
+                        ]);
+                    }
+                    if ($variationValue === '250g') {
+                        Discount::create([
+                            'product_id' => $product->id,
+                            'product_variation_id' => $productVariation->id,
+                            'price' => $discount->price * 2.5,
+                            'percentage' => $discount->percentage,
+                            'starts_at' => $discount->starts_at,
+                            'ends_at' => $discount->ends_at,
+                        ]);
+                    }
+                });
+            });
+        });
+    }
 }

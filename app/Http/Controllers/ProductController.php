@@ -42,7 +42,7 @@ class ProductController extends Controller
     {
         $query = request('query');
 
-        $products = Product::where('name', 'like', '%' . $query . '%')
+        $products = Product::where('name', 'like', '%'.$query.'%')
             ->with('cover')
             ->take(20)
             ->get();
@@ -60,19 +60,19 @@ class ProductController extends Controller
                 ->active()
                 ->when($selectedAttributesValues && count($selectedAttributesValues) > 0, function ($query) use ($selectedAttributesValues) {
                     foreach ($selectedAttributesValues as $attribute => $value) {
-                        if (!empty($value)) {
+                        if (! empty($value)) {
                             $query->whereHas('attributes', function ($q) use ($value) {
-                                $q->whereIn('attribute_values.id', (array)$value);
+                                $q->whereIn('attribute_values.id', (array) $value);
                             });
                         }
                     }
                 })
                 ->when($selectedVariationValues && count($selectedVariationValues) > 0, function ($query) use ($selectedVariationValues) {
                     foreach ($selectedVariationValues as $variationId => $variationValue) {
-                        if (!empty($variationValue)) {
+                        if (! empty($variationValue)) {
                             $query->whereHas('variations', function ($q) use ($variationValue) {
                                 $q->whereHas('variations', function ($q2) use ($variationValue) {
-                                    $q2->whereIn('variation_values.id', (array)$variationValue);
+                                    $q2->whereIn('variation_values.id', (array) $variationValue);
                                 });
                             });
                         }
@@ -85,7 +85,7 @@ class ProductController extends Controller
                 ->when(request('search') ?? null, function ($query, $search) {
                     $query->where('name', 'like', "%$search%");
                 })
-                ->when(!empty(request('selectedCategories')), function ($query) {
+                ->when(! empty(request('selectedCategories')), function ($query) {
                     $query->whereHas('categories', function ($q) {
                         $q->whereIn('categories.id', request('selectedCategories'));
                     });
@@ -101,10 +101,10 @@ class ProductController extends Controller
             'variations' => $variations,
             'attributes' => $attributes,
             'query' => [
-                'variations' => $variations->mapWithKeys(fn($variation) => [
+                'variations' => $variations->mapWithKeys(fn ($variation) => [
                     $variation->id => request('variations')[$variation->id] ?? null,
                 ]),
-                'attributes' => $attributes->mapWithKeys(fn($attribute) => [
+                'attributes' => $attributes->mapWithKeys(fn ($attribute) => [
                     $attribute->slug => request('attributes')[$attribute->slug] ?? null,
                 ]),
                 'priceRange' => request('priceRange'),

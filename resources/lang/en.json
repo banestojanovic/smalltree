@@ -43,23 +43,6 @@
                 "trashed": "Trashed"
             }
         },
-        "menu": {
-            "menu": "Menu",
-            "top": {
-                "locations": "Locations",
-                "favorites": "Favorites",
-                "cart": "Cart",
-                "products": "Products",
-                "teas": "Teas",
-                "accessories": "Accessories",
-                "blog": "Blog",
-                "contact": "Contact",
-                "search": "Search",
-                "search_in_products": "Search in products",
-                "no_result_found": "No result found",
-                "loading": "Loading"
-            }
-        },
         "homepage": {
             "hero": {
                 "buy_now": "Buy Now"
@@ -92,6 +75,24 @@
             "form_errors": "Form Errors",
             "there_are_some_form_errors": "There are some form errors",
             "dismiss": "Dismiss"
+        }
+    },
+    "menu": {
+        "menu": "Menu",
+        "top": {
+            "home": "Home",
+            "locations": "Locations",
+            "favorites": "Favorites",
+            "cart": "Cart",
+            "products": "Products",
+            "teas": "Teas",
+            "accessories": "Accessories",
+            "blog": "Blog",
+            "contact": "Contact",
+            "search": "Search",
+            "search_in_products": "Start typing...",
+            "no_result_found": "No result found",
+            "loading": "Loading"
         }
     },
     "category_show": {

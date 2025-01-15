@@ -22,6 +22,9 @@ class ProductData extends Data
     #[Computed]
     public ?array $additional;
 
+    #[Computed]
+    public ?CategoryData $category;
+
     public function __construct(
         public int $id,
         public string $name,
@@ -43,6 +46,8 @@ class ProductData extends Data
         #[DataCollectionOf(CategoryData::class)]
         public ?Collection $categories,
         public ?DiscountData $discount,
+        #[DataCollectionOf(DiscountData::class)]
+        public ?Collection $discounts,
     ) {
         $this->grouped_variations = $variations?->flatMap(fn ($variation) => $variation->variations)->groupBy('variation.name') ?? [];
         $this->grouped_attributes = $attributes?->groupBy('attribute.name') ?? [];
@@ -51,5 +56,7 @@ class ProductData extends Data
             __('Sastojci') => $data['ingredients'] ?? '',
             __('Najbolje upotrebiti do') => $data['valid_until'] ?? '',
         ];
+
+        $this->category = $categories?->first();
     }
 }

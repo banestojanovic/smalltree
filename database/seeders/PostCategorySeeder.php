@@ -37,7 +37,6 @@ class PostCategorySeeder extends Seeder
                 ->state(new Sequence(
                     ['name' => $category]
                 ))
-                ->cover()
                 ->create();
         });
 

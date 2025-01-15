@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\ProductStockStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,9 +13,16 @@ class CartController extends Controller
     {
         $request->validate([
             'product_id' => 'required|integer',
+            'price' => 'required|numeric',
             'variation_id' => 'nullable|integer',
             'quantity' => 'required|integer|min:1',
         ]);
+
+        $productFromDB = Product::with('variations')->findOrFail(request('product_id'));
+
+        if ($productFromDB->stock_status == ProductStockStatus::OUT_OF_STOCK) {
+            return back()->with('error', __('cart')['item_out_of_stock']);
+        }
 
         $cart = (new \App\Support\Cart)->getOrCreateCart();
 
@@ -28,7 +37,7 @@ class CartController extends Controller
         $existing = $query->first();
 
         if ($existing) {
-            if ($existing->pivot->quantity + $qty > $existing->stock) {
+            if ($existing->stock !== null && $existing->pivot->quantity + $qty > $existing->stock) {
                 return back()->with('error', __('cart')['item_quantity_exceeds_stock']);
             }
 
@@ -36,6 +45,8 @@ class CartController extends Controller
                 ->where('id', $existing->pivot->id)
                 ->update([
                     'product_variation_id' => request('variation_id'),
+                    'price' => request('price'),
+                    'real_price' => request('real_price') > 0 ? request('real_price') : null,
                     'quantity' => $existing->pivot->quantity + $qty,
                 ])
             );
@@ -43,6 +54,8 @@ class CartController extends Controller
             $cart->products()->attach([
                 request('product_id') => [
                     'product_variation_id' => request('variation_id'),
+                    'price' => request('price'),
+                    'real_price' => request('real_price') > 0 ? request('real_price') : null,
                     'quantity' => $qty,
                 ],
             ]);
@@ -84,19 +97,23 @@ class CartController extends Controller
 
         $cart = (new \App\Support\Cart)->getOrCreateCart();
 
-        $query = $cart->products()->wherePivot('product_id', request('product_id'));
+        $product = $cart->products()->wherePivot('product_id', request('product_id'));
 
         if (request('variation_id')) {
-            $query->wherePivot('product_variation_id', request('variation_id'));
+            $product->wherePivot('product_variation_id', request('variation_id'));
         }
 
-        $existing = $query->first();
+        $existing = $product->first();
 
         if (! $existing) {
             return back()->with('error', __('cart')['item_quantity_not_updated']);
         }
 
-        if ($existing->pivot->quantity + request('quantity') > $existing->stock) {
+        if ($existing->stock_status == ProductStockStatus::OUT_OF_STOCK) {
+            return back()->with('error', __('cart')['item_out_of_stock']);
+        }
+
+        if ($existing->stock !== null && $existing->pivot->quantity + request('quantity') > $existing->stock) {
             return back()->with('error', __('cart')['item_quantity_exceeds_stock']);
         }
 

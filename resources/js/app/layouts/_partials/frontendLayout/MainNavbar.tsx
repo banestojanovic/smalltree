@@ -11,34 +11,37 @@ export default function TopNavbar() {
                 <div className="container">
                     <div className="flex h-16 items-center justify-between">
                         <div className="hidden items-center justify-between sm:flex">
-                            <div className="flex space-x-8">
+                            <div className="flex space-x-4 text-[15px] uppercase lg:space-x-8">
                                 <NavLink href={route('home')} active={route().current('home')}>
-                                    {t('enums.menu.top.products')}
+                                    {t('menu.top.home')}
                                 </NavLink>
 
                                 <NavLink href={route('products.search-page')} active={route().current('products.search-page')}>
-                                    {t('enums.menu.top.teas')}
+                                    {t('menu.top.teas')}
                                 </NavLink>
 
                                 <NavLink href={route('products.search-page')} active={false}>
-                                    {t('enums.menu.top.accessories')}
+                                    {t('menu.top.accessories')}
+                                </NavLink>
+
+                                <NavLink href={route('products.search-page')} active={false}>
+                                    {t('menu.top.promotions')}
                                 </NavLink>
 
                                 <NavLink href={route('posts.index')} active={route().current('posts.index')}>
-                                    {t('enums.menu.top.blog')}
+                                    {t('menu.top.blog')}
                                 </NavLink>
 
                                 <NavLink href={route('contact.show')} active={false}>
-                                    {t('enums.menu.top.contact')}
+                                    {t('menu.top.contact')}
                                 </NavLink>
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-end">
+                        <div className="flex items-center justify-end lg:w-1/3">
                             <ProductSearch />
                         </div>
 
-                        {/* Hamburger */}
                         <div className="-me-2 flex items-center sm:hidden">
                             <MobileMenu />
                         </div>

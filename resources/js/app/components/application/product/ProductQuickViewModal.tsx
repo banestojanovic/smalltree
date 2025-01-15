@@ -17,7 +17,6 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
 
     useEffect(() => {
         if (product?.grouped_variations) {
-            // Find the first group and select the second variation in that group
             const firstGroup = Object.keys(product.grouped_variations)[0];
             if (firstGroup && product.grouped_variations[firstGroup]?.[1]) {
                 setSelectedVariation(product.grouped_variations[firstGroup][1]?.id.toString());
@@ -63,7 +62,7 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
                         <Typography as="p" className="mt-10 !text-xl !font-bold">
                             {matchingVariation?.price ? (
                                 <>
-                                    {matchingVariation.price} <span className="!font-normal">rsd</span>
+                                    {matchingVariation?.discount?.price ?? matchingVariation.price} <span className="!font-normal">rsd</span>
                                 </>
                             ) : (
                                 <ProductPrice product={product} />

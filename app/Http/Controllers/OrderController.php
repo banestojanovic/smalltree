@@ -53,51 +53,48 @@ class OrderController extends Controller
             'is_default' => $request->is_default,
         ]);
 
-        $totalAmount = 0;
-        $totalDiscount = 0; // TODO: get the real discount
+        $totalAmount = $cart->products->sum(fn ($product) => $product->pivot->price * $product->pivot->quantity);
+        $totalDiscount = $cart->products->sum(fn ($product) => ($product->pivot->real_price - $product->pivot->price) * $product->pivot->quantity);
 
-        foreach ($cart->products as $product) {
-            $productVariation = $product->variations->where('id', $product->pivot->product_variation_id)->first();
-
-            $totalAmount += $productVariation->price ?? $product->price;
-            //            $totalAmount += $productVariation->discount ?? $product->discount;
-
-            if ($product->pivot->quantity > $product->stock) {
-                return back()->with('error', __('cart')['item_quantity_exceeds_stock']);
-            }
+        if ($cart->products->contains(fn ($product) => $product->stock_status === ProductStockStatus::OUT_OF_STOCK)) {
+            return back()->with('error', __('cart')['item_out_of_stock']);
         }
 
-        // Save Order
+        if ($cart->products->contains(fn ($product) => $product->stock !== null && $product->pivot->quantity > $product->stock)) {
+            return back()->with('error', __('cart')['item_quantity_exceeds_stock']);
+        }
+
         $order = Order::create([
             'user_id' => $user->id,
             'shipping_address_id' => $address->id,
             'cart_id' => $cart->id,
             'user_ip' => $request->ip(),
-            'amount' => $totalAmount,
+            'amount' => $totalAmount + $totalDiscount,
             'shipping' => $request->shipping ?? 0,
             'discount' => $totalDiscount,
-            'total' => $totalAmount - $totalDiscount + $request->shipping ?? 0,
+            'total' => $totalAmount + $request->shipping ?? 0,
             'status' => OrderStatus::PENDING,
             'payment_method' => $request->payment_method,
         ]);
 
         foreach ($cart->products as $product) {
-            $productVariation = $product->variations->where('id', $product->pivot->product_variation_id)->first();
             $stockPosition = $product->stock - $product->pivot->quantity;
 
             $order->items()->create([
                 'product_id' => $product->id,
                 'product_variation_id' => $product->pivot->product_variation_id,
                 'quantity' => $product->pivot->quantity,
-                'price' => $productVariation?->price ?? $product->price,
+                'price' => $product->pivot->price,
                 'discount' => 0,
                 'tax' => 0,
             ]);
 
-            $product->update([
-                'stock' => $stockPosition,
-                'stock_status' => $stockPosition > 0 ? ProductStockStatus::IN_STOCK : ProductStockStatus::OUT_OF_STOCK,
-            ]);
+            if ($product->stock !== null) {
+                $product->update([
+                    'stock' => $stockPosition,
+                    'stock_status' => $stockPosition > 0 ? ProductStockStatus::IN_STOCK : ProductStockStatus::OUT_OF_STOCK,
+                ]);
+            }
         }
 
         $cart->update(['status' => CartStatus::INACTIVE]);

@@ -6,17 +6,18 @@ const ProductPrice = ({ product }: PageProps<{ product: App.Data.ProductData }>)
 
     return (
         <>
-            {product.discount ? (
-                <span className="flex items-center">
-                    <span>
-                        <span className="font-semibold">{product.price}</span> rsd
+            {product?.discount?.price ? (
+                <div className="flex items-end">
+                    <span className={`space-x-0.5`}>
+                        <span className="font-semibold">{product.discount.price.toFixed(2)}</span>
+                        <span className={`font-light`}>rsd</span>
                     </span>
-                    <span className="ml-3 text-gray-500 line-through">{product.price} rsd</span>
-                </span>
+                    <span className="ml-3 text-sm font-[500] text-neutral-500 line-through">{product.price?.toFixed(2)} rsd</span>
+                </div>
             ) : (
-                <span>
-                    <span className="font-semibold">{product.price}</span> rsd
-                </span>
+                <div>
+                    <span className="font-semibold">{product.price?.toFixed(2)}</span> rsd
+                </div>
             )}
         </>
     );

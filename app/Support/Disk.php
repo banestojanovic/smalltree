@@ -13,4 +13,6 @@ class Disk
     public const CategoryImages = 'category:images';
 
     public const PostCategoryImages = 'post_category:images';
+
+    public const Attachments = 'attachments';
 }

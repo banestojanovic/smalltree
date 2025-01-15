@@ -54,6 +54,7 @@ class DiscountsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('product.name'),
                 Tables\Columns\TextColumn::make('productVariation.variations.value'),
+                Tables\Columns\TextColumn::make('price')->money('rsd'),
                 Tables\Columns\TextColumn::make('starts_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('ends_at')

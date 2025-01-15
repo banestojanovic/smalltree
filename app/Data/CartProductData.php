@@ -37,8 +37,9 @@ class CartProductData extends Data
         public ?Collection $variations,
         public ?Pivot $pivot,
     ) {
+        $variation = $this->variations->where('id', $this->pivot->product_variation_id)->first();
         $this->quantity = $this->pivot->quantity ?? 1;
-        $this->realPrice = $this->quantity * ($this->variations->where('id', $this->pivot->product_variation_id)->first()->price ?? $this->price);
+        $this->realPrice = $this->quantity * ($variation?->discount?->price ?? $variation->price ?? $this->price);
         $this->chosenId = $this->pivot->product_variation_id ?? $this->id;
     }
 }

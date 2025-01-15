@@ -45,23 +45,6 @@
                         "trashed": "Trashed"
                     }
                 },
-                "menu": {
-                    "menu": "Menu",
-                    "top": {
-                        "locations": "Locations",
-                        "favorites": "Favorites",
-                        "cart": "Cart",
-                        "products": "Products",
-                        "teas": "Teas",
-                        "accessories": "Accessories",
-                        "blog": "Blog",
-                        "contact": "Contact",
-                        "search": "Search",
-                        "search_in_products": "Search in products",
-                        "no_result_found": "No result found",
-                        "loading": "Loading"
-                    }
-                },
                 "homepage": {
                     "hero": {
                         "buy_now": "Buy Now"
@@ -94,6 +77,24 @@
                     "form_errors": "Form Errors",
                     "there_are_some_form_errors": "There are some form errors",
                     "dismiss": "Dismiss"
+                }
+            },
+            "menu": {
+                "menu": "Menu",
+                "top": {
+                    "home": "Home",
+                    "locations": "Locations",
+                    "favorites": "Favorites",
+                    "cart": "Cart",
+                    "products": "Products",
+                    "teas": "Teas",
+                    "accessories": "Accessories",
+                    "blog": "Blog",
+                    "contact": "Contact",
+                    "search": "Search",
+                    "search_in_products": "Start typing...",
+                    "no_result_found": "No result found",
+                    "loading": "Loading"
                 }
             },
             "category_show": {
@@ -248,57 +249,59 @@
                         "draft": "Nacrt",
                         "trashed": "Izbrisano"
                     }
-                },
-                "menu": {
-                    "menu": "Meni",
-                    "top": {
-                        "locations": "Lokacije",
-                        "favorites": "Omiljeno",
-                        "cart": "Korpa",
-                        "products": "Proizvodi",
-                        "teas": "Čajevi",
-                        "accessories": "Dodaci",
-                        "blog": "Blog",
-                        "contact": "Kontakt",
-                        "search": "Pretraga",
-                        "search_in_products": "Pretraga u proizvodima",
-                        "no_result_found": "Nema rezultata",
-                        "loading": "Učitavanje"
-                    }
-                },
-                "homepage": {
-                    "hero": {
-                        "buy_now": "Kupi sada"
-                    },
-                    "promotions": {
-                        "tea_of_the_month": "Čaj meseca",
-                        "tea_of_the_month_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-                        "special_offer": "Specijalna ponuda",
-                        "special_offer_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-                    },
-                    "sections": {
-                        "most_popular_tea": "Najpopularniji čaj",
-                        "staff_recommended": "Preporuka osoblja",
-                        "stores_with_tea": "Priče uz čaj",
-                        "see_all": "Prikaži sve",
-                        "read_more": "Pročitaj više"
-                    },
-                    "tea_ritual": {
-                        "your_matcha_ritual": "Vaš MATCHA ritual",
-                        "your_mate_ritual": "Vaš MATE ritual",
-                        "tea_mug": "Šolja za čaj",
-                        "set": "Set",
-                        "purchase": "Kupi"
-                    }
-                },
-                "flash": {
-                    "success": "Uspeh",
-                    "error": "Greška",
-                    "errors": "Greške",
-                    "form_errors": "Greške u formi",
-                    "there_are_some_form_errors": "Postoje greške u formi",
-                    "dismiss": "Zatvori"
                 }
+            },
+            "menu": {
+                "menu": "Meni",
+                "top": {
+                    "home": "Početna",
+                    "locations": "Lokacije",
+                    "favorites": "Omiljeno",
+                    "cart": "Korpa",
+                    "products": "Proizvodi",
+                    "teas": "Čajevi",
+                    "accessories": "Dodaci",
+                    "promotions": "Promocije",
+                    "blog": "Blog",
+                    "contact": "Kontakt",
+                    "search": "Pretraga",
+                    "search_in_products": "Krenite da kucate...",
+                    "no_result_found": "Nema rezultata",
+                    "loading": "Učitavanje"
+                }
+            },
+            "homepage": {
+                "hero": {
+                    "action": "Pogledajte promocije"
+                },
+                "promotions": {
+                    "tea_of_the_month": "Čaj meseca",
+                    "tea_of_the_month_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+                    "special_offer": "Specijalna ponuda",
+                    "special_offer_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+                },
+                "sections": {
+                    "most_popular_tea": "Najpopularniji čaj",
+                    "staff_recommended": "Preporuka osoblja",
+                    "stores_with_tea": "Priče uz čaj",
+                    "see_all": "Prikaži sve",
+                    "read_more": "Pročitaj više"
+                },
+                "tea_ritual": {
+                    "your_matcha_ritual": "Vaš MATCHA ritual",
+                    "your_mate_ritual": "Vaš MATE ritual",
+                    "tea_mug": "Šolja za čaj",
+                    "set": "Set",
+                    "purchase": "Kupi"
+                }
+            },
+            "flash": {
+                "success": "Uspeh",
+                "error": "Greška",
+                "errors": "Greške",
+                "form_errors": "Greške u formi",
+                "there_are_some_form_errors": "Postoje greške u formi",
+                "dismiss": "Zatvori"
             },
             "category_show": {
                 "filters": {
@@ -315,6 +318,7 @@
                 "item_removed_from_cart": "Proizvod je uklonjen iz korpe",
                 "item_quantity_updated": "Količina proizvoda je ažurirana",
                 "item_quantity_not_updated": "Količina proizvoda nije ažurirana",
+                "item_out_of_stock": "Proizvod je trenutno nedostupan",
                 "item_quantity_exceeds_stock": "Količina premašuje stanje na lageru",
                 "cart_empty": "Korpa je prazna",
                 "check_out": "Plaćanje",
@@ -334,7 +338,8 @@
                 "subtotal": "Međuzbir",
                 "discount": "Popust",
                 "shipping": "Dostava",
-                "total": "Ukupno"
+                "total": "Ukupno",
+                "on_action": "Akcija"
             },
             "checkout": {
                 "checkout": "Plaćanje",

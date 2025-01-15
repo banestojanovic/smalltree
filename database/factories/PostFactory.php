@@ -29,10 +29,10 @@ class PostFactory extends Factory
     public function gallery()
     {
         return $this->afterCreating(function (Post $post) {
-            for ($i = 1; $i <= 10; $i++) {
-                $img = rand(1, 10);
+            for ($i = 1; $i <= 4; $i++) {
+                $img = rand(1, 4);
 
-                $post->addMediaFromDisk("products/$img.jpg", 'dummy')
+                $post->addMediaFromDisk("posts/$img.webp", 'dummy')
                     ->preservingOriginal()
                     ->withProperties(['uuid' => Str::uuid()])
                     ->setOrder($i)

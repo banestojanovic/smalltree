@@ -22,6 +22,8 @@ const AddToCartButton = ({
 } & ButtonProps) => {
     const { post, setData } = useForm({
         product_id: product?.id,
+        price: product?.price,
+        real_price: 0,
         variation_id: productVariantId,
         quantity: quantity ?? 1,
     });
@@ -36,6 +38,8 @@ const AddToCartButton = ({
         variation?.variations?.some((variationDetail: VariationValueData) => variationDetail?.pivot?.variation_value_id == productVariantId),
     );
 
+    const price = matchingVariation ? (matchingVariation?.discount?.price ?? matchingVariation.price) : (product?.discount?.price ?? product?.price);
+
     useEffect(() => {
         setData('variation_id', matchingVariation?.id ?? null);
     }, [productVariantId]);
@@ -44,7 +48,12 @@ const AddToCartButton = ({
         setData('quantity', quantity ?? 1);
     }, [quantity]);
 
-    const price = matchingVariation ? matchingVariation.price : product?.price;
+    useEffect(() => {
+        const real_price = (matchingVariation ? matchingVariation?.price : product?.price) ?? 0;
+
+        setData('price', price);
+        setData('real_price', real_price);
+    }, [price]);
 
     return (
         <Button size={'circle'} variant={variant ?? 'secondary'} onClick={updateCart} {...props}>

@@ -118,7 +118,24 @@ class Product extends Model implements HasMedia, Sortable
 
     public function discount(): HasOne
     {
-        return $this->hasOne(Discount::class);
+        return $this->hasOne(Discount::class)->where('starts_at', '<=', now())->where('ends_at', '>=', now());
+    }
+
+    public function discounts(): HasMany
+    {
+        return $this->hasMany(Discount::class)->where('starts_at', '<=', now())->where('ends_at', '>=', now());
+    }
+
+    public function scopeOrderByDiscount($query): void
+    {
+        $query->addSelect([
+            'latest_discount_start' => Discount::select('starts_at')
+                ->whereColumn('product_id', 'products.id')
+                ->where('starts_at', '<=', now())
+                ->where('ends_at', '>=', now())
+                ->orderBy('starts_at', 'desc')
+                ->limit(1),
+        ]);
     }
 
     public function scopeActive($query)

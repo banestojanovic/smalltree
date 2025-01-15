@@ -1,11 +1,10 @@
-import { Head } from '@inertiajs/react';
-import { ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
-
 import CategoriesSlider from '@/app/components/application/category/CategoriesSlider';
 import TeaRituals from '@/app/components/application/TeaRituals';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import { PageProps } from '@/app/types';
+import { Head } from '@inertiajs/react';
+import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import Hero from './_partials/Hero';
 import PopularProducts from './_partials/PopularProducts';
 import Promotions from './_partials/Promotions';
@@ -18,19 +17,21 @@ const Home = ({
     posts,
     specialOffer,
     productOfTheMonth,
+    hero,
 }: PageProps<{
     popularProducts?: App.Data.ProductData[];
     staffRecommendedProducts?: App.Data.ProductData[];
     posts?: App.Data.PostData[];
     specialOffer: App.Data.ProductData;
     productOfTheMonth: App.Data.ProductData;
+    hero: { title: string; subtitle: string; image: string };
 }>) => {
     const { t } = useTranslation();
 
     return (
         <>
             <Head title={t('enums.page.titles.home')} />
-            <Hero />
+            <Hero hero={hero} />
             <CategoriesSlider />
             <PopularProducts products={popularProducts} />
             <Promotions specialOffer={specialOffer} productOfTheMonth={productOfTheMonth} />

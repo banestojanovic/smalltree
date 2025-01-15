@@ -56,6 +56,14 @@ class Order extends Model
         );
     }
 
+    protected function discount(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
+        );
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

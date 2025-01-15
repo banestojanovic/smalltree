@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Imports\ContentImport;
 use App\Models\AttributeValue;
 use App\Models\Category;
 use App\Models\Discount;
@@ -10,11 +11,11 @@ use App\Models\PostCategory;
 use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\User;
-
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Tags\Tag;
 
 class DatabaseSeeder extends Seeder
@@ -57,6 +58,8 @@ class DatabaseSeeder extends Seeder
             $post->categories()->attach(PostCategory::inRandomOrder()->first()->id);
             $post->attachTags(Tag::inRandomOrder()->limit(3)->get()->pluck('name')->toArray());
         });
+
+        Excel::import(new ContentImport(), storage_path('app/public/import/content.xlsx'));
 
         return;
 

@@ -29,9 +29,15 @@ class CategoryFactory extends Factory
     {
         return $this->afterCreating(function (Category $category) {
 
-            $img = rand(1, 10);
+            if ($category->parent_id) {
+                return;
+            }
 
-            $category->addMediaFromDisk("products/$img.jpg", 'dummy')
+            $slug = $category->slug;
+
+            $filePath = "dummy/server/categories/$slug.webp";
+
+            $category->addMediaFromDisk($filePath, 'public')
                 ->preservingOriginal()
                 ->withProperties(['uuid' => Str::uuid()])
                 ->setOrder(1)
