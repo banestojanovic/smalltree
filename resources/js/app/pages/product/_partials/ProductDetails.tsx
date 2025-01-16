@@ -43,13 +43,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                     </Typography>
 
                     <Typography as="p" className="mt-10 !text-3xl !font-bold">
-                        {matchingVariation?.price ? (
-                            <>
-                                {matchingVariation.price} <span className="!font-normal">rsd</span>
-                            </>
-                        ) : (
-                            <ProductPrice product={product} />
-                        )}
+                        <ProductPrice price={matchingVariation?.price ?? product.price ?? 0} discountPrice={matchingVariation?.discount?.price ?? null} />
                     </Typography>
 
                     {product?.grouped_variations && (

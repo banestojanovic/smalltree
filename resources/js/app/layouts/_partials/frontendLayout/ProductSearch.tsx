@@ -68,7 +68,7 @@ const ProductSearch = () => {
 
     return (
         <div className="relative mx-auto w-full max-w-3xl" ref={dropdownRef}>
-            <div className="flex items-center gap-x-1.5">
+            <div className="flex items-center">
                 <div className={`hidden items-center lg:flex lg:gap-x-1.5`}>
                     <span>
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-5`}>
@@ -79,7 +79,7 @@ const ProductSearch = () => {
                             <path d="M14.5742 14.5741L20.5001 20.5" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </span>
-                    <Label htmlFor={`productSearch`} className="mr-2">
+                    <Label htmlFor={`productSearch`} className="mr-2 font-normal">
                         {t('menu.top.search')}
                     </Label>
                 </div>

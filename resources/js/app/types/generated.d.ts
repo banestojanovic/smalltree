@@ -49,6 +49,7 @@ name: string;
 slug: string;
 sku: string;
 price: number | null;
+real_price: number | null;
 stock: number | null;
 stock_status: App.ProductStockStatus;
 description: string | null;
@@ -97,7 +98,7 @@ export type OrderItemData = {
 id: number;
 order_id: number;
 product_id: number;
-product_variation_id: number;
+product_variation_id: number | null;
 quantity: number;
 price: number;
 discount: number;

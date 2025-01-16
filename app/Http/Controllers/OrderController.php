@@ -107,7 +107,7 @@ class OrderController extends Controller
         $order = Order::where('uuid', $uuid)->with('items.product.cover', 'user', 'shippingAddress')->firstOrFail();
 
         return inertia('order/summary', [
-            'order' => OrderData::from($order),
+            'order' => OrderData::optional($order),
         ]);
     }
 }

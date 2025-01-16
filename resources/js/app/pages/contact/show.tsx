@@ -130,11 +130,11 @@ const ShopAddressCard = ({ shop }: ShopAddressCardProps) => {
             </CardHeader>
 
             <CardContent>
-                <p className="line-clamp-4 font-merriweather">{shop.address}</p>
-                <p className="line-clamp-4 font-merriweather">{shop.phone}</p>
-                <p className="line-clamp-4 font-merriweather">{shop.email}</p>
-                <p className="line-clamp-4 font-merriweather">{shop.working_hours}</p>
-                <p className="line-clamp-4 font-merriweather"></p>
+                <p className="line-clamp-4 font-title">{shop.address}</p>
+                <p className="line-clamp-4 font-title">{shop.phone}</p>
+                <p className="line-clamp-4 font-title">{shop.email}</p>
+                <p className="line-clamp-4 font-title">{shop.working_hours}</p>
+                <p className="line-clamp-4 font-title"></p>
             </CardContent>
 
             <CardFooter className="mt-auto flex items-center">

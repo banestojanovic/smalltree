@@ -11,10 +11,14 @@ use App\Models\PostCategory;
 use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\User;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Settings\GeneralSettings;
+use App\Support\Disk;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Tags\Tag;
 
@@ -32,6 +36,8 @@ class DatabaseSeeder extends Seeder
         Storage::disk('public')->deleteDirectory('post');
         Storage::disk('public')->deleteDirectory('post_category');
         Storage::disk('public')->deleteDirectory('attachments');
+
+        $this->seedAttachments();
 
         User::factory()->superAdmin()->create([
             'email' => 'admin@test.com',
@@ -59,7 +65,19 @@ class DatabaseSeeder extends Seeder
             $post->attachTags(Tag::inRandomOrder()->limit(3)->get()->pluck('name')->toArray());
         });
 
-        Excel::import(new ContentImport(), storage_path('app/public/import/content.xlsx'));
+        Excel::import(new ContentImport, storage_path('app/public/import/content.xlsx'));
+
+        if (app()->environment('local', 'staging')) {
+            $promoted = Product::inRandomOrder()->limit(3)->get();
+            $promoted->each(function ($product) {
+                Discount::create([
+                    'product_id' => $product->id,
+                    'price' => $product->price * 0.8,
+                    'starts_at' => now()->subDays(rand(1, 10)),
+                    'ends_at' => now()->addDays(rand(10, 30)),
+                ]);
+            });
+        }
 
         return;
 
@@ -92,5 +110,30 @@ class DatabaseSeeder extends Seeder
             $post->categories()->attach(Category::inRandomOrder()->first()->id);
             $post->attachTags(Tag::inRandomOrder()->limit(3)->get()->pluck('name')->toArray());
         });
+    }
+
+    public function seedAttachments()
+    {
+        $settings = (new GeneralSettings);
+
+        $heroImg = $this->copyAttachment('hero.webp');
+        $settings->hero_image = [$heroImg];
+
+        $settings->save();
+    }
+
+    public function copyAttachment(string $sourceImg)
+    {
+        $sourcePath = "site/images/$sourceImg";
+
+        $name = time().'.webp';
+        if (Storage::disk('public')->exists($sourcePath)) {
+            Storage::disk(Disk::Attachments)->put(
+                $name,
+                Storage::disk('public')->get($sourcePath)
+            );
+        }
+
+        return $name;
     }
 }

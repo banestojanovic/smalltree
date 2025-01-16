@@ -57,6 +57,10 @@ class Discount extends Model
                 return;
             }
 
+            if ($product->product_type_id !== 1) {
+                return null;
+            }
+
             $discount->withoutEvents(function () use ($product, $discount) {
                 $product->variations()->each(function (ProductVariation $productVariation) use ($product, $discount) {
 

@@ -25,11 +25,9 @@ class ContentImport implements ToCollection, WithHeadingRow
                 continue;
             }
 
-            $type = $this->importType($row['vrsta']);
-
             $product = Product::create([
                 'name' => trim(str_replace(['FTGFOP1', 'TGFOP', 'SFTGFOP1', '"'], '', $row['naziv_proizvoda'])),
-                'product_type_id' => $type,
+                'product_type_id' => $row['type'] ?? 1,
                 'sku' => trim($row['sifra_proizvoda_prodavca']),
                 'description' => trim($row['opis']),
                 'price' => (int) trim($row['prodajna_cena']),
@@ -132,18 +130,5 @@ class ContentImport implements ToCollection, WithHeadingRow
         }
 
         return str_replace(['x', 'X'], 'Nema', $country);
-    }
-
-    public function importType(?string $type): ?int
-    {
-
-        $correctType = 1;
-        if ($type == 31) {
-            $correctType = 3;
-        } elseif ($type == 34) {
-            $correctType = 2;
-        }
-
-        return $correctType;
     }
 }

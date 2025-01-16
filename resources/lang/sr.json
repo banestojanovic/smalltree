@@ -8,22 +8,6 @@
                 "user": "Korisnik"
             }
         },
-        "product": {
-            "status": {
-                "inactive": "Neaktivno",
-                "active": "Aktivno",
-                "draft": "Nacrt",
-                "trashed": "Izbrisano"
-            },
-            "stock_status": {
-                "out_of_stock": "Nema na stanju",
-                "in_stock": "Na stanju"
-            },
-            "no_products_available": "Nema dostupnih proizvoda",
-            "variations": "Varijacije",
-            "free_shipping_over": "Besplatna dostava za porudžbine preko",
-            "similar_products": "Slični proizvodi"
-        },
         "post": {
             "status": {
                 "inactive": "Neaktivno",
@@ -63,6 +47,17 @@
             "loading": "Učitavanje"
         }
     },
+    "flash": {
+        "success": "Uspeh",
+        "error": "Greška",
+        "errors": "Greške",
+        "form_errors": "Greške u formi",
+        "there_are_some_form_errors": "Postoje greške u formi",
+        "dismiss": "Zatvori"
+    },
+    "sr": {
+        "product_variations": "Varijacije proizvoda"
+    },
     "homepage": {
         "hero": {
             "action": "Pogledajte promocije"
@@ -74,7 +69,10 @@
             "special_offer_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
         },
         "sections": {
-            "most_popular_tea": "Najpopularniji čaj",
+            "most_popular": {
+                "title": "Akcije i popularni proizvodi",
+                "subtitle": "Proizvodi koji su na akciji, najtraženiji i najprodavaniji"
+            },
             "staff_recommended": "Preporuka osoblja",
             "stores_with_tea": "Priče uz čaj",
             "see_all": "Prikaži sve",
@@ -88,13 +86,22 @@
             "purchase": "Kupi"
         }
     },
-    "flash": {
-        "success": "Uspeh",
-        "error": "Greška",
-        "errors": "Greške",
-        "form_errors": "Greške u formi",
-        "there_are_some_form_errors": "Postoje greške u formi",
-        "dismiss": "Zatvori"
+    "product": {
+        "add_to_cart": "Dodaj u korpu",
+        "status": {
+            "inactive": "Neaktivno",
+            "active": "Aktivno",
+            "draft": "Nacrt",
+            "trashed": "Izbrisano"
+        },
+        "stock_status": {
+            "out_of_stock": "Nema na stanju",
+            "in_stock": "Na stanju"
+        },
+        "no_products_available": "Nema dostupnih proizvoda",
+        "variations": "Varijacije",
+        "free_shipping_over": "Besplatna dostava za porudžbine preko",
+        "similar_products": "Slični proizvodi"
     },
     "category_show": {
         "filters": {

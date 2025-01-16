@@ -128,14 +128,14 @@ class Product extends Model implements HasMedia, Sortable
 
     public function scopeOrderByDiscount($query): void
     {
-        $query->addSelect([
-            'latest_discount_start' => Discount::select('starts_at')
+        $query->orderByDesc(
+            Discount::select('starts_at')
                 ->whereColumn('product_id', 'products.id')
                 ->where('starts_at', '<=', now())
                 ->where('ends_at', '>=', now())
-                ->orderBy('starts_at', 'desc')
-                ->limit(1),
-        ]);
+                ->orderByDesc('starts_at')
+                ->limit(1)
+        );
     }
 
     public function scopeActive($query)
@@ -156,6 +156,10 @@ class Product extends Model implements HasMedia, Sortable
     protected static function booted(): void
     {
         static::created(function (Product $product) {
+            if ($product->product_type_id !== 1) {
+                return null;
+            }
+
             $variations = VariationValue::all();
             $variations->each(function (VariationValue $variation) use ($product) {
                 $price = $product->price;
@@ -178,6 +182,10 @@ class Product extends Model implements HasMedia, Sortable
         });
 
         static::saving(function (Product $product) {
+            if ($product->product_type_id !== 1) {
+                return null;
+            }
+
             return;
             if ($product->variations()->exists()) {
                 $product->variations()->with('variations')->each(function (ProductVariation $variation) use ($product) {
@@ -224,6 +232,9 @@ class Product extends Model implements HasMedia, Sortable
         });
 
         static::saving(function (Product $product) {
+            if ($product->product_type_id !== 1) {
+                return null;
+            }
             $product->base_price = $product->calculateMinimumPrice();
         });
     }

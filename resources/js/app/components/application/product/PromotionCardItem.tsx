@@ -22,7 +22,7 @@ const PromotionCardItem = ({
             </Typography>
 
             <Typography as="h3" className="!font-normal text-white">
-                <ProductPrice product={product} />
+                <ProductPrice price={product?.price ?? 0} discountPrice={product?.discount?.price ?? null} />
             </Typography>
         </div>
     </div>

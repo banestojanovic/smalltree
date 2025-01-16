@@ -9,13 +9,16 @@ use App\Models\Post;
 use App\Models\Product;
 use App\Models\Variation;
 use App\Settings\GeneralSettings;
+use App\Settings\PromotionSettings;
 use App\Support\Disk;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
-    public function __invoke(GeneralSettings $settings)
+    public function __invoke(GeneralSettings $settings, PromotionSettings $promotion_settings)
     {
+        $promotedProducts = $promotion_settings->promoted_products;
+
         $popularProducts = ProductData::collect(Product::query()
             ->with('variations.discount', 'discount', 'cover', 'categories')
             ->with([
@@ -26,6 +29,7 @@ class HomeController extends Controller
             ])
             ->active()
             ->orderByDiscount()
+            ->when(! empty($promotedProducts), fn ($q) => $q->orderByRaw('FIELD(id, '.implode(',', $promotedProducts).') DESC'))
             ->limit(8)
             ->get());
 

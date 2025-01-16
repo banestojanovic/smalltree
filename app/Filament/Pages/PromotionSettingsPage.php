@@ -24,8 +24,7 @@ class PromotionSettingsPage extends SettingsPage
                     Forms\Components\Select::make('promoted_products')
                         ->label('Promoted Products')
                         ->options(fn () => Product::all()->pluck('name', 'id')->toArray())
-                        ->multiple()
-                        ->required(),
+                        ->multiple(),
                 ]),
             ]);
     }

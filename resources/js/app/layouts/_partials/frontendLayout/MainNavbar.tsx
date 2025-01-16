@@ -11,7 +11,7 @@ export default function TopNavbar() {
                 <div className="container">
                     <div className="flex h-16 items-center justify-between">
                         <div className="hidden items-center justify-between sm:flex">
-                            <div className="flex space-x-4 text-[15px] uppercase lg:space-x-8">
+                            <nav className="flex space-x-4 text-[15px] uppercase lg:space-x-8">
                                 <NavLink href={route('home')} active={route().current('home')}>
                                     {t('menu.top.home')}
                                 </NavLink>
@@ -35,7 +35,7 @@ export default function TopNavbar() {
                                 <NavLink href={route('contact.show')} active={false}>
                                     {t('menu.top.contact')}
                                 </NavLink>
-                            </div>
+                            </nav>
                         </div>
 
                         <div className="flex items-center justify-end lg:w-1/3">

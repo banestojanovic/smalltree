@@ -3,6 +3,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 import RemoveFromCartButton from '@/app/layouts/_partials/frontendLayout/RemoveFromCartButton';
 import UpdateCartQuantity from '@/app/layouts/_partials/frontendLayout/UpdateCartQuantity';
 import { PageProps } from '@/app/types';
+import useNumberFormatter from '@/functions';
 import { Link, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +14,8 @@ export default function Cart() {
     const global = usePage<PageProps<{ global?: PageProps['global'] }>>().props.global;
 
     const { t } = useTranslation();
+
+    const formatNumber = useNumberFormatter();
 
     useEffect(() => {
         if (global?.action === 'cart.updated') {
@@ -37,7 +40,7 @@ export default function Cart() {
                                             <div className="flex items-center gap-x-3 font-medium">
                                                 <img src={product.cover.original_url} alt={product.name} className="aspect-square size-14 rounded-lg object-cover" />
                                                 <div className="flex flex-col">
-                                                    <span className="font-merriweather">{product.name}</span>
+                                                    <span className="font-title">{product.name}</span>
                                                     <div className="w-24">
                                                         <UpdateCartQuantity product={product} />
                                                     </div>
@@ -46,7 +49,7 @@ export default function Cart() {
                                         </div>
                                         <div className="flex flex-col text-sm font-medium">
                                             <p>
-                                                <span className={'font-semibold'}>{(product?.realPrice ?? 0).toFixed(2)}</span> rsd
+                                                <span className={'font-semibold'}>{formatNumber(product.realPrice)}</span> rsd
                                             </p>
                                             <RemoveFromCartButton product={product} />
                                         </div>

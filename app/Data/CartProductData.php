@@ -28,6 +28,7 @@ class CartProductData extends Data
         public readonly string $slug,
         public readonly string $sku,
         public readonly ?float $price,
+        public readonly ?float $real_price,
         public readonly ?int $stock,
         public readonly ProductStockStatus $stock_status,
         public readonly ?string $description,
@@ -39,7 +40,7 @@ class CartProductData extends Data
     ) {
         $variation = $this->variations->where('id', $this->pivot->product_variation_id)->first();
         $this->quantity = $this->pivot->quantity ?? 1;
-        $this->realPrice = $this->quantity * ($variation?->discount?->price ?? $variation->price ?? $this->price);
+        $this->realPrice = $this->quantity * ($this->pivot->price);
         $this->chosenId = $this->pivot->product_variation_id ?? $this->id;
     }
 }

@@ -29,7 +29,7 @@ const PostCard = ({ post }: PageProps<{ post: App.Data.PostData }>) => {
             </CardHeader>
 
             <CardContent>
-                <p className="line-clamp-4 font-merriweather">{post.content}</p>
+                <p className="line-clamp-4 font-title">{post.content}</p>
             </CardContent>
 
             <CardFooter className="mt-auto flex items-center">
