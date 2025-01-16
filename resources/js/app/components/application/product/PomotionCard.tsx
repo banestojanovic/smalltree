@@ -1,22 +1,23 @@
 import { Card, CardContent } from '@/app/components/ui/card';
-import { Typography } from '../../ui/typography';
 import React from 'react';
+import { Typography } from '../../ui/typography';
 
 interface PromotionCardProps {
     title: string;
     description: string;
     bgImageSrc: string;
     children?: React.ReactNode;
+    cardClass?: string;
 }
 
-const PromotionCard = ({ title, description, bgImageSrc, children }: PromotionCardProps) => {
+const PromotionCard = ({ title, description, bgImageSrc, children, cardClass }: PromotionCardProps) => {
     return (
-        <Card className="relative h-full min-h-80 bg-cover bg-center" style={{ backgroundImage: `url(${bgImageSrc})` }}>
+        <Card className={`relative h-full bg-cover bg-center md:min-h-[436px] ${cardClass ?? ''}`} style={{ backgroundImage: `url(${bgImageSrc})` }}>
             {/* Overlay */}
             <div className="absolute inset-0 z-0 rounded-lg bg-black bg-opacity-50"></div>
 
             <CardContent className="relative z-10 flex h-full w-full flex-col justify-between !px-4 !py-4 lg:!px-8 lg:!py-8">
-                <div>
+                <div className={`space-y-2`}>
                     <Typography as="h2" className="text-white">
                         {title}
                     </Typography>

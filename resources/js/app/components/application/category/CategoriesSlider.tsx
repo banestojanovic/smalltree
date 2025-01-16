@@ -54,7 +54,7 @@ const CategoriesSlider = () => {
 
                     <motion.div
                         ref={scrollContainerRef}
-                        className="scrollbar-hidden flex items-start justify-between gap-x-2 overflow-x-auto px-2 lg:gap-x-4"
+                        className="scrollbar-hidden flex items-start justify-between gap-x-2 overflow-x-auto px-2 lg:gap-x-3"
                         transition={{
                             duration: 0.8,
                             delay: 0.5,
@@ -69,8 +69,8 @@ const CategoriesSlider = () => {
                                 transition={{ type: 'spring', duration: (index + 1) / 10 }}
                             >
                                 <Link href={route('categories.show', category.slug)} className="flex flex-col items-center">
-                                    <span className="group inline-flex size-24 items-center justify-center rounded-full bg-white transition hover:bg-primary/5 lg:size-28">
-                                        <Avatar className="size-20 border border-gray-300 transition group-hover:scale-110 lg:size-24">
+                                    <span className="group inline-flex size-24 items-center justify-center rounded-full bg-white transition hover:bg-primary/5 lg:size-32">
+                                        <Avatar className="size-20 border border-gray-300 transition group-hover:scale-110 lg:size-28">
                                             <AvatarImage src={category.cover?.original_url} className="object-cover" />
                                             <AvatarFallback className="text-lg">{category.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
                                         </Avatar>

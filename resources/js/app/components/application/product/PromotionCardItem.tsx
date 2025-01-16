@@ -16,13 +16,13 @@ const PromotionCardItem = ({
                 <AvatarFallback>{product.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
             </Avatar>
         </div>
-        <div className="">
-            <Typography as="h3" className="!text-lg !font-normal !leading-5 text-white sm:!text-2xl">
+        <div>
+            <Typography as="h3" className="text-lg/7 text-white sm:text-xl">
                 <Link href={route('products.show', product.slug)}>{product.name}</Link>
             </Typography>
 
             <Typography as="h3" className="!font-normal text-white">
-                <ProductPrice price={product?.price ?? 0} discountPrice={product?.discount?.price ?? null} />
+                <ProductPrice price={product?.price ?? 0} discountPrice={product?.discount?.price ?? null} variant={`light`} />
             </Typography>
         </div>
     </div>

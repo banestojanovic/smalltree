@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Data\PostData;
 use App\Data\ProductData;
-use App\Models\Discount;
 use App\Models\Post;
 use App\Models\Product;
-use App\Models\Variation;
 use App\Settings\GeneralSettings;
 use App\Settings\PromotionSettings;
 use App\Support\Disk;
@@ -40,8 +38,34 @@ class HomeController extends Controller
             ->limit(8)
             ->get());
 
-        $specialOffer = ProductData::from(Product::with('cover')->active()->inRandomOrder()->first());
-        $productOfTheMonth = ProductData::from(Product::with('cover')->active()->inRandomOrder()->first());
+        $teaOfTheMonth = [
+            'title' => $promotion_settings->tea_of_the_month_title['sr'] ?? '',
+            'subtitle' => $promotion_settings->tea_of_the_month_subtitle['sr'] ?? '',
+            'image' => ! empty($promotion_settings->tea_of_the_month_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->tea_of_the_month_image[0]) : asset('site/images/hero_art.webp'),
+            'product' => ProductData::from(Product::with('variations.discount', 'discount', 'cover', 'categories')
+                ->with([
+                    'variations' => function ($query) {
+                        $query->with('variations')
+                            ->select('product_variations.*');
+                    },
+                ])
+                ->active()->when(! empty($promotion_settings->tea_of_the_month_products),
+                    fn ($q) => $q->whereIn('id', $promotion_settings->tea_of_the_month_products))->inRandomOrder()->first()),
+        ];
+        $specialOffer = [
+            'title' => $promotion_settings->special_offer_title['sr'] ?? '',
+            'subtitle' => $promotion_settings->special_offer_subtitle['sr'] ?? '',
+            'image' => ! empty($promotion_settings->special_offer_bg_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->special_offer_bg_image[0]) : asset('site/images/hero_art.webp'),
+            'product' => ProductData::from(Product::with('variations.discount', 'discount', 'cover', 'categories')
+                ->with([
+                    'variations' => function ($query) {
+                        $query->with('variations')
+                            ->select('product_variations.*');
+                    },
+                ])
+                ->active()->when(! empty($promotion_settings->special_offer_products),
+                    fn ($q) => $q->whereIn('id', $promotion_settings->special_offer_products))->inRandomOrder()->first()),
+        ];
 
         $posts = PostData::collect(Post::query()
             ->with('cover', 'categories')
@@ -66,8 +90,8 @@ class HomeController extends Controller
             'popularProducts' => $popularProducts,
             'staffRecommendedProducts' => $staffRecommendedProducts,
             'posts' => $posts,
+            'productOfTheMonth' => $teaOfTheMonth,
             'specialOffer' => $specialOffer,
-            'productOfTheMonth' => $productOfTheMonth,
             'matchRituals' => $matchRituals,
             'mateRituals' => $mateRituals,
             'hero' => [
@@ -77,6 +101,4 @@ class HomeController extends Controller
             ],
         ]);
     }
-
-
 }

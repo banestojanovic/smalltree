@@ -8,6 +8,18 @@ export default {
 
     theme: {
         extend: {
+            container: {
+                screens: {
+                    xl: '1420px',
+                },
+                padding: {
+                    DEFAULT: '1rem',
+                    sm: '2rem',
+                    lg: '4rem',
+                    xl: '3rem',
+                    '2xl': '6rem',
+                },
+            },
             fontFamily: {
                 title: ['Merriweather', ...defaultTheme.fontFamily.sans],
                 sans: ['Montserrat', ...defaultTheme.fontFamily.sans],

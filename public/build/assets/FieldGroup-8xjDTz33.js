@@ -1,1 +1,0 @@
-import{j as s}from"./app-BhTVF_pr.js";import{L as m}from"./FrontendLayout-GVZ6lZ3L.js";function x({label:t,name:r,error:e,children:i}){return s.jsxs("div",{className:"space-y-2",children:[t&&s.jsx(m,{htmlFor:r,children:t}),i,e&&s.jsx("div",{className:"mt-2 text-sm text-red-500",children:e})]})}export{x as F};

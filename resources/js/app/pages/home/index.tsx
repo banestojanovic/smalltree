@@ -22,8 +22,8 @@ const Home = ({
     popularProducts?: App.Data.ProductData[];
     staffRecommendedProducts?: App.Data.ProductData[];
     posts?: App.Data.PostData[];
-    specialOffer: App.Data.ProductData;
-    productOfTheMonth: App.Data.ProductData;
+    specialOffer: { title: string; subtitle: string; image: string; product: App.Data.ProductData };
+    productOfTheMonth: { title: string; subtitle: string; image: string; product: App.Data.ProductData };
     hero: { title: string; subtitle: string; image: string };
 }>) => {
     const { t } = useTranslation();

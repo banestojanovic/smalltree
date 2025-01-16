@@ -17,24 +17,26 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
                     {t('order.on_action')} {product?.discount?.percentage ? `${product.discount.percentage}%` : ''}
                 </span>
             )}
-            <CardHeader className="w-full pb-5">
+            <CardHeader className="flex w-full pb-5">
                 {product.cover?.original_url && (
                     <Link href={route('products.show', { slug: product.slug })}>
-                        <img className="h-60 w-full rounded-lg object-cover p-2 sm:h-56" src={product.cover.original_url} alt={product.name} />
+                        <img className="h-60 w-full rounded-lg object-contain p-2 sm:h-56 md:object-cover" src={product.cover.original_url} alt={product.name} />
                     </Link>
                 )}
-                {product?.category && (
-                    <CardDescription className={`text-sm`}>
-                        <Link key={product.category.id} href={route('categories.show', product.category.slug)} className={`hover:underline`}>
-                            {product.category.name}
-                        </Link>
-                    </CardDescription>
-                )}
-                <CardTitle>
-                    <Typography as="h4" className={`font-normal`}>
-                        <Link href={route('products.show', { slug: product.slug })}>{product.name}</Link>
-                    </Typography>
-                </CardTitle>
+                <div>
+                    {product?.category && (
+                        <CardDescription className={`text-sm`}>
+                            <Link key={product.category.id} href={route('categories.show', product.category.slug)} className={`hover:underline`}>
+                                {product.category.name}
+                            </Link>
+                        </CardDescription>
+                    )}
+                    <CardTitle>
+                        <Typography as="h4" className={`font-normal`}>
+                            <Link href={route('products.show', { slug: product.slug })}>{product.name}</Link>
+                        </Typography>
+                    </CardTitle>
+                </div>
             </CardHeader>
 
             <CardFooter className="mt-auto flex items-center justify-between">
