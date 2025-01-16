@@ -156,7 +156,7 @@ class Product extends Model implements HasMedia, Sortable
     protected static function booted(): void
     {
         static::created(function (Product $product) {
-            if ($product->product_type_id !== 1) {
+            if ((int) $product->product_type_id !== 1) {
                 return null;
             }
 
@@ -182,7 +182,7 @@ class Product extends Model implements HasMedia, Sortable
         });
 
         static::saving(function (Product $product) {
-            if ($product->product_type_id !== 1) {
+            if ((int) $product->product_type_id !== 1) {
                 return null;
             }
 
@@ -232,7 +232,7 @@ class Product extends Model implements HasMedia, Sortable
         });
 
         static::saving(function (Product $product) {
-            if ($product->product_type_id !== 1) {
+            if ((int) $product->product_type_id !== 1) {
                 return null;
             }
             $product->base_price = $product->calculateMinimumPrice();

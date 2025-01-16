@@ -57,7 +57,7 @@ class Discount extends Model
                 return;
             }
 
-            if ($product->product_type_id !== 1) {
+            if ((int) $product->product_type_id !== 1) {
                 return null;
             }
 
