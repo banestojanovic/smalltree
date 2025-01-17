@@ -14,6 +14,7 @@ use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Settings\GeneralSettings;
+use App\Settings\PromotionSettings;
 use App\Support\Disk;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
@@ -36,8 +37,6 @@ class DatabaseSeeder extends Seeder
         Storage::disk('public')->deleteDirectory('post');
         Storage::disk('public')->deleteDirectory('post_category');
         Storage::disk('public')->deleteDirectory('attachments');
-
-        $this->seedAttachments();
 
         User::factory()->superAdmin()->create([
             'email' => 'admin@test.com',
@@ -79,6 +78,8 @@ class DatabaseSeeder extends Seeder
             });
         }
 
+        $this->seedSettings();
+
         return;
 
         // just for testing.
@@ -112,14 +113,24 @@ class DatabaseSeeder extends Seeder
         });
     }
 
-    public function seedAttachments()
+    public function seedSettings()
     {
         $settings = (new GeneralSettings);
+        $promotionSettings = (new PromotionSettings);
 
         $heroImg = $this->copyAttachment('hero.webp');
         $settings->hero_image = [$heroImg];
 
+        $teaOfTheMonthImg = $this->copyAttachment('hero_art.webp');
+        $promotionSettings->tea_of_the_month_bg_image = [$teaOfTheMonthImg];
+        $promotionSettings->tea_of_the_month_products = [Product::whereHas('discount')->inRandomOrder()->first()->id];
+
+        $specialOfferImg = $this->copyAttachment('special_offer.webp');
+        $promotionSettings->special_offer_bg_image = [$specialOfferImg];
+        $promotionSettings->special_offer_products = [Product::inRandomOrder()->first()->id];
+
         $settings->save();
+        $promotionSettings->save();
     }
 
     public function copyAttachment(string $sourceImg)

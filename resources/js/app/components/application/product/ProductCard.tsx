@@ -20,10 +20,10 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
             <CardHeader className="flex w-full pb-5">
                 {product.cover?.original_url && (
                     <Link href={route('products.show', { slug: product.slug })}>
-                        <img className="h-60 w-full rounded-lg object-contain p-2 sm:h-56 md:object-cover" src={product.cover.original_url} alt={product.name} />
+                        <img className="h-60 w-full rounded-lg object-contain p-2 sm:h-56" src={product.cover.original_url} alt={product.name} />
                     </Link>
                 )}
-                <div>
+                <div className={`space-y-2`}>
                     {product?.category && (
                         <CardDescription className={`text-sm`}>
                             <Link key={product.category.id} href={route('categories.show', product.category.slug)} className={`hover:underline`}>

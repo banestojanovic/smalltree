@@ -6,6 +6,8 @@ use Spatie\LaravelSettings\Settings;
 
 class PromotionSettings extends Settings
 {
+    public array $action_products = [];
+
     public array $promoted_products = [];
 
     public array $tea_of_the_month_title;

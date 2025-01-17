@@ -91,6 +91,7 @@ export default function TopNavbar() {
                     <div className="flex w-2/12 items-center justify-center">
                         <Link href="/">
                             <motion.span
+                                initial={{ height: '6rem' }}
                                 animate={{ height: isScrolled ? '3.5rem' : '6rem' }}
                                 transition={{
                                     duration: 0.2,

@@ -15,6 +15,7 @@ class HomeController extends Controller
 {
     public function __invoke(GeneralSettings $settings, PromotionSettings $promotion_settings)
     {
+        $actionProducts = $promotion_settings->action_products;
         $promotedProducts = $promotion_settings->promoted_products;
 
         $popularProducts = ProductData::collect(Product::query()
@@ -27,14 +28,22 @@ class HomeController extends Controller
             ])
             ->active()
             ->orderByDiscount()
-            ->when(! empty($promotedProducts), fn ($q) => $q->orderByRaw('FIELD(id, '.implode(',', $promotedProducts).') DESC'))
+            ->when(! empty($actionProducts), fn ($q) => $q->orderByRaw('FIELD(id, '.implode(',', $actionProducts).') DESC'))
+            ->when(empty($actionProducts), fn ($q) => $q->inRandomOrder())
             ->limit(8)
             ->get());
 
         $staffRecommendedProducts = ProductData::collect(Product::query()
             ->with('variations.discount', 'discount', 'cover', 'categories')
+            ->with([
+                'variations' => function ($query) {
+                    $query->with('variations')
+                        ->select('product_variations.*');
+                },
+            ])
             ->active()
-            ->skip(8)
+            ->when(! empty($promotedProducts), fn ($q) => $q->orderByRaw('FIELD(id, '.implode(',', $promotedProducts).') DESC'))
+            ->when(empty($promotedProducts), fn ($q) => $q->inRandomOrder())
             ->limit(8)
             ->get());
 
@@ -49,8 +58,11 @@ class HomeController extends Controller
                             ->select('product_variations.*');
                     },
                 ])
-                ->active()->when(! empty($promotion_settings->tea_of_the_month_products),
-                    fn ($q) => $q->whereIn('id', $promotion_settings->tea_of_the_month_products))->inRandomOrder()->first()),
+                ->active()
+                ->when(! empty($promotion_settings->tea_of_the_month_products),
+                    fn ($q) => $q->whereIn('id', $promotion_settings->tea_of_the_month_products))
+                ->inRandomOrder()
+                ->first()),
         ];
         $specialOffer = [
             'title' => $promotion_settings->special_offer_title['sr'] ?? '',
@@ -63,8 +75,11 @@ class HomeController extends Controller
                             ->select('product_variations.*');
                     },
                 ])
-                ->active()->when(! empty($promotion_settings->special_offer_products),
-                    fn ($q) => $q->whereIn('id', $promotion_settings->special_offer_products))->inRandomOrder()->first()),
+                ->active()
+                ->when(! empty($promotion_settings->special_offer_products),
+                    fn ($q) => $q->whereIn('id', $promotion_settings->special_offer_products))
+                ->inRandomOrder()
+                ->first()),
         ];
 
         $posts = PostData::collect(Post::query()

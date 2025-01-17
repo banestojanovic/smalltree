@@ -2,6 +2,7 @@ import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { PageProps } from '@/app/types';
 import { router, useForm, usePage } from '@inertiajs/react';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 const CartButton = () => {
@@ -31,9 +32,18 @@ const CartButton = () => {
                     {cart.products.length}
                 </Badge>
             )}
-            <Button variant="ghost" size="icon" onClick={openCart} className="inline-flex size-10 items-center justify-center rounded-full bg-white transition-colors">
-                {isLoading && <span className={`material-symbols-outlined animate-spin text-3xl`}>progress_activity</span>}
-                {!isLoading && <span className={`material-symbols-outlined text-3xl`}>shopping_bag</span>}
+            <Button asChild variant="ghost" size="icon" onClick={openCart} className="inline-flex size-10 items-center justify-center rounded-full bg-white transition-colors">
+                <motion.button
+                    type={`button`}
+                    whileHover={{
+                        scale: 1.1,
+                        transition: { duration: 0.2 },
+                    }}
+                    whileTap={{ scale: 0.8 }}
+                >
+                    {isLoading && <span className={`material-symbols-outlined animate-spin text-3xl`}>progress_activity</span>}
+                    {!isLoading && <span className={`material-symbols-outlined text-3xl`}>shopping_bag</span>}
+                </motion.button>
             </Button>
         </div>
     );

@@ -22,6 +22,12 @@ class PromotionSettingsPage extends SettingsPage
         return $form
             ->schema([
                 Forms\Components\Tabs::make()->tabs([
+                    Forms\Components\Tabs\Tab::make('Proizvodi na akciji')->schema([
+                        Forms\Components\Select::make('action_products')
+                            ->label('Na akciji')
+                            ->options(fn () => Product::all()->pluck('name', 'id')->toArray())
+                            ->multiple(),
+                    ]),
                     Forms\Components\Tabs\Tab::make('Promoted products')->schema([
                         Forms\Components\Select::make('promoted_products')
                             ->label('Promoted Products')

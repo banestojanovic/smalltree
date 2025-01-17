@@ -8,6 +8,18 @@
                 "user": "Korisnik"
             }
         },
+        "product": {
+            "status": {
+                "inactive": "Neaktivno",
+                "active": "Aktivno",
+                "draft": "Nacrt",
+                "trashed": "Izbrisano"
+            },
+            "stock_status": {
+                "out_of_stock": "Nema na stanju",
+                "in_stock": "Na stanju"
+            }
+        },
         "post": {
             "status": {
                 "inactive": "Neaktivno",
@@ -71,9 +83,14 @@
         "sections": {
             "most_popular": {
                 "title": "Akcije i popularni proizvodi",
-                "subtitle": "Proizvodi koji su na akciji, najtraženiji i najprodavaniji"
+                "subtitle": "Proizvodi koji su na akciji, najtraženiji i najprodavaniji",
+                "action": "Pogledaj sve čajeve"
             },
-            "staff_recommended": "Preporuka osoblja",
+            "recommended": {
+                "title": "SmallTree preporuka",
+                "subtitle": "Preporuke našeg osoblja za odabir najboljih čajeva",
+                "action": "Pogledaj sve čajeve"
+            },
             "stores_with_tea": "Priče uz čaj",
             "see_all": "Prikaži sve",
             "read_more": "Pročitaj više"
@@ -88,16 +105,6 @@
     },
     "product": {
         "add_to_cart": "Dodaj u korpu",
-        "status": {
-            "inactive": "Neaktivno",
-            "active": "Aktivno",
-            "draft": "Nacrt",
-            "trashed": "Izbrisano"
-        },
-        "stock_status": {
-            "out_of_stock": "Nema na stanju",
-            "in_stock": "Na stanju"
-        },
         "no_products_available": "Nema dostupnih proizvoda",
         "variations": "Varijacije",
         "free_shipping_over": "Besplatna dostava za porudžbine preko",

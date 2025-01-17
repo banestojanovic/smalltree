@@ -6,12 +6,12 @@ const ProductPrice = ({ price, discountPrice, variant }: { price: number; discou
     return (
         <>
             {discountPrice ? (
-                <div className={`flex items-end ${variant === 'light' ? 'text-xl' : ''}`}>
+                <div className={`flex items-baseline ${variant === 'light' ? 'text-xl' : ''}`}>
                     <span className={`space-x-0.5`}>
                         <span className={`${variant === 'light' ? 'font-light' : 'font-semibold'}`}>{formatNumber(discountPrice)}</span>
                         <span className={`font-light`}>rsd</span>
                     </span>
-                    <span className="ml-3 text-sm font-[500] text-neutral-500 line-through">{formatNumber(price)} rsd</span>
+                    <span className={`ml-3 font-medium line-through ${variant === 'light' ? 'text-white' : 'text-foreground/50 text-sm'}`}>{formatNumber(price)} rsd</span>
                 </div>
             ) : (
                 <div>

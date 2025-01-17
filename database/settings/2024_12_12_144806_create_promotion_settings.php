@@ -5,6 +5,7 @@ use Spatie\LaravelSettings\Migrations\SettingsMigration;
 return new class extends SettingsMigration {
     public function up(): void
     {
+        $this->migrator->add('general.action_products', []);
         $this->migrator->add('general.promoted_products', []);
 
         $this->migrator->add('general.tea_of_the_month_title', ['sr' => 'Čaj meseca']);
