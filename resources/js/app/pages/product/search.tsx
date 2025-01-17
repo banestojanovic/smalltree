@@ -2,7 +2,6 @@ import { Head } from '@inertiajs/react';
 import { ReactNode } from 'react';
 
 import CategoriesSlider from '@/app/components/application/category/CategoriesSlider';
-import TeaRituals from '@/app/components/application/TeaRituals';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import { PaginatedData } from '@/app/types';
 import { useTranslation } from 'react-i18next';
@@ -39,8 +38,6 @@ const ProductsSearchPage = ({
             <ProductsListFilters attributes={attributes} variations={variations} query={query} />
 
             <ProductsList products={products} />
-
-            <TeaRituals />
         </>
     );
 };

@@ -22,6 +22,7 @@ const CartButton = () => {
     const openCart = () => {
         get(route('cart.open'), {
             preserveScroll: true,
+            preserveState: true,
             only: ['auth', 'cart', 'flash', 'global'],
         });
     };

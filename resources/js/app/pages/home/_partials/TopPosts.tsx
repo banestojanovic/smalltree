@@ -1,38 +1,48 @@
-import { Button } from '@/app/components/ui/button';
-import { useTranslation } from 'react-i18next';
-
 import PostCard from '@/app/components/application/blog/PostCard';
+import { Button } from '@/app/components/ui/button';
 import { Typography } from '@/app/components/ui/typography';
 import { PageProps } from '@/app/types';
 import { Link } from '@inertiajs/react';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const TopPosts = ({ posts }: PageProps<{ posts?: App.Data.PostData[] }>) => {
     const { t } = useTranslation();
 
-    return (
+    return posts && posts?.length > 0 ? (
         <section className="mt-10 pb-10 sm:mt-20">
             <div className="container">
                 <h2 className="scroll-m-20 pb-7 text-3xl font-semibold tracking-tight first:mt-0"></h2>
-                <Typography as="h2"> {t('enums.homepage.sections.stores_with_tea')}</Typography>
-                <Typography as="p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto</Typography>
+                <Typography as="h2" className={`sm:text-3xl`}>
+                    {t('homepage.sections.posts.title')}
+                </Typography>
+                <Typography as="p" className={`mt-2 leading-normal text-foreground/80 sm:mt-4`}>
+                    {t('homepage.sections.posts.subtitle')}
+                </Typography>
 
-                <div className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                    {posts && posts.length > 0 ? (
-                        posts.map((post) => <PostCard post={post} key={post.id} />)
-                    ) : (
-                        <Typography as="p" className="">
-                            {t('posts.no_story_available')}
-                        </Typography>
-                    )}
+                <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    {posts?.map((post, index) => (
+                        <motion.div
+                            key={post.id}
+                            initial={{ y: `${index + 50}px` }}
+                            whileInView={{ y: 0 }}
+                            transition={{ type: 'spring', duration: (index + 1) / 4 }}
+                            className={`flex ${index === 0 ? 'max-lg:col-span-full' : ''}`}
+                        >
+                            <PostCard post={post} />
+                        </motion.div>
+                    ))}
                 </div>
 
                 <div className="mt-10 flex items-center justify-center">
-                    <Button asChild className="!px-10">
-                        <Link href={route('posts.index')}>{t('enums.homepage.sections.see_all')}</Link>
+                    <Button asChild className="h-12 px-10">
+                        <Link href={route('posts.index')}>{t('homepage.sections.posts.action')}</Link>
                     </Button>
                 </div>
             </div>
         </section>
+    ) : (
+        <></>
     );
 };
 

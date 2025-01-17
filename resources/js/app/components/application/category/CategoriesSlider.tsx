@@ -64,7 +64,7 @@ const CategoriesSlider = () => {
                         {categories?.map((category, index) => (
                             <motion.div
                                 key={category.id}
-                                initial={{ transform: index <= 3 ? `translateX(${index - 100})` : `translateX(${index + 100})` }}
+                                initial={{ transform: index <= 3 ? `translateX(${index - 100}px)` : `translateX(${index + 100}px)` }}
                                 animate={{ transform: 'translateX(0px)' }}
                                 transition={{ type: 'spring', duration: (index + 1) / 10 }}
                             >

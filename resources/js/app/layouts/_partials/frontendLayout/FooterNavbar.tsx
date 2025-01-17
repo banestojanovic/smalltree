@@ -14,32 +14,24 @@ const FooterNavlinks = () => {
                     <div className="grid w-full grid-cols-1 items-start gap-x-12 gap-y-7 sm:grid-cols-[40%_auto_auto]">
                         <NewsletterSubscription />
 
-                        <div className="">
+                        <div>
                             <Typography as="h4" className="">
                                 {t('footer.our_stores')}
                             </Typography>
 
                             <ul className="mt-7 flex flex-col gap-3">
-                                <li>
-                                    <Typography as="p" className="">
-                                        Store One
-                                    </Typography>
+                                <li className={`text-[15px]`}>
+                                    Store One
                                     <div className="flex items-start gap-x-3">
-                                        <Typography as="p" className="">
-                                            Street Address 23, State 1, Zip Code
-                                        </Typography>
+                                        Street Address 23, State 1, Zip Code
                                         <MapPin />
                                     </div>
                                 </li>
 
-                                <li>
-                                    <Typography as="p" className="">
-                                        Store Two
-                                    </Typography>
+                                <li className={`text-[15px]`}>
+                                    Store One
                                     <div className="flex items-start gap-x-3">
-                                        <Typography as="p" className="">
-                                            Street Address 24, State 1, Zip Code
-                                        </Typography>
+                                        Street Address 23, State 1, Zip Code
                                         <MapPin />
                                     </div>
                                 </li>
@@ -51,7 +43,7 @@ const FooterNavlinks = () => {
                                 {t('footer.additional_info')}
                             </Typography>
 
-                            <ul className="mt-7 flex flex-col gap-3">
+                            <ul className="mt-7 flex flex-col gap-2 text-[15px]">
                                 <li>
                                     <Link href={'#'}>About us</Link>
                                 </li>

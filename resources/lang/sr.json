@@ -96,16 +96,19 @@
                 "subtitle": "Veliki izbor pribora za pripremu i uživanje u šoljici čaja",
                 "action": "Pogledaj sav pribor"
             },
+            "posts": {
+                "title": "Ćaskanja i priče",
+                "subtitle": "Priče i blogovi o čajevima, zdravlju i načinu života",
+                "action": "Pogledaj sve priče"
+            },
             "stores_with_tea": "Priče uz čaj",
             "see_all": "Prikaži sve",
             "read_more": "Pročitaj više"
-        },
-        "tea_ritual": {
-            "your_matcha_ritual": "Vaš MATCHA ritual",
-            "your_mate_ritual": "Vaš MATE ritual",
-            "tea_mug": "Šolja za čaj",
-            "set": "Set",
-            "purchase": "Kupi"
+        }
+    },
+    "cards": {
+        "posts": {
+            "action": "Pročitaj više"
         }
     },
     "product": {
@@ -127,11 +130,15 @@
     "cart": {
         "cart": "Korpa",
         "item_added_to_cart": "Proizvod je dodat u korpu",
+        "items_added_to_cart": "Proizvodi su dodati u korpu",
         "item_removed_from_cart": "Proizvod je uklonjen iz korpe",
         "item_quantity_updated": "Količina proizvoda je ažurirana",
         "item_quantity_not_updated": "Količina proizvoda nije ažurirana",
         "item_out_of_stock": "Proizvod je trenutno nedostupan",
-        "item_quantity_exceeds_stock": "Količina premašuje stanje na lageru",
+        "specific_item_out_of_stock": "Proizvod :product je trenutno nedostupan",
+        "specific_item_quantity_exceeds_stock": "Količina proizvoda :product premašuje stanje na lageru",
+        "specific_item_price_invalid": "Cena proizvoda :product nije validna",
+        "item_quantity_exceeds_stock": "",
         "cart_empty": "Korpa je prazna",
         "check_out": "Plaćanje",
         "remove": "Ukloni",
@@ -185,7 +192,7 @@
         "products_search": "Pretraga proizvoda"
     },
     "shopping_benefits": {
-        "shop_with_us": "Kupujte kod nas",
+        "shop_with_us": "Kupovina kod nas",
         "benefit_of_buying": "Prednosti kupovine SmallTree čajeva",
         "benefit1": "Besplatna dostava za sve porudžbine preko 10,000",
         "benefit2": "Povraćaj novca u roku od 14 dana od plaćanja",
@@ -194,7 +201,7 @@
     "newsletter": {
         "title": "Uštedite 10% na svakoj kupovini!",
         "subscribe": "Prijavite se",
-        "email_placeholder": "Unesite vašu e-poštu",
+        "email_placeholder": "Upišite vaš email...",
         "button_text": "Prijavite se na SmallTree newsletter"
     },
     "footer": {

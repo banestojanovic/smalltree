@@ -1,68 +1,55 @@
-import AddToCartButton from '@/app/components/application/product/AddToCartButton';
+import AddGroupedProductsToCartButton from '@/app/components/application/product/AddGroupedProductsToCartButton';
 import PromotionCard from '@/app/components/application/product/PomotionCard';
-import { ProductQuickViewModal } from '@/app/components/application/product/ProductQuickViewModal';
 import PromotionCardItem from '@/app/components/application/product/PromotionCardItem';
 import { PageProps } from '@/app/types';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 const Promotions = ({
-    specialOffer,
-    productOfTheMonth,
+    promoPackages,
 }: PageProps<{
-    specialOffer: { title: string; subtitle: string; image: string; product: App.Data.ProductData };
-    productOfTheMonth: { title: string; subtitle: string; image: string; product: App.Data.ProductData };
+    promoPackages?: {
+        title: Record<string, string>;
+        subtitle: Record<string, string>;
+        bg_image: string;
+        products: App.Data.ProductData[];
+    }[];
 }>) => {
     const { t } = useTranslation();
 
     return (
-        <section className="mt-10 h-full sm:mt-20">
+        <section className="mt-10 h-full overflow-hidden sm:mt-20">
             <div className="grid md:grid-cols-2">
-                {productOfTheMonth && (
-                    <motion.div initial={{ transform: `translateX(-20%)` }} whileInView={{ transform: 'translateX(0)' }} transition={{ type: 'spring', duration: 0.3 }} className={``}>
+                {promoPackages?.map((promoPackage, index) => (
+                    <motion.div key={index} initial={{ x: index % 2 !== 0 ? `20%` : `-20%` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.3 }}>
                         <PromotionCard
-                            title={productOfTheMonth?.title ?? t('homepage.promotions.tea_of_the_month')}
-                            description={productOfTheMonth?.subtitle ?? t('homepage.promotions.tea_of_the_month_description')}
-                            bgImageSrc={productOfTheMonth.image ?? ''}
-                            cardClass={`md:min-h-[513px]`}
+                            title={promoPackage?.title?.sr ?? t('homepage.promotions.tea_of_the_month')}
+                            description={promoPackage?.subtitle?.sr ?? t('homepage.promotions.tea_of_the_month_description')}
+                            bgImageSrc={promoPackage?.bg_image ?? ''}
+                            cardClass={`lg:min-h-[513px]`}
+                            variant={`package`}
                         >
-                            <div className="mt-7 items-center justify-between md:mt-auto md:flex">
-                                <PromotionCardItem product={productOfTheMonth.product} />
-
-                                <div className="flex items-center justify-end">
-                                    {productOfTheMonth.product.variations && productOfTheMonth.product.variations.length > 0 ? (
-                                        <ProductQuickViewModal product={productOfTheMonth.product} />
-                                    ) : (
-                                        <AddToCartButton variant="secondary" product={productOfTheMonth.product} productVariantId={null} />
-                                    )}
+                            <div className="flex items-end justify-between pt-6 lg:gap-20">
+                                <div className={`flex flex-col space-y-6`}>
+                                    {promoPackage.products.map((product: App.Data.ProductData, key: number) => (
+                                        <PromotionCardItem key={key} product={product} />
+                                    ))}
                                 </div>
+
+                                <motion.div
+                                    whileHover={{
+                                        scale: 1.03,
+                                        transition: { duration: 0.2 },
+                                    }}
+                                    whileTap={{ scale: 0.9 }}
+                                    className="flex items-center justify-end lg:-mb-10"
+                                >
+                                    <AddGroupedProductsToCartButton variant="secondary" products={promoPackage.products ?? []} />
+                                </motion.div>
                             </div>
                         </PromotionCard>
                     </motion.div>
-                )}
-
-                {specialOffer && (
-                    <motion.div initial={{ transform: `translateX(20%)` }} whileInView={{ transform: 'translateX(0)' }} transition={{ type: 'spring', duration: 0.3 }} className={``}>
-                        <PromotionCard
-                            title={specialOffer?.title ?? t('homepage.promotions.tea_of_the_month')}
-                            description={specialOffer?.subtitle ?? t('homepage.promotions.tea_of_the_month_description')}
-                            bgImageSrc={specialOffer.image ?? ''}
-                            cardClass={`md:min-h-[513px]`}
-                        >
-                            <div className="mt-7 items-center justify-between md:mt-auto md:flex">
-                                <PromotionCardItem product={specialOffer.product} />
-
-                                <div className="flex items-center justify-end">
-                                    {specialOffer.product.variations && specialOffer.product.variations.length > 0 ? (
-                                        <ProductQuickViewModal product={specialOffer.product} />
-                                    ) : (
-                                        <AddToCartButton variant="secondary" product={specialOffer.product} productVariantId={null} />
-                                    )}
-                                </div>
-                            </div>
-                        </PromotionCard>
-                    </motion.div>
-                )}
+                ))}
             </div>
         </section>
     );

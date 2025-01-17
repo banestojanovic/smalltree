@@ -14,14 +14,14 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
             <MainNavbar />
 
             {header && (
-                <header className="">
+                <header>
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{header}</div>
                 </header>
             )}
 
             <main>{children}</main>
 
-            <footer className={route().current() !== 'home' ? '' : ''}>
+            <footer>
                 <TeaShopBenefits />
                 <FooterNavlinks />
             </footer>

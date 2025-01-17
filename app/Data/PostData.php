@@ -5,6 +5,7 @@ namespace App\Data;
 use App\PostStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
@@ -14,6 +15,9 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PostData extends Data
 {
+    #[Computed]
+    public string $excerpt;
+
     public function __construct(
         public int $id,
         public string $name,
@@ -25,5 +29,7 @@ class PostData extends Data
         public string $date_created,
         #[DataCollectionOf(PostCategoryData::class)]
         public ?Collection $categories,
-    ) {}
+    ) {
+        $this->excerpt = substr($this->content, 0, 100);
+    }
 }

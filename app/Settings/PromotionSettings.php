@@ -28,6 +28,8 @@ class PromotionSettings extends Settings
 
     public array $special_offer_bg_image;
 
+    public array $promo_packages;
+
     public static function group(): string
     {
         return 'general';

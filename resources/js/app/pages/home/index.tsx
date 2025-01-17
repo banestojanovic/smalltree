@@ -1,7 +1,7 @@
 import CategoriesSlider from '@/app/components/application/category/CategoriesSlider';
-import TeaRituals from '@/app/components/application/TeaRituals';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import ProductsSection from '@/app/pages/home/_partials/ProductsSection';
+import PromotionsFull from '@/app/pages/home/_partials/PromotionsFull';
 import { PageProps } from '@/app/types';
 import { Head } from '@inertiajs/react';
 import { ReactNode } from 'react';
@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next';
 import Hero from './_partials/Hero';
 import Promotions from './_partials/Promotions';
 import TopPosts from './_partials/TopPosts';
-import PromotionsFull from '@/app/pages/home/_partials/PromotionsFull';
 
 const Home = ({
     popularProducts,
@@ -19,6 +18,7 @@ const Home = ({
     specialOffer,
     productOfTheMonth,
     hero,
+    promoPackages,
 }: PageProps<{
     popularProducts?: App.Data.ProductData[];
     staffRecommendedProducts?: App.Data.ProductData[];
@@ -27,6 +27,12 @@ const Home = ({
     specialOffer: { title: string; subtitle: string; image: string; product: App.Data.ProductData };
     productOfTheMonth: { title: string; subtitle: string; image: string; product: App.Data.ProductData };
     hero: { title: string; subtitle: string; image: string };
+    promoPackages?: {
+        title: Record<string, string>;
+        subtitle: Record<string, string>;
+        bg_image: string;
+        products: App.Data.ProductData[];
+    }[];
 }>) => {
     const { t } = useTranslation();
 
@@ -63,8 +69,7 @@ const Home = ({
                     link: route('search.sets'),
                 }}
             />
-            <PromotionsFull specialOffer={specialOffer} productOfTheMonth={productOfTheMonth} />
-            {/*<TeaRituals matchRitual={staffRecommendedProducts} mateRitual={staffRecommendedProducts} />*/}
+            <PromotionsFull promoPackages={promoPackages} />
             <TopPosts posts={posts} />
         </>
     );

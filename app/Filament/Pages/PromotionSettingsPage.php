@@ -22,12 +22,13 @@ class PromotionSettingsPage extends SettingsPage
         return $form
             ->schema([
                 Forms\Components\Tabs::make()->tabs([
-                    Forms\Components\Tabs\Tab::make('Proizvodi na akciji')->schema([
-                        Forms\Components\Select::make('action_products')
-                            ->label('Na akciji')
-                            ->options(fn () => Product::all()->pluck('name', 'id')->toArray())
-                            ->multiple(),
-                    ]),
+                    Forms\Components\Tabs\Tab::make('Proizvodi na akciji')
+                        ->schema([
+                            Forms\Components\Select::make('action_products')
+                                ->label('Na akciji')
+                                ->options(fn () => Product::all()->pluck('name', 'id')->toArray())
+                                ->multiple(),
+                        ]),
                     Forms\Components\Tabs\Tab::make('Promoted products')->schema([
                         Forms\Components\Select::make('promoted_products')
                             ->label('Promoted Products')
@@ -77,6 +78,27 @@ class PromotionSettingsPage extends SettingsPage
                             ->label('Pribor za čaj')
                             ->options(fn () => Product::where('product_type_id', 2)->get()->pluck('name', 'id')->toArray())
                             ->multiple(),
+                    ]),
+                    Forms\Components\Tabs\Tab::make('Promo Paketi')->schema([
+                        Forms\Components\Repeater::make('promo_packages')->schema([
+                            Forms\Components\TextInput::make('title.sr')
+                                ->label('Title'),
+                            Forms\Components\TextInput::make('subtitle.sr')
+                                ->label('Podnaslov'),
+                            Forms\Components\Select::make('products')
+                                ->label('Promoted Products')
+                                ->options(fn () => Product::all()->pluck('name', 'id')->toArray())
+                                ->multiple(),
+                            Forms\Components\FileUpload::make('bg_image')
+                                ->openable()
+                                ->reorderable()
+                                ->multiple()
+                                ->image()
+                                ->panelLayout('grid')
+                                ->appendFiles()
+                                ->disk(Disk::Attachments)
+                                ->columnSpanFull(),
+                        ]),
                     ]),
                 ])->columnSpanFull()->contained(false),
             ]);

@@ -33,16 +33,10 @@ const ProductsSection = ({
                     </Typography>
                 )}
 
-                <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
                     {products && products.length > 0 ? (
                         products.map((product, index) => (
-                            <motion.div
-                                key={product.id}
-                                initial={{ transform: `translateY(${index + 50})` }}
-                                whileInView={{ transform: 'translateY(0px)' }}
-                                transition={{ type: 'spring', duration: (index + 1) / 4 }}
-                                className={`flex`}
-                            >
+                            <motion.div key={product.id} initial={{ y: `${index + 50}px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: (index + 1) / 4 }} className={`flex`}>
                                 <ProductCard product={product} key={product.id} />
                             </motion.div>
                         ))
@@ -53,7 +47,7 @@ const ProductsSection = ({
 
                 {action && action?.title && action?.link && (
                     <div className="mt-10 flex items-center justify-center">
-                        <Button asChild className="px-10">
+                        <Button asChild className="h-12 px-10">
                             <Link href={action.link}>{action.title}</Link>
                         </Button>
                     </div>

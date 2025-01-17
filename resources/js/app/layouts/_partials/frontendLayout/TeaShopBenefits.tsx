@@ -6,8 +6,8 @@ const RelatedProducts = () => {
 
     return (
         <div className="bg-gray text-white">
-            <div className="container mt-7 flex w-full items-center py-20 lg:justify-center">
-                <div className="grid w-full grid-cols-1 gap-7 sm:grid-cols-4 sm:place-items-center">
+            <div className="container flex w-full items-center py-10 md:py-20 lg:justify-center">
+                <div className="grid w-full grid-cols-1 gap-7 xl:grid-cols-4 xl:gap-14">
                     <div className="">
                         <Typography as="h2" className="">
                             {t('shopping_benefits.shop_with_us')}
@@ -18,7 +18,7 @@ const RelatedProducts = () => {
                         </Typography>
                     </div>
 
-                    <div className="">
+                    <div className="col-span-3 grid gap-4 md:grid-cols-3">
                         <div className="flex items-center gap-x-4">
                             <span>
                                 <svg className="!size-11 sm:!size-16" viewBox="0 0 62 44" fill="currentFill" xmlns="http://www.w3.org/2000/svg">
@@ -32,9 +32,7 @@ const RelatedProducts = () => {
                                 {t('shopping_benefits.benefit1')}
                             </Typography>
                         </div>
-                    </div>
 
-                    <div className="">
                         <div className="flex items-center gap-x-4">
                             <span>
                                 <svg className="!size-11 sm:!size-16" fill="none" viewBox="0 0 49 44" xmlns="http://www.w3.org/2000/svg">
@@ -62,9 +60,7 @@ const RelatedProducts = () => {
                                 {t('shopping_benefits.benefit2')}
                             </Typography>
                         </div>
-                    </div>
 
-                    <div className="">
                         <div className="flex items-center gap-x-4">
                             <span>
                                 <svg className="!size-11 sm:!size-16" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">

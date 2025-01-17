@@ -144,7 +144,7 @@ export default function TopNavbar() {
                                     strokeLinejoin="round"
                                 />
                             </svg>
-                            <span>office@smalltrees.rs</span>
+                            <span>office@smalltree.rs</span>
                         </a>
 
                         <Link href={route('contact.show')} target="_blank" className="flex items-center justify-center gap-x-1 text-xs">
@@ -170,7 +170,7 @@ export default function TopNavbar() {
             </div>
 
             <motion.div
-                animate={{ height: isScrolled ? 'auto' : '0', className: isScrolled ? 'grid md:hidden' : 'none' }}
+                animate={{ height: isScrolled ? 'auto' : '0', className: isScrolled ? 'grid md:hidden' : '' }}
                 initial={{ transform: `translateY(10%)` }}
                 whileInView={{ transform: 'translateY(0px)' }}
                 transition={{ type: 'spring' }}

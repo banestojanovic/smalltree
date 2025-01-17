@@ -120,6 +120,7 @@ description: string | null;
 cover: any | null;
 };
 export type PostData = {
+excerpt: string;
 id: number;
 name: string;
 slug: string;

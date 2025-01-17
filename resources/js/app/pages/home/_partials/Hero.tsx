@@ -15,22 +15,22 @@ const Hero = ({ hero }: { hero: { title: string; subtitle: string; image: string
 
             <div className="relative z-10 h-full max-lg:py-12 lg:h-[395px]">
                 <div className="container flex h-full items-center text-white">
-                    <div className="">
+                    <div>
                         {hero?.subtitle && (
-                            <motion.div initial={{ transform: `translateY(-30%)` }} animate={{ transform: 'translateY(0)' }} transition={transition}>
+                            <motion.div initial={{ y: `-30%` }} animate={{ y: 0 }} transition={transition}>
                                 <Typography as="p" className="mb-4 font-normal max-lg:text-sm">
                                     {hero.subtitle}
                                 </Typography>
                             </motion.div>
                         )}
                         {hero?.title && (
-                            <motion.div initial={{ transform: `translateX(10%)` }} animate={{ transform: 'translateX(0)' }} transition={transition}>
+                            <motion.div initial={{ x: `4%` }} animate={{ x: 0 }} transition={transition}>
                                 <Typography as="h1" className="font-normal tracking-normal">
                                     {hero.title}
                                 </Typography>
                             </motion.div>
                         )}
-                        <motion.div initial={{ transform: `translateY(30%)` }} animate={{ transform: 'translateY(0)' }} transition={transition}>
+                        <motion.div initial={{ y: `30%` }} animate={{ y: '0' }} transition={transition}>
                             <div className="relative -mx-0.5 mt-7 inline-flex overflow-hidden rounded-lg p-0.5">
                                 <span className="absolute inline-flex size-full rounded-lg bg-primary opacity-50 motion-safe:animate-ping"></span>
                                 <Button asChild type={`button`} className={`relative z-10 h-12 hover:bg-primary hover:brightness-95`}>

@@ -13,6 +13,7 @@ Route::get('/kategorije/{slug}', [\App\Http\Controllers\CategoryController::clas
 
 Route::get('/korpa', [\App\Http\Controllers\CartController::class, 'open'])->name('cart.open');
 Route::post('/korpa/update', [\App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
+Route::post('/korpa/update-grouped', [\App\Http\Controllers\CartController::class, 'storeGrouped'])->name('cart.store_grouped');
 Route::put('/kopra/update-quantity', [\App\Http\Controllers\CartController::class, 'updateQuantity'])->name('cart.update');
 Route::delete('/korpa/remove-product', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
 
