@@ -38,6 +38,7 @@ const AddToCartButton = ({
     const updateCart = () => {
         post(route('cart.store'), {
             preserveScroll: true,
+            only: ['auth', 'cart', 'flash', 'global'],
         });
     };
 

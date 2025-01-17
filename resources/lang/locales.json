@@ -298,6 +298,11 @@
                         "subtitle": "Preporuke našeg osoblja za odabir najboljih čajeva",
                         "action": "Pogledaj sve čajeve"
                     },
+                    "sets": {
+                        "title": "Pribor za čaj",
+                        "subtitle": "Veliki izbor pribora za pripremu i uživanje u šoljici čaja",
+                        "action": "Pogledaj sav pribor"
+                    },
                     "stores_with_tea": "Priče uz čaj",
                     "see_all": "Prikaži sve",
                     "read_more": "Pročitaj više"

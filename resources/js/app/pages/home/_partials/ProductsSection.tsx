@@ -41,7 +41,6 @@ const ProductsSection = ({
                                 initial={{ transform: `translateY(${index + 50})` }}
                                 whileInView={{ transform: 'translateY(0px)' }}
                                 transition={{ type: 'spring', duration: (index + 1) / 4 }}
-                                viewport={{ once: true }}
                                 className={`flex`}
                             >
                                 <ProductCard product={product} key={product.id} />

@@ -4,6 +4,7 @@ import { ProductQuickViewModal } from '@/app/components/application/product/Prod
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { PageProps } from '@/app/types';
 import { Link } from '@inertiajs/react';
+import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '../../ui/typography';
 
@@ -41,13 +42,20 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
 
             <CardFooter className="mt-auto flex items-center justify-between">
                 <ProductPrice price={product?.price ?? 0} discountPrice={product?.discount?.price ?? null} />
-                <div className="inline-flex items-center justify-end">
+                <motion.div
+                    whileHover={{
+                        scale: 1.03,
+                        transition: { duration: 0.2 },
+                    }}
+                    whileTap={{ scale: 0.9 }}
+                    className={`inline-flex items-center justify-end`}
+                >
                     {product.variations && product.variations.length > 0 ? (
                         <ProductQuickViewModal product={product} />
                     ) : (
                         <AddToCartButton variant="secondary" product={product} productVariantId={null} />
                     )}
-                </div>
+                </motion.div>
             </CardFooter>
         </Card>
     );

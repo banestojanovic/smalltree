@@ -72,7 +72,13 @@ class PromotionSettingsPage extends SettingsPage
                             ->disk(Disk::Attachments)
                             ->columnSpanFull(),
                     ]),
-                ])->contained(false),
+                    Forms\Components\Tabs\Tab::make('Promovisani pribor')->schema([
+                        Forms\Components\Select::make('promoted_product_sets')
+                            ->label('Pribor za čaj')
+                            ->options(fn () => Product::where('product_type_id', 2)->get()->pluck('name', 'id')->toArray())
+                            ->multiple(),
+                    ]),
+                ])->columnSpanFull()->contained(false),
             ]);
     }
 }

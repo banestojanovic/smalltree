@@ -8,12 +8,13 @@ import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import Hero from './_partials/Hero';
 import Promotions from './_partials/Promotions';
-import RecommendedProducts from './_partials/RecommendedProducts';
 import TopPosts from './_partials/TopPosts';
+import PromotionsFull from '@/app/pages/home/_partials/PromotionsFull';
 
 const Home = ({
     popularProducts,
     staffRecommendedProducts,
+    teaSets,
     posts,
     specialOffer,
     productOfTheMonth,
@@ -21,6 +22,7 @@ const Home = ({
 }: PageProps<{
     popularProducts?: App.Data.ProductData[];
     staffRecommendedProducts?: App.Data.ProductData[];
+    teaSets?: App.Data.ProductData[];
     posts?: App.Data.PostData[];
     specialOffer: { title: string; subtitle: string; image: string; product: App.Data.ProductData };
     productOfTheMonth: { title: string; subtitle: string; image: string; product: App.Data.ProductData };
@@ -52,8 +54,17 @@ const Home = ({
                     link: route('search.teas'),
                 }}
             />
-            <RecommendedProducts products={staffRecommendedProducts} />
-            <TeaRituals matchRitual={staffRecommendedProducts} mateRitual={staffRecommendedProducts} />
+            <ProductsSection
+                products={teaSets}
+                title={t('homepage.sections.sets.title')}
+                subtitle={t('homepage.sections.sets.subtitle')}
+                action={{
+                    title: t('homepage.sections.sets.action'),
+                    link: route('search.sets'),
+                }}
+            />
+            <PromotionsFull specialOffer={specialOffer} productOfTheMonth={productOfTheMonth} />
+            {/*<TeaRituals matchRitual={staffRecommendedProducts} mateRitual={staffRecommendedProducts} />*/}
             <TopPosts posts={posts} />
         </>
     );

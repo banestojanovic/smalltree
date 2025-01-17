@@ -7,6 +7,7 @@ return new class extends SettingsMigration {
     {
         $this->migrator->add('general.action_products', []);
         $this->migrator->add('general.promoted_products', []);
+        $this->migrator->add('general.promoted_product_sets', []);
 
         $this->migrator->add('general.tea_of_the_month_title', ['sr' => 'Čaj meseca']);
         $this->migrator->add('general.tea_of_the_month_subtitle', ['sr' => 'Ovaj mesec je najviše njih uživalo u ovom čaju']);

@@ -17,6 +17,7 @@ class HomeController extends Controller
     {
         $actionProducts = $promotion_settings->action_products;
         $promotedProducts = $promotion_settings->promoted_products;
+        $promotedSets = $promotion_settings->promoted_product_sets;
 
         $popularProducts = ProductData::collect(Product::query()
             ->with('variations.discount', 'discount', 'cover', 'categories')
@@ -45,6 +46,21 @@ class HomeController extends Controller
             ->when(! empty($promotedProducts), fn ($q) => $q->orderByRaw('FIELD(id, '.implode(',', $promotedProducts).') DESC'))
             ->when(empty($promotedProducts), fn ($q) => $q->inRandomOrder())
             ->limit(8)
+            ->get());
+
+        $teaSets = ProductData::collect(Product::query()
+            ->with('variations.discount', 'discount', 'cover', 'categories')
+            ->with([
+                'variations' => function ($query) {
+                    $query->with('variations')
+                        ->select('product_variations.*');
+                },
+            ])
+            ->where('product_type_id', 2)
+            ->active()
+            ->when(! empty($promotedSets), fn ($q) => $q->orderByRaw('FIELD(id, '.implode(',', $promotedSets).') DESC'))
+            ->when(empty($promotedSets), fn ($q) => $q->inRandomOrder())
+            ->limit(4)
             ->get());
 
         $teaOfTheMonth = [
@@ -104,6 +120,7 @@ class HomeController extends Controller
         return inertia('home/index', [
             'popularProducts' => $popularProducts,
             'staffRecommendedProducts' => $staffRecommendedProducts,
+            'teaSets' => $teaSets,
             'posts' => $posts,
             'productOfTheMonth' => $teaOfTheMonth,
             'specialOffer' => $specialOffer,

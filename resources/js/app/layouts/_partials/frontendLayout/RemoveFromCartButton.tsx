@@ -25,6 +25,7 @@ export default function RemoveFromCartButton({ product }: { product: App.Data.Ca
     const updateCart = () => {
         submit('delete', route('cart.remove'), {
             preserveScroll: true,
+            only: ['auth', 'cart', 'flash', 'global'],
         });
     };
 

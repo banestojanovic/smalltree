@@ -10,6 +10,8 @@ class PromotionSettings extends Settings
 
     public array $promoted_products = [];
 
+    public array $promoted_product_sets = [];
+
     public array $tea_of_the_month_title;
 
     public array $tea_of_the_month_subtitle;

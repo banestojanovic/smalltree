@@ -22,29 +22,29 @@ const CartButton = () => {
     const openCart = () => {
         get(route('cart.open'), {
             preserveScroll: true,
+            only: ['auth', 'cart', 'flash', 'global'],
         });
     };
 
     return (
         <div className="hover:scale-10 relative transition">
-            {cart?.products && cart.products.length > 0 && (
-                <Badge variant={'destructive'} className="absolute -right-2 -top-1 inline-flex size-5 items-center justify-center rounded-full text-xs">
-                    {cart.products.length}
-                </Badge>
-            )}
-            <Button asChild variant="ghost" size="icon" onClick={openCart} className="inline-flex size-10 items-center justify-center rounded-full bg-white transition-colors">
-                <motion.button
-                    type={`button`}
-                    whileHover={{
-                        scale: 1.1,
-                        transition: { duration: 0.2 },
-                    }}
-                    whileTap={{ scale: 0.8 }}
-                >
+            <motion.div
+                whileHover={{
+                    scale: 1.04,
+                    transition: { duration: 0.2 },
+                }}
+                whileTap={{ scale: 0.8 }}
+            >
+                {cart?.products && cart.products.length > 0 && (
+                    <Badge variant={'destructive'} className="absolute -right-2 -top-1 inline-flex size-5 items-center justify-center rounded-full text-xs">
+                        {cart.products.length}
+                    </Badge>
+                )}
+                <Button variant="ghost" size="icon" onClick={openCart} className="inline-flex size-10 items-center justify-center rounded-full bg-white transition-colors">
                     {isLoading && <span className={`material-symbols-outlined animate-spin text-3xl`}>progress_activity</span>}
                     {!isLoading && <span className={`material-symbols-outlined text-3xl`}>shopping_bag</span>}
-                </motion.button>
-            </Button>
+                </Button>
+            </motion.div>
         </div>
     );
 };
