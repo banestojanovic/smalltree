@@ -1,5 +1,7 @@
 import CartButton from '@/app/components/application/product/CartButton';
 import ApplicationLogo from '@/app/components/ApplicationLogo';
+import MobileMenu from '@/app/layouts/_partials/frontendLayout/MobileMenu';
+import MobileProductSearch from '@/app/layouts/_partials/frontendLayout/MobileProductSearch';
 import { PageProps } from '@/app/types';
 import { Link, usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
@@ -109,10 +111,14 @@ export default function TopNavbar() {
                     </div>
                 </div>
 
-                <div className="py-2 md:hidden">
-                    <div className={`flex justify-around gap-1`}>
-                        <a href="tel:+3810113820466" className="flex items-center justify-center gap-x-1 text-xs">
-                            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-2.5 max-sm:hidden`}>
+                <div className="grid grid-cols-2 items-center md:hidden">
+                    <Link href="/" className={`relative flex size-full items-center justify-center`}>
+                        <ApplicationLogo className="flex size-24 fill-primary" />
+                    </Link>
+
+                    <div className={`flex flex-col gap-4`}>
+                        <a href="tel:+3810113820466" className="flex items-center gap-x-1 text-xs">
+                            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-2.5`}>
                                 <path
                                     d="M15.3986 11.1774L11.4635 9.41658C11.311 9.35056 11.1444 9.32361 10.9788 9.33816C10.8132 9.35271 10.6538 9.40831 10.5152 9.49992C10.5041 9.50695 10.4935 9.51475 10.4835 9.52325L8.41679 11.2849C8.3708 11.313 8.3186 11.3293 8.26481 11.3323C8.21103 11.3354 8.15732 11.3251 8.10845 11.3024C6.7551 10.6491 5.35425 9.25908 4.70091 7.92157C4.6778 7.87306 4.66707 7.81959 4.66969 7.76593C4.6723 7.71226 4.68818 7.66009 4.71591 7.61406L6.4826 5.51321C6.49093 5.50321 6.49843 5.49237 6.50593 5.48154C6.59726 5.34304 6.65269 5.18399 6.66724 5.01873C6.68179 4.85347 6.65499 4.68719 6.58927 4.53486L4.82508 0.606484C4.73991 0.40752 4.59249 0.241557 4.40496 0.133517C4.21743 0.0254765 3.99991 -0.018809 3.78506 0.00731057C2.73635 0.145579 1.77384 0.66087 1.0773 1.45694C0.380755 2.25301 -0.00218332 3.27542 9.36447e-06 4.33319C9.36447e-06 10.7666 5.23341 16 11.6668 16C12.7246 16.0022 13.747 15.6192 14.5431 14.9227C15.3392 14.2262 15.8545 13.2637 15.9927 12.2149C16.0187 12.0011 15.9748 11.7846 15.8678 11.5976C15.7607 11.4107 15.5961 11.2633 15.3986 11.1774ZM15.3336 12.1316C15.2159 13.0197 14.7788 13.8346 14.1039 14.4239C13.4291 15.0131 12.5627 15.3364 11.6668 15.3333C5.60175 15.3333 0.666685 10.3983 0.666685 4.33319C0.663582 3.4373 0.98688 2.57095 1.57614 1.89612C2.16539 1.22128 2.98026 0.784163 3.8684 0.666485C3.88172 0.665684 3.89507 0.665684 3.9084 0.666485C3.97416 0.667045 4.03828 0.687046 4.09271 0.723969C4.14713 0.760892 4.18941 0.813088 4.21423 0.873987L5.97342 4.80236C5.99395 4.85038 6.00291 4.90254 5.99958 4.95465C5.99625 5.00676 5.98073 5.05736 5.95426 5.10237L4.1884 7.20239C4.18007 7.21323 4.17173 7.22323 4.16423 7.23489C4.07016 7.37876 4.01475 7.54444 4.00336 7.71596C3.99198 7.88748 4.025 8.05903 4.09923 8.21407C4.82341 9.69659 6.31676 11.1791 7.81595 11.9033C7.97205 11.977 8.14458 12.0091 8.31676 11.9964C8.48893 11.9837 8.65488 11.9266 8.79846 11.8308L8.8293 11.8074L10.8985 10.0474C10.9428 10.0204 10.9928 10.0042 11.0445 10.0003C11.0963 9.99642 11.1482 10.0048 11.196 10.0249L15.1302 11.7883C15.1966 11.8159 15.2523 11.8643 15.2889 11.9262C15.3256 11.988 15.3412 12.0601 15.3336 12.1316Z"
                                     fill="black"
@@ -120,8 +126,8 @@ export default function TopNavbar() {
                             </svg>
                             <span>0113820466</span>
                         </a>
-                        <a href="mailto:office@smalltree.rs" target="_blank" className="flex items-center justify-center gap-x-1 text-xs" rel="noreferrer">
-                            <svg viewBox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-3 shrink-0 max-sm:hidden`}>
+                        <a href="mailto:office@smalltree.rs" target="_blank" className="flex items-center gap-x-1 text-xs" rel="noreferrer">
+                            <svg viewBox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-3 shrink-0`}>
                                 <path
                                     d="M1.2167 12.4298C1.0837 12.1936 1 11.8813 1 11.5455V1.44264M20 1.42313V11.546C20 11.8736 19.924 12.1746 19.791 12.4108M7.05689 7.04096L8.75765 8.61488C8.84905 8.69841 8.94029 8.77082 9.03135 8.8321C9.95568 9.51815 11.0325 9.51815 11.9532 8.82799C12.0405 8.7674 12.1325 8.69088 12.2162 8.61488L13.9282 7.03326"
                                     stroke="black"
@@ -147,8 +153,8 @@ export default function TopNavbar() {
                             <span>office@smalltree.rs</span>
                         </a>
 
-                        <Link href={route('contact.show')} target="_blank" className="flex items-center justify-center gap-x-1 text-xs">
-                            <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-3 max-sm:hidden`}>
+                        <Link href={route('contact.show')} target="_blank" className="flex items-center gap-x-1 text-xs">
+                            <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-3`}>
                                 <path
                                     d="M7 4C6.40666 4 5.82664 4.17595 5.33329 4.50559C4.83994 4.83524 4.45542 5.30377 4.22836 5.85195C4.0013 6.40013 3.94189 7.00333 4.05764 7.58527C4.1734 8.16721 4.45912 8.70176 4.87868 9.12132C5.29824 9.54088 5.83279 9.8266 6.41473 9.94236C6.99667 10.0581 7.59987 9.9987 8.14805 9.77164C8.69623 9.54457 9.16477 9.16006 9.49441 8.66671C9.82405 8.17336 10 7.59334 10 7C10 6.20435 9.68393 5.44129 9.12132 4.87868C8.55871 4.31607 7.79565 4 7 4ZM7 9.33333C6.53851 9.33333 6.08738 9.19649 5.70367 8.94009C5.31995 8.68371 5.02089 8.31929 4.84428 7.89293C4.66768 7.46657 4.62147 6.99741 4.7115 6.54479C4.80153 6.09217 5.02376 5.67641 5.35008 5.35008C5.67641 5.02376 6.09217 4.80153 6.54479 4.7115C6.99741 4.62147 7.46657 4.66768 7.89293 4.84428C8.31929 5.02088 8.68371 5.31995 8.9401 5.70367C9.19649 6.08738 9.33333 6.53851 9.33333 7C9.33333 7.30642 9.27298 7.60983 9.15572 7.89293C9.03846 8.17602 8.86659 8.43324 8.64992 8.64991C8.43325 8.86658 8.17602 9.03846 7.89293 9.15572C7.60984 9.27298 7.30642 9.33333 7 9.33333ZM7 0C5.14409 0.00198528 3.36477 0.740121 2.05245 2.05244C0.740121 3.36477 0.00198528 5.14409 0 7C0 9.535 1.18083 12.2325 3.41667 14.8017C4.42813 15.9704 5.56653 17.023 6.81083 17.94C6.8668 17.9791 6.93341 18 7.00167 18C7.06992 18 7.13654 17.9791 7.1925 17.94C8.43564 17.0228 9.57291 15.9703 10.5833 14.8017C12.8175 12.2325 14 9.535 14 7C13.998 5.14409 13.2599 3.36477 11.9476 2.05244C10.6352 0.740121 8.85591 0.00198528 7 0ZM10.0917 14.3525C9.16038 15.4191 8.12466 16.3897 7 17.25C5.87518 16.3887 4.83946 15.4169 3.90833 14.3492C2.42917 12.65 0.666667 9.99167 0.666667 7C0.666667 5.3203 1.33393 3.70939 2.52166 2.52166C3.70939 1.33393 5.3203 0.666667 7 0.666667C8.6797 0.666667 10.2906 1.33393 11.4783 2.52166C12.6661 3.70939 13.3333 5.3203 13.3333 7C13.3333 9.99167 11.5708 12.65 10.0917 14.3525Z"
                                     fill="black"
@@ -157,14 +163,6 @@ export default function TopNavbar() {
 
                             <span>{t('menu.top.locations')}</span>
                         </Link>
-                    </div>
-                    <div className="flex px-4">
-                        <Link href="/" className={`relative flex size-full`}>
-                            <ApplicationLogo className="flex size-20 fill-primary" />
-                        </Link>
-                        <div className="ml-auto flex items-center justify-end">
-                            <CartButton />
-                        </div>
                     </div>
                 </div>
             </div>
@@ -175,11 +173,28 @@ export default function TopNavbar() {
                 whileInView={{ transform: 'translateY(0px)' }}
                 transition={{ type: 'spring' }}
                 viewport={{ once: true }}
-                className={`width-full fixed bottom-0 left-0 right-0 z-20 grid divide-x rounded-t border-t bg-white md:hidden ${cart?.products && cart.products.length > 0 ? 'grid-cols-5' : 'grid-cols-4'}`}
+                className={`width-full fixed bottom-0 left-0 right-0 z-20 grid divide-x rounded-t border-t bg-white md:hidden ${cart?.products && cart.products.length > 0 ? 'grid-cols-6' : 'grid-cols-5'}`}
             >
-                <Link href="/" className={`relative flex size-full items-center justify-center`}>
-                    <ApplicationLogo className="flex size-10 fill-primary" />
-                </Link>
+                <div>
+                    <MobileMenu />
+                </div>
+                <div>
+                    <MobileProductSearch />
+                </div>
+                {cart?.products && cart.products.length > 0 && (
+                    <motion.div
+                        animate={{ height: isScrolled ? 'auto' : '0', display: isScrolled ? 'grid' : 'none' }}
+                        initial={{ transform: `translateX(10%)` }}
+                        whileInView={{ transform: 'translateX(0px)' }}
+                        transition={{ type: 'spring' }}
+                        viewport={{ once: true }}
+                        className="flex items-center justify-center"
+                    >
+                        <div className="relative top-1">
+                            <CartButton size={`small`} />
+                        </div>
+                    </motion.div>
+                )}
                 <a href="tel:+3810113820466" className="flex flex-col items-center justify-center gap-1 text-xs">
                     <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-5`}>
                         <path
@@ -222,20 +237,6 @@ export default function TopNavbar() {
                         />
                     </svg>
                 </Link>
-                {cart?.products && cart.products.length > 0 && (
-                    <motion.div
-                        animate={{ height: isScrolled ? 'auto' : '0', display: isScrolled ? 'grid' : 'none' }}
-                        initial={{ transform: `translateX(10%)` }}
-                        whileInView={{ transform: 'translateX(0px)' }}
-                        transition={{ type: 'spring' }}
-                        viewport={{ once: true }}
-                        className="flex items-center justify-center"
-                    >
-                        <div className="relative top-1">
-                            <CartButton />
-                        </div>
-                    </motion.div>
-                )}
             </motion.div>
         </motion.header>
     );

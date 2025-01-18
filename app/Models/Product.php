@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -118,7 +119,7 @@ class Product extends Model implements HasMedia, Sortable
 
     public function discount(): HasOne
     {
-        return $this->hasOne(Discount::class)->where('starts_at', '<=', now())->where('ends_at', '>=', now());
+        return $this->hasOne(Discount::class)->where('ends_at', '>=', now());
     }
 
     public function discounts(): HasMany
@@ -155,6 +156,10 @@ class Product extends Model implements HasMedia, Sortable
 
     protected static function booted(): void
     {
+        static::updated(function (Product $product) {
+            Cache::forget('transformed_product_packages');
+        });
+
         static::created(function (Product $product) {
             if ((int) $product->product_type_id !== 1) {
                 return null;

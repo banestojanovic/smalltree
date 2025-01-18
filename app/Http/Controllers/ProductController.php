@@ -43,8 +43,8 @@ class ProductController extends Controller
         $query = request('query');
 
         $products = Product::where('name', 'like', '%'.$query.'%')
-            ->with('cover')
-            ->take(20)
+            ->with('cover', 'discount')
+            ->take(10)
             ->get();
 
         return response()->json(ProductData::collect($products));

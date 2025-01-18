@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
-Route::get('/api/pretraga', [\App\Http\Controllers\ProductController::class, 'search'])->name('products.search');
 Route::get('/pretraga', [\App\Http\Controllers\ProductController::class, 'searchPage'])->name('products.search-page');
 Route::get('/cajevi', [\App\Http\Controllers\ProductController::class, 'searchPage'])->name('search.teas');
 Route::get('/dodaci', [\App\Http\Controllers\ProductController::class, 'searchPage'])->name('search.sets');

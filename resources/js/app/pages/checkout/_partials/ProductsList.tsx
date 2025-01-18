@@ -23,7 +23,7 @@ const ProductsLists = ({ cart }: { cart: App.Data.CartData }) => {
                                     </div>
                                 </div>
                                 <div className="flex flex-col text-sm font-medium">
-                                    <p className="text-center md:text-right text-lg font-semibold">${(product?.realPrice ?? 0).toFixed(2)}</p>
+                                    <p className="text-center text-lg font-semibold md:text-right">${(product?.realPrice ?? 0).toFixed(2)}</p>
                                     <RemoveFromCartButton product={product} />
                                 </div>
                             </li>
@@ -33,7 +33,7 @@ const ProductsLists = ({ cart }: { cart: App.Data.CartData }) => {
             ) : (
                 <p className="text-sm text-gray-500">Your cart is empty.</p>
             )}
-            <Separator className='mt-5' />
+            <Separator className="mt-5" />
             <dl className="space-y-6 px-4 py-6 sm:px-6">
                 <div className="flex items-center justify-between">
                     <dt className="text-sm">Subtotal</dt>

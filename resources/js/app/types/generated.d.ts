@@ -35,7 +35,10 @@ value: Array<any> | string;
 attribute: App.Data.AttributeData | null;
 };
 export type CartData = {
+subtotal: number;
 total: number;
+discount: number;
+shipping: number;
 id: number;
 session: string;
 products: Array<App.Data.CartProductData> | null;
@@ -44,6 +47,7 @@ export type CartProductData = {
 quantity: number;
 realPrice: number;
 chosenId: number;
+variation: App.Data.VariationValueData | null;
 id: number;
 name: string;
 slug: string;

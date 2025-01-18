@@ -38,14 +38,14 @@ export default function RemoveFromCartButton({ product }: { product: App.Data.Ca
                     </Button>
                 </div>
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className={`bg-white`}>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                    <AlertDialogDescription>The product will be permanently removed from the cart</AlertDialogDescription>
+                    <AlertDialogTitle>{t('cart.alert.title')}</AlertDialogTitle>
+                    <AlertDialogDescription>{t('cart.alert.description')}</AlertDialogDescription>
                 </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={updateCart}>Remove product</AlertDialogAction>
+                <AlertDialogFooter className={`max-sm:space-y-2`}>
+                    <AlertDialogCancel className={`bg-white`}>{t('cart.alert.cancel')}</AlertDialogCancel>
+                    <AlertDialogAction onClick={updateCart}>{t('cart.alert.confirm')}</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

@@ -57,7 +57,7 @@ const AddToCartButton = ({
     }, [quantity]);
 
     useEffect(() => {
-        const real_price = (matchingVariation ? matchingVariation?.price : (product?.discount?.price ?? product?.price)) ?? 0;
+        const real_price = (matchingVariation ? matchingVariation?.price : product?.price) ?? 0;
 
         setData('price', price);
         setData('real_price', real_price);

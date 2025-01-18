@@ -19,7 +19,6 @@ use App\Support\Disk;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Tags\Tag;
 
@@ -129,6 +128,23 @@ class DatabaseSeeder extends Seeder
         $promotionSettings->special_offer_bg_image = [$specialOfferImg];
         $promotionSettings->special_offer_products = [Product::inRandomOrder()->first()->id];
 
+        $promotedPackages = [
+            [
+                'bg_image' => [$this->copyAttachment('special_offer.webp')],
+                'title' => ['sr' => 'Vaš MATE čaj ritual'],
+                'subtitle' => ['sr' => 'Komplet set za pripremanje mate čaja'],
+                'products' => [Product::where('product_type_id', 1)->inRandomOrder()->first()->id, Product::where('product_type_id', 1)->inRandomOrder()->first()->id],
+            ],
+            [
+                'bg_image' => [$this->copyAttachment('hero_art.webp')],
+                'title' => ['sr' => 'Vaš MATCHA čaj ritual'],
+                'subtitle' => ['sr' => 'Komplet set za pripremanje matcha čaja'],
+                'products' => [Product::where('product_type_id', 1)->inRandomOrder()->first()->id, Product::where('product_type_id', 1)->inRandomOrder()->first()->id],
+            ],
+        ];
+
+        $promotionSettings->promo_packages = $promotedPackages;
+
         $settings->save();
         $promotionSettings->save();
     }
@@ -137,7 +153,7 @@ class DatabaseSeeder extends Seeder
     {
         $sourcePath = "site/images/$sourceImg";
 
-        $name = time().'.webp';
+        $name = rand(10000000, 99999999).'.webp';
         if (Storage::disk('public')->exists($sourcePath)) {
             Storage::disk(Disk::Attachments)->put(
                 $name,

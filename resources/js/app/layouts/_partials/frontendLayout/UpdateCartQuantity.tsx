@@ -13,6 +13,7 @@ export default function UpdateCartQuantity({ product }: { product: App.Data.Cart
 
         submit('put', route('cart.update'), {
             preserveScroll: true,
+            only: ['auth', 'cart', 'flash', 'global'],
         });
     };
 

@@ -353,10 +353,17 @@
                 "specific_item_quantity_exceeds_stock": "Količina proizvoda :product premašuje stanje na lageru",
                 "specific_item_price_invalid": "Cena proizvoda :product nije validna",
                 "item_quantity_exceeds_stock": "",
-                "cart_empty": "Korpa je prazna",
+                "cart_empty": "Vaša korpa je prazna",
+                "continue_shopping": "Nastavite kupovinu",
                 "check_out": "Plaćanje",
                 "remove": "Ukloni",
-                "pay_now": "Plati sada"
+                "pay_now": "Plati sada",
+                "alert": {
+                    "title": "Da li ste sigurni?",
+                    "description": "Da li ste sigurni da želite da uklonite ovaj proizvod iz korpe?",
+                    "cancel": "Otkaži",
+                    "confirm": "Potvrdi"
+                }
             },
             "order": {
                 "order_created": "Porudžbina je uspešno kreirana",
@@ -369,6 +376,8 @@
                 "payment_method": "Način plaćanja",
                 "shipping_method": "Način dostave",
                 "subtotal": "Međuzbir",
+                "before_tax": "Pre poreza",
+                "tax": "PDV",
                 "discount": "Popust",
                 "shipping": "Dostava",
                 "total": "Ukupno",

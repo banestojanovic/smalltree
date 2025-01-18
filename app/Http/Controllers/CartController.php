@@ -70,7 +70,7 @@ class CartController extends Controller
             'products' => 'required|array',
         ]);
 
-        $productsFromDB = Product::whereIn('id', request('products'))->get();
+        $productsFromDB = Product::with('discount')->whereIn('id', request('products'))->get();
 
         $cart = (new \App\Support\Cart)->getOrCreateCart();
 
@@ -98,7 +98,7 @@ class CartController extends Controller
                     ->where('id', $existing->pivot->id)
                     ->update([
                         'product_variation_id' => null,
-                        'price' => $product->price,
+                        'price' => $product->discount?->price ?? $product->price,
                         'real_price' => $product->price,
                         'quantity' => $existing->pivot->quantity + $qty,
                     ])
@@ -107,7 +107,7 @@ class CartController extends Controller
                 $cart->products()->attach([
                     $product->id => [
                         'product_variation_id' => null,
-                        'price' => $product->price,
+                        'price' => $product->discount?->price ?? $product->price,
                         'real_price' => $product->price,
                         'quantity' => $qty,
                     ],
