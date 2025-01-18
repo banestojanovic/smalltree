@@ -264,6 +264,13 @@
                     "search_in_products": "Krenite da kucate...",
                     "no_result_found": "Nema rezultata",
                     "loading": "Učitavanje"
+                },
+                "footer": {
+                    "blog": "Blog",
+                    "about": "O nama",
+                    "contact": "Kontakt",
+                    "privacy_policy": "Politika privatnosti",
+                    "terms_of_service": "Uslovi korišćenja"
                 }
             },
             "flash": {
@@ -412,15 +419,17 @@
                 "button_text": "Prijavite se na SmallTree newsletter"
             },
             "footer": {
-                "follow_us": "Pratite nas:",
+                "follow_us": "Zapratite nas:",
                 "instagram": "Instagram",
                 "facebook": "Facebook",
-                "our_stores": "Naše prodavnice",
+                "our_stores": "Prodajna mesta",
                 "additional_info": "Dodatne informacije",
                 "toc": "Uslovi korišćenja",
                 "privacy": "Politika privatnosti",
-                "all_rights_reserved": "Sva prava zadržana 2025. SmallTree eCommerce by Dimaso DOO",
-                "safe_purchase": "Sigurna kupovina omogućena od strane"
+                "copyrights": "Sva prava zadržana :date . SmallTree eCommerce by",
+                "safe_purchase": "Sigurnu kupovinu omogućili:",
+                "see_on_map": "Vidi na mapi",
+                "see_directions": "Vidi putanju"
             },
             "pagination": {
                 "next": "sledeće",

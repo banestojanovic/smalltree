@@ -45,12 +45,12 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
                 </Button>
             </DialogTrigger>
 
-            <DialogHeader>
-                <DialogTitle className={'sr-only'}>{t('sr.product_variations')}</DialogTitle>
-                <DialogDescription className={'sr-only'}>{t('sr.product_variations')}</DialogDescription>
-            </DialogHeader>
-
             <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-[500px]">
+                <DialogHeader>
+                    <DialogTitle className={'sr-only'}>{t('sr.product_variations')}</DialogTitle>
+                    <DialogDescription className={'sr-only'}>{t('sr.product_variations')}</DialogDescription>
+                </DialogHeader>
+
                 <div className={`mt-4 space-y-6`}>
                     <section className={'flex w-5/6 items-center gap-3'}>
                         {product.cover?.original_url && (

@@ -25,6 +25,7 @@ export default {
                 sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
+                md: '15px',
                 '3xl': '2rem',
             },
             borderRadius: {

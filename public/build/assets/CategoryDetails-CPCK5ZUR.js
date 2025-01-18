@@ -1,1 +1,0 @@
-import{V as r,j as s}from"./app-CGtRt_CQ.js";import{T as e}from"./typography-BzCpM2Ay.js";const c=()=>{const{category:a}=r().props;return a&&s.jsx("section",{className:"mt-5 sm:mt-10",children:s.jsxs("div",{className:"container",children:[s.jsx(e,{as:"h2",children:a.name}),s.jsx(e,{as:"p",className:"mt-3",children:a.description})]})})};export{c as default};
