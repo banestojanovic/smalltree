@@ -4,11 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
-Route::get('/pretraga', [\App\Http\Controllers\ProductController::class, 'searchPage'])->name('products.search-page');
-Route::get('/cajevi', [\App\Http\Controllers\ProductController::class, 'searchPage'])->name('search.teas');
-Route::get('/dodaci', [\App\Http\Controllers\ProductController::class, 'searchPage'])->name('search.sets');
+Route::get('/pretraga', [\App\Http\Controllers\SearchController::class, 'search'])->name('search.show');
 Route::get('/proizvod/{slug}', [\App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
-Route::get('/kategorije/{slug}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
+Route::get('/kategorija/{slug}', [\App\Http\Controllers\SearchController::class, 'search'])->name('categories.show');
 
 Route::get('/korpa', [\App\Http\Controllers\CartController::class, 'open'])->name('cart.open');
 Route::post('/korpa/update', [\App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
@@ -28,5 +26,7 @@ Route::post('/subscribers', [\App\Http\Controllers\SubscriberController::class, 
 
 Route::get('/kontakt', [\App\Http\Controllers\ContactUsController::class, 'show'])->name('contact.show');
 Route::post('/kontakt', [\App\Http\Controllers\ContactUsController::class, 'store'])->name('contact.store');
+
+Route::get('/{type}', [\App\Http\Controllers\SearchController::class, 'search'])->name('search.type');
 
 Route::get('/{slug}', [\App\Http\Controllers\PageController::class, 'show'])->name('pages.show');

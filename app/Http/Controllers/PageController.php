@@ -10,10 +10,7 @@ class PageController extends Controller
 {
     public function show($slug)
     {
-
-        $page = Page::where('slug', $slug)->where('status', PageStatus::ACTIVE)->first();
-
-//                dd($page->toArray());
+        $page = Page::where('slug', $slug)->where('status', PageStatus::ACTIVE)->firstOrFail();
 
         return inertia('page/show', [
             'page' => PageData::from($page),

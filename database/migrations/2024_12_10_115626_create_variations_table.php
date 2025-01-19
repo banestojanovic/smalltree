@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('variations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('searchable')->default(0);
             $table->longText('description')->nullable();
             $table->longText('data')->nullable();
             $table->bigInteger('order_column')->nullable();

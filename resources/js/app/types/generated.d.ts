@@ -1,5 +1,6 @@
 declare namespace App {
-export type AttributeType = 1 | 2;
+export type AttributeSearchable = 0 | 1;
+export type AttributeType = 1 | 2 | 3;
 export type CartStatus = 0 | 1;
 export type OrderStatus = 0 | 1 | 2 | 3 | 4 | 5;
 export type PageStatus = 0 | 1 | 2 | 3;
@@ -8,6 +9,7 @@ export type ProductStatus = 0 | 1 | 2 | 3;
 export type ProductStockStatus = 0 | 1;
 export type SubscriberStatus = 0 | 1;
 export type UserRole = 1 | 2 | 3 | 4;
+export type VariationSearchable = 0 | 1;
 }
 declare namespace App.Data {
 export type AddressData = {
@@ -82,6 +84,8 @@ export type GlobalData = {
 env: string;
 action: any | string | null;
 categories: Array<App.Data.CategoryData> | null;
+promoPackages: Array<any> | null;
+posts: Array<App.Data.PostData> | null;
 };
 export type OrderData = {
 id: number;
@@ -158,6 +162,11 @@ attributes: Array<App.Data.AttributeValueData> | null;
 categories: Array<App.Data.CategoryData> | null;
 discount: App.Data.DiscountData | null;
 discounts: Array<App.Data.DiscountData> | null;
+};
+export type ProductTypeData = {
+id: number;
+name: string;
+slug: string;
 };
 export type ProductVariationData = {
 id: number;

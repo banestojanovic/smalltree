@@ -5,8 +5,11 @@ namespace App\Http\Middleware;
 use App\Data\CartData;
 use App\Data\CategoryData;
 use App\Data\GlobalData;
+use App\Data\PostData;
 use App\Data\UserData;
 use App\Models\Category;
+use App\Models\Post;
+use App\Settings\PromotionSettings;
 use App\Support\Cart;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -36,6 +39,16 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $promotion_settings = new PromotionSettings;
+        $promoPackages = (new \App\Support\Product)->transformPromoPackages($promotion_settings->promo_packages);
+
+        $posts = PostData::collect(Post::query()
+            ->with('cover', 'categories')
+            ->orderBy('created_at', 'desc')
+            ->active()
+            ->take(3)
+            ->get());
+
         return [
             ...parent::share($request),
             'auth' => [
@@ -50,6 +63,8 @@ class HandleInertiaRequests extends Middleware
                 'env' => config('app.env'),
                 'action' => session()->get('action'),
                 'categories' => CategoryData::collect(Category::with('cover')->whereNull('parent_id')->get()),
+                'promoPackages' => $promoPackages,
+                'posts' => $posts,
             ]),
             'flash' => fn () => [
                 'success' => session()->get('success'),

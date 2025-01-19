@@ -16,6 +16,7 @@ return new class extends Migration
             $table->longText('name');
             $table->string('slug')->index();
             $table->integer('type')->default(1);
+            $table->integer('searchable')->default(1);
             $table->longText('description')->nullable();
             $table->longText('data')->nullable();
             $table->bigInteger('order_column')->nullable();

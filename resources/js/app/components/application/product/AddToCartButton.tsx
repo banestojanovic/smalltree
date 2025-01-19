@@ -64,7 +64,7 @@ const AddToCartButton = ({
     }, [price]);
 
     return (
-        <Button size={size ?? 'circle'} variant={variant ?? 'secondary'} onClick={updateCart} {...props}>
+        <Button size={size ?? 'circle'} variant={variant ?? 'ternary'} onClick={updateCart} {...props}>
             <span>
                 <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={iconClass ?? ''}>
                     <path

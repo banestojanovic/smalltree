@@ -18,15 +18,15 @@ export default function TopNavbar() {
                                     {t('menu.top.home')}
                                 </NavLink>
 
-                                <NavLink href={route('products.search-page')} active={route().current('products.search-page')}>
+                                <NavLink href={route('search.type', { type: 'cajevi' })} active={route().current('search.type', { type: 'cajevi' })}>
                                     {t('menu.top.teas')}
                                 </NavLink>
 
-                                <NavLink href={route('products.search-page')} active={false}>
+                                <NavLink href={route('search.type', { type: 'dodaci' })} active={route().current('search.type', { type: 'dodaci' })}>
                                     {t('menu.top.accessories')}
                                 </NavLink>
 
-                                <NavLink href={route('products.search-page')} active={false}>
+                                <NavLink href={route('search.show')} active={route().current('search.show')}>
                                     {t('menu.top.promotions')}
                                 </NavLink>
 

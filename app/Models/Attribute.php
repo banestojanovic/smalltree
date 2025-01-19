@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\AttributeSearchable;
 use App\AttributeType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,12 +27,14 @@ class Attribute extends Model implements Sortable
         'slug',
         'description',
         'type',
+        'searchable',
         'data',
         'order_column',
     ];
 
     protected $casts = [
         'type' => AttributeType::class,
+        'searchable' => AttributeSearchable::class,
         'data' => 'array',
     ];
 

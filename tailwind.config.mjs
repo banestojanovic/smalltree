@@ -56,6 +56,10 @@ export default {
                     DEFAULT: 'hsl(var(--secondary))',
                     foreground: 'hsl(var(--secondary-foreground))',
                 },
+                ternary: {
+                    DEFAULT: 'hsl(var(--ternary))',
+                    foreground: 'hsl(var(--ternary-foreground))',
+                },
                 gray: {
                     DEFAULT: 'hsl(var(--gray))',
                     dark: 'hsl(var(--gray-dark))',

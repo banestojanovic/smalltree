@@ -71,7 +71,7 @@ const ProductSearch = () => {
     function gotoSearchPage() {
         setIsDropdownOpen(false);
         if (query.length > 0) {
-            router.get(route('products.search-page', { search: query }));
+            router.get(route('search.show', { search: query }));
         }
     }
 

@@ -247,11 +247,18 @@
         "message_received": "Hvala. Primili smo vašu poruku.",
         "submit_button": "Pošaljite poruku"
     },
+    "search": {
+        "title": "Pretraga",
+        "description": "Pretražite našu prodavnicu",
+        "no_results": "Nema rezultata",
+        "no_results_message": "Nismo pronašli rezultate za vašu pretragu, pokušajte da podesite kriterijume."
+    },
     "filters": {
         "messages": {
             "no_results_found": "Nema rezultata",
             "clear": "Očisti",
             "close": "Zatvori",
+            "reset": "Resetuj",
             "start_typing": "Počnite da kucate...",
             "select_all": "Izaberite sve",
             "deselect_all": "Uklonite sve"
@@ -261,7 +268,11 @@
             "price_range": "Opseg cena"
         },
         "placeholders": {
+            "types": "Vrsta",
             "categories": "Kategorije"
+        },
+        "actions": {
+            "reset": "Resetuj filtere"
         }
     }
 }

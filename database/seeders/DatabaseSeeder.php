@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         (new CategorySeeder)->run();
 
         ProductType::factory()->count(3)
-            ->state(new Sequence(fn ($sequence) => ['name' => 'Čaj'],
+            ->state(new Sequence(fn ($sequence) => ['name' => 'Čajevi'],
                 ['name' => 'Pribor'],
                 ['name' => 'Med'],
             ))

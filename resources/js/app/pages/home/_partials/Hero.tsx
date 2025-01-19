@@ -34,7 +34,7 @@ const Hero = ({ hero }: { hero: { title: string; subtitle: string; image: string
                             <div className="relative -mx-0.5 mt-7 inline-flex overflow-hidden rounded-lg p-0.5">
                                 <span className="absolute inline-flex size-full rounded-lg bg-primary opacity-50 motion-safe:animate-ping"></span>
                                 <Button asChild type={`button`} className={`relative z-10 h-12 hover:bg-primary hover:brightness-95`}>
-                                    <Link href={route('products.search-page')}>{t('homepage.hero.action')}</Link>
+                                    <Link href={route('search.show')}>{t('homepage.hero.action')}</Link>
                                 </Button>
                             </div>
                         </motion.div>

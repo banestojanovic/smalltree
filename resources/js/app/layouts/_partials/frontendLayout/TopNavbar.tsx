@@ -37,7 +37,7 @@ export default function TopNavbar() {
                 ease: [0, 0.71, 0.2, 1.01],
             }}
             ref={headerRef}
-            className={`top-0 z-20 flex items-center border-b bg-background md:sticky ${isScrolled ? '' : 'border-transparent'}`}
+            className={`top-auto flex items-center border-b bg-background md:sticky md:top-0 md:z-20 ${isScrolled ? '' : 'border-transparent'}`}
         >
             <div className="container max-sm:px-2">
                 <div className="hidden items-center gap-x-4 md:flex">

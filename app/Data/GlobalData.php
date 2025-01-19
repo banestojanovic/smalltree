@@ -14,5 +14,8 @@ class GlobalData extends Data
         public Closure|string|null $action,
         #[DataCollectionOf(CategoryData::class)]
         public ?Collection $categories,
+        public ?array $promoPackages,
+        #[DataCollectionOf(PostData::class)]
+        public ?Collection $posts,
     ) {}
 }

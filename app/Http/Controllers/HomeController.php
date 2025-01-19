@@ -18,7 +18,6 @@ class HomeController extends Controller
         $actionProducts = $promotion_settings->action_products;
         $promotedProducts = $promotion_settings->promoted_products;
         $promotedSets = $promotion_settings->promoted_product_sets;
-        $promoPackages = (new \App\Support\Product)->transformPromoPackages($promotion_settings->promo_packages);
 
         $popularProducts = ProductData::collect(Product::query()
             ->with('variations.discount', 'discount', 'cover', 'categories')
@@ -99,20 +98,12 @@ class HomeController extends Controller
                 ->first()),
         ];
 
-        $posts = PostData::collect(Post::query()
-            ->with('cover', 'categories')
-            ->active()
-            ->take(3)
-            ->get());
-
         return inertia('home/index', [
             'popularProducts' => $popularProducts,
             'staffRecommendedProducts' => $staffRecommendedProducts,
             'teaSets' => $teaSets,
-            'posts' => $posts,
             'productOfTheMonth' => $teaOfTheMonth,
             'specialOffer' => $specialOffer,
-            'promoPackages' => $promoPackages,
             'hero' => [
                 'title' => $settings->hero_title['sr'] ?? '',
                 'subtitle' => $settings->hero_subtitle['sr'] ?? '',

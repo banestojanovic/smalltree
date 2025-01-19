@@ -34,6 +34,8 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
         env: string;
         action: string;
         categories?: App.Data.CategoryData[];
+        promoPackages?: [];
+        posts?: App.Data.PostData[];
     };
     flash?: {
         success: string;

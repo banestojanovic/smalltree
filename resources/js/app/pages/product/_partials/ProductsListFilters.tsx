@@ -1,14 +1,13 @@
-import { useEffect, useRef } from 'react';
-
-import { PageProps } from '@/app/types';
-import { useForm, usePage } from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';
-
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/app/components/ui/dropdown-menu';
 import { MultiSelect } from '@/app/components/ui/multi-select';
 import { Slider } from '@/app/components/ui/slider';
+import { PageProps } from '@/app/types';
+import useNumberFormatter from '@/functions';
+import { useForm, usePage } from '@inertiajs/react';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface queryProps {
     attributes: never;
@@ -16,19 +15,40 @@ interface queryProps {
     priceRange: number[] | never;
     search: string | number | never;
     selectedCategories: string[] | [];
+    selectedTypes: string[] | [];
+}
+
+interface PageDataProps {
+    slug?: string;
 }
 
 const ProductsListFilters = ({
+    pageData,
     attributes,
     variations,
+    types,
     query,
 }: PageProps<{
+    pageData: PageDataProps;
     attributes: App.Data.AttributeData[];
     variations: App.Data.VariationData[];
+    types: App.Data.ProductTypeData[];
     query: queryProps;
 }>) => {
+    const [rangeMenuOpen, setRangeMenuOpen] = useState<boolean>(false);
     const { t } = useTranslation();
     const categories = usePage<PageProps<{ global?: App.Data.GlobalData }>>().props.global?.categories;
+
+    const formatNumber = useNumberFormatter();
+
+    const formattedTypes =
+        types?.map((cat) => {
+            return {
+                value: cat.id.toString(),
+                label: cat.name,
+            };
+        }) ?? [];
+
     const formattedCategories =
         categories?.map((cat) => {
             return {
@@ -48,6 +68,7 @@ const ProductsListFilters = ({
         }, {}),
         priceRange: query.priceRange ?? null,
         search: query.search ?? null,
+        selectedTypes: query.selectedTypes ?? [],
         selectedCategories: query.selectedCategories ?? [],
     });
 
@@ -56,7 +77,7 @@ const ProductsListFilters = ({
     };
 
     const handleSearch = () => {
-        get(route('products.search-page'), {
+        get(route().current() === 'categories.show' && pageData?.slug ? route('categories.show', { slug: pageData.slug }) : route('search.show'), {
             preserveScroll: true,
             preserveState: true,
         });
@@ -75,14 +96,27 @@ const ProductsListFilters = ({
         <section className="mt-10">
             <div className="container">
                 <div className="flex w-full flex-wrap items-center gap-4">
-                    <div>
-                        <MultiSelect
-                            options={formattedCategories}
-                            onValueChange={(value) => setData('selectedCategories', value ?? [])}
-                            defaultValue={data?.selectedCategories}
-                            placeholder={t('filters.placeholders.categories')}
-                        />
-                    </div>
+                    {route().current() !== 'categories.show' && (
+                        <div>
+                            <MultiSelect
+                                options={formattedTypes}
+                                onValueChange={(value) => setData('selectedTypes', value ?? [])}
+                                defaultValue={data?.selectedTypes}
+                                placeholder={t('filters.placeholders.types')}
+                            />
+                        </div>
+                    )}
+
+                    {route().current() !== 'categories.show' && (
+                        <div>
+                            <MultiSelect
+                                options={formattedCategories}
+                                onValueChange={(value) => setData('selectedCategories', value ?? [])}
+                                defaultValue={data?.selectedCategories}
+                                placeholder={t('filters.placeholders.categories')}
+                            />
+                        </div>
+                    )}
 
                     {variations.length > 0 &&
                         variations.map((variation) => (
@@ -128,9 +162,9 @@ const ProductsListFilters = ({
                             </div>
                         ))}
 
-                    <DropdownMenu>
+                    <DropdownMenu open={rangeMenuOpen} onOpenChange={setRangeMenuOpen}>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outlined-white" className={`h-12`}>
+                            <Button variant="outlined-white" className={`h-12`} onClick={() => setRangeMenuOpen(true)}>
                                 {t('filters.labels.price')}
 
                                 {data.priceRange && data.priceRange?.length ? (
@@ -151,31 +185,40 @@ const ProductsListFilters = ({
                                 </svg>
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-80">
+                        <DropdownMenuContent className="min-w-80">
                             <div className="p-3">
-                                <h2 className="py-2 text-lg font-semibold">{t('filters.labels.price_range')}</h2>
+                                <div className={`flex justify-between`}>
+                                    <h2 className="mb-4 font-title text-lg font-semibold">{t('filters.labels.price_range')}</h2>
 
-                                <Button onClick={() => setData('priceRange', [])}>{t('filters.messages.clear')}</Button>
-
-                                <div className="flex items-center justify-center">
-                                    {data.priceRange && data.priceRange?.length ? (
-                                        <Badge variant="outline" className="text-lg">
-                                            ${data.priceRange[0] ?? 0} - ${data.priceRange[1] ?? 0}
-                                        </Badge>
-                                    ) : (
-                                        ''
-                                    )}
+                                    <Button
+                                        variant={`link`}
+                                        size={`circle`}
+                                        className={`mr-2 text-muted-foreground underline hover:text-foreground`}
+                                        onClick={() => {
+                                            setData('priceRange', []);
+                                            setRangeMenuOpen(false);
+                                        }}
+                                    >
+                                        <span className="">{t('filters.messages.reset')}</span>
+                                    </Button>
                                 </div>
-                                <Slider
-                                    className="mt-4"
-                                    defaultValue={query.priceRange ?? [0, 10000]}
-                                    onValueCommit={handleValueChange}
-                                    max={10000}
-                                    min={0}
-                                    minStepsBetweenThumbs={1}
-                                    step={100}
-                                    aria-label="Price range"
-                                />
+                                <div className={`flex flex-col space-y-2.5 text-muted-foreground`}>
+                                    <Slider
+                                        className="mt-4"
+                                        defaultValue={query.priceRange ?? [0, 10000]}
+                                        onValueCommit={handleValueChange}
+                                        max={10000}
+                                        min={0}
+                                        minStepsBetweenThumbs={1}
+                                        step={100}
+                                        aria-label="Price range"
+                                    />
+
+                                    <div className="flex items-center justify-between text-sm">
+                                        <span>{formatNumber(data?.priceRange?.[0] ?? 0)}rsd</span>
+                                        <span>{formatNumber(data?.priceRange?.[1] ?? 10000)}rsd</span>
+                                    </div>
+                                </div>
                             </div>
                         </DropdownMenuContent>
                     </DropdownMenu>

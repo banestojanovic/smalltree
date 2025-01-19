@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\VariationSearchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -19,12 +20,14 @@ class Variation extends Model implements Sortable
 
     protected $fillable = [
         'name',
+        'searchable',
         'description',
         'order_column',
         'data',
     ];
 
     protected $casts = [
+        'searchable' => VariationSearchable::class,
         'data' => 'array',
     ];
 

@@ -151,14 +151,21 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
                                     <Badge className={`flex size-5 items-center justify-center rounded-full`}>{selectedValues.length}</Badge>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
-                                            fill="currentColor"
-                                            fillRule="evenodd"
-                                            clipRule="evenodd"
-                                        ></path>
-                                    </svg>
+                                    <div
+                                        onClick={(event) => {
+                                            event.stopPropagation();
+                                            handleClear();
+                                        }}
+                                    >
+                                        <svg className={`!size-3`} viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12.8536 2.85355C13.0488 2.65829 13.0488 2.34171 12.8536 2.14645C12.6583 1.95118 12.3417 1.95118 12.1464 2.14645L7.5 6.79289L2.85355 2.14645C2.65829 1.95118 2.34171 1.95118 2.14645 2.14645C1.95118 2.34171 1.95118 2.65829 2.14645 2.85355L6.79289 7.5L2.14645 12.1464C1.95118 12.3417 1.95118 12.6583 2.14645 12.8536C2.34171 13.0488 2.65829 13.0488 2.85355 12.8536L7.5 8.20711L12.1464 12.8536C12.3417 13.0488 12.6583 13.0488 12.8536 12.8536C13.0488 12.6583 13.0488 12.3417 12.8536 12.1464L8.20711 7.5L12.8536 2.85355Z"
+                                                fill="currentColor"
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                            ></path>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         ) : (
@@ -180,27 +187,31 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
                         )}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto border-foreground/40 p-0 shadow-none" align="start" onEscapeKeyDown={() => setIsPopoverOpen(false)}>
+                <PopoverContent className="border-foreground/40 p-0 shadow-none" align="start" onEscapeKeyDown={() => setIsPopoverOpen(false)}>
                     <Command>
                         <CommandInput placeholder={t('filters.messages.start_typing')} onKeyDown={handleInputKeyDown} className={``} />
                         <CommandList>
                             <CommandEmpty>{t('filters.messages.no_results_found')}</CommandEmpty>
                             <CommandGroup>
-                                <CommandItem key="all" onSelect={toggleAll} className="cursor-pointer py-3 text-foreground">
+                                <CommandItem key="all" onSelect={toggleAll} className="cursor-pointer items-start py-3 text-foreground">
                                     <div
                                         className={cn(
-                                            'mr-2 flex size-4 items-center justify-center rounded-sm border border-border',
+                                            'mr-2 flex size-4 items-start justify-center rounded-sm border border-border',
                                             selectedValues.length === options.length ? 'bg-primary text-white' : '[&_svg]:invisible',
                                         )}
                                     >
                                         <CheckIcon />
                                     </div>
-                                    {selectedValues.length === options.length ? <span>{t('filters.messages.deselect_all')}</span> : <span>{t('filters.messages.select_all')}</span>}
+                                    {selectedValues.length === options.length ? (
+                                        <span className={`relative -top-0.5`}>{t('filters.messages.deselect_all')}</span>
+                                    ) : (
+                                        <span className={`relative -top-0.5`}>{t('filters.messages.select_all')}</span>
+                                    )}
                                 </CommandItem>
                                 {options.map((option) => {
                                     const isSelected = selectedValues.includes(option.value);
                                     return (
-                                        <CommandItem key={option.value} onSelect={() => toggleOption(option.value)} className="cursor-pointer py-3">
+                                        <CommandItem key={option.value} onSelect={() => toggleOption(option.value)} className="cursor-pointer items-start py-3">
                                             <div
                                                 className={cn(
                                                     'mr-2 flex size-4 items-center justify-center rounded-sm border border-border',
@@ -210,7 +221,7 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
                                                 <CheckIcon className="h-4 w-4" />
                                             </div>
                                             {option.icon && <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
-                                            <span>{option.label}</span>
+                                            <span className={`relative -top-1`}>{option.label}</span>
                                         </CommandItem>
                                     );
                                 })}
