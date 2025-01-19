@@ -1,15 +1,13 @@
-// src/components/multi-select.tsx
-
-import { cva, type VariantProps } from 'class-variance-authority';
-import { CheckIcon, ChevronDown, WandSparkles, XCircle, XIcon } from 'lucide-react';
-import * as React from 'react';
-
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from '@/app/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/app/components/ui/popover';
 import { Separator } from '@/app/components/ui/separator';
 import { cn } from '@/lib/utils';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { CheckIcon } from 'lucide-react';
+import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Variants for the multi-select component to handle different styles.
@@ -97,7 +95,8 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
     ({ options, onValueChange, variant, defaultValue = [], placeholder = 'Select options', animation = 0, maxCount = 3, modalPopover = false, asChild = false, className, ...props }, ref) => {
         const [selectedValues, setSelectedValues] = React.useState<string[]>(defaultValue);
         const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
-        const [isAnimating, setIsAnimating] = React.useState(false);
+
+        const { t } = useTranslation();
 
         const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
             if (event.key === 'Enter') {
@@ -144,97 +143,68 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
         return (
             <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen} modal={modalPopover}>
                 <PopoverTrigger asChild>
-                    <Button
-                        ref={ref}
-                        {...props}
-                        onClick={handleTogglePopover}
-                        className={cn('flex h-auto min-h-9 w-full items-center justify-between rounded-md border bg-inherit p-1 hover:bg-inherit [&_svg]:pointer-events-auto', className)}
-                    >
+                    <Button ref={ref} {...props} onClick={handleTogglePopover} variant={`outlined-white`} className={`h-12`}>
                         {selectedValues.length > 0 ? (
-                            <div className="flex w-full items-center justify-between">
-                                <div className="flex flex-wrap items-center">
-                                    {selectedValues.slice(0, maxCount).map((value) => {
-                                        const option = options.find((o) => o.value === value);
-                                        const IconComponent = option?.icon;
-                                        return (
-                                            <Badge key={value} className={cn(isAnimating ? 'animate-bounce' : '', multiSelectVariants({ variant }))} style={{ animationDuration: `${animation}s` }}>
-                                                {IconComponent && <IconComponent className="mr-2 h-4 w-4" />}
-                                                {option?.label}
-                                                <XCircle
-                                                    className="ml-2 h-4 w-4 cursor-pointer"
-                                                    onClick={(event) => {
-                                                        event.stopPropagation();
-                                                        toggleOption(value);
-                                                    }}
-                                                />
-                                            </Badge>
-                                        );
-                                    })}
-                                    {selectedValues.length > maxCount && (
-                                        <Badge
-                                            className={cn(
-                                                'border-foreground/1 bg-transparent text-foreground hover:bg-transparent',
-                                                isAnimating ? 'animate-bounce' : '',
-                                                multiSelectVariants({ variant }),
-                                            )}
-                                            style={{ animationDuration: `${animation}s` }}
-                                        >
-                                            {`+ ${selectedValues.length - maxCount} more`}
-                                            <XCircle
-                                                className="ml-2 h-4 w-4 cursor-pointer"
-                                                onClick={(event) => {
-                                                    event.stopPropagation();
-                                                    clearExtraOptions();
-                                                }}
-                                            />
-                                        </Badge>
-                                    )}
+                            <div className="flex w-full items-center justify-between space-x-4">
+                                <div className="flex flex-wrap items-center space-x-2 text-foreground">
+                                    <span>{placeholder}</span>
+                                    <Badge className={`flex size-5 items-center justify-center rounded-full`}>{selectedValues.length}</Badge>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <XIcon
-                                        className="mx-2 h-4 cursor-pointer text-muted-foreground"
-                                        onClick={(event) => {
-                                            event.stopPropagation();
-                                            handleClear();
-                                        }}
-                                    />
-                                    <Separator orientation="vertical" className="flex h-full min-h-6" />
-                                    <ChevronDown className="mx-2 h-4 cursor-pointer text-muted-foreground" />
+                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+                                            fill="currentColor"
+                                            fillRule="evenodd"
+                                            clipRule="evenodd"
+                                        ></path>
+                                    </svg>
                                 </div>
                             </div>
                         ) : (
-                            <div className="mx-auto flex w-full items-center justify-between">
-                                <span className="mx-3 text-sm text-muted-foreground">{placeholder}</span>
-                                <ChevronDown className="mx-2 h-4 cursor-pointer text-muted-foreground" />
+                            <div className="flex w-full items-center justify-between space-x-4">
+                                <div className="flex flex-wrap items-center space-x-2 text-foreground">
+                                    <span>{placeholder}</span>
+                                    <Badge className={`flex size-5 items-center justify-center rounded-full bg-accent/50 font-light text-accent-foreground`}>{selectedValues.length}</Badge>
+                                </div>
+
+                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+                                        fill="currentColor"
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
+                                    ></path>
+                                </svg>
                             </div>
                         )}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start" onEscapeKeyDown={() => setIsPopoverOpen(false)}>
+                <PopoverContent className="w-auto border-foreground/40 p-0 shadow-none" align="start" onEscapeKeyDown={() => setIsPopoverOpen(false)}>
                     <Command>
-                        <CommandInput placeholder="Search..." onKeyDown={handleInputKeyDown} />
+                        <CommandInput placeholder={t('filters.messages.start_typing')} onKeyDown={handleInputKeyDown} className={``} />
                         <CommandList>
-                            <CommandEmpty>No results found.</CommandEmpty>
+                            <CommandEmpty>{t('filters.messages.no_results_found')}</CommandEmpty>
                             <CommandGroup>
-                                <CommandItem key="all" onSelect={toggleAll} className="cursor-pointer">
+                                <CommandItem key="all" onSelect={toggleAll} className="cursor-pointer py-3 text-foreground">
                                     <div
                                         className={cn(
-                                            'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
-                                            selectedValues.length === options.length ? 'bg-primary text-primary-foreground' : 'opacity-50 [&_svg]:invisible',
+                                            'mr-2 flex size-4 items-center justify-center rounded-sm border border-border',
+                                            selectedValues.length === options.length ? 'bg-primary text-white' : '[&_svg]:invisible',
                                         )}
                                     >
-                                        <CheckIcon className="h-4 w-4" />
+                                        <CheckIcon />
                                     </div>
-                                    <span>(Select All)</span>
+                                    {selectedValues.length === options.length ? <span>{t('filters.messages.deselect_all')}</span> : <span>{t('filters.messages.select_all')}</span>}
                                 </CommandItem>
                                 {options.map((option) => {
                                     const isSelected = selectedValues.includes(option.value);
                                     return (
-                                        <CommandItem key={option.value} onSelect={() => toggleOption(option.value)} className="cursor-pointer">
+                                        <CommandItem key={option.value} onSelect={() => toggleOption(option.value)} className="cursor-pointer py-3">
                                             <div
                                                 className={cn(
-                                                    'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
-                                                    isSelected ? 'bg-primary text-primary-foreground' : 'opacity-50 [&_svg]:invisible',
+                                                    'mr-2 flex size-4 items-center justify-center rounded-sm border border-border',
+                                                    isSelected ? 'bg-primary text-white' : '[&_svg]:invisible',
                                                 )}
                                             >
                                                 <CheckIcon className="h-4 w-4" />
@@ -251,25 +221,19 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
                                     {selectedValues.length > 0 && (
                                         <>
                                             <CommandItem onSelect={handleClear} className="flex-1 cursor-pointer justify-center">
-                                                Clear
+                                                {t('filters.messages.clear')}
                                             </CommandItem>
                                             <Separator orientation="vertical" className="flex h-full min-h-6" />
                                         </>
                                     )}
                                     <CommandItem onSelect={() => setIsPopoverOpen(false)} className="max-w-full flex-1 cursor-pointer justify-center">
-                                        Close
+                                        {t('filters.messages.close')}
                                     </CommandItem>
                                 </div>
                             </CommandGroup>
                         </CommandList>
                     </Command>
                 </PopoverContent>
-                {animation > 0 && selectedValues.length > 0 && (
-                    <WandSparkles
-                        className={cn('my-2 h-3 w-3 cursor-pointer bg-background text-foreground', isAnimating ? '' : 'text-muted-foreground')}
-                        onClick={() => setIsAnimating(!isAnimating)}
-                    />
-                )}
             </Popover>
         );
     },

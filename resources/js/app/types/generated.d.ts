@@ -31,7 +31,7 @@ data: Array<any> | null;
 export type AttributeValueData = {
 id: number;
 attribute_id: number;
-value: Array<any> | string;
+value: string;
 attribute: App.Data.AttributeData | null;
 };
 export type CartData = {

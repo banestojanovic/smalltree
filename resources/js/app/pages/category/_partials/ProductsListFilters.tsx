@@ -124,7 +124,7 @@ const ProductsListFilters = ({
 
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="outline-white" className="w-[200px] !justify-between py-5">
+                                <Button variant="outlined-white" className="w-[200px] !justify-between py-5">
                                     Price
                                     <span className="opacity-50">
                                         <svg width="5" height="4" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -221,7 +221,7 @@ const ProductsListFilters = ({
 
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
-                                    <Button variant="outline-white" className="!justify-between py-5">
+                                    <Button variant="outlined-white" className="!justify-between py-5">
                                         Price
                                         <span className="opacity-50">
                                             <svg width="5" height="4" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">

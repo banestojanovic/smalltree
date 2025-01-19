@@ -69,7 +69,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         <div className="flex items-center">
                             <Button
                                 type="button"
-                                variant="outline-white"
+                                variant="outlined-white"
                                 onClick={() => {
                                     setItemQuantity((q) => (q > 1 ? q - 1 : q));
                                 }}
@@ -79,7 +79,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                             <span className="mx-3 text-2xl font-semibold">{itemQuantity}</span>
                             <Button
                                 type="button"
-                                variant="outline-white"
+                                variant="outlined-white"
                                 disabled={itemQuantity >= (product?.stock ?? 99)}
                                 onClick={() => {
                                     setItemQuantity((q) => q + 1);
@@ -94,7 +94,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                             productVariantId={selectedVariation}
                             quantity={itemQuantity}
                             disabled={Object.keys(product?.variations ?? [])?.length > 0 && !selectedVariation}
-                            variant="outline-white"
+                            variant="outlined-white"
                             className="inline-flex items-center justify-center"
                         />
                     </div>

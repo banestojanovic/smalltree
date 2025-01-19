@@ -246,5 +246,22 @@
     "contact": {
         "message_received": "Hvala. Primili smo vašu poruku.",
         "submit_button": "Pošaljite poruku"
+    },
+    "filters": {
+        "messages": {
+            "no_results_found": "Nema rezultata",
+            "clear": "Očisti",
+            "close": "Zatvori",
+            "start_typing": "Počnite da kucate...",
+            "select_all": "Izaberite sve",
+            "deselect_all": "Uklonite sve"
+        },
+        "labels": {
+            "price": "Cena",
+            "price_range": "Opseg cena"
+        },
+        "placeholders": {
+            "categories": "Kategorije"
+        }
     }
 }
