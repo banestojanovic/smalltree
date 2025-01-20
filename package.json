@@ -73,6 +73,7 @@
     "react-i18next": "^15.2.0",
     "react-number-format": "^5.4.2",
     "react-redux": "^9.2.0",
+    "react-sticky-box": "^2.0.5",
     "sonner": "^1.7.1",
     "swiper": "^11.1.15",
     "tailwind-merge": "^2.5.5",

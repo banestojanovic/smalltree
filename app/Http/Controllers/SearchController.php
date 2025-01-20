@@ -32,6 +32,16 @@ class SearchController extends Controller
             $types = ProductType::whereIn('slug', $types)->pluck('id')->toArray();
             $selectedTypes = array_map('strval', $types) ?? null;
         }
+
+        $selectedCategories = request('selectedCategories') ?? [];
+
+        if (! empty(request('category'))) {
+            $category = Category::where('slug', request('category'))->first();
+            if ($category) {
+                $selectedCategories = array_merge($selectedCategories, [$category->id]);
+            }
+        }
+
         $products = ProductData::collect(
             Product::with(['variations', 'discount', 'cover', 'categories'])
                 ->active()
@@ -72,10 +82,8 @@ class SearchController extends Controller
                 ->when(request('search') ?? null, function ($query, $search) {
                     $query->where('name', 'like', "%$search%");
                 })
-                ->when(! empty(request('selectedCategories')), function ($query) {
-                    $query->whereHas('categories', function ($q) {
-                        $q->whereIn('categories.id', request('selectedCategories'));
-                    });
+                ->when(! empty($selectedCategories), function ($query) use ($selectedCategories) {
+                    $query->whereHas('categories', fn ($q) => $q->whereIn('categories.id', $selectedCategories));
                 })
                 ->orderByDiscount()
                 ->paginate(16)
@@ -94,8 +102,8 @@ class SearchController extends Controller
         $title = __('search.title');
         $description = __('search.description');
 
-        if (! empty(request('slug'))) {
-            $category = Category::where('slug', request('slug'))->first();
+        if (! empty(request('category'))) {
+            $category = Category::where('slug', request('category'))->first();
             if ($category) {
                 $title = $category->name;
                 $description = $category->description;
@@ -116,7 +124,7 @@ class SearchController extends Controller
             'pageData' => [
                 'title' => $title,
                 'description' => $description,
-                'slug' => request('slug') ?? '',
+                'slug' => request('category') ?? request('slug') ?? '',
             ],
             'products' => $products,
             'variations' => $variations,

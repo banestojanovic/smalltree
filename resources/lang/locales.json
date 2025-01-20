@@ -330,7 +330,10 @@
                 "no_products_available": "Nema dostupnih proizvoda",
                 "variations": "Varijacije",
                 "free_shipping_over": "Besplatna dostava za porudžbine preko",
-                "similar_products": "Slični proizvodi"
+                "similar_products": {
+                    "title": "Slični proizvodi",
+                    "description": "Otkrijte pravu paletu čajeva sličnih ovom"
+                }
             },
             "category_show": {
                 "filters": {

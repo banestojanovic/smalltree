@@ -17,13 +17,20 @@ class ProductController extends Controller
         );
 
         $categoryIds = $product->categories?->pluck('id')->toArray();
+
         $similarProducts = ProductData::collect(Product::query()
-            ->with(['discount', 'cover', 'categories'])
+            ->with(['variations.discount', 'discount', 'cover', 'categories'])
+            ->with([
+                'variations' => function ($query) {
+                    $query->with('variations')
+                        ->select('product_variations.*');
+                },
+            ])
             ->active()
             ->whereHas('categories', function ($q) use ($categoryIds) {
                 $q->whereIn('categories.id', $categoryIds);
             })
-            ->take(22)
+            ->take(4)
             ->latest()
             ->get()
         );

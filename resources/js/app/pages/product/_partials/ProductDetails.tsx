@@ -1,15 +1,16 @@
-import { Button } from '@/app/components/ui/button';
-import { Typography } from '@/app/components/ui/typography';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-
 import AddToCartButton from '@/app/components/application/product/AddToCartButton';
 import ProductPrice from '@/app/components/application/product/ProductPrice';
+import { Button } from '@/app/components/ui/button';
 import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
+import { Typography } from '@/app/components/ui/typography';
 import PhotoSlider from '@/app/pages/product/_partials/PhotoSlider';
 import { PageProps } from '@/app/types';
 import { Link } from '@inertiajs/react';
+import { motion } from 'framer-motion';
 import { Minus, Plus } from 'lucide-react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import StickyBox from 'react-sticky-box';
 import VariationValueData = App.Data.VariationValueData;
 import ProductVariationData = App.Data.ProductVariationData;
 
@@ -24,34 +25,41 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
     );
 
     return (
-        <section className="container mt-5 sm:mt-10">
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+        <section className="container">
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 lg:gap-12">
                 <div>
-                    <PhotoSlider product={product} />
+                    <StickyBox offsetTop={80}>
+                        <PhotoSlider product={product} />
+                    </StickyBox>
                 </div>
                 <div className="mt-7 lg:mt-0">
-                    <div className="mb-1 flex flex-wrap items-center gap-x-3">
-                        {product.categories?.map((category: App.Data.CategoryData) => (
-                            <Link key={category.id} href={route('categories.show', category.slug)}>
-                                {category.name}
-                            </Link>
-                        ))}
+                    <div className="mb-2 flex flex-wrap items-center gap-x-3">
+                        {product.categories?.map((category: App.Data.CategoryData, index) =>
+                            index === 0 ? (
+                                <Link key={index} href={route('categories.show', { category: category.slug })} className={`text-sm text-muted-foreground hover:text-foreground hover:underline`}>
+                                    {category.name}
+                                </Link>
+                            ) : (
+                                ''
+                            ),
+                        )}
                     </div>
-                    <Typography as="h2">{product.name}</Typography>
-                    <Typography as="p" className="mt-5">
+                    <Typography as="h2" className={`leading-tight sm:text-[40px]`}>
+                        {product.name}
+                    </Typography>
+                    <Typography as="p" className="mt-6 leading-normal sm:text-base">
                         {product.description}
                     </Typography>
 
-                    <Typography as="p" className="mt-10 !text-3xl !font-bold">
-                        <ProductPrice price={matchingVariation?.price ?? product.price ?? 0} discountPrice={matchingVariation?.discount?.price ?? null} />
+                    <Typography as="div" className="mt-6 font-bold sm:text-2xl">
+                        <ProductPrice variant={'single'} price={matchingVariation?.price ?? product.price ?? 0} discountPrice={matchingVariation?.discount?.price ?? null} />
                     </Typography>
 
                     {product?.grouped_variations && (
-                        <div className="mt-5">
+                        <div className="mt-10">
                             <ToggleGroup variant="outline" type="single" className="justify-start" value={selectedVariation ?? undefined} onValueChange={(value) => setSelectedVariation(value)}>
                                 {Object.keys(product?.grouped_variations ?? {}).map((group) => (
                                     <div key={group} className={'flex flex-col flex-wrap space-y-1'}>
-                                        {/*<Typography as="h4"> {group} </Typography>*/}
                                         <div className={'flex gap-2'}>
                                             {product?.grouped_variations[group].map((variation: VariationValueData) => (
                                                 <ToggleGroupItem variant="default" value={variation.id.toString()} aria-label="Toggle bold" key={variation.id}>
@@ -65,22 +73,25 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         </div>
                     )}
 
-                    <div className="mt-10 flex flex-col gap-5 md:flex-row md:items-center">
-                        <div className="flex items-center">
+                    <div className="mt-10 flex gap-2 md:gap-5 lg:items-center">
+                        <div className="flex items-center gap-3 md:gap-x-5">
                             <Button
                                 type="button"
                                 variant="outlined-white"
+                                className={`h-11 px-3`}
+                                disabled={itemQuantity <= 1}
                                 onClick={() => {
                                     setItemQuantity((q) => (q > 1 ? q - 1 : q));
                                 }}
                             >
                                 <Minus />
                             </Button>
-                            <span className="mx-3 text-2xl font-semibold">{itemQuantity}</span>
+                            <span className="text-2xl font-semibold">{itemQuantity}</span>
                             <Button
                                 type="button"
                                 variant="outlined-white"
                                 disabled={itemQuantity >= (product?.stock ?? 99)}
+                                className={`h-11 px-3`}
                                 onClick={() => {
                                     setItemQuantity((q) => q + 1);
                                 }}
@@ -94,8 +105,11 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                             productVariantId={selectedVariation}
                             quantity={itemQuantity}
                             disabled={Object.keys(product?.variations ?? [])?.length > 0 && !selectedVariation}
-                            variant="outlined-white"
-                            className="inline-flex items-center justify-center"
+                            variant={`outlined-white`}
+                            className="flex h-11 items-center justify-center px-4 text-xs uppercase sm:text-base"
+                            iconClass={`!sm:size-5 shrink-0 fill-foreground`}
+                            size={`lg`}
+                            label={t('product.add_to_cart')}
                         />
                     </div>
 
@@ -108,41 +122,53 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                                 />
                             </svg>
                         </span>
-                        {t('enums.product.free_shipping_over')} 5,000 rsd
+                        {t('product.free_shipping_over')} 5,000rsd
                     </Typography>
-                </div>
 
-                <div className="col-span-full grid grid-cols-2 gap-10 rounded">
-                    {Object.entries((product?.grouped_attributes as Record<string, App.Data.AttributeValueData[]>) || {}).map(([group, attributes]) => (
-                        <div key={group} className="flex w-full items-center justify-between border-b border-gray-300 pb-4">
-                            <Typography as="h3" className="mt-0 sm:text-xl">
-                                {group}
-                            </Typography>
+                    <div className="col-span-full grid gap-4 rounded sm:gap-10">
+                        {Object.entries((product?.grouped_attributes as Record<string, App.Data.AttributeValueData[]>) || {}).map(([group, attributes]) => (
+                            <motion.div
+                                key={group}
+                                className="flex w-full flex-col items-start border-b border-gray-300 pb-4 max-xxs:space-y-2 xxs:flex-row xxs:justify-between"
+                                initial={{ y: 50 }}
+                                whileInView={{ y: 0 }}
+                                transition={{ type: 'spring', duration: 0.2 }}
+                            >
+                                <Typography as="h3" className="mt-0 text-lg sm:text-lg lg:text-2xl">
+                                    {group}
+                                </Typography>
 
-                            {attributes.map((attribute: App.Data.AttributeValueData) => (
-                                <Typography as="div" className="mt-0 flex items-center gap-x-2" key={attribute.id}>
+                                {attributes.map((attribute: App.Data.AttributeValueData) => (
+                                    <Typography as="div" className="mt-0 flex items-center gap-x-2" key={attribute.id}>
+                                        <div className="flex items-center justify-end gap-x-2 self-end text-right max-sm:text-base">
+                                            <span dangerouslySetInnerHTML={{ __html: attribute.attribute?.icon ?? '' }} />
+                                            <span className="w-full">{Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value} </span>
+                                        </div>
+                                    </Typography>
+                                ))}
+                            </motion.div>
+                        ))}
+
+                        {Object.entries(product?.additional || []).map(([group, value]) => (
+                            <motion.div
+                                key={group}
+                                className="flex w-full flex-col items-start border-b border-gray-300 pb-4 max-xxs:space-y-2 xxs:flex-row xxs:justify-between"
+                                initial={{ y: 50 }}
+                                whileInView={{ y: 0 }}
+                                transition={{ type: 'spring', duration: 0.3 }}
+                            >
+                                <Typography as="h3" className="mt-0 text-lg sm:text-lg lg:text-2xl">
+                                    {group}
+                                </Typography>
+
+                                <Typography as="div" className="mt-0 flex items-center gap-x-2">
                                     <div className="flex items-center justify-end gap-x-2 self-end text-right">
-                                        <span dangerouslySetInnerHTML={{ __html: attribute.attribute?.icon ?? '' }} />
-                                        <span className="w-full">{Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value} </span>
+                                        <span className="w-full">{value} </span>
                                     </div>
                                 </Typography>
-                            ))}
-                        </div>
-                    ))}
-
-                    {Object.entries(product?.additional || []).map(([group, value]) => (
-                        <div key={group} className="flex w-full items-center justify-between border-b border-gray-300 pb-4">
-                            <Typography as="h3" className="mt-0 sm:text-xl">
-                                {group}
-                            </Typography>
-
-                            <Typography as="div" className="mt-0 flex items-center gap-x-2">
-                                <div className="flex items-center justify-end gap-x-2 self-end text-right">
-                                    <span className="w-full">{value} </span>
-                                </div>
-                            </Typography>
-                        </div>
-                    ))}
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

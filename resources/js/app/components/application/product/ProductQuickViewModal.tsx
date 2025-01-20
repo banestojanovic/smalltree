@@ -88,7 +88,7 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
                             </ToggleGroup>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-2 pt-4">
+                        <div className="grid xs:grid-cols-2 gap-2 pt-4">
                             <AddToCartButton
                                 disabled={!selectedVariation}
                                 productVariantId={selectedVariation}

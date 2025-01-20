@@ -11,9 +11,11 @@ const ProductShowPage = ({ product }: PageProps<{ product: App.Data.ProductData 
         <>
             <Head title={product.name} />
 
-            <ProductDetails product={product} />
+            <div className={`py-8 lg:py-16`}>
+                <ProductDetails product={product} />
+            </div>
 
-            <div className={`pt-20`}>
+            <div>
                 <SimilarProducts />
             </div>
         </>

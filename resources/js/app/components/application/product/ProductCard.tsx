@@ -27,7 +27,7 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
                 <div className={`space-y-2`}>
                     {product?.category && (
                         <CardDescription className={`text-sm`}>
-                            <Link key={product.category.id} href={route('categories.show', product.category.slug)} className={`hover:underline`}>
+                            <Link key={product.category.id} href={route('categories.show', { category: product.category.slug })} className={`hover:underline`}>
                                 {product.category.name}
                             </Link>
                         </CardDescription>

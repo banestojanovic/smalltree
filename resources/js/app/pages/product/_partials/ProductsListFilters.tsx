@@ -85,7 +85,7 @@ const ProductsListFilters = ({
     };
 
     const handleSearch = () => {
-        get(route().current() === 'categories.show' && pageData?.slug ? route('categories.show', { slug: pageData.slug }) : route('search.show'), {
+        get(route().current() === 'categories.show' && pageData?.slug ? route('categories.show', { category: pageData.slug }) : route('search.show'), {
             preserveScroll: true,
             preserveState: true,
         });

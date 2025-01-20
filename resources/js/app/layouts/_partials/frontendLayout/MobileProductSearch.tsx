@@ -10,11 +10,12 @@ import { debounce } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const ProductSearch = () => {
+const ProductSearch = ({ variant }: { variant?: string }) => {
     const { t } = useTranslation();
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [sheetOpen, setSheetOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -79,9 +80,17 @@ const ProductSearch = () => {
 
     return (
         <div>
-            <Sheet onOpenChange={(open: boolean) => (!open ? setQuery('') : '')}>
+            <Sheet
+                open={sheetOpen}
+                onOpenChange={(open: boolean) => {
+                    setSheetOpen(open);
+                    if (!open) {
+                        setQuery('');
+                    }
+                }}
+            >
                 <SheetTrigger asChild>
-                    <Button variant="ghost" className={`mx-auto flex px-2.5`}>
+                    <Button variant="ghost" className={`mx-auto flex px-2.5 ${variant === 'circled' ? 'size-10 rounded-full' : ''}`}>
                         <span>
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`!size-5`}>
                                 <path
@@ -102,17 +111,8 @@ const ProductSearch = () => {
 
                     <div className="relative mx-auto w-full" ref={dropdownRef}>
                         <div className="flex items-center">
-                            <div className={`hidden items-center lg:flex lg:gap-x-1.5`}>
-                                <span>
-                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-5`}>
-                                        <path
-                                            d="M8.64815 16.7963C13.1482 16.7963 16.7963 13.1482 16.7963 8.64815C16.7963 4.14805 13.1482 0.5 8.64815 0.5C4.14805 0.5 0.5 4.14805 0.5 8.64815C0.5 13.1482 4.14805 16.7963 8.64815 16.7963Z"
-                                            stroke="black"
-                                        />
-                                        <path d="M14.5742 14.5741L20.5001 20.5" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </span>
-                                <Label htmlFor={`productSearch`} className="mr-2 font-normal">
+                            <div className={`hidden`}>
+                                <Label htmlFor={`productSearch`} className="sr-only">
                                     {t('menu.top.search')}
                                 </Label>
                             </div>
@@ -145,9 +145,10 @@ const ProductSearch = () => {
                                                 {results.map((product: App.Data.ProductData) => (
                                                     <li
                                                         key={product.id}
-                                                        className={cn('cursor-pointer py-4 hover:bg-primary/10', query === product.name && 'bg-gray-200')}
+                                                        className={cn('cursor-pointer p-4 hover:bg-accent', query === product.name && 'bg-gray-200')}
                                                         onClick={() => {
                                                             setIsDropdownOpen(false);
+                                                            setSheetOpen(false);
                                                             router.get(route('products.show', product.slug));
                                                         }}
                                                     >

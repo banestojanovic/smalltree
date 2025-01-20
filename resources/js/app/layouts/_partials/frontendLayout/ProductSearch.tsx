@@ -120,7 +120,7 @@ const ProductSearch = () => {
                                     {results.map((product: App.Data.ProductData) => (
                                         <li
                                             key={product.id}
-                                            className={cn('cursor-pointer px-4 py-4 hover:bg-primary/10', query === product.name && 'bg-gray-200')}
+                                            className={cn('cursor-pointer px-4 py-4 hover:bg-accent', query === product.name && 'bg-gray-200')}
                                             onClick={() => {
                                                 setIsDropdownOpen(false);
                                                 router.get(route('products.show', product.slug));

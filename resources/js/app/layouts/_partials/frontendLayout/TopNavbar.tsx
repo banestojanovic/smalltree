@@ -106,7 +106,18 @@ export default function TopNavbar() {
                         </Link>
                     </div>
 
-                    <div className="ml-auto flex w-5/12 items-center justify-end gap-x-5">
+                    <div className="ml-auto flex w-5/12 items-center justify-end gap-x-2">
+                        <motion.div
+                            initial={{ y: -100 }}
+                            animate={{ y: isScrolled ? 0 : -100 }}
+                            transition={{
+                                duration: 0.2,
+                                ease: [0, 0.71, 0.2, 1.01],
+                            }}
+                            className={`size-10 items-center justify-center rounded-full bg-white ${isScrolled ? 'flex' : 'hidden'}`}
+                        >
+                            <MobileProductSearch variant={'circled'} />
+                        </motion.div>
                         <CartButton />
                     </div>
                 </div>
