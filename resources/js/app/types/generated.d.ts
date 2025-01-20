@@ -23,6 +23,8 @@ postal_code: string;
 };
 export type AttributeData = {
 icon: string | null;
+searchType: string | null;
+searchLabel: string | null;
 id: number;
 name: string;
 slug: string;

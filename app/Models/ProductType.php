@@ -13,6 +13,7 @@ class ProductType extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductTypeFactory> */
     use HasFactory;
+
     use HasSlug;
     use HasTranslations;
 

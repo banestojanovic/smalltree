@@ -16,6 +16,5 @@ class OrderItemData extends Data
         public int $discount,
         public int $tax,
         public ?ProductData $product,
-    ) {
-    }
+    ) {}
 }

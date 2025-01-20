@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\PostData;
 use App\Data\ProductData;
-use App\Models\Post;
 use App\Models\Product;
 use App\Settings\GeneralSettings;
 use App\Settings\PromotionSettings;

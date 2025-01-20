@@ -12,7 +12,7 @@ class SubscriberController extends Controller
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'email' => 'required|string|lowercase|email|max:255|unique:' . Subscriber::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:'.Subscriber::class,
         ]);
 
         if ($validation->fails()) {

@@ -2,7 +2,6 @@
 
 namespace App\Support;
 
-use App\CartStatus;
 use App\Data\ProductData;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -43,7 +42,6 @@ class Product
             })->all();
         });
     }
-
 
     public function transformPromoPackages(array $promoPackages): array
     {

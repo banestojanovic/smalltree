@@ -1,10 +1,10 @@
-import { Head } from '@inertiajs/react';
-import { ReactNode } from 'react';
-
 import CategoriesSlider from '@/app/components/application/category/CategoriesSlider';
 import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import { PaginatedData } from '@/app/types';
+import { Head } from '@inertiajs/react';
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import ProductsList from './_partials/ProductsList';
 import ProductsListFilters from './_partials/ProductsListFilters';
@@ -16,6 +16,7 @@ interface queryProps {
     search: string | number | never;
     selectedCategories: string[] | [];
     selectedTypes: string[] | [];
+    contains: Record<string, string[] | null>;
 }
 
 interface PageDataProps {
@@ -28,6 +29,7 @@ const ProductsSearchPage = ({
     pageData,
     products,
     attributes,
+    radioAttributes,
     variations,
     types,
     query,
@@ -35,6 +37,7 @@ const ProductsSearchPage = ({
     pageData: PageDataProps;
     products: PaginatedData<App.Data.ProductData>;
     attributes: App.Data.AttributeData[];
+    radioAttributes: App.Data.AttributeData[];
     variations: App.Data.VariationData[];
     types: App.Data.ProductTypeData[];
     query: queryProps;
@@ -50,11 +53,17 @@ const ProductsSearchPage = ({
             {pageData?.title || pageData?.description ? (
                 <section className="mt-5 sm:mt-10">
                     <div className="container mx-auto">
-                        {pageData?.title && <Typography as="h2">{pageData.title}</Typography>}
+                        {pageData?.title && (
+                            <motion.div initial={{ y: `-20px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.2 }}>
+                                <Typography as="h2">{pageData.title}</Typography>
+                            </motion.div>
+                        )}
                         {pageData?.description && (
-                            <Typography as="p" className="mt-3">
-                                {pageData.description}
-                            </Typography>
+                            <motion.div initial={{ y: `20px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.2 }}>
+                                <Typography as="p" className="mt-3">
+                                    {pageData.description}
+                                </Typography>
+                            </motion.div>
                         )}
                     </div>
                 </section>
@@ -62,7 +71,7 @@ const ProductsSearchPage = ({
                 ''
             )}
 
-            <ProductsListFilters pageData={pageData} attributes={attributes} variations={variations} types={types} query={query} />
+            <ProductsListFilters pageData={pageData} attributes={attributes} radioAttributes={radioAttributes} variations={variations} types={types} query={query} />
 
             <ProductsList products={products} />
         </>

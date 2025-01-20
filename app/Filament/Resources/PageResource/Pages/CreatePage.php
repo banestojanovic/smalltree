@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\PageResource\Pages;
 
 use App\Filament\Resources\PageResource;
-use Filament\Actions;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Pages\CreateRecord;
 

@@ -40,7 +40,6 @@ class CombineLanguageFiles extends Command
             File::makeDirectory($outputDir, 0755, true);
         }
 
-
         $combined = [];
 
         foreach (File::files($langDir) as $file) {

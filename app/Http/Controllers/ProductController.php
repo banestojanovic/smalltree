@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\AttributeData;
 use App\Data\ProductData;
-use App\Data\VariationData;
-use App\Models\Attribute;
 use App\Models\Product;
-use App\Models\Variation;
 
 class ProductController extends Controller
 {

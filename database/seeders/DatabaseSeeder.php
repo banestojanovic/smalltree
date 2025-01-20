@@ -11,7 +11,6 @@ use App\Models\PostCategory;
 use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\User;
-
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Settings\GeneralSettings;
 use App\Settings\PromotionSettings;

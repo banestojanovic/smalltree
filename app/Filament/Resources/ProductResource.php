@@ -188,7 +188,7 @@ class ProductResource extends Resource
     {
         return [
             ProductVariationsRelationManager::class,
-            DiscountsRelationManager::class
+            DiscountsRelationManager::class,
         ];
     }
 

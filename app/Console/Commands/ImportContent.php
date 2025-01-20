@@ -27,6 +27,6 @@ class ImportContent extends Command
      */
     public function handle()
     {
-        Excel::import(new ContentImport(), storage_path('app/public/import/content.xlsx'));
+        Excel::import(new ContentImport, storage_path('app/public/import/content.xlsx'));
     }
 }

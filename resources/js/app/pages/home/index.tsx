@@ -12,7 +12,6 @@ const Home = ({
     popularProducts,
     staffRecommendedProducts,
     teaSets,
-    posts,
     specialOffer,
     productOfTheMonth,
     hero,
@@ -20,7 +19,6 @@ const Home = ({
     popularProducts?: App.Data.ProductData[];
     staffRecommendedProducts?: App.Data.ProductData[];
     teaSets?: App.Data.ProductData[];
-    posts?: App.Data.PostData[];
     specialOffer: { title: string; subtitle: string; image: string; product: App.Data.ProductData };
     productOfTheMonth: { title: string; subtitle: string; image: string; product: App.Data.ProductData };
     hero: { title: string; subtitle: string; image: string };

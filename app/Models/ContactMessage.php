@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\SubscriberStatus;
 use Illuminate\Database\Eloquent\Model;
 
 class ContactMessage extends Model
@@ -13,5 +12,4 @@ class ContactMessage extends Model
         'phone',
         'message',
     ];
-
 }

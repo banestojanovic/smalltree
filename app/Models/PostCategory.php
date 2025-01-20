@@ -20,6 +20,7 @@ class PostCategory extends Model implements HasMedia, Sortable
 {
     /** @use HasFactory<\Database\Factories\PostCategoryFactory> */
     use HasFactory;
+
     use HasRecursiveRelationships;
     use HasSlug;
     use InteractsWithMedia;

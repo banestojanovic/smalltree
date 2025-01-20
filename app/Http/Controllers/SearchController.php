@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AttributeSearchable;
+use App\AttributeType;
 use App\Data\AttributeData;
 use App\Data\ProductData;
 use App\Data\ProductTypeData;
@@ -13,8 +14,6 @@ use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\Variation;
 use App\VariationSearchable;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 class SearchController extends Controller
 {
@@ -22,6 +21,7 @@ class SearchController extends Controller
     {
         $selectedAttributesValues = request('attributes') ?? [];
         $selectedVariationValues = request('variations') ?? [];
+        $contains = request('contains') ?? [];
 
         $selectedTypes = request('selectedTypes') ?? [];
         if (! empty(request('type'))) {
@@ -36,6 +36,15 @@ class SearchController extends Controller
             Product::with(['variations', 'discount', 'cover', 'categories'])
                 ->active()
                 ->when(! empty($selectedTypes), fn ($query) => $query->whereIn('product_type_id', $selectedTypes))
+                ->when($contains && count($contains) > 0, function ($query) use ($contains) {
+                    foreach ($contains as $attribute => $value) {
+                        if (! empty($value)) {
+                            $query->whereHas('attributes', function ($q) use ($value) {
+                                $q->whereIn('attribute_values.id', (array) $value);
+                            });
+                        }
+                    }
+                })
                 ->when($selectedAttributesValues && count($selectedAttributesValues) > 0, function ($query) use ($selectedAttributesValues) {
                     foreach ($selectedAttributesValues as $attribute => $value) {
                         if (! empty($value)) {
@@ -73,7 +82,14 @@ class SearchController extends Controller
         );
 
         $variations = VariationData::collect(Variation::where('searchable', VariationSearchable::YES)->with('values')->get());
-        $attributes = AttributeData::collect(Attribute::where('searchable', AttributeSearchable::YES)->with('values')->get());
+        $attributes = AttributeData::collect(Attribute::where('searchable', AttributeSearchable::YES)->where('type', AttributeType::SELECT)->with('values')->get());
+        $radioAttributes = AttributeData::collect(Attribute::where('searchable', AttributeSearchable::YES)->where('type', AttributeType::RADIO)
+            ->with([
+                'values' => function ($query) {
+                    $query->where('value->sr', 'Nema');
+                },
+            ])
+            ->get());
 
         $title = __('search.title');
         $description = __('search.description');
@@ -105,14 +121,18 @@ class SearchController extends Controller
             'products' => $products,
             'variations' => $variations,
             'attributes' => $attributes,
+            'radioAttributes' => $radioAttributes,
             'types' => ProductTypeData::collect(ProductType::get()),
             'query' => [
                 'selectedTypes' => $selectedTypes ?? [],
-                'variations' => $variations->mapWithKeys(fn ($variation) => [
-                    $variation->id => request('variations')[$variation->id] ?? null,
-                ]),
                 'attributes' => $attributes->mapWithKeys(fn ($attribute) => [
                     $attribute->slug => request('attributes')[$attribute->slug] ?? null,
+                ]),
+                'contains' => $radioAttributes->mapWithKeys(fn ($attribute) => [
+                    $attribute->slug => request('contains')[$attribute->slug] ?? null,
+                ]),
+                'variations' => $variations->mapWithKeys(fn ($variation) => [
+                    $variation->id => request('variations')[$variation->id] ?? null,
                 ]),
                 'priceRange' => request('priceRange'),
                 'search' => request('search'),

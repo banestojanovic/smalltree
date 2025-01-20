@@ -12,6 +12,12 @@ class AttributeData extends Data
     #[Computed]
     public ?string $icon;
 
+    #[Computed]
+    public ?string $searchType;
+
+    #[Computed]
+    public ?string $searchLabel;
+
     public function __construct(
         public int $id,
         public string $name,
@@ -22,5 +28,7 @@ class AttributeData extends Data
         public ?array $data,
     ) {
         $this->icon = $data['icon'] ?? null;
+        $this->searchType = $data['searchData']['type'] ?? null;
+        $this->searchLabel = $data['searchData']['label'][app()->getLocale()] ?? null;
     }
 }

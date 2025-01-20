@@ -6,6 +6,7 @@ import { Slider } from '@/app/components/ui/slider';
 import { PageProps } from '@/app/types';
 import useNumberFormatter from '@/functions';
 import { useForm, usePage } from '@inertiajs/react';
+import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +17,7 @@ interface queryProps {
     search: string | number | never;
     selectedCategories: string[] | [];
     selectedTypes: string[] | [];
+    contains: Record<string, string[] | null>;
 }
 
 interface PageDataProps {
@@ -25,12 +27,14 @@ interface PageDataProps {
 const ProductsListFilters = ({
     pageData,
     attributes,
+    radioAttributes,
     variations,
     types,
     query,
 }: PageProps<{
     pageData: PageDataProps;
     attributes: App.Data.AttributeData[];
+    radioAttributes: App.Data.AttributeData[];
     variations: App.Data.VariationData[];
     types: App.Data.ProductTypeData[];
     query: queryProps;
@@ -66,6 +70,10 @@ const ProductsListFilters = ({
             acc[variation.id] = query.variations?.[variation.id] ?? null;
             return acc;
         }, {}),
+        contains: radioAttributes.reduce<Record<string, string[] | null>>((acc, attribute) => {
+            acc[attribute.slug] = query.contains?.[attribute.slug] ?? null;
+            return acc;
+        }, {}),
         priceRange: query.priceRange ?? null,
         search: query.search ?? null,
         selectedTypes: query.selectedTypes ?? [],
@@ -97,25 +105,25 @@ const ProductsListFilters = ({
             <div className="container">
                 <div className="flex w-full flex-wrap items-center gap-4">
                     {route().current() !== 'categories.show' && (
-                        <div>
+                        <motion.div initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.2 }}>
                             <MultiSelect
                                 options={formattedTypes}
                                 onValueChange={(value) => setData('selectedTypes', value ?? [])}
                                 defaultValue={data?.selectedTypes}
                                 placeholder={t('filters.placeholders.types')}
                             />
-                        </div>
+                        </motion.div>
                     )}
 
                     {route().current() !== 'categories.show' && (
-                        <div>
+                        <motion.div initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.5 }}>
                             <MultiSelect
                                 options={formattedCategories}
                                 onValueChange={(value) => setData('selectedCategories', value ?? [])}
                                 defaultValue={data?.selectedCategories}
                                 placeholder={t('filters.placeholders.categories')}
                             />
-                        </div>
+                        </motion.div>
                     )}
 
                     {variations.length > 0 &&
@@ -141,8 +149,8 @@ const ProductsListFilters = ({
                         ))}
 
                     {attributes.length > 0 &&
-                        attributes.map((attribute) => (
-                            <div key={attribute.id}>
+                        attributes.map((attribute, index) => (
+                            <motion.div key={attribute.id} initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: (index + 3) / 4 }}>
                                 <MultiSelect
                                     options={
                                         attribute?.values?.map((attribute_value) => ({
@@ -159,69 +167,100 @@ const ProductsListFilters = ({
                                     defaultValue={data?.attributes?.[attribute.slug] ?? undefined}
                                     placeholder={attribute.name}
                                 />
-                            </div>
+                            </motion.div>
                         ))}
 
-                    <DropdownMenu open={rangeMenuOpen} onOpenChange={setRangeMenuOpen}>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outlined-white" className={`h-12`} onClick={() => setRangeMenuOpen(true)}>
-                                {t('filters.labels.price')}
-
-                                {data.priceRange && data.priceRange?.length ? (
-                                    <Badge variant="outline" className="border-none px-0 text-xs text-muted-foreground">
-                                        ${data.priceRange[0] ?? 0} - ${data.priceRange[1] ?? 0}
-                                    </Badge>
-                                ) : (
-                                    ''
-                                )}
-
-                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
-                                        fill="currentColor"
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                    ></path>
-                                </svg>
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="min-w-80">
-                            <div className="p-3">
-                                <div className={`flex justify-between`}>
-                                    <h2 className="mb-4 font-title text-lg font-semibold">{t('filters.labels.price_range')}</h2>
-
+                    {radioAttributes.length > 0 &&
+                        radioAttributes.map((attribute, index) =>
+                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                            // @ts-expect-error
+                            (attribute?.searchType && data.selectedTypes?.includes(attribute.searchType)) || data.selectedTypes?.length < 1 ? (
+                                <motion.div key={attribute.id} initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: (index + 3) / 4 }}>
                                     <Button
-                                        variant={`link`}
-                                        size={`circle`}
-                                        className={`mr-2 text-muted-foreground underline hover:text-foreground`}
+                                        variant={`outlined-white`}
+                                        className={`h-12 space-x-4`}
                                         onClick={() => {
-                                            setData('priceRange', []);
-                                            setRangeMenuOpen(false);
+                                            const currentValue = data.contains[attribute.slug];
+                                            setData('contains', {
+                                                ...data.contains,
+                                                [attribute.slug]: currentValue?.length ? [] : attribute?.values?.[0]?.id ? [attribute.values[0].id.toString()] : null,
+                                            });
                                         }}
                                     >
-                                        <span className="">{t('filters.messages.reset')}</span>
-                                    </Button>
-                                </div>
-                                <div className={`flex flex-col space-y-2.5 text-muted-foreground`}>
-                                    <Slider
-                                        className="mt-4"
-                                        defaultValue={query.priceRange ?? [0, 10000]}
-                                        onValueCommit={handleValueChange}
-                                        max={10000}
-                                        min={0}
-                                        minStepsBetweenThumbs={1}
-                                        step={100}
-                                        aria-label="Price range"
-                                    />
+                                        <span>{attribute?.searchLabel ?? attribute.name}</span>
 
-                                    <div className="flex items-center justify-between text-sm">
-                                        <span>{formatNumber(data?.priceRange?.[0] ?? 0)}rsd</span>
-                                        <span>{formatNumber(data?.priceRange?.[1] ?? 10000)}rsd</span>
+                                        <span className={`relative inline-flex size-5 items-center justify-between rounded-full border border-foreground/40 p-0.5`}>
+                                            {data.contains?.[attribute.slug]?.[0] ? <span className={`absolute left-px inline-flex size-4 shrink-0 rounded-full bg-primary`}></span> : ''}
+                                        </span>
+                                    </Button>
+                                </motion.div>
+                            ) : (
+                                ''
+                            ),
+                        )}
+
+                    <motion.div initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 1.2 }}>
+                        <DropdownMenu open={rangeMenuOpen} onOpenChange={setRangeMenuOpen}>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="outlined-white" className={`h-12`} onClick={() => setRangeMenuOpen(true)}>
+                                    {t('filters.labels.price')}
+
+                                    {data.priceRange && data.priceRange?.length ? (
+                                        <Badge variant="outline" className="border-none px-0 text-xs text-muted-foreground">
+                                            ${data.priceRange[0] ?? 0} - ${data.priceRange[1] ?? 0}
+                                        </Badge>
+                                    ) : (
+                                        ''
+                                    )}
+
+                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
+                                            fill="currentColor"
+                                            fillRule="evenodd"
+                                            clipRule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="min-w-80">
+                                <div className="p-3">
+                                    <div className={`flex justify-between`}>
+                                        <h2 className="mb-4 font-title text-lg font-semibold">{t('filters.labels.price_range')}</h2>
+
+                                        <Button
+                                            variant={`link`}
+                                            size={`circle`}
+                                            className={`mr-2 text-muted-foreground underline hover:text-foreground`}
+                                            onClick={() => {
+                                                setData('priceRange', []);
+                                                setRangeMenuOpen(false);
+                                            }}
+                                        >
+                                            <span className="">{t('filters.messages.reset')}</span>
+                                        </Button>
+                                    </div>
+                                    <div className={`flex flex-col space-y-2.5 text-muted-foreground`}>
+                                        <Slider
+                                            className="mt-4"
+                                            defaultValue={query.priceRange ?? [0, 10000]}
+                                            onValueCommit={handleValueChange}
+                                            max={10000}
+                                            min={0}
+                                            minStepsBetweenThumbs={1}
+                                            step={100}
+                                            aria-label="Price range"
+                                        />
+
+                                        <div className="flex items-center justify-between text-sm">
+                                            <span>{formatNumber(data?.priceRange?.[0] ?? 0)}rsd</span>
+                                            <span>{formatNumber(data?.priceRange?.[1] ?? 10000)}rsd</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </motion.div>
                 </div>
             </div>
         </section>

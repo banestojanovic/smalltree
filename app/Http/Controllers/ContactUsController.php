@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
-use App\Models\Subscriber;
-use App\SubscriberStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

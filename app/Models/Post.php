@@ -24,10 +24,11 @@ class Post extends Model implements HasMedia, Sortable
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
+
     use HasSlug;
     use HasTags;
-    use InteractsWithMedia;
     use HasTranslations;
+    use InteractsWithMedia;
     use SoftDeletes;
     use SortableTrait;
 
@@ -57,7 +58,6 @@ class Post extends Model implements HasMedia, Sortable
     protected $appends = [
         'date_created',
     ];
-
 
     public function cover(): MorphOne
     {
