@@ -11,7 +11,7 @@ class AddressData extends Data
         public int $user_id,
         public string $phone,
         public string $address_line_1,
-        public string $address_line_2,
+        public ?string $address_line_2,
         public string $city,
         public string $postal_code,
     ) {}

@@ -18,14 +18,16 @@ class OrderController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|email',
+            'address' => 'required',
             'city' => 'required',
             'postal_code' => 'required',
             'payment_method' => 'required|integer',
         ]);
 
         if ($validation->fails()) {
-            return back()->with(['error' => $validation->errors()->first()]);
+            return back()->with(['error' => $validation->errors()->first()])->withErrors($validation->errors());
         }
 
         $cart = (new \App\Support\Cart)->getCart();
@@ -46,8 +48,7 @@ class OrderController extends Controller
         $address = $user->address()->updateOrCreate([
             'company' => $request->company,
             'phone' => $request->phone,
-            'address_line_1' => $request->address_line_1,
-            'address_line_2' => $request->address_line_2,
+            'address_line_1' => $request->address,
             'city' => $request->city,
             'postal_code' => $request->postal_code,
             'is_default' => $request->is_default,

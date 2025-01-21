@@ -1,60 +1,119 @@
-import { Separator } from '@/app/components/ui/separator';
 import RemoveFromCartButton from '@/app/layouts/_partials/frontendLayout/RemoveFromCartButton';
 import UpdateCartQuantity from '@/app/layouts/_partials/frontendLayout/UpdateCartQuantity';
+import useNumberFormatter from '@/functions';
+import { useTranslation } from 'react-i18next';
 
 const ProductsLists = ({ cart }: { cart: App.Data.CartData }) => {
+    const formatNumber = useNumberFormatter();
+    const { t } = useTranslation();
+
     return (
         <>
             <h3 className="sr-only">Items in your cart</h3>
             {cart?.products ? (
                 <ul className="space-y-4">
-                    {cart?.products?.map((product) => {
-                        return (
-                            <li key={product.id} className="flex flex-col md:flex-row md:items-center md:justify-between">
-                                <div>
-                                    <div className="flex items-center gap-x-3 font-medium">
-                                        <img src={product.cover.original_url} alt={product.name} className="aspect-square size-12 rounded-lg object-cover" />
-                                        <div className="flex flex-col text-gray-500">
-                                            <span>{product.name}</span>
-                                            <div className="w-24">
-                                                <UpdateCartQuantity product={product} />
+                    {cart?.products?.map((product: App.Data.CartProductData) => (
+                        <li key={product.chosenId} className="flex justify-between pt-4">
+                            <div className={`w-full`}>
+                                <div className="flex gap-x-3 font-medium">
+                                    {product.cover?.original_url && <img src={product.cover.original_url} alt={product.name} className="aspect-square size-14 rounded-lg object-cover" />}
+                                    <div className="flex w-full flex-col space-y-3">
+                                        <div className={`flex flex-col`}>
+                                            <span className="font-title">{product.name}</span>
+                                            {product?.variation && (
+                                                <span className="text-xs text-foreground/50">
+                                                    {`${product.variation?.variation?.name}:`} {product.variation.value}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className="flex justify-between text-sm font-medium xs:hidden">
+                                            <div className="flex flex-col">
+                                                <p className={`flex items-center space-x-px`}>
+                                                    <span className={'font-semibold'}>{formatNumber(product.realPrice)}</span>
+                                                    <span className={`font-normal`}>rsd</span>
+                                                </p>
+                                                {product?.price && product.realPrice !== product.price && (
+                                                    <p className={`flex items-center space-x-px text-xs`}>
+                                                        <span className={'text-foreground/50 line-through'}>{formatNumber(product.price)}</span>
+                                                        <span className={`font-normal`}>rsd</span>
+                                                    </p>
+                                                )}
                                             </div>
+                                            <RemoveFromCartButton product={product} />
+                                        </div>
+                                        <div className="w-24">
+                                            <UpdateCartQuantity product={product} />
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex flex-col text-sm font-medium">
-                                    <p className="text-center text-lg font-semibold md:text-right">${(product?.realPrice ?? 0).toFixed(2)}</p>
-                                    <RemoveFromCartButton product={product} />
-                                </div>
-                            </li>
-                        );
-                    })}
+                            </div>
+                            <div className="ml-4 hidden flex-col items-end text-sm font-medium xs:flex">
+                                <p className={`flex items-center space-x-px`}>
+                                    <span className={'font-semibold'}>{formatNumber(product.realPrice)}</span>
+                                    <span className={`font-normal`}>rsd</span>
+                                </p>
+                                {product?.price && product.realPrice !== product.price && (
+                                    <p className={`flex items-center space-x-px text-xs`}>
+                                        <span className={'text-foreground/50 line-through'}>{formatNumber(product.price)}</span>
+                                        <span className={`font-normal`}>rsd</span>
+                                    </p>
+                                )}
+                                <RemoveFromCartButton product={product} />
+                            </div>
+                        </li>
+                    ))}
                 </ul>
             ) : (
-                <p className="text-sm text-gray-500">Your cart is empty.</p>
+                ''
             )}
-            <Separator className="mt-5" />
-            <dl className="space-y-6 px-4 py-6 sm:px-6">
-                <div className="flex items-center justify-between">
-                    <dt className="text-sm">Subtotal</dt>
-                    <dd className="text-sm font-medium text-gray-900">${(cart?.total ?? 0)?.toFixed(2)}</dd>
-                </div>
-                <div className="flex items-center justify-between">
-                    <dt className="text-sm">Shipping</dt>
-                    <dd className="text-sm font-medium text-gray-900">$0.00</dd>
-                </div>
-                <div className="flex items-center justify-between">
-                    <dt className="text-sm">Taxes</dt>
-                    <dd className="text-sm font-medium text-gray-900">$0.00</dd>
-                </div>
 
-                <Separator />
-
-                <div className="flex items-center justify-between pt-6">
-                    <dt className="text-base font-medium">Total</dt>
-                    <dd className="text-base font-medium text-gray-900">${(cart?.total ?? 0)?.toFixed(2)}</dd>
+            <div className={`mt-10 flex flex-col space-y-10`}>
+                <div className={`w-full space-y-6`}>
+                    {cart && cart?.subtotal > 0 && (
+                        <div className="flex items-center justify-between">
+                            <span>{t('order.subtotal')}</span>
+                            <span className={`space-x-px`}>
+                                <span className="font-semibold">{formatNumber(cart?.subtotal ?? 0)}</span>
+                                <span className={`font-normal`}>rsd</span>
+                            </span>
+                        </div>
+                    )}
+                    {cart && cart?.shipping > 0 && (
+                        <div className="flex items-center justify-between">
+                            <span>{t('order.shipping')}</span>
+                            <span className={`space-x-px`}>
+                                <span className="font-semibold">{formatNumber(cart?.shipping ?? 0)}</span>
+                                <span className={`font-normal`}>rsd</span>
+                            </span>
+                        </div>
+                    )}
+                    <div className="flex items-center justify-between">
+                        <span>{t('order.tax')}</span>
+                        <span className={`space-x-px`}>
+                            <span className="font-semibold">20</span>
+                            <span className={`font-normal`}>%</span>
+                        </span>
+                    </div>
+                    {cart && cart?.discount > 0 && (
+                        <div className="flex items-center justify-between">
+                            <span>{t('order.discount')}</span>
+                            <span className={`space-x-px`}>
+                                <span className="font-semibold">-{formatNumber(cart?.discount ?? 0)}</span>
+                                <span className={`font-normal`}>rsd</span>
+                            </span>
+                        </div>
+                    )}
+                    {cart && cart?.total > 0 && (
+                        <div className="flex items-center justify-between border-t border-input pt-4">
+                            <span className={`text-2xl`}>{t('order.total')}</span>
+                            <span className={`space-x-px`}>
+                                <span className="font-semibold">{formatNumber(cart?.total ?? 0)}</span>
+                                <span className={`font-normal`}>rsd</span>
+                            </span>
+                        </div>
+                    )}
                 </div>
-            </dl>
+            </div>
         </>
     );
 };

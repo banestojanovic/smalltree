@@ -17,7 +17,7 @@ id: number;
 user_id: number;
 phone: string;
 address_line_1: string;
-address_line_2: string;
+address_line_2: string | null;
 city: string;
 postal_code: string;
 };

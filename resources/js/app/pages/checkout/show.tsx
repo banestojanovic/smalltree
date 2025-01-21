@@ -4,7 +4,6 @@ import FieldGroup from '@/app/components/ui/FieldGroup';
 import { Input } from '@/app/components/ui/input';
 import { Label } from '@/app/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
-import { Separator } from '@/app/components/ui/separator';
 import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import ProductsList from '@/app/pages/checkout/_partials/ProductsList';
@@ -13,24 +12,23 @@ import { Head, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const paymentMethods = [
-    { id: '1', title: 'Credit card' },
-    { id: '2', title: 'Cash on Delivery' },
-];
-
 const CheckoutIndex = () => {
     const { t } = useTranslation();
 
     const cart = usePage<PageProps<{ cart: App.Data.CartData }>>().props.cart;
     const global = usePage<PageProps<{ global: App.Data.GlobalData }>>().props.global;
 
+    const paymentMethods = [
+        { id: '1', title: t('checkout.payment_methods.credit_card') },
+        { id: '2', title: t('checkout.payment_methods.upon_delivery') },
+    ];
+
     const { data, setData, post, errors } = useForm({
         email: '',
         phone: '',
         first_name: '',
         last_name: '',
-        address_line_1: '',
-        address_line_2: '',
+        address: '',
         city: '',
         postal_code: '',
         payment_method: '2',
@@ -50,8 +48,7 @@ const CheckoutIndex = () => {
             phone: '+1234567890',
             first_name: 'John',
             last_name: 'Doe',
-            address_line_1: '123 Test Street',
-            address_line_2: 'Apt 4B',
+            address: '123 Test Street',
             city: 'Test City',
             postal_code: '12345',
             payment_method: '2',
@@ -62,8 +59,8 @@ const CheckoutIndex = () => {
         <>
             <Head title={t('checkout.checkout')} />
 
-            <div className="container relative md:max-w-6xl">
-                <div className="py-7 lg:py-20">
+            <div className="container relative lg:max-w-6xl">
+                <div className="py-7 lg:pt-20">
                     <h2 className="sr-only">{t('checkout.checkout')}</h2>
 
                     {global?.env === 'local' && (
@@ -72,104 +69,104 @@ const CheckoutIndex = () => {
                         </Button>
                     )}
 
-                    <form onSubmit={submit} className="gap-20 lg:grid lg:grid-cols-2">
+                    <form onSubmit={submit} className="grid gap-10 md:gap-20 lg:grid-cols-2">
                         <div className={`space-y-10`}>
-                            <div className={`space-y-7`}>
+                            <div className={`space-y-3.5 md:space-y-7`}>
                                 <Typography as="h4">{t('checkout.contact_info')}</Typography>
 
-                                <div className={`grid gap-6`}>
-                                    <FieldGroup label="Email" name="email" error={errors.email} required>
-                                        <Input id="email" type="email" placeholder="Email" value={data.email} onChange={(e) => setData('email', e.target.value)} />
+                                <div className={`grid gap-6 md:grid-cols-2 lg:grid-cols-1`}>
+                                    <FieldGroup label={t('checkout.form.labels.email')} name="email" error={errors.email} required>
+                                        <Input id="email" type="email" placeholder={t('checkout.form.placeholders.email')} value={data.email} onChange={(e) => setData('email', e.target.value)} />
                                     </FieldGroup>
 
-                                    <FieldGroup label="Phone" name="phone" error={errors.phone} required>
-                                        <Input id="phone" placeholder="Phone" value={data.phone} onChange={(e) => setData('phone', e.target.value)} />
+                                    <FieldGroup label={t('checkout.form.labels.phone')} name="phone" error={errors.phone} required>
+                                        <Input id="phone" placeholder={t('checkout.form.placeholders.phone')} value={data.phone} onChange={(e) => setData('phone', e.target.value)} />
                                     </FieldGroup>
                                 </div>
                             </div>
 
-                            <div className="space-y-7">
+                            <div className={`space-y-3.5 md:space-y-7`}>
                                 <Typography as="h4">{t('checkout.shipping_info')}</Typography>
 
-                                <div>
-                                    <div className="gap-x-5 md:flex md:items-center">
+                                <div className={`space-y-7`}>
+                                    <div className="grid gap-6 md:flex md:items-center">
                                         <div className="w-full">
-                                            <FieldGroup label="First Name" name="first_name" error={errors.first_name} required>
-                                                <Input id="first_name" placeholder="First name" value={data.first_name} onChange={(e) => setData('first_name', e.target.value)} />
+                                            <FieldGroup label={t('checkout.form.labels.first_name')} name="first_name" error={errors.first_name} required>
+                                                <Input
+                                                    id="first_name"
+                                                    placeholder={t('checkout.form.placeholders.first_name')}
+                                                    value={data.first_name}
+                                                    onChange={(e) => setData('first_name', e.target.value)}
+                                                />
                                             </FieldGroup>
                                         </div>
 
-                                        <div className="mt-5 w-full md:mt-0">
-                                            <FieldGroup label="Last Name" name="last_name" error={errors.last_name} required>
-                                                <Input id="last_name" placeholder="First name" value={data.last_name} onChange={(e) => setData('last_name', e.target.value)} />
+                                        <div className="w-full">
+                                            <FieldGroup label={t('checkout.form.labels.last_name')} name="last_name" error={errors.last_name} required>
+                                                <Input
+                                                    id="last_name"
+                                                    placeholder={t('checkout.form.placeholders.last_name')}
+                                                    value={data.last_name}
+                                                    onChange={(e) => setData('last_name', e.target.value)}
+                                                />
                                             </FieldGroup>
                                         </div>
                                     </div>
 
-                                    <div className="mt-5">
-                                        <FieldGroup label="Address Line 1" name="address_line_1" error={errors.address_line_1}>
-                                            <Input id="address_line_1" placeholder="Address Line 1" value={data.address_line_1} onChange={(e) => setData('address_line_1', e.target.value)} />
-                                        </FieldGroup>
-                                    </div>
+                                    <FieldGroup label={t('checkout.form.labels.address')} name="address" error={errors.address} required>
+                                        <Input id="address" placeholder={t('checkout.form.placeholders.address')} value={data.address} onChange={(e) => setData('address', e.target.value)} />
+                                    </FieldGroup>
 
-                                    <div className="mt-5">
-                                        <FieldGroup label="Address Line 2" name="address_line_2" error={errors.address_line_2}>
-                                            <Input id="address_line_2" placeholder="Address Line 2" value={data.address_line_2} onChange={(e) => setData('address_line_2', e.target.value)} />
-                                        </FieldGroup>
-                                    </div>
-
-                                    <div className="mt-5 gap-x-5 md:flex md:items-center">
+                                    <div className="grid gap-7 md:flex md:items-center">
                                         <div className="w-full">
-                                            <FieldGroup label="City" name="city" error={errors.city}>
+                                            <FieldGroup label="City" name="city" error={errors.city} required>
                                                 <Input id="city" placeholder="City" value={data.city} onChange={(e) => setData('city', e.target.value)} />
                                             </FieldGroup>
                                         </div>
-                                        <div className="mt-5 w-full md:mt-0">
-                                            <FieldGroup label="Postal Code" name="postal_code" error={errors.postal_code}>
-                                                <Input id="postal_code" placeholder="Postal Code" value={data.postal_code} onChange={(e) => setData('postal_code', e.target.value)} />
+                                        <div className="w-full">
+                                            <FieldGroup label={t('checkout.form.labels.postal_code')} name="postal_code" error={errors.postal_code} required>
+                                                <Input
+                                                    id="postal_code"
+                                                    placeholder={t('checkout.form.placeholders.postal_code')}
+                                                    value={data.postal_code}
+                                                    onChange={(e) => setData('postal_code', e.target.value)}
+                                                />
                                             </FieldGroup>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <Separator />
+                            <div className={`space-y-3.5 md:space-y-7`}>
+                                <Typography as="h4">{t('checkout.payment_method')}</Typography>
 
-                            <div className="mt-10">
-                                <Typography as="h4" className="mb-5">
-                                    {t('checkout.payment')}
-                                </Typography>
-
-                                <RadioGroup onValueChange={(e) => setData('payment_method', e)} defaultValue={data.payment_method} className="flex w-full flex-col items-center gap-3 md:flex-row">
+                                <RadioGroup onValueChange={(value) => setData('payment_method', value)} value={data.payment_method} className="flex w-full flex-col items-center md:flex-row md:gap-7">
                                     {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
-                                        <Card className="w-full !rounded-md !border-gray-400" key={paymentMethodIdx}>
-                                            <CardContent>
-                                                <div className="flex w-full items-center space-x-2">
-                                                    <RadioGroupItem value={paymentMethod.id} id={`payment_method_${paymentMethod.id}`} />
-                                                    <Label htmlFor={`payment_method_${paymentMethod.id}`}>{paymentMethod.title} </Label>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
+                                        <Button asChild variant="outlined-white" key={paymentMethodIdx} className={`h-12 w-full justify-start px-6`}>
+                                            <div className={`relative`}>
+                                                <RadioGroupItem value={paymentMethod.id} id={`payment_method_${paymentMethod.id}`} />
+                                                <Label htmlFor={`payment_method_${paymentMethod.id}`} className={`absolute inset-0 cursor-pointer opacity-0`}>
+                                                    <span className={`sr-only`}>{paymentMethod.title}</span>
+                                                </Label>
+                                                <span>{paymentMethod.title}</span>
+                                            </div>
+                                        </Button>
                                     ))}
                                 </RadioGroup>
                                 {errors.payment_method && <div className="mt-2 text-sm text-red-500">{errors.payment_method}</div>}
                             </div>
                         </div>
 
-                        <div className="mt-10 lg:mt-0">
-                            <Typography as="h4" className="mb-8">
-                                {t('checkout.order_summary')}
-                            </Typography>
+                        <div className={`space-y-3.5 md:space-y-7`}>
+                            <Typography as="h4">{t('checkout.order_summary')}</Typography>
 
                             <Card className={'rounded-md border-none shadow-none'}>
-                                <CardContent>
+                                <CardContent className={`p-2 md:p-10`}>
                                     <ProductsList cart={cart} />
 
-                                    <Separator />
-
-                                    <div className="px-4 py-6 sm:px-6">
-                                        <Button type="submit" className="block w-full">
-                                            {t('checkout.action.confirm')}
+                                    <div className={`mt-10`}>
+                                        <Button type="submit" className="block h-12 w-full uppercase">
+                                            {t('checkout.actions.confirm')}
                                         </Button>
                                     </div>
                                 </CardContent>

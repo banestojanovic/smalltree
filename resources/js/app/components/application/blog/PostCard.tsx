@@ -14,7 +14,7 @@ const PostCard = ({ post }: PageProps<{ post: App.Data.PostData }>) => {
             <CardHeader>
                 {post.cover?.original_url && (
                     <Link href={route('posts.show', post.slug)} className="rounded-lg p-2.5">
-                        <img className="aspect-video rounded-lg object-cover lg:aspect-square" src={post.cover.original_url} alt={post.name} />
+                        <img className="aspect-video rounded-lg object-cover" src={post.cover.original_url} alt={post.name} />
                     </Link>
                 )}
             </CardHeader>

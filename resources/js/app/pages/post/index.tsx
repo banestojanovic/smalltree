@@ -1,59 +1,76 @@
-import { Head } from '@inertiajs/react';
-import { ReactNode, useState } from 'react';
-
 import PostCard from '@/app/components/application/blog/PostCard';
 import Pagination from '@/app/components/ui/pagination';
 import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
 import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import { PaginatedData } from '@/app/types';
-import { meta } from 'eslint-plugin-react/lib/rules/jsx-props-no-spread-multi';
+import { Head, router } from '@inertiajs/react';
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import category = meta.docs.category;
 
-const PostIndexPage = ({ posts, featurePost, categories }: { posts: PaginatedData<App.Data.PostData>; featurePost: App.Data.PostData; categories: App.Data.PostCategoryData[] }) => {
+interface QueryProps {
+    category?: string;
+}
+
+const PostIndexPage = ({
+    posts,
+    categories,
+    category,
+}: {
+    posts: PaginatedData<App.Data.PostData>;
+    categories: App.Data.PostCategoryData[];
+    category: App.Data.PostCategoryData;
+    query: QueryProps;
+}) => {
     const { t } = useTranslation();
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
     return (
         <>
             <Head title={t('posts.stories')} />
-            <div className="container mt-7 sm:mt-10">
-                {/*<Card className="relative h-60 bg-cover bg-center sm:h-80" style={{ backgroundImage: `url(${featurePost.cover.original_url})` }}>*/}
-                {/*    <CardHeader className="relative flex h-full w-full flex-col justify-center">*/}
-                {/*        <CardTitle>*/}
-                {/*            <Typography as="h4" className="!font-normal text-white">*/}
-                {/*                {t('posts.featured_post')}*/}
-                {/*            </Typography>*/}
-
-                {/*            <Typography as="h2" className="text-white">*/}
-                {/*                <Link href={route('posts.show', featurePost.slug)}>{featurePost.name}</Link>*/}
-                {/*            </Typography>*/}
-                {/*        </CardTitle>*/}
-                {/*    </CardHeader>*/}
-                {/*</Card>*/}
+            <div className="container mt-7 space-y-10 sm:mt-10">
+                <section className="mt-5 sm:mt-10">
+                    <motion.div initial={{ y: `-20px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.2 }}>
+                        <Typography as="h2">{category?.name ? category.name : t('blog.title')}</Typography>
+                    </motion.div>
+                    <motion.div initial={{ y: `20px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.2 }}>
+                        <Typography as="p" className="mt-3">
+                            {category?.description ? category.description : t('blog.subtitle')}
+                        </Typography>
+                    </motion.div>
+                </section>
 
                 {categories && (
-                    <ToggleGroup type="single" className="flex-wrap justify-start gap-3" value={selectedCategory ?? undefined} onValueChange={(value) => setSelectedCategory(value)}>
-                        {categories.map((category) => (
-                            <ToggleGroupItem variant="outline" value={category.id.toString()} aria-label="Toggle bold" key={category.id}>
-                                {category.name}
-                            </ToggleGroupItem>
+                    <ToggleGroup
+                        type="single"
+                        className="flex-wrap justify-start gap-3"
+                        value={category?.slug ?? undefined}
+                        onValueChange={(value) => {
+                            router.visit(route('posts_by_category.index', { category: value }), {
+                                only: ['posts', 'category'],
+                                preserveState: true,
+                                preserveScroll: true,
+                            });
+                        }}
+                    >
+                        {categories.map((category, index: number) => (
+                            <motion.div key={category.id} initial={{ x: 50 }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: (index + 1) / 4 }}>
+                                <ToggleGroupItem variant="outline" value={category.slug} aria-label="Toggle bold" key={category.id} className={`transition active:scale-95`}>
+                                    {category.name}
+                                </ToggleGroupItem>
+                            </motion.div>
                         ))}
                     </ToggleGroup>
                 )}
+
                 <section>
-                    <Typography as="h2" className="!mt-7">
-                        {t('posts.stories')}
-                    </Typography>
-
-                    <Typography as="p" className="">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                    </Typography>
-
                     <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {posts.data && posts.data.length > 0 ? (
-                            posts.data.map((post) => <PostCard post={post} key={post.id} />)
+                            posts.data.map((post, index: number) => (
+                                <motion.div key={post.id} initial={{ y: `${index + 50}px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: (index + 1) / 4 }}>
+                                    <PostCard post={post} />
+                                </motion.div>
+                            ))
                         ) : (
                             <Typography as="p" className="">
                                 {t('posts.no_story_available')}

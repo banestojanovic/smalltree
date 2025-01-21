@@ -11,20 +11,22 @@ class PostController extends Controller
 {
     public function index(): \Inertia\Response|\Inertia\ResponseFactory
     {
+        $categories = PostCategoryData::collect(PostCategory::all());
+
         $posts = PostData::collect(Post::query()
             ->with('cover', 'categories')
+            ->when(! empty(request('category')), fn ($q) => $q->whereHas('categories', fn ($q) => $q->where('slug', request('category'))))
             ->active()
             ->paginate(18)
         );
 
-        $categories = PostCategoryData::collect(PostCategory::all());
-
-        $featurePost = PostData::from(Post::with('cover')->active()->inRandomOrder()->first());
-
         return inertia('post/index', [
             'posts' => $posts,
             'categories' => $categories,
-            'featurePost' => $featurePost,
+            'category' => PostCategoryData::optional(PostCategory::where('slug', request('category'))->first()),
+            'query' => [
+                'category' => request('category') ?? null,
+            ],
         ]);
     }
 

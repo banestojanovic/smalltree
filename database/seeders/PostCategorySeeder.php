@@ -17,7 +17,7 @@ class PostCategorySeeder extends Seeder
         $categories = collect([
             'Crni čaj',
             'Zeleni čaj',
-            'Bel čaj',
+            'Beli čaj',
             'Voćni čaj',
             'Oolong čaj',
             'Pu erh čaj',

@@ -390,21 +390,37 @@
                 "checkout": "Plaćanje",
                 "contact_info": "Kontakt informacije",
                 "shipping_info": "Informacije o dostavi",
-                "email": "Vaš email...",
-                "Phone": "Telefon...",
-                "first_name": "Vaše ime...",
-                "last_name": "Vaše prezime...",
-                "company": "Kompanija",
-                "address_line": "Adresa...",
-                "address_line_2": "Druga adresa...",
-                "city": "Grad...",
-                "postal_code": "Poštanski broj...",
-                "payment": "Plaćanje",
-                "order_summary": "Rezime porudžbine",
-                "fill_with_test_data": "Popuni test podacima",
-                "action": {
+                "form": {
+                    "labels": {
+                        "email": "Email",
+                        "phone": "Telefon",
+                        "first_name": "Ime",
+                        "last_name": "Prezime",
+                        "address": "Adresa",
+                        "city": "Grad",
+                        "postal_code": "Poštanski broj"
+                    },
+                    "placeholders": {
+                        "email": "Vaš email...",
+                        "phone": "Telefon...",
+                        "first_name": "Vaše ime...",
+                        "last_name": "Vaše prezime...",
+                        "company": "Kompanija",
+                        "address": "Adresa...",
+                        "city": "Grad...",
+                        "postal_code": "Poštanski broj..."
+                    }
+                },
+                "actions": {
                     "confirm": "Potvrdi porudžbinu"
-                }
+                },
+                "payment_methods": {
+                    "credit_card": "Kreditna kartica",
+                    "upon_delivery": "Plaćanje pouzećem"
+                },
+                "payment_method": "Način plaćanja",
+                "order_summary": "Rezime porudžbine",
+                "fill_with_test_data": "Popuni test podacima"
             },
             "posts": {
                 "blogs": "Blogovi",
@@ -414,6 +430,10 @@
                 "recommended_stories": "Preporučene priče",
                 "no_story_available": "Nema dostupnih priča",
                 "share_with_social_network": "Podelite članak na društvenim mrežama"
+            },
+            "blog": {
+                "title": "Blog",
+                "subtitle": "Čitajte naše priče i blogove o čajevima, zdravlju i načinu života"
             },
             "subscription": {
                 "you_are_subscribed": "Uspešno ste se prijavili"
