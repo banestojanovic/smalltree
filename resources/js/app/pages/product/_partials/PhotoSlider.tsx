@@ -1,17 +1,13 @@
+import { Button } from '@/app/components/ui/button';
+import { PageProps } from '@/app/types';
+import { motion } from 'framer-motion';
+import { ChevronRight } from 'lucide-react';
 import { useState } from 'react';
-// Import Swiper React components
-
-// Import Swiper styles
+import { useTranslation } from 'react-i18next';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-
-// import required modules
-import { Button } from '@/app/components/ui/button';
-import { PageProps } from '@/app/types';
-import { ChevronRight } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperClass } from 'swiper/types';
@@ -27,7 +23,7 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
 
     return (
         <div>
-            <div className="h-full">
+            <motion.div className="h-full" initial={{ y: 50 }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.3 }}>
                 <Swiper
                     spaceBetween={10}
                     thumbs={{ swiper: thumbsSwiper }}
@@ -48,13 +44,13 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
                                                 {t('order.on_action')} {product?.discount?.percentage ? `${product.discount.percentage}%` : ''}
                                             </span>
                                         )}
-                                        <img className="lg:h-[550px] w-full rounded-lg object-cover" src={photo?.original_url} alt={'Product slider image'} />
+                                        <img className="w-full rounded-lg object-cover lg:h-[550px]" src={photo?.original_url} alt={'Product slider image'} />
                                     </div>
                                 </SwiperSlide>
                             ),
                     )}
                 </Swiper>
-            </div>
+            </motion.div>
 
             <div className="mt-5 flex items-center justify-between gap-x-5">
                 <Button className="slider-prev flex size-5 items-center rounded-full bg-white p-3 md:size-7" variant="ghost">

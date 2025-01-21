@@ -19,6 +19,7 @@ class ProductController extends Controller
         $categoryIds = $product->categories?->pluck('id')->toArray();
 
         $similarProducts = ProductData::collect(Product::query()
+            ->whereNot('id', $product->id)
             ->with(['variations.discount', 'discount', 'cover', 'categories'])
             ->with([
                 'variations' => function ($query) {
@@ -31,7 +32,7 @@ class ProductController extends Controller
                 $q->whereIn('categories.id', $categoryIds);
             })
             ->take(4)
-            ->latest()
+            ->inRandomOrder()
             ->get()
         );
 

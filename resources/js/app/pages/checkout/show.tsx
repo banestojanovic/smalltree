@@ -1,6 +1,3 @@
-import { Head, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler, ReactNode } from 'react';
-
 import { Button } from '@/app/components/ui/button';
 import { Card, CardContent } from '@/app/components/ui/card';
 import FieldGroup from '@/app/components/ui/FieldGroup';
@@ -12,6 +9,8 @@ import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import ProductsList from '@/app/pages/checkout/_partials/ProductsList';
 import { PageProps } from '@/app/types';
+import { Head, useForm, usePage } from '@inertiajs/react';
+import { FormEventHandler, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const paymentMethods = [
@@ -62,50 +61,46 @@ const CheckoutIndex = () => {
     return (
         <>
             <Head title={t('checkout.checkout')} />
-            <div className="container mx-auto w-full md:max-w-5xl">
-                <div className="mx-auto max-w-2xl py-7 lg:max-w-7xl lg:py-20">
+
+            <div className="container relative md:max-w-6xl">
+                <div className="py-7 lg:py-20">
                     <h2 className="sr-only">{t('checkout.checkout')}</h2>
 
                     {global?.env === 'local' && (
-                        <Button variant={'outline'} type={'button'} onClick={fillWithTestData}>
+                        <Button variant={'outlined-white'} type={'button'} onClick={fillWithTestData} className={`absolute top-4`}>
                             {t('checkout.fill_with_test_data')}
                         </Button>
                     )}
 
-                    <form onSubmit={submit} className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-12">
-                        <div>
-                            <div>
-                                <Typography as="h3">{t('checkout.contact_info')}</Typography>
+                    <form onSubmit={submit} className="gap-20 lg:grid lg:grid-cols-2">
+                        <div className={`space-y-10`}>
+                            <div className={`space-y-7`}>
+                                <Typography as="h4">{t('checkout.contact_info')}</Typography>
 
-                                <div className="mt-5">
-                                    <FieldGroup label="Email" name="email" error={errors.email}>
+                                <div className={`grid gap-6`}>
+                                    <FieldGroup label="Email" name="email" error={errors.email} required>
                                         <Input id="email" type="email" placeholder="Email" value={data.email} onChange={(e) => setData('email', e.target.value)} />
                                     </FieldGroup>
 
-                                    <div className="mt-5">
-                                        <FieldGroup label="Phone" name="phone" error={errors.phone}>
-                                            <Input id="phone" placeholder="Phone" value={data.phone} onChange={(e) => setData('phone', e.target.value)} />
-                                        </FieldGroup>
-                                    </div>
+                                    <FieldGroup label="Phone" name="phone" error={errors.phone} required>
+                                        <Input id="phone" placeholder="Phone" value={data.phone} onChange={(e) => setData('phone', e.target.value)} />
+                                    </FieldGroup>
                                 </div>
                             </div>
 
-                            <Separator />
+                            <div className="space-y-7">
+                                <Typography as="h4">{t('checkout.shipping_info')}</Typography>
 
-                            {/* Shipping Info */}
-                            <div className="mt-10">
-                                <Typography as="h3">{t('checkout.shipping_info')}</Typography>
-
-                                <div className="mt-5">
+                                <div>
                                     <div className="gap-x-5 md:flex md:items-center">
                                         <div className="w-full">
-                                            <FieldGroup label="First Name" name="first_name" error={errors.first_name}>
+                                            <FieldGroup label="First Name" name="first_name" error={errors.first_name} required>
                                                 <Input id="first_name" placeholder="First name" value={data.first_name} onChange={(e) => setData('first_name', e.target.value)} />
                                             </FieldGroup>
                                         </div>
 
                                         <div className="mt-5 w-full md:mt-0">
-                                            <FieldGroup label="Last Name" name="last_name" error={errors.last_name}>
+                                            <FieldGroup label="Last Name" name="last_name" error={errors.last_name} required>
                                                 <Input id="last_name" placeholder="First name" value={data.last_name} onChange={(e) => setData('last_name', e.target.value)} />
                                             </FieldGroup>
                                         </div>
@@ -140,9 +135,8 @@ const CheckoutIndex = () => {
 
                             <Separator />
 
-                            {/* Payment Method */}
                             <div className="mt-10">
-                                <Typography as="h3" className="mb-5">
+                                <Typography as="h4" className="mb-5">
                                     {t('checkout.payment')}
                                 </Typography>
 
@@ -162,13 +156,12 @@ const CheckoutIndex = () => {
                             </div>
                         </div>
 
-                        {/* Order summary */}
                         <div className="mt-10 lg:mt-0">
-                            <Typography as="h3" className="mb-5">
+                            <Typography as="h4" className="mb-8">
                                 {t('checkout.order_summary')}
                             </Typography>
 
-                            <Card className={'!border-gray-50 !rounded-md'}>
+                            <Card className={'rounded-md border-none shadow-none'}>
                                 <CardContent>
                                     <ProductsList cart={cart} />
 
@@ -176,7 +169,7 @@ const CheckoutIndex = () => {
 
                                     <div className="px-4 py-6 sm:px-6">
                                         <Button type="submit" className="block w-full">
-                                            Confirm order
+                                            {t('checkout.action.confirm')}
                                         </Button>
                                     </div>
                                 </CardContent>

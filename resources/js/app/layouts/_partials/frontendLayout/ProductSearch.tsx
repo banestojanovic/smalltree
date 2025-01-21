@@ -4,6 +4,7 @@ import useNumberFormatter from '@/functions';
 import { cn } from '@/lib/utils';
 import { router } from '@inertiajs/react';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import { debounce } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -93,38 +94,43 @@ const ProductSearch = () => {
                     </Label>
                 </div>
                 <div className={`relative w-full`}>
-                    <Input
-                        id={`productSearch`}
-                        autoComplete="off"
-                        type="text"
-                        value={query}
-                        onChange={handleSearch}
-                        onKeyDown={(event) => (event.key === 'Enter' ? gotoSearchPage() : '')}
-                        placeholder={t('menu.top.search_in_products')}
-                        className="w-full border-border bg-input text-sm shadow-none placeholder:italic placeholder:text-foreground lg:ml-4"
-                    />
+                    <div className={`relative`}>
+                        <Input
+                            id={`productSearch`}
+                            autoComplete="off"
+                            type="text"
+                            value={query}
+                            onChange={handleSearch}
+                            onKeyDown={(event) => (event.key === 'Enter' ? gotoSearchPage() : '')}
+                            placeholder={t('menu.top.search_in_products')}
+                            className="w-full border-border bg-input text-sm shadow-none placeholder:italic placeholder:text-foreground lg:ml-4"
+                        />
 
-                    {isLoading && (
-                        <span className={`absolute right-2`}>
-                            <svg className="size-4 animate-spin" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </span>
-                    )}
+                        {isLoading && (
+                            <span className={`absolute right-0 top-2.5`}>
+                                <svg className="size-4 animate-spin" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </span>
+                        )}
+                    </div>
 
                     {isDropdownOpen && (
                         <div className="absolute left-0 z-20 ml-4 mt-1 max-h-96 w-full overflow-y-auto rounded border bg-input py-2">
                             {results.length < 1 && <div className="flex w-full items-center gap-x-2 px-4 text-sm">{t('menu.top.no_result_found')}</div>}
                             {results.length >= 1 && (
                                 <ul className="">
-                                    {results.map((product: App.Data.ProductData) => (
-                                        <li
+                                    {results.map((product: App.Data.ProductData, index: number) => (
+                                        <motion.li
                                             key={product.id}
                                             className={cn('cursor-pointer px-4 py-4 hover:bg-accent', query === product.name && 'bg-gray-200')}
                                             onClick={() => {
                                                 setIsDropdownOpen(false);
                                                 router.get(route('products.show', product.slug));
                                             }}
+                                            initial={{ y: 50 }}
+                                            whileInView={{ y: 0 }}
+                                            transition={{ type: 'spring', duration: (index + 1) / 4 }}
                                         >
                                             <div className="flex items-center justify-between gap-4 text-sm">
                                                 <div className="flex items-center gap-x-4">
@@ -146,7 +152,7 @@ const ProductSearch = () => {
                                                     )}
                                                 </div>
                                             </div>
-                                        </li>
+                                        </motion.li>
                                     ))}
                                 </ul>
                             )}

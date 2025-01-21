@@ -51,7 +51,7 @@ export default function Cart() {
                                                                 </span>
                                                             )}
                                                         </div>
-                                                        <div className="xs:hidden flex justify-between text-sm font-medium">
+                                                        <div className="flex justify-between text-sm font-medium xs:hidden">
                                                             <div className="flex flex-col">
                                                                 <p className={`flex items-center space-x-px`}>
                                                                     <span className={'font-semibold'}>{formatNumber(product.realPrice)}</span>
@@ -72,7 +72,7 @@ export default function Cart() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="xs:flex ml-4 hidden flex-col items-end text-sm font-medium">
+                                            <div className="ml-4 hidden flex-col items-end text-sm font-medium xs:flex">
                                                 <p className={`flex items-center space-x-px`}>
                                                     <span className={'font-semibold'}>{formatNumber(product.realPrice)}</span>
                                                     <span className={`font-normal`}>rsd</span>

@@ -370,7 +370,7 @@
             },
             "order": {
                 "order_created": "Porudžbina je uspešno kreirana",
-                "order_summary": "Rezime porudžbine",
+                "order_summary": "Detalji porudžbine",
                 "thank_you": "Hvala",
                 "its_on_the_way": "Na putu je!",
                 "order_received": "Vaša porudžbina je primljena i uskoro će biti poslata.",
@@ -390,17 +390,21 @@
                 "checkout": "Plaćanje",
                 "contact_info": "Kontakt informacije",
                 "shipping_info": "Informacije o dostavi",
-                "email": "E-pošta",
-                "Phone": "Telefon",
-                "first_name": "Ime",
-                "last_name": "Prezime",
+                "email": "Vaš email...",
+                "Phone": "Telefon...",
+                "first_name": "Vaše ime...",
+                "last_name": "Vaše prezime...",
                 "company": "Kompanija",
-                "address_line": "Adresa",
-                "city": "Grad",
-                "postal_code": "Poštanski broj",
+                "address_line": "Adresa...",
+                "address_line_2": "Druga adresa...",
+                "city": "Grad...",
+                "postal_code": "Poštanski broj...",
                 "payment": "Plaćanje",
                 "order_summary": "Rezime porudžbine",
-                "fill_with_test_data": "Popuni test podacima"
+                "fill_with_test_data": "Popuni test podacima",
+                "action": {
+                    "confirm": "Potvrdi porudžbinu"
+                }
             },
             "posts": {
                 "blogs": "Blogovi",
