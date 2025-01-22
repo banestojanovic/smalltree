@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContactMessage;
+use App\Mail\ContactUsMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class ContactUsController extends Controller
@@ -24,6 +25,12 @@ class ContactUsController extends Controller
 
         if ($validation->fails()) {
             return back()->with(['error' => $validation->errors()->first()])->withErrors($validation->errors());
+        }
+
+        try {
+            Mail::to('djex808@gmail.com')->send(new ContactUsMail(data: request()->all()));
+        } catch (\Exception $e) {
+            return back()->with(['error' => $e->getMessage()]);
         }
 
         return redirect()->back()->with('success', __('contact')['message_received']);

@@ -37,17 +37,17 @@ const FooterNavlinks = () => {
         {
             id: 'blog',
             title: 'menu.footer.blog',
-            route: '#',
+            route: route('posts.index'),
         },
         {
             id: 'about',
             title: 'menu.footer.about',
-            route: '#',
+            route: route('page.about.show'),
         },
         {
             id: 'contact',
             title: 'menu.footer.contact',
-            route: 'contact.show',
+            route: route('contact.show'),
         },
         {
             id: 'privacy_policy',
@@ -151,7 +151,9 @@ const FooterNavlinks = () => {
                             <ul className="mt-7 flex flex-col gap-2 text-[15px]">
                                 {footerNav.map((nav) => (
                                     <li key={nav.id}>
-                                        <Link href={nav.route}>{t(nav.title)}</Link>
+                                        <Link href={nav.route} className={`hover:underline`}>
+                                            {t(nav.title)}
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>

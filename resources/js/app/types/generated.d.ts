@@ -2,6 +2,7 @@ declare namespace App {
 export type AttributeSearchable = 0 | 1;
 export type AttributeType = 1 | 2 | 3;
 export type CartStatus = 0 | 1;
+export type OrderPaymentMethod = 1 | 2;
 export type OrderStatus = 0 | 1 | 2 | 3 | 4 | 5;
 export type PageStatus = 0 | 1 | 2 | 3;
 export type PostStatus = 0 | 1 | 2 | 3;
@@ -90,6 +91,7 @@ promoPackages: Array<any> | null;
 posts: Array<App.Data.PostData> | null;
 };
 export type OrderData = {
+payment_method_label: string;
 id: number;
 user_id: number;
 shipping_address_id: number;
@@ -99,6 +101,7 @@ amount: number;
 shipping: number;
 discount: number;
 total: number;
+payment_method: App.OrderPaymentMethod;
 status: App.OrderStatus | null;
 shipping_address: App.Data.AddressData | null;
 user: App.Data.UserData | null;
@@ -111,8 +114,8 @@ product_id: number;
 product_variation_id: number | null;
 quantity: number;
 price: number;
+real_price: number;
 discount: number;
-tax: number;
 product: App.Data.ProductData | null;
 };
 export type PageData = {

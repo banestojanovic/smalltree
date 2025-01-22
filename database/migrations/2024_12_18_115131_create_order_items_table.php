@@ -17,8 +17,9 @@ return new class extends Migration
             $table->foreignId('product_id')->index()->nullable()->constrained()->nullOnDelete();
             $table->foreignId('product_variation_id')->index()->nullable()->constrained()->nullOnDelete();
             $table->integer('quantity')->nullable();
-            $table->integer('price')->nullable();
-            $table->integer('discount')->nullable();
+            $table->bigInteger('price')->nullable();
+            $table->bigInteger('real_price')->nullable();
+            $table->bigInteger('discount')->nullable();
             $table->integer('tax')->nullable();
             $table->timestamps();
         });

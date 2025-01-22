@@ -16,4 +16,9 @@ class PageController extends Controller
             'page' => PageData::from($page),
         ]);
     }
+
+    public function aboutUs()
+    {
+        return inertia('page/about_us');
+    }
 }

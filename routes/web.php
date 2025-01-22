@@ -28,6 +28,12 @@ Route::post('/subscribers', [\App\Http\Controllers\SubscriberController::class, 
 Route::get('/kontakt', [\App\Http\Controllers\ContactUsController::class, 'show'])->name('contact.show');
 Route::post('/kontakt', [\App\Http\Controllers\ContactUsController::class, 'store'])->name('contact.store');
 
-Route::get('/{type}', [\App\Http\Controllers\SearchController::class, 'search'])->name('search.type');
+Route::get('/o-nama', [\App\Http\Controllers\PageController::class, 'aboutUs'])->name('page.about.show');
 
-Route::get('/{slug}', [\App\Http\Controllers\PageController::class, 'show'])->name('pages.show');
+Route::get('/{type}', [\App\Http\Controllers\SearchController::class, 'search'])
+    ->where('type', 'cajevi|pribor|dodaci|ostalo')
+    ->name('search.type');
+
+\App\Models\Page::all()->each(function ($page) {
+    Route::get($page->slug, [\App\Http\Controllers\PageController::class, 'show']);
+});

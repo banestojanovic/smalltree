@@ -86,8 +86,8 @@ class OrderController extends Controller
                 'product_variation_id' => $product->pivot->product_variation_id,
                 'quantity' => $product->pivot->quantity,
                 'price' => $product->pivot->price,
-                'discount' => 0,
-                'tax' => 0,
+                'real_price' => $product->pivot->real_price,
+                'discount' => $product->pivot->real_price - $product->pivot->price,
             ]);
 
             if ($product->stock !== null) {

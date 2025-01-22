@@ -13,8 +13,8 @@ class OrderItemData extends Data
         public ?int $product_variation_id,
         public int $quantity,
         public int $price,
+        public int $real_price,
         public int $discount,
-        public int $tax,
         public ?ProductData $product,
     ) {}
 }

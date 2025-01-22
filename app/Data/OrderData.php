@@ -2,13 +2,18 @@
 
 namespace App\Data;
 
+use App\OrderPaymentMethod;
 use App\OrderStatus;
 use Illuminate\Database\Eloquent\Collection;
+use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 
 class OrderData extends Data
 {
+    #[Computed]
+    public string $payment_method_label;
+
     public function __construct(
         public int $id,
         public int $user_id,
@@ -19,10 +24,13 @@ class OrderData extends Data
         public int $shipping,
         public int $discount,
         public int $total,
+        public OrderPaymentMethod $payment_method,
         public ?OrderStatus $status,
         public ?AddressData $shipping_address,
         public ?UserData $user,
         #[DataCollectionOf(OrderItemData::class)]
         public ?Collection $items,
-    ) {}
+    ) {
+        $this->payment_method_label = $payment_method->getLabel();
+    }
 }

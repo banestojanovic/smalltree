@@ -1,16 +1,14 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { ReactNode } from 'react';
 
 import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
-import { PageProps } from '@/app/types';
+import useNumberFormatter from '@/functions';
 import { useTranslation } from 'react-i18next';
 
-const OrderSummaryPage = () => {
+const OrderSummaryPage = ({ order }: { order: App.Data.OrderData }) => {
     const { t } = useTranslation();
-    const order = usePage<PageProps<{ order: App.Data.OrderData }>>().props.order;
-
-    console.log(order);
+    const formatNumber = useNumberFormatter();
 
     return (
         <>
@@ -18,53 +16,60 @@ const OrderSummaryPage = () => {
             <div className="container">
                 <div className="mt-5 md:mt-10">
                     <div className="mx-auto max-w-3xl">
-                        <div className="max-w-xl">
-                            <Typography as="h4">{t('order.thank_you')}</Typography>
-
-                            <Typography as="h2" className="!text-5xl">
-                                {t('order.its_on_the_way')}
-                            </Typography>
-                            <Typography as="p" className="mt-3">
-                                {t('order.order_received')}
+                        <div className="max-w-xl space-y-2 md:space-y-4">
+                            <Typography as="p" className={`text-sm font-medium uppercase text-primary sm:text-sm`}>
+                                {t('order.summary.top_title')}
                             </Typography>
 
+                            <Typography as="h2" className="max-sm:font-semibold sm:text-5xl">
+                                {t('order.summary.title')}
+                            </Typography>
+                            <Typography as="p" className={`text-foreground/60`}>
+                                {t('order.summary.subtitle')}
+                            </Typography>
+                        </div>
+
+                        <div>
                             <dl className="mt-12 text-sm font-medium">
-                                <dt className="text-gray-900">Order number</dt>
-                                <dd className="mt-2 text-indigo-600">{order.id}</dd>
+                                <dt className="">{t('order.summary.order_number')}</dt>
+                                <dd className="mt-2 text-primary">#{order.id}</dd>
                             </dl>
                         </div>
 
                         <div className="mt-10 border-t border-gray-200">
-                            <h2 className="sr-only">Your order</h2>
+                            <h2 className="sr-only">{t('order.summary.your_order')}</h2>
 
-                            <h3 className="sr-only">Items</h3>
+                            <h3 className="sr-only">{t('order.summary.products')}</h3>
                             {order?.items?.map(
                                 (item) =>
                                     item?.product && (
-                                        <div key={item.id} className="flex space-x-6 border-b border-gray-200 py-10">
+                                        <div key={item.id} className="flex space-x-6 py-10">
                                             {item?.product?.cover?.original_url && (
                                                 <img
                                                     src={item?.product.cover?.original_url}
                                                     alt={item?.product.name}
-                                                    className="h-20 w-20 flex-none rounded-lg bg-gray-100 object-cover object-center sm:h-40 sm:w-40"
+                                                    className="size-20 flex-none rounded-lg bg-white object-contain object-center sm:h-40 sm:w-40"
                                                 />
                                             )}
                                             <div className="flex flex-auto flex-col">
                                                 <div>
-                                                    <h4 className="font-medium text-gray-900">
+                                                    <h4 className="font-title text-xl font-medium hover:underline">
                                                         <Link href={route('products.show', item?.product?.slug)}>{item.product.name}</Link>
                                                     </h4>
-                                                    <p className="mt-2 text-sm text-gray-600">{item.product.description}</p>
+                                                    <p className="mt-2 text-sm">{item.product.description}</p>
                                                 </div>
                                                 <div className="mt-6 flex flex-1 items-end">
-                                                    <dl className="flex flex-col gap-x-4 divide-x divide-gray-200 text-sm sm:space-x-6 md:flex-row">
+                                                    <dl className="flex flex-col gap-1 space-x-1 text-sm xxs:flex-row xxs:divide-x sm:space-x-6">
                                                         <div className="flex">
-                                                            <dt className="font-medium text-gray-900">Quantity:</dt>
-                                                            <dd className="ml-2 text-gray-700">{item.quantity}</dd>
+                                                            <dt className="font-medium">{t('order.summary.quantity')}:</dt>
+                                                            <dd className="ml-2">{item.quantity}</dd>
                                                         </div>
-                                                        <div className="flex items-center">
-                                                            <dt className="font-medium text-gray-900">Price:</dt>
-                                                            <dd className="ml-2 text-gray-700">${item.price}</dd>
+                                                        <div className="flex xxs:pl-2 sm:pl-6">
+                                                            <dt className="font-medium">{t('order.summary.price')}:</dt>
+                                                            <dd className="ml-2 flex flex-col gap-1 xxs:flex-row xxs:space-x-2">
+                                                                <span>{formatNumber(item.price)}rsd</span>
+                                                                {item.price !== item.real_price && <span className={`text-muted-foreground line-through`}>{formatNumber(item.real_price)}rsd</span>}
+                                                            </dd>
                                                         </div>
                                                     </dl>
                                                 </div>
@@ -74,14 +79,14 @@ const OrderSummaryPage = () => {
                             )}
 
                             <div className="sm:ml-40 sm:pl-6">
-                                <h3 className="sr-only">Your information</h3>
+                                <h3 className="sr-only">{t('order.summary.your_information')}</h3>
 
-                                <h4 className="sr-only">Addresses</h4>
+                                <h4 className="sr-only">{t('order.summary.addresses')}</h4>
                                 <dl className="grid grid-cols-2 gap-x-6 py-10 text-sm">
                                     <div>
-                                        <dt className="font-medium text-gray-900">{t('order.shipping_address')}</dt>
-                                        <dd className="mt-2 text-gray-700">
-                                            <address className="not-italic">
+                                        <dt className="font-medium">{t('order.shipping_address')}</dt>
+                                        <dd className="mt-2">
+                                            <address className="space-y-1 not-italic">
                                                 <span className="block">{order?.user?.name}</span>
                                                 <span className="block">
                                                     {order.shipping_address?.address_line_1} {order.shipping_address?.address_line_2}
@@ -93,27 +98,39 @@ const OrderSummaryPage = () => {
                                         </dd>
                                     </div>
                                     <div>
-                                        <dt className="font-medium text-gray-900">{t('order.payment_method')}</dt>
-                                        <dd className="mt-2 text-gray-700">
-                                            <p>Cash on delivery</p>
+                                        <dt className="font-medium">{t('order.payment_method')}</dt>
+                                        <dd className="mt-2">
+                                            <p>{order.payment_method_label}</p>
                                         </dd>
                                     </div>
                                 </dl>
 
-                                <h3 className="sr-only">Summary</h3>
+                                <h3 className="sr-only">{t('order.summary.summary')}</h3>
 
                                 <dl className="space-y-6 border-t border-gray-200 pt-10 text-sm">
                                     <div className="flex justify-between">
-                                        <dt className="font-medium text-gray-900">{t('order.subtotal')}</dt>
-                                        <dd className="text-gray-700">${order.amount}</dd>
+                                        <dt className="font-medium">{t('order.subtotal')}</dt>
+                                        <dd>{formatNumber(order?.amount ?? 0)}rsd</dd>
                                     </div>
+                                    {order?.shipping > 0 && (
+                                        <div className="flex justify-between">
+                                            <dt className="font-medium">{t('order.shipping')}</dt>
+                                            <dd>{formatNumber(order?.shipping ?? 0)}rsd</dd>
+                                        </div>
+                                    )}
+                                    {order?.discount > 0 && (
+                                        <div className="flex justify-between">
+                                            <dt className="font-medium">{t('order.discount')}</dt>
+                                            <dd>{formatNumber(order?.discount ?? 0)}rsd</dd>
+                                        </div>
+                                    )}
                                     <div className="flex justify-between">
-                                        <dt className="font-medium text-gray-900">{t('order.shipping')}</dt>
-                                        <dd className="text-gray-700">${order.shipping}</dd>
+                                        <dt className="font-medium">{t('order.tax')}</dt>
+                                        <dd>20%</dd>
                                     </div>
-                                    <div className="flex justify-between">
-                                        <dt className="font-medium text-gray-900">{t('order.total')}</dt>
-                                        <dd className="text-gray-900">${order.total}</dd>
+                                    <div className="flex justify-between text-xl">
+                                        <dt className="font-medium">{t('order.total')}</dt>
+                                        <dd>{formatNumber(order.total)}rsd</dd>
                                     </div>
                                 </dl>
                             </div>

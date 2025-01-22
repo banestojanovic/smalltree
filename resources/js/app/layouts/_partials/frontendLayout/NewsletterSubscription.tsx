@@ -16,6 +16,7 @@ const NewsletterSubscription = () => {
         e.preventDefault();
 
         post(route('subscribers.store'), {
+            preserveScroll: true,
             onFinish: () => reset('email'),
         });
     };

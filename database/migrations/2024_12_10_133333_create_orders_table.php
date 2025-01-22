@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('user_ip')->nullable();
             $table->bigInteger('amount')->nullable();
             $table->bigInteger('shipping')->nullable();
-            $table->integer('discount')->nullable();
+            $table->bigInteger('discount')->nullable();
             $table->bigInteger('total');
             $table->tinyInteger('payment_method')->nullable();
             $table->integer('status')->default(1);

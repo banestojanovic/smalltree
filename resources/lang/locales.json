@@ -245,6 +245,10 @@
                         "draft": "Nacrt",
                         "trashed": "Izbrisano"
                     }
+                },
+                "payment_method": {
+                    "cart": "Kreditna kartica",
+                    "upon_delivery": "Plaćanje pouzećem"
                 }
             },
             "menu": {
@@ -371,9 +375,6 @@
             "order": {
                 "order_created": "Porudžbina je uspešno kreirana",
                 "order_summary": "Detalji porudžbine",
-                "thank_you": "Hvala",
-                "its_on_the_way": "Na putu je!",
-                "order_received": "Vaša porudžbina je primljena i uskoro će biti poslata.",
                 "shipping_address": "Adresa za dostavu",
                 "billing_address": "Adresa za naplatu",
                 "payment_method": "Način plaćanja",
@@ -384,7 +385,20 @@
                 "discount": "Popust",
                 "shipping": "Dostava",
                 "total": "Ukupno",
-                "on_action": "Akcija"
+                "on_action": "Akcija",
+                "summary": {
+                    "title": "Porudžbina je primljena",
+                    "top_title": "Hvala na poverenju!",
+                    "subtitle": "Vaša porudžbina je uspešno kreirana i uskoro će biti poslata.",
+                    "order_number": "Broj porudžbine",
+                    "your_order": "Vaša porudžbina",
+                    "products": "Proizvodi",
+                    "quantity": "Količina",
+                    "price": "Cena",
+                    "your_information": "Vaši podaci",
+                    "addresses": "Adrese",
+                    "summary": "Detalji porudžbine"
+                }
             },
             "checkout": {
                 "checkout": "Plaćanje",
@@ -474,13 +488,14 @@
             "pages": {
                 "not_found": "Nije pronađeno",
                 "not_found_error": "Greška, ova stranica ne postoji.",
-                "not_found_message": "Ova stranica ne postoji, možete se vratiti na početnu stranicu",
-                "click_button": "klikom ovde"
+                "not_found_message": "Ova stranica ne postoji, možete se vratiti na",
+                "click_button": "početnu stranicu klikom ovde"
             },
             "contact": {
                 "title": "Kontakt i lokacije",
                 "subtitle": "Kontaktirajte nas ili posetite naša prodajna mesta",
                 "message_received": "Hvala. Primili smo vašu poruku.",
+                "message_not_sent": "Poruka nije poslata. Molimo pokušajte ponovo.",
                 "form": {
                     "labels": {
                         "name": "Ime",
@@ -540,6 +555,17 @@
                 },
                 "actions": {
                     "reset": "Resetuj filtere"
+                }
+            },
+            "page": {
+                "about": {
+                    "title": "O nama",
+                    "subtitle": "Dobrodošli u Small Tree svet čajeva",
+                    "content": {
+                        "first": "Dobrodošli u prvi beogradski salon čaja. Salon de The rodjen je iz ljubavi i potpuno posvećen uživanju u čaju.Potrudili smo se da napravimo udobno, ušuškano mesto, gde ćete moći da se opustite, ali i uživate u zaboravljenom zvuku ploča, ukusu pažljivo odabranih kolača i mirisu neodoljivih čajnih kombinacija.",
+                        "second": "Svi naši čajevi biće Vam posluženi na potpuno jedinstven način u najrazličitijem priboru, pružajući vam mogućnost da sami osetite čaroliju pripreme čaja. Čaj je malo umetničko delo i traži veštu ruku.Sami ili u društvu dragih osoba i kućnih ljubimaca, uživaćete u prostoru bez duvanskog dima, ćaskanju ili momentu mira, listajući knjige koje su obeležile neka prošla vremena.",
+                        "third": "U Salon de The možete odabrati poklone, kupiti čaj ili organizovati svoje „Tea Party“ okupljanje. Organizacija rođendana i proslava je nešto u čemu uživamo. Priredite sebi ili voljenoj osobi proslavu za pamćenje.Prostor naše čajdžinice je idealno mesto za održavanje seminara, predavanja i prezentacija. Za sve dodatne informacije, kontaktirajte nas putem našeg maila office@smalltree.rs.Mi smo zaljubljeni u čaj, volimo ga iz mnogo razloga, dozvolite nam da tu strast podelimo sa Vama."
+                    }
                 }
             }
         }

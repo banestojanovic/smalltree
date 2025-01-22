@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\OrderPaymentMethod;
 use App\OrderStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -21,12 +22,14 @@ class Order extends Model
         'shipping',
         'discount',
         'total',
+        'payment_method',
         'status',
         'cart',
         'data',
     ];
 
     public $casts = [
+        'payment_method' => OrderPaymentMethod::class,
         'status' => OrderStatus::class,
         'cart' => 'array',
         'data' => 'array',

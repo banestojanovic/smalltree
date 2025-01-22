@@ -66,7 +66,7 @@ const ContactUsPage = () => {
                             <div className="mt-7 space-y-7">
                                 <div className={`space-y-7 lg:w-3/4`}>
                                     <FieldGroup label={t('contact.form.labels.name')} name="name" error={errors.name} required>
-                                        <Input autoFocus={true} id="name" placeholder={t('contact.form.placeholders.name')} value={data.name} onChange={(e) => setData('name', e.target.value)} />
+                                        <Input id="name" placeholder={t('contact.form.placeholders.name')} value={data.name} onChange={(e) => setData('name', e.target.value)} />
                                     </FieldGroup>
 
                                     <FieldGroup label={t('contact.form.labels.email')} name="email" error={errors.email} required>
