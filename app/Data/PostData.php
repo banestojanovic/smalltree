@@ -4,6 +4,7 @@ namespace App\Data;
 
 use App\PostStatus;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
@@ -15,11 +16,14 @@ class PostData extends Data
     #[Computed]
     public string $excerpt;
 
+    #[Computed]
+    public ?PostCategoryData $category;
+
     public function __construct(
         public int $id,
         public string $name,
         public string $slug,
-        public ?string $content,
+        public string $content,
         public PostStatus $status,
         public ?Media $cover,
         public ?MediaCollection $photos,
@@ -27,6 +31,7 @@ class PostData extends Data
         #[DataCollectionOf(PostCategoryData::class)]
         public ?Collection $categories,
     ) {
-        $this->excerpt = substr($this->content, 0, 100);
+        $this->excerpt = Str::words($this->content, 20);
+        $this->category = $this->categories?->first();
     }
 }

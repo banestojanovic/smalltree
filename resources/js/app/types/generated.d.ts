@@ -131,10 +131,11 @@ cover: any | null;
 };
 export type PostData = {
 excerpt: string;
+category: App.Data.PostCategoryData | null;
 id: number;
 name: string;
 slug: string;
-content: string | null;
+content: string;
 status: App.PostStatus;
 cover: any | null;
 photos: any | null;

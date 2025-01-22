@@ -39,10 +39,13 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
 
             <main>{children}</main>
 
-            <PromotionsFull promoPackages={promoPackages} />
-            <TopPosts posts={posts} />
+            <section>
+                <PromotionsFull promoPackages={promoPackages} />
 
-            <footer className={`mt-20`}>
+                {route().current() !== 'posts.index' && route().current() !== 'posts_by_category.index' && route().current() !== 'posts.show' && <TopPosts posts={posts} />}
+            </section>
+
+            <footer>
                 <TeaShopBenefits />
                 <FooterNavlinks />
             </footer>

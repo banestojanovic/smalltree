@@ -222,7 +222,7 @@
         "featured_post": "Istaknuti post",
         "recommended_stories": "Preporučene priče",
         "no_story_available": "Nema dostupnih priča",
-        "share_with_social_network": "Podelite članak na društvenim mrežama"
+        "share_with_social_network": "Podelite članak na društvenim mrežama:"
     },
     "blog": {
         "title": "Blog",
@@ -271,8 +271,41 @@
         "click_button": "klikom ovde"
     },
     "contact": {
+        "title": "Kontakt i lokacije",
+        "subtitle": "Kontaktirajte nas ili posetite naša prodajna mesta",
         "message_received": "Hvala. Primili smo vašu poruku.",
-        "submit_button": "Pošaljite poruku"
+        "form": {
+            "labels": {
+                "name": "Ime",
+                "email": "Email",
+                "phone": "Telefon",
+                "message": "Poruka"
+            },
+            "placeholders": {
+                "name": "Vaše ime...",
+                "email": "Vaš email...",
+                "phone": "Vaš telefon...",
+                "message": "Vaša poruka..."
+            },
+            "action": {
+                "submit": "Pošaljite poruku"
+            }
+        },
+        "data": {
+            "address": "Adresa",
+            "store_position": "Pozicija",
+            "mb": "MB",
+            "pib": "PIB",
+            "code": "Šifra delatnosti",
+            "phone": "Telefon",
+            "email": "Email",
+            "phone2": "Kontakt veleprodaje",
+            "phone3": "Kontakt veleprodaje",
+            "working_hours": "Radno vreme",
+            "saturday": "Subota",
+            "sunday": "Nedelja",
+            "see_directions": "Pogledaj direkcije na mapi"
+        }
     },
     "search": {
         "title": "Pretraga",

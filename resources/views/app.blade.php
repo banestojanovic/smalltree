@@ -13,7 +13,7 @@
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,200,0..1,-50..200&icon_names=progress_activity,shopping_bag&display=block" />
 
     @if (app()->environment('local'))
-{{--        <script src="https://cdn.jsdelivr.net/gh/underground-works/clockwork-browser@1/dist/toolbar.js"></script>--}}
+        <script src="https://cdn.jsdelivr.net/gh/underground-works/clockwork-browser@1/dist/toolbar.js"></script>
     @endif
 
     <!-- Scripts -->

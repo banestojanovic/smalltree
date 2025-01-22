@@ -26,7 +26,7 @@ const PostCard = ({ post }: PageProps<{ post: App.Data.PostData }>) => {
                     </Typography>
                 </CardTitle>
 
-                <p className="line-clamp-4 font-title font-light">{post.excerpt}</p>
+                <p className="line-clamp-4 font-title font-light" dangerouslySetInnerHTML={{ __html: post.excerpt }}></p>
 
                 <CardFooter className="mt-auto flex items-center p-0">
                     <Button asChild variant="link" className="p-0 font-title text-base underline">

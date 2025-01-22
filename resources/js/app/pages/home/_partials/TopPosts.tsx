@@ -10,7 +10,7 @@ const TopPosts = ({ posts }: PageProps<{ posts?: App.Data.PostData[] }>) => {
     const { t } = useTranslation();
 
     return posts && posts?.length > 0 ? (
-        <section className="mt-10 pb-10 sm:mt-20">
+        <section className="my-10 pb-10 sm:my-20">
             <div className="container">
                 <h2 className="scroll-m-20 pb-7 text-3xl font-semibold tracking-tight first:mt-0"></h2>
                 <Typography as="h2" className={`sm:text-3xl`}>

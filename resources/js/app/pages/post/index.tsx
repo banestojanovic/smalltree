@@ -64,7 +64,7 @@ const PostIndexPage = ({
                 )}
 
                 <section>
-                    <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                         {posts.data && posts.data.length > 0 ? (
                             posts.data.map((post, index: number) => (
                                 <motion.div key={post.id} initial={{ y: `${index + 50}px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: (index + 1) / 4 }}>

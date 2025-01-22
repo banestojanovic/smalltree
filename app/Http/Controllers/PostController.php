@@ -16,8 +16,9 @@ class PostController extends Controller
         $posts = PostData::collect(Post::query()
             ->with('cover', 'categories')
             ->when(! empty(request('category')), fn ($q) => $q->whereHas('categories', fn ($q) => $q->where('slug', request('category'))))
+            ->latest()
             ->active()
-            ->paginate(18)
+            ->paginate(12)
         );
 
         return inertia('post/index', [
@@ -40,7 +41,7 @@ class PostController extends Controller
             ->whereHas('categories', function ($q) use ($post) {
                 $q->whereIn('post_categories.id', $post->categories->pluck('id')->toArray());
             })
-            ->take(6)
+            ->take(3)
             ->get()
         );
 

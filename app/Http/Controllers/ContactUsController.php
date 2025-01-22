@@ -23,15 +23,8 @@ class ContactUsController extends Controller
         ]);
 
         if ($validation->fails()) {
-            return back()->with(['error' => $validation->errors()->first()]);
+            return back()->with(['error' => $validation->errors()->first()])->withErrors($validation->errors());
         }
-
-        ContactMessage::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'message' => $request->message,
-        ]);
 
         return redirect()->back()->with('success', __('contact')['message_received']);
     }

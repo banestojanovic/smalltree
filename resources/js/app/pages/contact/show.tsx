@@ -1,17 +1,38 @@
-import { Head, useForm } from '@inertiajs/react';
-import { FormEventHandler, ReactNode } from 'react';
-
 import { Button } from '@/app/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/app/components/ui/dialog';
 import FieldGroup from '@/app/components/ui/FieldGroup';
 import { Input } from '@/app/components/ui/input';
 import { Textarea } from '@/app/components/ui/textarea';
 import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
+import { Head, useForm } from '@inertiajs/react';
+import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import { FormEventHandler, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface ShopAddressCardProps {
-    shop: { name: string; address: string; phone: string; email: string; working_hours: string };
+    shop: {
+        name: string;
+        address: string;
+        store_position?: string;
+        data: {
+            mb?: string;
+            pib?: string;
+            code?: string;
+            phone?: string;
+            phone2?: string;
+            phone3?: string;
+            email?: string;
+            working_hours?: string;
+            saturday?: string;
+            sunday?: string;
+        }[];
+        img: string;
+        latitude: string;
+        longitude: string;
+        direction?: string;
+    };
 }
 
 const ContactUsPage = () => {
@@ -36,80 +57,106 @@ const ContactUsPage = () => {
         <>
             <Head title="Contact us" />
             <div className="container py-10 sm:py-20">
-                <Typography as="h3">{t('checkout.contact_info')}</Typography>
-                <Typography as="p">{t('checkout.contact_info')}</Typography>
+                <Typography as="h3">{t('contact.title')}</Typography>
+                <Typography as="p">{t('contact.subtitle')}</Typography>
 
-                <div className="grid grid-cols-1 gap-7 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 2xl:gap-20">
                     <section>
-                        <form onSubmit={submit} className="">
-                            <div>
-                                <div className="mt-7 space-y-7">
-                                    <FieldGroup label="Name" name="name" error={errors.name}>
-                                        <Input autoFocus={true} id="name" placeholder="Full Name" value={data.name} onChange={(e) => setData('name', e.target.value)} />
+                        <form onSubmit={submit}>
+                            <div className="mt-7 space-y-7">
+                                <div className={`space-y-7 lg:w-3/4`}>
+                                    <FieldGroup label={t('contact.form.labels.name')} name="name" error={errors.name} required>
+                                        <Input autoFocus={true} id="name" placeholder={t('contact.form.placeholders.name')} value={data.name} onChange={(e) => setData('name', e.target.value)} />
                                     </FieldGroup>
 
-                                    <FieldGroup label="Email" name="email" error={errors.email}>
-                                        <Input id="email" type="email" placeholder="Email" value={data.email} onChange={(e) => setData('email', e.target.value)} />
+                                    <FieldGroup label={t('contact.form.labels.email')} name="email" error={errors.email} required>
+                                        <Input id="email" type="email" placeholder={t('contact.form.placeholders.email')} value={data.email} onChange={(e) => setData('email', e.target.value)} />
                                     </FieldGroup>
 
-                                    <FieldGroup label="Phone" name="phone" error={errors.phone}>
-                                        <Input id="phone" placeholder="Your Phone Number" value={data.phone} onChange={(e) => setData('phone', e.target.value)} />
+                                    <FieldGroup label={t('contact.form.labels.phone')} name="phone" error={errors.phone} required>
+                                        <Input id="phone" placeholder={t('contact.form.placeholders.phone')} value={data.phone} onChange={(e) => setData('phone', e.target.value)} />
                                     </FieldGroup>
-
-                                    <FieldGroup label="Message" name="message" error={errors.message}>
-                                        <Textarea id="message" rows={7} placeholder="Enter your message" value={data.message} onChange={(e) => setData('message', e.target.value)} />
-                                    </FieldGroup>
-
-                                    <div className="mt-10">
-                                        <Button type="submit" className="">
-                                            {t('contact.submit_button')}
-                                        </Button>
-                                    </div>
                                 </div>
+
+                                <FieldGroup label={t('contact.form.labels.message')} name="message" error={errors.message} required>
+                                    <Textarea id="message" rows={7} placeholder={t('contact.form.placeholders.message')} value={data.message} onChange={(e) => setData('message', e.target.value)} />
+                                </FieldGroup>
+                            </div>
+
+                            <div className="mt-10">
+                                <Button type="submit" size={`xl`}>
+                                    {t('contact.form.action.submit')}
+                                </Button>
                             </div>
                         </form>
                     </section>
 
                     <section>
-                        <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
-                            <img className={'h-60 w-full rounded-lg object-cover lg:h-[285px] lg:w-[229px]'} src="/images/1.png" alt="image 1" />
-                            <img className={'h-60 w-full rounded-lg object-cover lg:h-[285px] lg:w-[229px]'} src="/images/2.png" alt="image 1" />
-                            <img className={'h-60 w-full rounded-lg object-cover lg:h-[285px] lg:w-[229px]'} src="/images/3.png" alt="image 1" />
-                            <img className={'h-60 w-full rounded-lg object-cover lg:h-[285px] lg:w-[229px]'} src="/images/4.png" alt="image 1" />
-                            <img className={'h-60 w-full rounded-lg object-cover lg:h-[285px] lg:w-[229px]'} src="/images/5.png" alt="image 1" />
-                            <img className={'h-60 w-full rounded-lg object-cover lg:h-[285px] lg:w-[229px]'} src="/images/6.png" alt="image 1" />
+                        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                            <figure className={`rounded-lg bg-white p-1.5`}>
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-1.jpg" alt="Slika salona" />
+                            </figure>
+                            <figure className={`rounded-lg bg-white p-1.5`}>
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-2.jpg" alt="Slika salona" />
+                            </figure>
+                            <figure className={`rounded-lg bg-white p-1.5`}>
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-3.jpg" alt="Slika salona" />
+                            </figure>
+                            <figure className={`rounded-lg bg-white p-1.5`}>
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-4.jpg" alt="Slika salona" />
+                            </figure>
+                            <figure className={`rounded-lg bg-white p-1.5`}>
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-5.jpg" alt="Slika salona" />
+                            </figure>
+                            <figure className={`rounded-lg bg-white p-1.5`}>
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-6.jpg" alt="Slika salona" />
+                            </figure>
                         </div>
                     </section>
                 </div>
 
-                {/*    Shops Addresses */}
-                <div className="mt-7 grid grid-cols-1 gap-7 sm:mt-10 md:grid-cols-2 lg:grid-cols-3">
+                <div className="ms:mt-32 mt-16 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
                     <ShopAddressCard
                         shop={{
-                            name: '',
-                            address: "Bulevar Mihajla Pupina 4, Beograd,'\n" + "Pozicija štanda: Prizemlje, nivo 0.,'\n" + "'Ulaz sa Brankovog mosta ispred lokala Go Sushi i IQOSI'",
-                            phone: '063 40 46 96 ',
-                            email: 'office@smalltree.rs \n',
-                            working_hours: '10 – 22 h',
+                            name: 'Salon De The',
+                            address: 'Svetog Save 12, Beograd',
+                            data: [{ phone: '063 40 46 96' }, { email: 'office@smalltree.rs' }, { working_hours: '10 – 22 h' }, { saturday: '09 - 16 h' }, { sunday: 'Neradni dan' }],
+                            img: '/site/locations/location-1.png',
+                            latitude: '44.8014506981761',
+                            longitude: '20.467196357670886',
+                            direction:
+                                'https://www.google.com/maps/place/Salon+de+th%C3%A9+by+Small+Tree/@44.8012924,20.4645997,17z/data=!3m1!4b1!4m6!3m5!1s0x475a700a36c7f3e9:0xca244ed82b9c2d6b!8m2!3d44.8012886!4d20.4671746!16s%2Fg%2F11b5pj9g43?entry=ttu&g_ep=EgoyMDI1MDExNS4wIKXMDSoASAFQAw%3D%3D',
                         }}
                     />
                     <ShopAddressCard
                         shop={{
-                            name: '',
-                            address: "Bulevar Mihajla Pupina 4, Beograd,'\n" + "Pozicija štanda: Prizemlje, nivo 0.,'\n" + "'Ulaz sa Brankovog mosta ispred lokala Go Sushi i IQOSI'",
-                            phone: '063 40 46 96 ',
-                            email: 'office@smalltree.rs \n',
-                            working_hours: '10 – 22 h',
+                            name: 'Tržni centar Ušće',
+                            address: 'Bulevar Mihajla Pupina 4, Beograd',
+                            store_position: 'Prizemlje, nivo 0. Ulaz sa Brankovog mosta ispred lokala Go Sushi i IQOSI',
+                            data: [{ phone: '063 40 46 96' }, { email: 'office@smalltree.rs' }, { working_hours: '10 – 22 h' }],
+                            img: '/site/locations/location-2.png',
+                            latitude: '44.81558910915537',
+                            longitude: '20.43684835437302',
+                            direction:
+                                'https://www.google.com/maps/place/U%C5%A0%C4%86E+Shopping+Center/@44.8155166,20.4311953,17z/data=!3m1!4b1!4m6!3m5!1s0x475a655bae3423a7:0xd9fb62470be09800!8m2!3d44.8155129!4d20.4360662!16s%2Fg%2F11x97z8_n?entry=ttu&g_ep=EgoyMDI1MDExNS4wIKXMDSoASAFQAw%3D%3D',
                         }}
                     />
-
                     <ShopAddressCard
                         shop={{
-                            name: '',
-                            address: "Bulevar Mihajla Pupina 4, Beograd,'\n" + "Pozicija štanda: Prizemlje, nivo 0.,'\n" + "'Ulaz sa Brankovog mosta ispred lokala Go Sushi i IQOSI'",
-                            phone: '063 40 46 96 ',
-                            email: 'office@smalltree.rs \n',
-                            working_hours: '10 – 22 h',
+                            name: 'Veleprodaja - Small Tree DOO',
+                            address: 'Jurija Gagarina 115/111, 11070 Beograd, Novi Beograd',
+                            data: [
+                                { mb: '20662999' },
+                                { pib: '106702340' },
+                                { code: '4711; trgovina na veliko i malo' },
+                                { email: 'office@smalltree.rs' },
+                                { phone: '011 382 04 66' },
+                                { phone2: '063 404 905' },
+                                { phone3: '063 711 91 91' },
+                            ],
+                            img: '/site/locations/location-3.png',
+                            latitude: '44.80215996074898',
+                            longitude: '20.391877369714173',
                         }}
                     />
                 </div>
@@ -119,29 +166,108 @@ const ContactUsPage = () => {
 };
 
 const ShopAddressCard = ({ shop }: ShopAddressCardProps) => {
+    const { t } = useTranslation();
+
+    const formatPhoneNumber = (phone: string) => {
+        if (phone.startsWith('0')) {
+            phone = phone.substring(1);
+        }
+        phone = phone.replace(/\s+/g, '');
+        return `+381${phone}`;
+    };
+
     return (
-        <Card>
-            <CardHeader>
-                <img className="h-60 w-full rounded-lg object-cover p-1.5 sm:h-72" src="/images/shop-map.png" alt="shop map" />
-                <CardTitle>
-                    <Typography as="h4">{shop.name}</Typography>
-                    {/*<p className="mt-1 text-sm !font-normal tracking-widest">{shop.date_created}</p>*/}
-                </CardTitle>
-            </CardHeader>
+        <Card className={`p-0`}>
+            <img className="h-60 w-full rounded-lg object-cover p-2 sm:h-72" src={shop.img} alt="shop map" />
 
-            <CardContent>
-                <p className="line-clamp-4 font-title">{shop.address}</p>
-                <p className="line-clamp-4 font-title">{shop.phone}</p>
-                <p className="line-clamp-4 font-title">{shop.email}</p>
-                <p className="line-clamp-4 font-title">{shop.working_hours}</p>
-                <p className="line-clamp-4 font-title"></p>
+            <CardContent className={`p-6`}>
+                <CardHeader className={`p-0`}>
+                    <CardTitle className={`p-0`}>
+                        <Typography as="h3" className={`font-medium`}>
+                            {shop.name}
+                        </Typography>
+                    </CardTitle>
+                </CardHeader>
+
+                <div className={`mt-4 space-y-0.5 text-md font-light`}>
+                    <dl>
+                        <dd className="line-clamp-4 font-title">{shop.address}</dd>
+                    </dl>
+                    {shop?.store_position && (
+                        <dl>
+                            <dd className="line-clamp-4 font-title">{shop.store_position}</dd>
+                        </dl>
+                    )}
+                    {shop.data.map((items) =>
+                        Object.entries(items).map(([key, item]) => (
+                            <dl key={key} className={`flex space-x-1`}>
+                                <dt className="font-title">{t(`contact.data.${key}`)}:</dt>
+                                <dd className="line-clamp-4 font-title">
+                                    {key === 'phone' || key === 'phone2' || key === 'phone3' ? (
+                                        <a href={`tel:${formatPhoneNumber(item)}`} className={'underline'}>
+                                            {item}
+                                        </a>
+                                    ) : key === 'email' ? (
+                                        <a href={`mailto:${item}`}>{item}</a>
+                                    ) : (
+                                        item
+                                    )}
+                                </dd>
+                            </dl>
+                        )),
+                    )}
+                </div>
+
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <CardFooter className="mt-4 flex p-0">
+                            <Button variant="link" className="px-0 font-title text-base underline">
+                                {t('contact.data.see_directions')}
+                            </Button>
+                        </CardFooter>
+                    </DialogTrigger>
+
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>{shop.address}</DialogTitle>
+                            <DialogDescription className={`flex items-center space-x-1`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                    <path d="M426.92-187.54v-221.67l54.46-155.56q2.7-4.85 6.43-7.73 3.73-2.88 11.57-2.88h285.85q6.72 0 11.51 2.88 4.8 2.88 6.49 7.73l54.46 155.56v221.67q0 7.1-4.83 11.93-4.84 4.84-11.94 4.84h-6.46q-7.09 0-11.93-4.84-4.84-4.83-4.84-11.93v-50.92H466.92v50.92q0 7.1-4.83 11.93-4.84 4.84-11.94 4.84h-6.46q-7.09 0-11.93-4.84-4.84-4.83-4.84-11.93Zm49.23-254h332.31L774.31-540h-264l-34.16 98.46Zm-13.84 35.39v132.3-132.3Zm63.07 98.46q15.04 0 25.22-10.18 10.17-10.17 10.17-25.21 0-15.04-10.17-25.21-10.18-10.17-25.22-10.17-15.03 0-25.21 10.17Q490-358.12 490-343.08q0 15.04 10.17 25.21 10.18 10.18 25.21 10.18Zm233.85 0q15.04 0 25.21-10.18 10.18-10.17 10.18-25.21 0-15.04-10.18-25.21-10.17-10.17-25.21-10.17-15.04 0-25.21 10.17-10.17 10.17-10.17 25.21 0 15.04 10.17 25.21 10.17 10.18 25.21 10.18ZM182.31-180v-12.31L250-260q-56.15 0-101.92-24.62-45.77-24.61-45.77-75.38v-340q0-40.62 59.77-60.31Q221.85-780 342.31-780q121.84 0 180.92 19.46 59.08 19.46 59.08 60.54v53.85h-40V-700h-400v280h213.84v240H182.31Zm20-144.62q15.04 0 25.21-10.17 10.17-10.17 10.17-25.21 0-15.04-10.17-25.21-10.17-10.17-25.21-10.17-15.04 0-25.21 10.17-10.18 10.17-10.18 25.21 0 15.04 10.18 25.21 10.17 10.17 25.21 10.17Zm260 50.77h360v-132.3h-360v132.3Z" />
+                                </svg>
+                                <a
+                                    href={shop?.direction ? shop.direction : `https://www.google.com/maps/place/${parseFloat(shop.latitude)},${parseFloat(shop.longitude)}`}
+                                    target={`_blank`}
+                                    rel={`noreferrer`}
+                                    className={`underline`}
+                                >
+                                    {t('footer.see_directions')}
+                                </a>
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className={`h-72 w-full`}>
+                            <APIProvider apiKey={`AIzaSyAvcVTi-sOrkQdEOJ-QIazagXeiBLc6gU4`}>
+                                <Map
+                                    className={`size-full`}
+                                    defaultCenter={{
+                                        lat: parseFloat(shop.latitude),
+                                        lng: parseFloat(shop.longitude),
+                                    }}
+                                    defaultZoom={14}
+                                    gestureHandling={'greedy'}
+                                    disableDefaultUI={true}
+                                >
+                                    <Marker
+                                        position={{
+                                            lat: parseFloat(shop.latitude),
+                                            lng: parseFloat(shop.longitude),
+                                        }}
+                                    />
+                                </Map>
+                            </APIProvider>
+                        </div>
+                    </DialogContent>
+                </Dialog>
             </CardContent>
-
-            <CardFooter className="mt-auto flex items-center">
-                <Button variant="link" className="!px-0">
-                    See on map
-                </Button>
-            </CardFooter>
         </Card>
     );
 };
