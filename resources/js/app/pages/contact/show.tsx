@@ -94,22 +94,22 @@ const ContactUsPage = () => {
                     <section>
                         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
                             <figure className={`rounded-lg bg-white p-1.5`}>
-                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-1.jpg" alt="Slika salona" />
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-1.jpg" alt="Slika salona" />
                             </figure>
                             <figure className={`rounded-lg bg-white p-1.5`}>
-                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-2.jpg" alt="Slika salona" />
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-2.jpg" alt="Slika salona" />
                             </figure>
                             <figure className={`rounded-lg bg-white p-1.5`}>
-                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-3.jpg" alt="Slika salona" />
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-3.jpg" alt="Slika salona" />
                             </figure>
                             <figure className={`rounded-lg bg-white p-1.5`}>
-                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-4.jpg" alt="Slika salona" />
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-4.jpg" alt="Slika salona" />
                             </figure>
                             <figure className={`rounded-lg bg-white p-1.5`}>
-                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-5.jpg" alt="Slika salona" />
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-5.jpg" alt="Slika salona" />
                             </figure>
                             <figure className={`rounded-lg bg-white p-1.5`}>
-                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/site/salon/salon-6.jpg" alt="Slika salona" />
+                                <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-6.jpg" alt="Slika salona" />
                             </figure>
                         </div>
                     </section>
@@ -121,7 +121,7 @@ const ContactUsPage = () => {
                             name: 'Salon De The',
                             address: 'Svetog Save 12, Beograd',
                             data: [{ phone: '063 40 46 96' }, { email: 'office@smalltree.rs' }, { working_hours: '10 – 22 h' }, { saturday: '09 - 16 h' }, { sunday: 'Neradni dan' }],
-                            img: '/site/locations/location-1.png',
+                            img: '/storage/site/locations/location-1.png',
                             latitude: '44.8014506981761',
                             longitude: '20.467196357670886',
                             direction:
@@ -134,7 +134,7 @@ const ContactUsPage = () => {
                             address: 'Bulevar Mihajla Pupina 4, Beograd',
                             store_position: 'Prizemlje, nivo 0. Ulaz sa Brankovog mosta ispred lokala Go Sushi i IQOSI',
                             data: [{ phone: '063 40 46 96' }, { email: 'office@smalltree.rs' }, { working_hours: '10 – 22 h' }],
-                            img: '/site/locations/location-2.png',
+                            img: '/storage/site/locations/location-2.png',
                             latitude: '44.81558910915537',
                             longitude: '20.43684835437302',
                             direction:
@@ -154,7 +154,7 @@ const ContactUsPage = () => {
                                 { phone2: '063 404 905' },
                                 { phone3: '063 711 91 91' },
                             ],
-                            img: '/site/locations/location-3.png',
+                            img: '/storage/site/locations/location-3.png',
                             latitude: '44.80215996074898',
                             longitude: '20.391877369714173',
                         }}

@@ -23,7 +23,7 @@ const PageShowPage = () => {
 
                 <div className={`grid gap-6 md:grid-cols-2`}>
                     <figure className={`relative overflow-hidden rounded-md max-md:aspect-video`}>
-                        <img src="/site/salon/salon-6.jpg" alt="Slika Small Tree salona" className={`absolute inset-0 size-full rounded-md object-cover`} />
+                        <img src="/storage/site/salon/salon-6.jpg" alt="Slika Small Tree salona" className={`absolute inset-0 size-full rounded-md object-cover`} />
                     </figure>
 
                     <div className={`prose text-foreground xxs:prose-base md:prose-sm lg:prose-base`}>
@@ -35,22 +35,22 @@ const PageShowPage = () => {
 
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-6 lg:grid-cols-6">
                     <figure className={`rounded-lg`}>
-                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/site/salon/salon-7.jpg" alt="Slika salona" />
+                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/storage/site/salon/salon-7.jpg" alt="Slika salona" />
                     </figure>
                     <figure className={`rounded-lg`}>
-                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/site/salon/salon-8.jpg" alt="Slika salona" />
+                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/storage/site/salon/salon-8.jpg" alt="Slika salona" />
                     </figure>
                     <figure className={`rounded-lg`}>
-                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/site/salon/salon-9.jpg" alt="Slika salona" />
+                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/storage/site/salon/salon-9.jpg" alt="Slika salona" />
                     </figure>
                     <figure className={`rounded-lg`}>
-                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/site/salon/salon-10.jpg" alt="Slika salona" />
+                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/storage/site/salon/salon-10.jpg" alt="Slika salona" />
                     </figure>
                     <figure className={`rounded-lg`}>
-                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/site/salon/salon-1.jpg" alt="Slika salona" />
+                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/storage/site/salon/salon-1.jpg" alt="Slika salona" />
                     </figure>
                     <figure className={`rounded-lg`}>
-                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/site/salon/salon-2.jpg" alt="Slika salona" />
+                        <img className={'aspect-square w-full rounded-lg object-cover'} src="/storage/site/salon/salon-2.jpg" alt="Slika salona" />
                     </figure>
                 </div>
             </div>
