@@ -64,7 +64,7 @@ class HomeController extends Controller
         $teaOfTheMonth = [
             'title' => $promotion_settings->tea_of_the_month_title['sr'] ?? '',
             'subtitle' => $promotion_settings->tea_of_the_month_subtitle['sr'] ?? '',
-            'image' => ! empty($promotion_settings->tea_of_the_month_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->tea_of_the_month_image[0]) : asset('site/images/hero_art.webp'),
+            'image' => ! empty($promotion_settings->tea_of_the_month_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->tea_of_the_month_image[0]) : asset('storage/site/images/hero_art.webp'),
             'product' => ProductData::from(Product::with('variations.discount', 'discount', 'cover', 'categories')
                 ->with([
                     'variations' => function ($query) {
@@ -81,7 +81,7 @@ class HomeController extends Controller
         $specialOffer = [
             'title' => $promotion_settings->special_offer_title['sr'] ?? '',
             'subtitle' => $promotion_settings->special_offer_subtitle['sr'] ?? '',
-            'image' => ! empty($promotion_settings->special_offer_bg_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->special_offer_bg_image[0]) : asset('site/images/hero_art.webp'),
+            'image' => ! empty($promotion_settings->special_offer_bg_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->special_offer_bg_image[0]) : asset('storage/site/images/hero_art.webp'),
             'product' => ProductData::from(Product::with('variations.discount', 'discount', 'cover', 'categories')
                 ->with([
                     'variations' => function ($query) {
@@ -105,7 +105,7 @@ class HomeController extends Controller
             'hero' => [
                 'title' => $settings->hero_title['sr'] ?? '',
                 'subtitle' => $settings->hero_subtitle['sr'] ?? '',
-                'image' => ! empty($settings->hero_image) ? Storage::disk(Disk::Attachments)->url($settings->hero_image[0]) : asset('site/images/hero.jpg'),
+                'image' => ! empty($settings->hero_image) ? Storage::disk(Disk::Attachments)->url($settings->hero_image[0]) : asset('storage/site/images/hero.jpg'),
             ],
         ]);
     }

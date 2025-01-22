@@ -48,7 +48,7 @@ class Product
         $packages = $this->transformProductPackagesArray($promoPackages);
 
         return collect($packages)->map(function ($package) {
-            $package['bg_image'] = ! empty($package['bg_image'][0]) ? Storage::disk(Disk::Attachments)->url($package['bg_image'][0]) : asset('site/images/hero_art.webp');
+            $package['bg_image'] = ! empty($package['bg_image'][0]) ? Storage::disk(Disk::Attachments)->url($package['bg_image'][0]) : asset('storage/site/images/hero_art.webp');
 
             return $package;
         })->all();
