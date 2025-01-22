@@ -34,6 +34,8 @@ Route::get('/{type}', [\App\Http\Controllers\SearchController::class, 'search'])
     ->where('type', 'cajevi|pribor|dodaci|ostalo')
     ->name('search.type');
 
-\App\Models\Page::all()->each(function ($page) {
-    Route::get($page->slug, [\App\Http\Controllers\PageController::class, 'show']);
-});
+if (Schema::hasTable('pages')) {
+    \App\Models\Page::all()->each(function ($page) {
+        Route::get($page->slug, [\App\Http\Controllers\PageController::class, 'show']);
+    });
+}
