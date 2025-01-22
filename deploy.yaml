@@ -8,7 +8,7 @@ config:
 hosts:
   production:
     hostname: '172.104.147.112'
-    deploy_path: '/home/master/applications/aabsbqvthj/public_html'
+    deploy_path: '/home/master/applications/knqvdwpnpj/public_html'
     branch: main
 
 after:
