@@ -23,7 +23,7 @@ const Error = ({ status }: { status: string }) => {
                     <Typography as="h2" className={`sm:text-3xl`}>
                         {status}
                     </Typography>
-                    <Typography as="p" className={`mt-2 leading-normal text-foreground/80 sm:mt-4`}>
+                    <Typography as="p" className={`text-foreground/80 mt-2 leading-normal sm:mt-4`}>
                         {messages?.[status] ?? 'An error occurred'}
                     </Typography>
                 </div>
@@ -60,7 +60,7 @@ const Error = ({ status }: { status: string }) => {
                     </div>
                     <Typography as={'p'} className={`mt-12 sm:text-lg`}>
                         {t('pages.not_found_message')}
-                        <span className={'ml-1 hover:text-primary hover:underline'}>
+                        <span className={'hover:text-primary ml-1 hover:underline'}>
                             <Link href={'/'} className={`font-medium underline`}>
                                 {t('pages.click_button')}
                             </Link>

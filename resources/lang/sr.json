@@ -361,5 +361,16 @@
                 "third": "U Salon de The možete odabrati poklone, kupiti čaj ili organizovati svoje „Tea Party“ okupljanje. Organizacija rođendana i proslava je nešto u čemu uživamo. Priredite sebi ili voljenoj osobi proslavu za pamćenje.Prostor naše čajdžinice je idealno mesto za održavanje seminara, predavanja i prezentacija. Za sve dodatne informacije, kontaktirajte nas putem našeg maila office@smalltree.rs.Mi smo zaljubljeni u čaj, volimo ga iz mnogo razloga, dozvolite nam da tu strast podelimo sa Vama."
             }
         }
+    },
+    "payments": {
+        "failed": {
+            "title": "Plaćanje nije uspelo - kartica nije zadužena",
+            "description": "Plaćanje nije moglo biti uspešno izvršeno. Molimo pokušajte ponovo ili prijavite problem administraciji sajta.",
+            "action": "Nazad na plaćanje"
+        },
+        "success": {
+            "title": "Uspešno plaćanje - kartica je zadužena",
+            "description": "Vaša porudžbina je uspešno kreirana i vaša kartica je zadužena. Uskoro ćete dobiti potvrdu na vaš email."
+        }
     }
 }

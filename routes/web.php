@@ -32,6 +32,8 @@ Route::post('/kontakt', [\App\Http\Controllers\ContactUsController::class, 'stor
 
 Route::get('/o-nama', [\App\Http\Controllers\PageController::class, 'aboutUs'])->name('page.about.show');
 
+Route::get('/placanje-neuspesno', [\App\Http\Controllers\PaymentStatusController::class, 'paymentFailed'])->name('payment_failed.show');
+
 Route::get('/{type}', [\App\Http\Controllers\SearchController::class, 'search'])
     ->where('type', 'cajevi|pribor|dodaci|ostalo')
     ->name('search.type');

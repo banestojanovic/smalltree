@@ -60,15 +60,19 @@ class HandleInertiaRequests extends Middleware
             ],
             'cart' => CartData::optional((new Cart)->getCart()),
             'global' => fn () => GlobalData::optional([
-                'env' => config('app.env'),
                 'action' => session()->get('action'),
                 'categories' => CategoryData::collect(Category::with('cover')->whereNull('parent_id')->get()),
+                'env' => config('app.env'),
                 'promoPackages' => $promoPackages,
                 'posts' => $posts,
             ]),
             'flash' => fn () => [
                 'success' => session()->get('success'),
                 'error' => session()->get('error'),
+            ],
+            'payment' => fn () => [
+                'pay_with_card' => session()->get('payment.pay_with_card'),
+                'paymentData' => session()->get('payment.paymentData'),
             ],
         ];
     }

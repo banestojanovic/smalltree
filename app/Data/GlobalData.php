@@ -17,5 +17,6 @@ class GlobalData extends Data
         public ?array $promoPackages,
         #[DataCollectionOf(PostData::class)]
         public ?Collection $posts,
+        public ?array $additional,
     ) {}
 }

@@ -9,7 +9,7 @@ import FrontendLayout from '@/app/layouts/FrontendLayout';
 import ProductsList from '@/app/pages/checkout/_partials/ProductsList';
 import { PageProps } from '@/app/types';
 import { Head, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler, ReactNode } from 'react';
+import { FormEventHandler, ReactNode, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const CheckoutIndex = () => {
@@ -17,6 +17,12 @@ const CheckoutIndex = () => {
 
     const cart = usePage<PageProps<{ cart: App.Data.CartData }>>().props.cart;
     const global = usePage<PageProps<{ global: App.Data.GlobalData }>>().props.global;
+    const payment = usePage<PageProps<{ flash?: PageProps['payment'] }>>().props.payment;
+
+    const [loading, setLoading] = useState<boolean>(false);
+    const [paymentData, setPaymentData] = useState<Record<string, string> | null>(null);
+
+    const paymentForm = useRef<HTMLFormElement>(null);
 
     const paymentMethods = [
         { id: '1', title: t('checkout.payment_methods.credit_card') },
@@ -31,14 +37,26 @@ const CheckoutIndex = () => {
         address: '',
         city: '',
         postal_code: '',
-        payment_method: '2',
+        payment_method: '',
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
+        setLoading(true);
+
         post(route('orders.store'), {
             preserveScroll: 'errors',
+            onSuccess: () => {
+                setLoading(false);
+                if (payment?.pay_with_card && payment?.paymentData) {
+                    setPaymentData(payment?.paymentData);
+
+                    setTimeout(() => {
+                        paymentForm.current?.submit();
+                    }, 250);
+                }
+            },
         });
     };
 
@@ -51,7 +69,7 @@ const CheckoutIndex = () => {
             address: '123 Test Street',
             city: 'Test City',
             postal_code: '12345',
-            payment_method: '2',
+            payment_method: '1',
         });
     };
 
@@ -67,6 +85,14 @@ const CheckoutIndex = () => {
                         <Button variant={'outlined-white'} type={'button'} onClick={fillWithTestData} className={`absolute top-4`}>
                             {t('checkout.fill_with_test_data')}
                         </Button>
+                    )}
+
+                    {paymentData && (
+                        <form ref={paymentForm} action={import.meta.env.VITE_NESTPAY_MERCHANT_3DGATE_URL} method="POST" className="hidden">
+                            {Object.entries(paymentData).map(([key, value]) => (
+                                <input key={key} type="text" name={key} value={value ?? ''} readOnly={true} />
+                            ))}
+                        </form>
                     )}
 
                     <form onSubmit={submit} className="grid gap-10 md:gap-20 lg:grid-cols-2">
@@ -165,7 +191,7 @@ const CheckoutIndex = () => {
                                     <ProductsList cart={cart} />
 
                                     <div className={`mt-10`}>
-                                        <Button type="submit" className="block h-12 w-full uppercase">
+                                        <Button type="submit" className="block h-12 w-full uppercase" disabled={loading}>
                                             {t('checkout.actions.confirm')}
                                         </Button>
                                     </div>

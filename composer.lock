@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef08e98976d35579556840463d6c6b50",
+    "content-hash": "bbfe8490a4d74854d143cc6381fc2453",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1290,6 +1290,71 @@
                 }
             ],
             "time": "2024-09-19T14:15:21+00:00"
+        },
+        {
+            "name": "cubes-doo/nestpay",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cubes-doo/nestpay.git",
+                "reference": "c56036319acbceccd3cfd520fd28c0d746b734cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cubes-doo/nestpay/zipball/c56036319acbceccd3cfd520fd28c0d746b734cd",
+                "reference": "c56036319acbceccd3cfd520fd28c0d746b734cd",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.6"
+            },
+            "suggest": {
+                "illuminate/support": "Required to integrate with Laravel framework (^5.4)."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Nestpay": "Cubes\\Nestpay\\Laravel\\Facade"
+                    },
+                    "providers": [
+                        "Cubes\\Nestpay\\Laravel\\NestpayServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cubes\\Nestpay\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandar Dimic",
+                    "email": "aleksandar.dimic@cubes.rs"
+                },
+                {
+                    "name": "Aleksa Cvijic",
+                    "email": "aleksa.cvijic@cubes.rs"
+                }
+            ],
+            "description": "Nestpay e-commerce integration",
+            "homepage": "https://github.com/cubes-doo/nestpay",
+            "keywords": [
+                "composer",
+                "laravel",
+                "nestpay",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/cubes-doo/nestpay/issues",
+                "source": "https://github.com/cubes-doo/nestpay/tree/v2.1.2"
+            },
+            "time": "2021-10-29T10:10:18+00:00"
         },
         {
             "name": "danharrin/date-format-converter",

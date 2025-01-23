@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "cubes-doo/nestpay": "^2.1",
         "deployer/deployer": "^7.5.8",
         "filament/filament": "^3.2.128",
         "filament/spatie-laravel-media-library-plugin": "^3.2.128",

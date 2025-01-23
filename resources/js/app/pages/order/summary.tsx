@@ -16,16 +16,22 @@ const OrderSummaryPage = ({ order }: { order: App.Data.OrderData }) => {
             <div className="container">
                 <div className="mt-5 md:mt-10">
                     <div className="mx-auto max-w-3xl">
-                        <div className="max-w-xl space-y-2 md:space-y-4">
-                            <Typography as="p" className={`text-primary text-sm font-medium uppercase sm:text-sm`}>
-                                {t('order.summary.top_title')}
-                            </Typography>
+                        <div className="max-w-3xl space-y-2 md:space-y-4">
+                            <div className={'flex justify-between'}>
+                                <Typography as="p" className={`text-primary text-sm font-medium uppercase sm:text-sm`}>
+                                    {t('order.summary.top_title')}
+                                </Typography>
 
-                            <Typography as="h2" className="max-sm:font-semibold sm:text-5xl">
-                                {t('order.summary.title')}
+                                <Typography as="p" className={`text-foreground/60 text-sm font-medium sm:text-sm`}>
+                                    {order?.date_created}
+                                </Typography>
+                            </div>
+
+                            <Typography as="h2" className="max-sm:font-semibold sm:text-5xl/tight">
+                                {order?.payment?.processed ? t('payments.success.title') : t('order.summary.title')}
                             </Typography>
                             <Typography as="p" className={`text-foreground/60`}>
-                                {t('order.summary.subtitle')}
+                                {order?.payment?.processed ? t('payments.success.description') : t('order.summary.subtitle')}
                             </Typography>
                         </div>
 
@@ -101,8 +107,15 @@ const OrderSummaryPage = ({ order }: { order: App.Data.OrderData }) => {
                                     </div>
                                     <div>
                                         <dt className="font-medium">{t('order.payment_method')}</dt>
-                                        <dd className="mt-2">
+                                        <dd className="mt-2 space-y-1">
                                             <p>{order.payment_method_label}</p>
+                                            {order?.payment?.processed && (
+                                                <>
+                                                    <p>{order.payment.card}</p>
+                                                    <p>{order.payment.masked}</p>
+                                                    <p>Transakcija: {order.payment.oid}</p>
+                                                </>
+                                            )}
                                         </dd>
                                     </div>
                                 </dl>

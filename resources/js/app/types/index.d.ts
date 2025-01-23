@@ -41,4 +41,8 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
         success: string;
         error: string;
     };
+    payment?: {
+        pay_with_card?: boolean;
+        paymentData?: Record<string, string>;
+    };
 };
