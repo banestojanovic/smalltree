@@ -54,7 +54,7 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
 
             <div className="mt-5 flex items-center justify-between gap-x-5">
                 <Button className="slider-prev flex size-5 items-center rounded-full bg-white p-3 md:size-7" variant="ghost">
-                    <ChevronRight className="!h-auto !w-2 rotate-180 sm:!w-4" />
+                    <ChevronRight className="h-auto! w-2! rotate-180 sm:w-4!" />
                 </Button>
 
                 <Swiper
@@ -94,7 +94,7 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
                 </Swiper>
 
                 <Button className="slider-next flex size-5 items-center justify-center rounded-full bg-white p-3 md:size-7" variant="ghost">
-                    <ChevronRight className="!h-auto !w-2 sm:!w-4" />
+                    <ChevronRight className="h-auto! w-2! sm:w-4!" />
                 </Button>
             </div>
         </div>

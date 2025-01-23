@@ -404,6 +404,7 @@
                 "checkout": "Plaćanje",
                 "contact_info": "Kontakt informacije",
                 "shipping_info": "Informacije o dostavi",
+                "buy_now": "Kupi odmah",
                 "form": {
                     "labels": {
                         "email": "Email",

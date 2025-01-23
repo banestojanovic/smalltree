@@ -3,8 +3,7 @@ import ProductPrice from '@/app/components/application/product/ProductPrice';
 import { Button } from '@/app/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/app/components/ui/dialog';
 import { Typography } from '@/app/components/ui/typography';
-import { PageProps } from '@/app/types';
-import { Link, usePage } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToggleGroup, ToggleGroupItem } from '../../ui/toggle-group';
@@ -15,7 +14,6 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
     const { t } = useTranslation();
 
     const [selectedVariation, setSelectedVariation] = useState<string | null>(null);
-    const cart = usePage<PageProps<{ cart?: App.Data.CartData }>>().props.cart;
 
     useEffect(() => {
         if (product?.grouped_variations) {
@@ -29,6 +27,25 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
     const matchingVariation = product?.variations?.find((variation: ProductVariationData) =>
         variation?.variations?.some((variationDetail: VariationValueData) => variationDetail?.pivot?.variation_value_id == selectedVariation),
     );
+
+    const { post, transform } = useForm({
+        product_id: product?.id,
+        price: 0,
+        real_price: 0,
+        variation_id: null,
+        quantity: 1,
+    });
+
+    const buyNow = () => {
+        transform((data) => ({
+            ...data,
+            price: matchingVariation?.discount?.price ?? matchingVariation?.price ?? product?.discount ?? product?.price ?? 0,
+            real_price: matchingVariation?.price ?? product?.price ?? 0,
+            variation_id: selectedVariation,
+        }));
+
+        post(route('buy_now'));
+    };
 
     return (
         <Dialog>
@@ -88,7 +105,7 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
                             </ToggleGroup>
                         </div>
 
-                        <div className="grid xs:grid-cols-2 gap-2 pt-4">
+                        <div className="xs:grid-cols-2 grid gap-2 pt-4">
                             <AddToCartButton
                                 disabled={!selectedVariation}
                                 productVariantId={selectedVariation}
@@ -97,28 +114,26 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
                                 size="lg"
                                 variant="outlined"
                                 className="inline-flex items-center justify-center uppercase sm:text-base"
-                                iconClass={`!size-5 shrink-0 fill-foreground`}
+                                iconClass={`size-5! shrink-0 fill-foreground`}
                                 label={t('product.add_to_cart')}
                             />
 
-                            <Button size={`lg`} asChild={cart && (cart?.products ?? []).length > 0} disabled={!cart || (cart?.products ?? []).length === 0} className={'flex w-full sm:text-base'}>
-                                <Link href={route('checkout.show')}>
-                                    <span className={'flex items-center gap-x-1'}>
-                                        <span>
-                                            <svg className={'!size-6 shrink-0'} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M19.4345 4.065H4.56445C3.90141 4.065 3.26553 4.32839 2.79669 4.79724C2.32785 5.26608 2.06445 5.90196 2.06445 6.565V17.435C2.06445 18.098 2.32785 18.7339 2.79669 19.2028C3.26553 19.6716 3.90141 19.935 4.56445 19.935H19.4345C20.0975 19.935 20.7334 19.6716 21.2022 19.2028C21.6711 18.7339 21.9345 18.098 21.9345 17.435V6.565C21.9345 5.90196 21.6711 5.26608 21.2022 4.79724C20.7334 4.32839 20.0975 4.065 19.4345 4.065ZM20.9345 13.995H14.5145C13.984 13.995 13.4753 13.7843 13.1002 13.4092C12.7252 13.0341 12.5145 12.5254 12.5145 11.995C12.5145 11.4646 12.7252 10.9559 13.1002 10.5808C13.4753 10.2057 13.984 9.995 14.5145 9.995H20.9345V13.995ZM14.5145 8.995C13.7188 8.995 12.9557 9.31107 12.3931 9.87368C11.8305 10.4363 11.5145 11.1994 11.5145 11.995C11.5145 12.7907 11.8305 13.5537 12.3931 14.1163C12.9557 14.6789 13.7188 14.995 14.5145 14.995H20.9345V17.435C20.9345 17.8328 20.7764 18.2144 20.4951 18.4957C20.2138 18.777 19.8323 18.935 19.4345 18.935H4.56445C4.16663 18.935 3.7851 18.777 3.50379 18.4957C3.22249 18.2144 3.06445 17.8328 3.06445 17.435V6.565C3.06445 6.16718 3.22249 5.78565 3.50379 5.50434C3.7851 5.22304 4.16663 5.065 4.56445 5.065H19.4345C19.8323 5.065 20.2138 5.22304 20.4951 5.50434C20.7764 5.78565 20.9345 6.16718 20.9345 6.565V8.995H14.5145Z"
-                                                    fill="white"
-                                                />
-                                                <path
-                                                    d="M14.5195 12.996C15.0718 12.996 15.5195 12.5483 15.5195 11.996C15.5195 11.4437 15.0718 10.996 14.5195 10.996C13.9672 10.996 13.5195 11.4437 13.5195 11.996C13.5195 12.5483 13.9672 12.996 14.5195 12.996Z"
-                                                    fill="white"
-                                                />
-                                            </svg>
-                                        </span>
-                                        <span className={`uppercase`}>{t('checkout.checkout')}</span>
+                            <Button size={`lg`} className={'flex w-full sm:text-base'} onClick={() => buyNow()}>
+                                <span className={'flex items-center gap-x-1'}>
+                                    <span>
+                                        <svg className={'size-6! shrink-0'} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M19.4345 4.065H4.56445C3.90141 4.065 3.26553 4.32839 2.79669 4.79724C2.32785 5.26608 2.06445 5.90196 2.06445 6.565V17.435C2.06445 18.098 2.32785 18.7339 2.79669 19.2028C3.26553 19.6716 3.90141 19.935 4.56445 19.935H19.4345C20.0975 19.935 20.7334 19.6716 21.2022 19.2028C21.6711 18.7339 21.9345 18.098 21.9345 17.435V6.565C21.9345 5.90196 21.6711 5.26608 21.2022 4.79724C20.7334 4.32839 20.0975 4.065 19.4345 4.065ZM20.9345 13.995H14.5145C13.984 13.995 13.4753 13.7843 13.1002 13.4092C12.7252 13.0341 12.5145 12.5254 12.5145 11.995C12.5145 11.4646 12.7252 10.9559 13.1002 10.5808C13.4753 10.2057 13.984 9.995 14.5145 9.995H20.9345V13.995ZM14.5145 8.995C13.7188 8.995 12.9557 9.31107 12.3931 9.87368C11.8305 10.4363 11.5145 11.1994 11.5145 11.995C11.5145 12.7907 11.8305 13.5537 12.3931 14.1163C12.9557 14.6789 13.7188 14.995 14.5145 14.995H20.9345V17.435C20.9345 17.8328 20.7764 18.2144 20.4951 18.4957C20.2138 18.777 19.8323 18.935 19.4345 18.935H4.56445C4.16663 18.935 3.7851 18.777 3.50379 18.4957C3.22249 18.2144 3.06445 17.8328 3.06445 17.435V6.565C3.06445 6.16718 3.22249 5.78565 3.50379 5.50434C3.7851 5.22304 4.16663 5.065 4.56445 5.065H19.4345C19.8323 5.065 20.2138 5.22304 20.4951 5.50434C20.7764 5.78565 20.9345 6.16718 20.9345 6.565V8.995H14.5145Z"
+                                                fill="white"
+                                            />
+                                            <path
+                                                d="M14.5195 12.996C15.0718 12.996 15.5195 12.5483 15.5195 11.996C15.5195 11.4437 15.0718 10.996 14.5195 10.996C13.9672 10.996 13.5195 11.4437 13.5195 11.996C13.5195 12.5483 13.9672 12.996 14.5195 12.996Z"
+                                                fill="white"
+                                            />
+                                        </svg>
                                     </span>
-                                </Link>
+                                    <span className={`uppercase`}>{t('checkout.buy_now')}</span>
+                                </span>
                             </Button>
                         </div>
                     </section>

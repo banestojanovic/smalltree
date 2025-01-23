@@ -1,7 +1,6 @@
 import { Button, ButtonProps } from '@/app/components/ui/button';
 import useNumberFormatter from '@/functions';
 import { useForm } from '@inertiajs/react';
-import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import VariationValueData = App.Data.VariationValueData;
 import ProductVariationData = App.Data.ProductVariationData;
@@ -66,7 +65,7 @@ const AddToCartButton = ({
 
     return (
         <Button asChild size={size ?? 'circle'} variant={variant ?? 'ternary'} onClick={updateCart} {...props}>
-            <motion.button type={`button`} whileTap={{ scale: 0.95 }} transition={{ type: 'spring', duration: 0.3 }}>
+            <button type="button" className={`cursor-pointer`}>
                 <span>
                     <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={iconClass ?? ''}>
                         <path
@@ -79,7 +78,7 @@ const AddToCartButton = ({
                 {label && <span>{label}</span>}
 
                 {showPrice && <span>{price ? `${formatNumber(price)}` : ''}</span>}
-            </motion.button>
+            </button>
         </Button>
     );
 };

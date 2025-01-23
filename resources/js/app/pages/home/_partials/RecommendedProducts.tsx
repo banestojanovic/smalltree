@@ -23,7 +23,7 @@ const RecommendedProducts = ({ products }: PageProps<{ products?: App.Data.Produ
                 </div>
 
                 <div className="mt-10 flex items-center justify-center">
-                    <Button className="!px-10">{t('enums.homepage.sections.see_all')}</Button>
+                    <Button className="px-10!">{t('enums.homepage.sections.see_all')}</Button>
                 </div>
             </div>
         </section>

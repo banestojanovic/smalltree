@@ -10,37 +10,34 @@ class Product
 {
     public function transformProductPackagesArray(array $promoPackages): array
     {
-        $cacheKey = 'transformed_product_packages';
+        //app|todo maybe should be cached.
+        $productIds = collect($promoPackages)
+            ->pluck('products')
+            ->flatten()
+            ->unique()
+            ->filter()
+            ->all();
 
-        return Cache::rememberForever($cacheKey, function () use ($promoPackages) {
-            $productIds = collect($promoPackages)
-                ->pluck('products')
-                ->flatten()
-                ->unique()
+        $products = ProductData::collect(\App\Models\Product::query()
+            ->with('variations.discount', 'discount', 'cover', 'categories')
+            ->with([
+                'variations' => function ($query) {
+                    $query->with('variations')
+                        ->select('product_variations.*');
+                },
+            ])
+            ->whereIn('id', $productIds)
+            ->get()
+            ->keyBy('id'));
+
+        return collect($promoPackages)->map(function ($package) use ($products) {
+            $package['products'] = collect($package['products'])
+                ->map(fn ($id) => $products->get($id))
                 ->filter()
                 ->all();
 
-            $products = ProductData::collect(\App\Models\Product::query()
-                ->with('variations.discount', 'discount', 'cover', 'categories')
-                ->with([
-                    'variations' => function ($query) {
-                        $query->with('variations')
-                            ->select('product_variations.*');
-                    },
-                ])
-                ->whereIn('id', $productIds)
-                ->get()
-                ->keyBy('id'));
-
-            return collect($promoPackages)->map(function ($package) use ($products) {
-                $package['products'] = collect($package['products'])
-                    ->map(fn ($id) => $products->get($id))
-                    ->filter()
-                    ->all();
-
-                return $package;
-            })->all();
-        });
+            return $package;
+        })->all();
     }
 
     public function transformPromoPackages(array $promoPackages): array

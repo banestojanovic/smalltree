@@ -10,7 +10,7 @@ const PostCard = ({ post }: PageProps<{ post: App.Data.PostData }>) => {
     const { t } = useTranslation();
 
     return (
-        <Card className={`w-full rounded-lg border-none shadow-none transition hover:scale-[1.01] hover:shadow`}>
+        <Card className={`w-full rounded-lg border-none shadow-none transition hover:scale-[1.01] hover:shadow-sm`}>
             <CardHeader>
                 {post.cover?.original_url && (
                     <Link href={route('posts.show', post.slug)} className="rounded-lg p-2.5">

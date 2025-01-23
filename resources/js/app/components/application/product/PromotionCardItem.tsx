@@ -21,7 +21,7 @@ const PromotionCardItem = ({
                 <Link href={route('products.show', product.slug)}>{product.name}</Link>
             </Typography>
 
-            <Typography as="h3" className="!font-normal text-white">
+            <Typography as="h3" className="font-normal! text-white">
                 <ProductPrice price={product?.price ?? 0} discountPrice={product?.discount?.price ?? null} variant={`light`} />
             </Typography>
         </div>

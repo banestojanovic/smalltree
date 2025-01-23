@@ -17,7 +17,7 @@ const OrderSummaryPage = ({ order }: { order: App.Data.OrderData }) => {
                 <div className="mt-5 md:mt-10">
                     <div className="mx-auto max-w-3xl">
                         <div className="max-w-xl space-y-2 md:space-y-4">
-                            <Typography as="p" className={`text-sm font-medium uppercase text-primary sm:text-sm`}>
+                            <Typography as="p" className={`text-primary text-sm font-medium uppercase sm:text-sm`}>
                                 {t('order.summary.top_title')}
                             </Typography>
 
@@ -32,7 +32,7 @@ const OrderSummaryPage = ({ order }: { order: App.Data.OrderData }) => {
                         <div>
                             <dl className="mt-12 text-sm font-medium">
                                 <dt className="">{t('order.summary.order_number')}</dt>
-                                <dd className="mt-2 text-primary">#{order.id}</dd>
+                                <dd className="text-primary mt-2">#{order.id}</dd>
                             </dl>
                         </div>
 
@@ -59,16 +59,18 @@ const OrderSummaryPage = ({ order }: { order: App.Data.OrderData }) => {
                                                     <p className="mt-2 text-sm">{item.product.description}</p>
                                                 </div>
                                                 <div className="mt-6 flex flex-1 items-end">
-                                                    <dl className="flex flex-col gap-1 space-x-1 text-sm xxs:flex-row xxs:divide-x sm:space-x-6">
-                                                        <div className="flex">
+                                                    <dl className="xxs:flex-row xxs:divide-x flex flex-col gap-1 space-x-1 text-sm sm:space-x-4">
+                                                        <div className="xxs:pr-2 flex sm:pr-6">
                                                             <dt className="font-medium">{t('order.summary.quantity')}:</dt>
                                                             <dd className="ml-2">{item.quantity}</dd>
                                                         </div>
-                                                        <div className="flex xxs:pl-2 sm:pl-6">
+                                                        <div className="flex">
                                                             <dt className="font-medium">{t('order.summary.price')}:</dt>
-                                                            <dd className="ml-2 flex flex-col gap-1 xxs:flex-row xxs:space-x-2">
-                                                                <span>{formatNumber(item.price)}rsd</span>
-                                                                {item.price !== item.real_price && <span className={`text-muted-foreground line-through`}>{formatNumber(item.real_price)}rsd</span>}
+                                                            <dd className="xxs:flex-row xxs:space-x-2 ml-2 flex flex-col gap-1">
+                                                                <span>{formatNumber(item.price * item.quantity)}rsd</span>
+                                                                {item.price !== item.real_price && (
+                                                                    <span className={`text-muted-foreground line-through`}>{formatNumber(item.real_price * item.quantity)}rsd</span>
+                                                                )}
                                                             </dd>
                                                         </div>
                                                     </dl>

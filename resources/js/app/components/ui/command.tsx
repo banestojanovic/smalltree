@@ -27,7 +27,7 @@ const CommandInput = React.forwardRef<React.ElementRef<typeof CommandPrimitive.I
         <CommandPrimitive.Input
             ref={ref}
             className={cn(
-                'text-m flex h-10 w-full rounded-none border-none bg-transparent py-3 text-xs outline-none placeholder:italic placeholder:text-muted-foreground focus-visible:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50',
+                'text-m flex h-10 w-full rounded-none border-none bg-transparent py-3 text-xs outline-hidden placeholder:italic placeholder:text-muted-foreground focus-visible:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50',
                 className,
             )}
             {...props}
@@ -71,7 +71,7 @@ const CommandItem = React.forwardRef<React.ElementRef<typeof CommandPrimitive.It
     <CommandPrimitive.Item
         ref={ref}
         className={cn(
-            'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected=true]:bg-accent/50 data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+            'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden data-[disabled=true]:pointer-events-none data-[selected=true]:bg-accent/50 data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
             className,
         )}
         {...props}

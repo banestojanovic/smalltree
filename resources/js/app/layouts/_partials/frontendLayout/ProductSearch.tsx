@@ -103,11 +103,11 @@ const ProductSearch = () => {
                             onChange={handleSearch}
                             onKeyDown={(event) => (event.key === 'Enter' ? gotoSearchPage() : '')}
                             placeholder={t('menu.top.search_in_products')}
-                            className="w-full border-border bg-input text-sm shadow-none placeholder:italic placeholder:text-foreground lg:ml-4"
+                            className="border-border bg-input placeholder:text-foreground w-full text-sm shadow-none placeholder:italic lg:ml-4"
                         />
 
                         {isLoading && (
-                            <span className={`absolute right-0 top-2.5`}>
+                            <span className={`absolute top-2.5 right-0`}>
                                 <svg className="size-4 animate-spin" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
@@ -116,14 +116,14 @@ const ProductSearch = () => {
                     </div>
 
                     {isDropdownOpen && (
-                        <div className="absolute left-0 z-20 ml-4 mt-1 max-h-96 w-full overflow-y-auto rounded border bg-input py-2">
+                        <div className="bg-input absolute left-0 z-20 mt-1 ml-4 max-h-96 w-full overflow-y-auto rounded border py-2">
                             {results.length < 1 && <div className="flex w-full items-center gap-x-2 px-4 text-sm">{t('menu.top.no_result_found')}</div>}
                             {results.length >= 1 && (
                                 <ul className="">
                                     {results.map((product: App.Data.ProductData, index: number) => (
                                         <motion.li
                                             key={product.id}
-                                            className={cn('cursor-pointer px-4 py-4 hover:bg-accent', query === product.name && 'bg-gray-200')}
+                                            className={cn('hover:bg-accent cursor-pointer px-4 py-4', query === product.name && 'bg-gray-200')}
                                             onClick={() => {
                                                 setIsDropdownOpen(false);
                                                 router.get(route('products.show', product.slug));
@@ -145,7 +145,7 @@ const ProductSearch = () => {
                                                         <span className={`font-normal`}>rsd</span>
                                                     </div>
                                                     {product?.discount?.price && (
-                                                        <div className={`flex items-center space-x-px text-xs text-foreground/50 line-through`}>
+                                                        <div className={`text-foreground/50 flex items-center space-x-px text-xs line-through`}>
                                                             <span>{formatNumber(product?.discount?.price)}</span>
                                                             <span>rsd</span>
                                                         </div>

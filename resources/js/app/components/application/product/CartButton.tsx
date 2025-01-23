@@ -2,7 +2,6 @@ import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { PageProps } from '@/app/types';
 import { router, useForm, usePage } from '@inertiajs/react';
-import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 const CartButton = ({ size }: { size?: string }) => {
@@ -28,18 +27,12 @@ const CartButton = ({ size }: { size?: string }) => {
     };
 
     return (
-        <div className="hover:scale-10 relative transition">
-            <motion.div
-                whileHover={{
-                    scale: 1.04,
-                    transition: { duration: 0.2 },
-                }}
-                whileTap={{ scale: 0.8 }}
-            >
+        <div className="active:sclae-95 relative transition hover:scale-105">
+            <div>
                 {cart?.products && cart.products.length > 0 && (
                     <Badge
                         variant={'destructive'}
-                        className={`absolute -right-2 -top-1 inline-flex items-center justify-center rounded-full ${size === 'small' ? 'size-4 text-xs' : 'size-5 text-sm'}`}
+                        className={`absolute -top-1 -right-2 z-10 inline-flex items-center justify-center rounded-full ${size === 'small' ? 'size-4 text-xs' : 'size-5 text-sm'}`}
                     >
                         {cart.products.length}
                     </Badge>
@@ -53,7 +46,7 @@ const CartButton = ({ size }: { size?: string }) => {
                     {isLoading && <span className={`material-symbols-outlined animate-spin ${size === 'small' ? 'text-xl' : 'text-3xl'}`}>progress_activity</span>}
                     {!isLoading && <span className={`material-symbols-outlined ${size === 'small' ? 'text-2xl' : 'text-3xl'}\``}>shopping_bag</span>}
                 </Button>
-            </motion.div>
+            </div>
         </div>
     );
 };

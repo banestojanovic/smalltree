@@ -37,7 +37,7 @@ export default function TopNavbar() {
                 ease: [0, 0.71, 0.2, 1.01],
             }}
             ref={headerRef}
-            className={`top-auto flex items-center border-b bg-background md:sticky md:top-0 md:z-20 ${isScrolled ? '' : 'border-transparent'}`}
+            className={`bg-background top-auto flex items-center border-b md:sticky md:top-0 md:z-20 ${isScrolled ? '' : 'border-transparent'}`}
         >
             <div className="container max-sm:px-2">
                 <div className="hidden items-center gap-x-4 md:flex">
@@ -99,7 +99,7 @@ export default function TopNavbar() {
                                     duration: 0.2,
                                     ease: [0, 0.71, 0.2, 1.01],
                                 }}
-                                className={`block fill-primary`}
+                                className={`fill-primary block`}
                             >
                                 <ApplicationLogo className={`size-full`} />
                             </motion.span>
@@ -124,7 +124,7 @@ export default function TopNavbar() {
 
                 <div className="grid grid-cols-2 items-center md:hidden">
                     <Link href="/" className={`relative flex size-full items-center justify-center`}>
-                        <ApplicationLogo className="flex size-24 fill-primary" />
+                        <ApplicationLogo className="fill-primary flex size-24" />
                     </Link>
 
                     <div className={`flex flex-col gap-4`}>
@@ -184,7 +184,7 @@ export default function TopNavbar() {
                 whileInView={{ transform: 'translateY(0px)' }}
                 transition={{ type: 'spring' }}
                 viewport={{ once: true }}
-                className={`width-full fixed bottom-0 left-0 right-0 z-20 grid divide-x rounded-t border-t bg-white md:hidden ${cart?.products && cart.products.length > 0 ? 'grid-cols-6' : 'grid-cols-5'}`}
+                className={`width-full fixed right-0 bottom-0 left-0 z-20 grid divide-x rounded-t border-t bg-white md:hidden ${cart?.products && cart.products.length > 0 ? 'grid-cols-6' : 'grid-cols-5'}`}
             >
                 <div>
                     <MobileMenu />

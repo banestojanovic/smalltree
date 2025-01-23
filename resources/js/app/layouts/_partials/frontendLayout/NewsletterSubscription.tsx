@@ -29,7 +29,7 @@ const NewsletterSubscription = () => {
 
             <form onSubmit={submit}>
                 <div className={`relative flex w-full flex-col gap-2 lg:flex-row lg:items-center`}>
-                    <div className={`relative flex w-full items-center rounded-lg bg-white px-2 pl-10 ring-primary ring-offset-1 has-[:focus]:ring`}>
+                    <div className={`relative flex w-full items-center rounded-lg bg-white px-2 pl-10 ring-primary ring-offset-1 has-focus:ring-3`}>
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className={`absolute left-4`}>
                             <path d="M5.14575 7.0415C12.5595 14.3941 13.176 14.1319 20.8541 7.0415" stroke="black" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round" />
                             <path
@@ -46,7 +46,7 @@ const NewsletterSubscription = () => {
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
                             placeholder={t('newsletter.email_placeholder')}
-                            className="h-12 w-full border-none bg-transparent text-sm text-foreground shadow-none outline-none placeholder:italic placeholder:text-foreground focus-visible:ring-0"
+                            className="h-12 w-full border-none bg-transparent text-sm text-foreground shadow-none outline-hidden placeholder:italic placeholder:text-foreground focus-visible:ring-0"
                         />
                     </div>
                     <Button type="submit" className={`h-12 px-8`}>

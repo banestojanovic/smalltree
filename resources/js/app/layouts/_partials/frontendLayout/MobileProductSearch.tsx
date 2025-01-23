@@ -93,7 +93,7 @@ const ProductSearch = ({ variant }: { variant?: string }) => {
                 <SheetTrigger asChild>
                     <Button variant="ghost" className={`mx-auto flex px-2.5 ${variant === 'circled' ? 'size-10 rounded-full' : ''}`}>
                         <span>
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`!size-5`}>
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-5!`}>
                                 <path
                                     d="M8.64815 16.7963C13.1482 16.7963 16.7963 13.1482 16.7963 8.64815C16.7963 4.14805 13.1482 0.5 8.64815 0.5C4.14805 0.5 0.5 4.14805 0.5 8.64815C0.5 13.1482 4.14805 16.7963 8.64815 16.7963Z"
                                     stroke="black"

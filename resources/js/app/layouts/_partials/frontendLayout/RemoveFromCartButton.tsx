@@ -11,7 +11,6 @@ import {
     AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { useForm } from '@inertiajs/react';
-import { motion } from 'framer-motion';
 import { Trash2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -26,18 +25,17 @@ export default function RemoveFromCartButton({ product }: { product: App.Data.Ca
     const updateCart = () => {
         submit('delete', route('cart.remove'), {
             preserveScroll: true,
-            only: ['auth', 'cart', 'flash', 'global'],
         });
     };
 
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <motion.div className="flex items-center justify-end" whileTap={{ scale: 0.95 }}>
-                    <Button variant="ghost" size="circle">
+                <div className="flex items-center justify-end">
+                    <Button type={`button`} variant="ghost" size="circle">
                         <Trash2 className="text-destructive" />
                     </Button>
-                </motion.div>
+                </div>
             </AlertDialogTrigger>
             <AlertDialogContent className={`bg-white`}>
                 <AlertDialogHeader>

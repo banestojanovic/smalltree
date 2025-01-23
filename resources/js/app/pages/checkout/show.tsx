@@ -38,7 +38,7 @@ const CheckoutIndex = () => {
         e.preventDefault();
 
         post(route('orders.store'), {
-            preserveScroll: true,
+            preserveScroll: 'errors',
         });
     };
 
@@ -59,7 +59,7 @@ const CheckoutIndex = () => {
         <>
             <Head title={t('checkout.checkout')} />
 
-            <div className="container relative lg:max-w-6xl">
+            <div className="relative container lg:max-w-6xl">
                 <div className="py-7 lg:pt-20">
                     <h2 className="sr-only">{t('checkout.checkout')}</h2>
 

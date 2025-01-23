@@ -14,6 +14,8 @@ Route::post('/korpa/update-grouped', [\App\Http\Controllers\CartController::clas
 Route::put('/kopra/update-quantity', [\App\Http\Controllers\CartController::class, 'updateQuantity'])->name('cart.update');
 Route::delete('/korpa/remove-product', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
 
+Route::post('/kupi-odmah', \App\Http\Controllers\BuyNowController::class)->name('buy_now');
+
 Route::get('/placanje', [\App\Http\Controllers\CheckoutController::class, 'show'])->name('checkout.show');
 
 Route::post('/orders', [\App\Http\Controllers\OrderController::class, 'store'])->name('orders.store');

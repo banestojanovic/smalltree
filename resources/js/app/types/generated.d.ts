@@ -50,15 +50,13 @@ products: Array<App.Data.CartProductData> | null;
 };
 export type CartProductData = {
 quantity: number;
-realPrice: number;
+total: number;
 chosenId: number;
 variation: App.Data.VariationValueData | null;
 id: number;
 name: string;
 slug: string;
 sku: string;
-price: number | null;
-real_price: number | null;
 stock: number | null;
 stock_status: App.ProductStockStatus;
 description: string | null;

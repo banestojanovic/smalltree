@@ -12,7 +12,7 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
     const { t } = useTranslation();
 
     return (
-        <Card key={product.id} className="relative flex w-full flex-col justify-between border-none shadow-none transition hover:scale-[1.01] hover:shadow">
+        <Card key={product.id} className="relative flex w-full flex-col justify-between border-none shadow-none transition hover:scale-[1.01] hover:shadow-sm">
             {product.discount && (
                 <span className="absolute right-2 top-2 rounded-md bg-primary px-4 py-1.5 text-xs text-white">
                     {t('order.on_action')} {product?.discount?.percentage ? `${product.discount.percentage}%` : ''}

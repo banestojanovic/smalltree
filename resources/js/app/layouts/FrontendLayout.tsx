@@ -26,8 +26,8 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
     const posts = usePage<PageProps<{ posts: App.Data.PostData[] }>>().props?.global?.posts ?? [];
 
     return (
-        <div className="min-h-screen bg-background">
-            <div className="relative flex h-[6px] w-full border-t-[6px] border-primary bg-primary"></div>
+        <div className="bg-background min-h-screen">
+            <div className="border-primary bg-primary relative flex h-[6px] w-full border-t-[6px]"></div>
             <TopNavbar />
             <MainNavbar />
 

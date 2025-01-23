@@ -93,10 +93,10 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             }
         };
 
-        const btnClass = 'h-full px-3 py-[1px] shadow-none bg-white rounded-none focus-visible:relative disabled:opacity-1 disabled:text-foreground/40';
+        const btnClass = 'h-full px-3 py-[1px] shadow-none bg-white rounded-none focus-visible:relative disabled:opacity-50 disabled:text-foreground/40';
 
         return (
-            <div className="flex items-center overflow-hidden rounded-lg border bg-input has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-ring has-[:focus-visible]:ring-offset-1">
+            <div className="bg-input has-focus-visible:ring-ring flex items-center overflow-hidden rounded-lg border has-focus-visible:ring-1 has-focus-visible:ring-offset-1">
                 <NumericFormat
                     value={value}
                     onValueChange={handleChange}
@@ -112,7 +112,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                     prefix={prefix}
                     customInput={Input}
                     placeholder={placeholder}
-                    className="h-vh relative rounded-none border-none bg-input font-normal shadow-none [appearance:textfield] focus-visible:border-none focus-visible:shadow-none focus-visible:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="h-vh bg-input relative [appearance:textfield] rounded-none border-none font-normal shadow-none focus-visible:border-none focus-visible:ring-0 focus-visible:shadow-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                     getInputRef={combinedRef}
                     {...props}
                 />

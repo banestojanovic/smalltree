@@ -13,13 +13,13 @@ export default function FlashedMessages() {
 
     useEffect(() => {
         if (flash?.success) {
-            toast.success(t('enums.flash.success'), {
+            toast.success(t('flash.success'), {
                 description: flash.success,
             });
         }
 
         if (flash?.error) {
-            toast.error(t('enums.flash.error'), {
+            toast.error(t('flash.error'), {
                 description: flash.error,
             });
         }

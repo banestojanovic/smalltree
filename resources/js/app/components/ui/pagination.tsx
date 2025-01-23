@@ -27,7 +27,7 @@ interface PaginationItem {
     active: boolean;
 }
 
-const paginationItemClasses = cva('px-4 flex items-center justify-center h-12 border border-foreground/50 rounded-md text-foreground capitalize text-sm focus:outline-none hover:bg-accent', {
+const paginationItemClasses = cva('px-4 flex items-center justify-center h-12 border border-foreground/50 rounded-md text-foreground capitalize text-sm focus:outline-hidden hover:bg-accent', {
     variants: {
         active: {
             true: 'bg-primary text-white border-primary hover:bg-primary cursor-default',
@@ -78,7 +78,7 @@ function PaginationItem({ active, label, url }: PaginationItem) {
 }
 
 function PageInactive({ label }: Pick<PaginationItem, 'label'>) {
-    const className = cva('flex items-center justify-center px-4 h-12 border border-foreground/10 bg-white/50 rounded-md text-sm text-muted-foreground focus:outline-none hover:bg-white/50');
+    const className = cva('flex items-center justify-center px-4 h-12 border border-foreground/10 bg-white/50 rounded-md text-sm text-muted-foreground focus:outline-hidden hover:bg-white/50');
 
     const isNext = label.toLowerCase().includes('next');
     const isPrevious = label.toLowerCase().includes('previous');

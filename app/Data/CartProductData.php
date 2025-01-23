@@ -17,7 +17,7 @@ class CartProductData extends Data
     public int $quantity;
 
     #[Computed]
-    public float $realPrice;
+    public float $total;
 
     #[Computed]
     public float $chosenId;
@@ -30,8 +30,6 @@ class CartProductData extends Data
         public readonly string $name,
         public readonly string $slug,
         public readonly string $sku,
-        public readonly ?float $price,
-        public readonly ?float $real_price,
         public readonly ?int $stock,
         public readonly ProductStockStatus $stock_status,
         public readonly ?string $description,
@@ -42,9 +40,9 @@ class CartProductData extends Data
         public ?Pivot $pivot,
     ) {
         $this->quantity = $this->pivot->quantity ?? 1;
-        $this->realPrice = $this->quantity * ($this->pivot->price);
+        $this->total = $this->quantity * ($this->pivot->price);
         $this->chosenId = $this->pivot->product_variation_id ?? $this->id;
 
-        $this->variation = $this->variations->where('id', $this->pivot->product_variation_id)->first()?->variations[0] ?? null;
+        $this->variation = $this->variations->where('price', $this->pivot->price)->first()?->variations[0] ?? null;
     }
 }

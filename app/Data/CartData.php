@@ -27,10 +27,10 @@ class CartData extends Data
         #[DataCollectionOf(CartProductData::class)]
         public ?Collection $products,
     ) {
-        $this->total = $this->products->sum('realPrice');
-        $this->subtotal = $this->products->sum('pivot.real_price');
+        $this->total = $this->products->sum('total');
+        $this->subtotal = $this->products->reduce(fn ($carry, $item) => $carry + (($item->pivot->real_price * $item->pivot->quantity)), 0);
 
         $this->shipping = 0;
-        $this->discount = $this->products->reduce(fn ($carry, $item) => $carry + ($item->price - $item->realPrice), 0);
+        $this->discount = $this->products->reduce(fn ($carry, $item) => $carry + (($item->pivot->real_price * $item->pivot->quantity) - $item->total), 0);
     }
 }
