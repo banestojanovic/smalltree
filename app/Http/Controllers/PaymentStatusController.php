@@ -47,18 +47,11 @@ class PaymentStatusController extends Controller
             $payment = $merchantService->paymentProcess3DGateResponse($request->all());
 
         } catch (\Cubes\Nestpay\PaymentAlreadyProcessedException $ex) {
-            //the payment has been already processed
-            //this error occures if customer refresh result page
-            //add code here for the case if necessary
-            $ex = null; //comment this if you want to show this exception if debug is on
+            $ex = null;
 
         } catch (\Exception $ex) {
-            //any other error
-            //add code here for the case if necessary
 
         } finally {
-            //try to get working payment
-
             try {
                 $payment = $merchantService->getWorkingPayment();
             } catch (\Exception $exTemp) {
@@ -66,7 +59,7 @@ class PaymentStatusController extends Controller
         }
 
         if ($ex && config('app.debug')) {
-//            throw $ex;
+            throw $ex;
         }
 
         if ($ex) {

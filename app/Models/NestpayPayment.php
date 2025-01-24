@@ -6,95 +6,97 @@ use Cubes\Nestpay\Laravel\PaymentModel as Model;
 
 class NestpayPayment extends Model
 {
-    protected $fillable = [
-        'processed',
-        'oid',
-        'trantype',
-        'currency',
-        'amount',
-        'Response',
-        'AuthCode',
-        'ProcReturnCode',
-        'TransId',
-        'ErrMsg',
-        'mdStatus',
-        'email',
-        'tel',
-        'description',
-        'BillToCompany',
-        'BillToName',
-        'BillToStreet1',
-        'BillToStreet2',
-        'BillToCity',
-        'BillToStateProv',
-        'BillToPostalCode',
-        'BillToCountry',
-        'ShipToCompany',
-        'ShipToName',
-        'ShipToStreet1',
-        'ShipToStreet2',
-        'ShipToCity',
-        'ShipToStateProv',
-        'ShipToPostalCode',
-        'ShipToCountry',
-        'DimCriteria1',
-        'DimCriteria2',
-        'DimCriteria3',
-        'DimCriteria4',
-        'DimCriteria5',
-        'DimCriteria6',
-        'DimCriteria7',
-        'DimCriteria8',
-        'DimCriteria9',
-        'DimCriteria10',
-        'instalment',
-        'INVOICENUMBER',
-        'storetype',
-        'lang',
-        'xid',
-        'HostRefNum',
-        'clientIp',
-        'ReturnOid',
-        'MaskedPan',
-        'rnd',
-        'merchantID',
-        'txstatus',
-        'iReqCode',
-        'iReqDetail',
-        'vendorCode',
-        'PAResSyntaxOK',
-        'PAResVerified',
-        'eci',
-        'cavv',
-        'cavvAlgorthm',
-        'md',
-        'Version',
-        'SID',
-        'mdErrorMsg',
-        'TRANID',
-        'clientid',
-        'EXTRA_TRXDATE',
-        'comments',
+    /*protected $table = 'nestpay_payments';
 
-        'ACQBIN',
-        'acqStan',
-        'cavvAlgorithm',
-        'digest',
-        'dsId',
-        'Ecom_Payment_Card_ExpDate_Month',
-        'Ecom_Payment_Card_ExpDate_Year',
-        'EXTRA_CARDBRAND',
-        'EXTRA_CARDISSUER',
-        'EXTRA_INVOICENUMBER',
-        'failUrl',
-        'HASH',
-        'hashAlgorithm',
-        'HASHPARAMS',
-        'HASHPARAMSVAL',
-        'okurl',
-        'refreshtime',
-        'SettleId',
-    ];
+    protected $fillable = [
+		'processed',
+		'oid',
+		'trantype',
+		'currency',
+		'amount',
+		'Response',
+		'AuthCode',
+		'ProcReturnCode',
+		'TransId',
+		'ErrMsg',
+		'mdStatus',
+		'email',
+		'tel',
+		'description',
+		'BillToCompany',
+		'BillToName',
+		'BillToStreet1',
+		'BillToStreet2',
+		'BillToCity',
+		'BillToStateProv',
+		'BillToPostalCode',
+		'BillToCountry',
+		'ShipToCompany',
+		'ShipToName',
+		'ShipToStreet1',
+		'ShipToStreet2',
+		'ShipToCity',
+		'ShipToStateProv',
+		'ShipToPostalCode',
+		'ShipToCountry',
+		'DimCriteria1',
+		'DimCriteria2',
+		'DimCriteria3',
+		'DimCriteria4',
+		'DimCriteria5',
+		'DimCriteria6',
+		'DimCriteria7',
+		'DimCriteria8',
+		'DimCriteria9',
+		'DimCriteria10',
+		'instalment',
+		'INVOICENUMBER',
+		'storetype',
+		'lang',
+		'xid',
+		'HostRefNum',
+		'clientIp',
+		'ReturnOid',
+		'MaskedPan',
+		'rnd',
+		'merchantID',
+		'txstatus',
+		'iReqCode',
+		'iReqDetail',
+		'vendorCode',
+		'PAResSyntaxOK',
+		'PAResVerified',
+		'eci',
+		'cavv',
+		'cavvAlgorthm',
+		'md',
+		'Version',
+		'SID',
+		'mdErrorMsg',
+		'TRANID',
+		'clientid',
+		'EXTRA_TRXDATE',
+		'comments',
+
+		'ACQBIN',
+		'acqStan',
+		'cavvAlgorithm',
+		'digest',
+		'dsId',
+		'Ecom_Payment_Card_ExpDate_Month',
+		'Ecom_Payment_Card_ExpDate_Year',
+		'EXTRA_CARDBRAND',
+		'EXTRA_CARDISSUER',
+		'EXTRA_INVOICENUMBER',
+		'failUrl',
+		'HASH',
+		'hashAlgorithm',
+		'HASHPARAMS',
+		'HASHPARAMSVAL',
+		'okurl',
+		'refreshtime',
+		'SettleId',
+    ];*/
 
     public function getInvoiceAttribute()
     {
@@ -111,53 +113,9 @@ class NestpayPayment extends Model
         return $this->MaskedPan;
     }
 
-    public function getMaskedCreditCardAttribute()
+    protected static function booted(): void
     {
-        return $this->MaskedPan;
+        \Illuminate\Database\Eloquent\Model::shouldBeStrict(false);
     }
 
-    public function getOrgHashAttribute()
-    {
-        return $this->HASH;
-    }
-
-    public function getTrantypeAttribute()
-    {
-        return $this->trantype ?? NestpayPayment::TRAN_TYPE_AUTH;
-    }
-
-    public function getpayResultsdsIdAttribute()
-    {
-        return $this->dsId;
-    }
-
-    public function getCallbackCallAttribute()
-    {
-        return null;
-    }
-
-    public function getIsHPPCallAttribute()
-    {
-        return null;
-    }
-
-    public function getInstalmentAttribute()
-    {
-        return null;
-    }
-
-    public function getEncodingAttribute()
-    {
-        return 'utf-8';
-    }
-
-    public function getEXTRAAAVRESPONSECODEAttribute()
-    {
-        return null;
-    }
-
-    public function getOrgRndAttribute()
-    {
-        return $this->rnd;
-    }
 }

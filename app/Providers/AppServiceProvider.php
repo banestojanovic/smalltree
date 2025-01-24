@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\NestpayEventsSubscriber;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Cart;
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Console\CliDumper;
 use Illuminate\Foundation\Http\HtmlDumper;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Vite;
@@ -67,5 +69,7 @@ class AppServiceProvider extends ServiceProvider
         Date::use(CarbonImmutable::class);
 
         Schema::defaultStringLength(125);
+
+        Event::subscribe(NestpayEventsSubscriber::class);
     }
 }

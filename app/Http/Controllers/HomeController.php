@@ -65,7 +65,7 @@ class HomeController extends Controller
             'title' => $promotion_settings->tea_of_the_month_title['sr'] ?? '',
             'subtitle' => $promotion_settings->tea_of_the_month_subtitle['sr'] ?? '',
             'image' => ! empty($promotion_settings->tea_of_the_month_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->tea_of_the_month_image[0]) : asset('storage/site/images/hero_art.webp'),
-            'product' => ProductData::from(Product::with('variations.discount', 'discount', 'cover', 'categories')
+            'product' => ProductData::optional(Product::with('variations.discount', 'discount', 'cover', 'categories')
                 ->with([
                     'variations' => function ($query) {
                         $query->with('variations')
@@ -82,7 +82,7 @@ class HomeController extends Controller
             'title' => $promotion_settings->special_offer_title['sr'] ?? '',
             'subtitle' => $promotion_settings->special_offer_subtitle['sr'] ?? '',
             'image' => ! empty($promotion_settings->special_offer_bg_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->special_offer_bg_image[0]) : asset('storage/site/images/hero_art.webp'),
-            'product' => ProductData::from(Product::with('variations.discount', 'discount', 'cover', 'categories')
+            'product' => ProductData::optional(Product::with('variations.discount', 'discount', 'cover', 'categories')
                 ->with([
                     'variations' => function ($query) {
                         $query->with('variations')

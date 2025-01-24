@@ -1,7 +1,7 @@
 declare namespace App {
 export type AttributeSearchable = 0 | 1;
 export type AttributeType = 1 | 2 | 3;
-export type CartStatus = 0 | 1;
+export type CartStatus = 0 | 1 | 2;
 export type OrderPaymentMethod = 1 | 2;
 export type OrderStatus = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type PageStatus = 0 | 1 | 2 | 3;

@@ -13,6 +13,7 @@ import ProductVariationData = App.Data.ProductVariationData;
 export function ProductQuickViewModal({ product }: { product: App.Data.ProductData }) {
     const { t } = useTranslation();
 
+    const [open, setOpen] = useState<boolean>(false);
     const [selectedVariation, setSelectedVariation] = useState<string | null>(null);
 
     useEffect(() => {
@@ -48,7 +49,7 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
     };
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button size="circle" variant="secondary">
                     <span>
@@ -116,6 +117,7 @@ export function ProductQuickViewModal({ product }: { product: App.Data.ProductDa
                                 className="inline-flex items-center justify-center uppercase sm:text-base"
                                 iconClass={`size-5! shrink-0 fill-foreground`}
                                 label={t('product.add_to_cart')}
+                                handleAddedToCart={() => setOpen(false)}
                             />
 
                             <Button size={`lg`} className={'flex w-full sm:text-base'} onClick={() => buyNow()}>

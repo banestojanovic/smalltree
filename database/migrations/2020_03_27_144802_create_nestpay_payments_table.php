@@ -29,8 +29,7 @@ class CreateNestpayPaymentsTable extends Migration
             $table->char('currency', 3)->comment('ISO code of transaction currency ISO 4217 numeric currency code, 3 digits');
             $table->char('Response', 10)->nullable()->comment('Payment status. Possible values: "Approved", "Error", "Declined"');
             $table->char('ProcReturnCode', 2)->nullable()->comment('Transaction status code. “00” for authorized transactions, “99” for gateway errors, others for ISO-8583 error codes');
-            $table->char('mdStatus',
-                3)->nullable()->comment('Status code for the 3D transaction. 1=authenticated transaction 2, 3, 4 = Card not participating or attempt 5,6,7,8 = Authentication not available or system error 0 = Authentication failed');
+            $table->char('mdStatus', 3)->nullable()->comment('Status code for the 3D transaction. 1=authenticated transaction 2, 3, 4 = Card not participating or attempt 5,6,7,8 = Authentication not available or system error 0 = Authentication failed');
             $table->string('ErrMsg')->nullable()->comment('Error message');
             $table->char('AuthCode', 32)->nullable()->comment('Transaction Verification/Approval/Authoriza tion code');
             $table->string('TransId', 64)->nullable()->comment(' Nestpay Transaction Id');
@@ -104,12 +103,12 @@ class CreateNestpayPaymentsTable extends Migration
             $table->string('failUrl')->nullable();
             $table->string('HASH')->nullable();
             $table->string('hashAlgorithm')->nullable();
-            $table->string('HASHPARAMS')->nullable();
-            $table->string('HASHPARAMSVAL')->nullable();
+            $table->text('HASHPARAMS')->nullable();
+            $table->text('HASHPARAMSVAL')->nullable();
             $table->string('okurl')->nullable();
+            //$table->string('payResults.dsId')->nullable();
             $table->string('refreshtime')->nullable();
             $table->string('SettleId')->nullable();
-            $table->string('isHPPCall')->nullable();
 
             $table->index('AuthCode', 'AuthCode');
             $table->index('processed', 'processed');
@@ -129,8 +128,8 @@ class CreateNestpayPaymentsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists($this->tableName);
-    }
+     public function down()
+     {
+       Schema::dropIfExists($this->tableName);
+     }
 }

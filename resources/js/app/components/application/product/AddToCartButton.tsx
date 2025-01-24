@@ -14,6 +14,7 @@ const AddToCartButton = ({
     variant,
     size,
     iconClass,
+    handleAddedToCart,
     ...props
 }: {
     product?: App.Data.ProductData;
@@ -24,6 +25,7 @@ const AddToCartButton = ({
     variant?: string | null;
     size?: string | null;
     iconClass?: string | null;
+    handleAddedToCart?: () => void;
 } & ButtonProps) => {
     const formatNumber = useNumberFormatter();
 
@@ -39,6 +41,11 @@ const AddToCartButton = ({
         post(route('cart.store'), {
             preserveScroll: true,
             only: ['auth', 'cart', 'flash', 'global'],
+            onSuccess: () => {
+                if (handleAddedToCart) {
+                    handleAddedToCart();
+                }
+            },
         });
     };
 
