@@ -16,13 +16,9 @@
                 "trashed": "Trashed"
             },
             "stock_status": {
-                "out_of_stock": "Out of Stock",
-                "in_stock": "In Stock"
-            },
-            "no_products_available": "No products available",
-            "variations": "Variations",
-            "free_shipping_over": "Free delivery for all orders over",
-            "similar_products": "Similar Products"
+                "out_of_stock": "Out of stock",
+                "in_stock": "In stock"
+            }
         },
         "post": {
             "status": {
@@ -43,38 +39,9 @@
                 "trashed": "Trashed"
             }
         },
-        "homepage": {
-            "hero": {
-                "buy_now": "Buy Now"
-            },
-            "promotions": {
-                "tea_of_the_month": "Tea of the Month",
-                "tea_of_the_month_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-                "special_offer": "Special Offer",
-                "special_offer_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-            },
-            "sections": {
-                "most_popular_tea": "Most Popular Tea",
-                "staff_recommended": "Our Staff Recommended",
-                "stores_with_tea": "Chat and Stories with tea",
-                "see_all": "See All",
-                "read_more": "Rad more"
-            },
-            "tea_ritual": {
-                "your_matcha_ritual": "Your MATCHA tea ritual",
-                "your_mate_ritual": "Your MATE tea ritual",
-                "tea_mug": "Tea mug",
-                "set": "Set",
-                "purchase": "Purchase"
-            }
-        },
-        "flash": {
-            "success": "Success",
-            "error": "Error",
-            "errors": "Errors",
-            "form_errors": "Form Errors",
-            "there_are_some_form_errors": "There are some form errors",
-            "dismiss": "Dismiss"
+        "payment_method": {
+            "cart": "Credit card",
+            "upon_delivery": "Cash on delivery"
         }
     },
     "menu": {
@@ -87,117 +54,323 @@
             "products": "Products",
             "teas": "Teas",
             "accessories": "Accessories",
+            "promotions": "Promotions",
             "blog": "Blog",
             "contact": "Contact",
             "search": "Search",
             "search_in_products": "Start typing...",
-            "no_result_found": "No result found",
+            "no_result_found": "No results found",
             "loading": "Loading"
+        },
+        "footer": {
+            "blog": "Blog",
+            "about": "About",
+            "contact": "Contact",
+            "privacy_policy": "Privacy Policy",
+            "terms_of_service": "Terms of Service"
+        }
+    },
+    "flash": {
+        "success": "Success",
+        "error": "Error",
+        "errors": "Errors",
+        "form_errors": "Form errors",
+        "there_are_some_form_errors": "There are some form errors",
+        "dismiss": "Close"
+    },
+    "sr": {
+        "product_variations": "Product variations"
+    },
+    "homepage": {
+        "hero": {
+            "action": "View promotions"
+        },
+        "promotions": {
+            "tea_of_the_month": "Tea of the month",
+            "tea_of_the_month_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+            "special_offer": "Special offer",
+            "special_offer_description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+        },
+        "sections": {
+            "most_popular": {
+                "title": "Deals and popular products",
+                "subtitle": "Products on sale, most sought after and best-selling",
+                "action": "View all teas"
+            },
+            "recommended": {
+                "title": "SmallTree recommendation",
+                "subtitle": "Our staff's recommendations for selecting the best teas",
+                "action": "View all teas"
+            },
+            "sets": {
+                "title": "Tea accessories",
+                "subtitle": "A wide selection of accessories for preparing and enjoying a cup of tea",
+                "action": "View all accessories"
+            },
+            "posts": {
+                "title": "Chats and stories",
+                "subtitle": "Stories and blogs about teas, health, and lifestyle",
+                "action": "View all stories"
+            },
+            "stores_with_tea": "Stories with tea",
+            "see_all": "Show all",
+            "read_more": "Read more"
+        }
+    },
+    "cards": {
+        "posts": {
+            "action": "Read more"
+        }
+    },
+    "product": {
+        "add_to_cart": "Add to cart",
+        "no_products_available": "No products available",
+        "variations": "Variations",
+        "free_shipping_over": "Free shipping for orders over",
+        "similar_products": {
+            "title": "Similar products",
+            "description": "Discover the right palette of teas similar to this one"
         }
     },
     "category_show": {
         "filters": {
             "filters": "Filters",
             "tea_variety": "Tea variety",
-            "origin_country": "Origin country",
+            "origin_country": "Country of origin",
             "tea_taste": "Tea taste",
             "not_selected": "Not selected"
         }
     },
     "cart": {
         "cart": "Cart",
-        "item_added_to_cart": "Item added to the cart",
-        "item_removed_from_cart": "Item removed from the cart",
-        "item_quantity_updated": "Item quantity updated",
-        "item_quantity_not_updated": "Item quantity not updated",
-        "item_quantity_exceeds_stock": "Item quantity exceeds stock",
-        "cart_empty": "Cart is empty",
+        "item_added_to_cart": "Product added to cart",
+        "items_added_to_cart": "Products added to cart",
+        "item_removed_from_cart": "Product removed from cart",
+        "item_quantity_updated": "Product quantity updated",
+        "item_quantity_not_updated": "Product quantity not updated",
+        "item_out_of_stock": "Product is currently unavailable",
+        "specific_item_out_of_stock": "Product :product is currently unavailable",
+        "specific_item_quantity_exceeds_stock": "Product :product quantity exceeds stock",
+        "specific_item_price_invalid": "Product :product price is invalid",
+        "item_quantity_exceeds_stock": "",
+        "cart_empty": "Your cart is empty",
+        "continue_shopping": "Continue shopping",
         "check_out": "Checkout",
         "remove": "Remove",
-        "pay_now": "Pay Now"
+        "pay_now": "Pay now",
+        "alert": {
+            "title": "Are you sure?",
+            "description": "Are you sure you want to remove this product from the cart?",
+            "cancel": "Cancel",
+            "confirm": "Confirm"
+        }
     },
     "order": {
-        "order_created": "Order is created successfully",
-        "order_summary": "Order Summary",
-        "thank_you": "Thank You",
-        "its_on_the_way": "It's on the way!",
-        "order_received": "Your order has been received and will be shipped very soon.",
-        "shipping_address": "Shipping Address",
-        "billing_address": "Billing Address",
+        "order_created": "Order successfully created",
+        "order_summary": "Order details",
+        "shipping_address": "Shipping address",
+        "billing_address": "Billing address",
         "payment_method": "Payment method",
         "shipping_method": "Shipping method",
         "subtotal": "Subtotal",
+        "before_tax": "Before tax",
+        "tax": "VAT",
         "discount": "Discount",
         "shipping": "Shipping",
-        "total": "Total"
+        "total": "Total",
+        "on_action": "Action",
+        "summary": {
+            "title": "Order received",
+            "top_title": "Thank you for your trust!",
+            "subtitle": "Your order has been successfully created and will be sent shortly.",
+            "order_number": "Order number",
+            "your_order": "Your order",
+            "products": "Products",
+            "quantity": "Quantity",
+            "price": "Price",
+            "your_information": "Your information",
+            "addresses": "Addresses",
+            "summary": "Order details"
+        }
     },
     "checkout": {
         "checkout": "Checkout",
         "contact_info": "Contact information",
         "shipping_info": "Shipping information",
-        "email": "Email",
-        "Phone": "Phone",
-        "first_name": "First Name",
-        "last_name": "Last Name",
-        "company": "Company",
-        "address_line": "Address Line",
-        "city": "City",
-        "postal_code": "Postal Code",
-        "payment": "Payment",
-        "order_summary": "Order Summary",
+        "buy_now": "Buy now",
+        "form": {
+            "labels": {
+                "email": "Email",
+                "phone": "Phone",
+                "first_name": "First name",
+                "last_name": "Last name",
+                "address": "Address",
+                "city": "City",
+                "postal_code": "Postal code"
+            },
+            "placeholders": {
+                "email": "Your email...",
+                "phone": "Phone...",
+                "first_name": "Your first name...",
+                "last_name": "Your last name...",
+                "company": "Company",
+                "address": "Address...",
+                "city": "City...",
+                "postal_code": "Postal code..."
+            }
+        },
+        "actions": {
+            "confirm": "Confirm order"
+        },
+        "payment_methods": {
+            "credit_card": "Credit card",
+            "upon_delivery": "Cash on delivery"
+        },
+        "payment_method": "Payment method",
+        "order_summary": "Order summary",
         "fill_with_test_data": "Fill with test data"
     },
     "posts": {
         "blogs": "Blogs",
         "posts": "Posts",
         "stories": "Stories",
-        "featured_post": "Featured Post",
-        "recommended_stories": "Recommended Stories",
-        "no_story_available": "No story available",
-        "share_with_social_network": "Share the article on social networks"
+        "featured_post": "Featured post",
+        "recommended_stories": "Recommended stories",
+        "no_story_available": "No stories available",
+        "share_with_social_network": "Share the article on social networks:"
+    },
+    "blog": {
+        "title": "Blog",
+        "subtitle": "Read our stories and blogs about teas, health, and lifestyle"
     },
     "subscription": {
-        "you_are_subscribed": "You are subscribed successfully"
+        "you_are_subscribed": "You have successfully subscribed"
     },
     "products": {
-        "products_search": "Products Search"
+        "products_search": "Product search"
     },
     "shopping_benefits": {
-        "shop_with_us": "Shopping with us",
-        "benefit_of_buying": "Benefits of buying SmallTree tea",
-        "benefit1": "Free shipping on all orders over 10,000",
-        "benefit2": "Refund up to 14 days from the day of payment",
-        "benefit3": "Refund up to 14 days from the day of payment"
+        "shop_with_us": "Shop with us",
+        "benefit_of_buying": "Benefits of buying SmallTree teas",
+        "benefit1": "Free shipping for all orders over 10,000",
+        "benefit2": "14-day money-back guarantee",
+        "benefit3": "Secure shopping"
     },
     "newsletter": {
         "title": "Save 10% on every purchase!",
         "subscribe": "Subscribe",
-        "email_placeholder": "Enter your email",
-        "button_text": "Sign up for the SmallTree newsletter"
+        "email_placeholder": "Enter your email...",
+        "button_text": "Subscribe to the SmallTree newsletter"
     },
     "footer": {
         "follow_us": "Follow us:",
         "instagram": "Instagram",
         "facebook": "Facebook",
-        "our_stores": "Our Stores",
-        "additional_info": "Additional Information",
-        "toc": "Terms & Conditions",
+        "our_stores": "Our stores",
+        "additional_info": "Additional information",
+        "toc": "Terms of Service",
         "privacy": "Privacy Policy",
-        "all_rights_reserved": "All rights reserved 2025. Small Tree eCommerce by Dimaso DOO",
-        "safe_purchase": "Safe purchase enabled by"
+        "copyrights": "All rights reserved :date . SmallTree eCommerce by",
+        "safe_purchase": "Secure shopping provided by:",
+        "see_on_map": "See on map",
+        "see_directions": "See directions"
     },
     "pagination": {
-        "next": "next",
-        "previous": "previous"
+        "next": "Next",
+        "previous": "Previous"
     },
     "pages": {
-        "not_found": "Not Found",
+        "not_found": "Not found",
         "not_found_error": "Error, this page does not exist.",
-        "not_found_message": "This page does not exist, you can return to the home page by",
-        "click_button": "clicking here"
+        "not_found_message": "This page does not exist, you can return to the",
+        "click_button": "homepage by clicking here"
     },
     "contact": {
-        "message_received": "Thank you. we have received your message.",
-        "submit_button": "Submit your message"
+        "title": "Contact and locations",
+        "subtitle": "Contact us or visit our stores",
+        "message_received": "Thank you. We have received your message.",
+        "message_not_sent": "Message not sent. Please try again.",
+        "form": {
+            "labels": {
+                "name": "Name",
+                "email": "Email",
+                "phone": "Phone",
+                "message": "Message"
+            },
+            "placeholders": {
+                "name": "Your name...",
+                "email": "Your email...",
+                "phone": "Your phone...",
+                "message": "Your message..."
+            },
+            "action": {
+                "submit": "Send message"
+            }
+        },
+        "data": {
+            "address": "Address",
+            "store_position": "Position",
+            "mb": "MB",
+            "pib": "PIB",
+            "code": "Activity code",
+            "phone": "Phone",
+            "email": "Email",
+            "phone2": "Wholesale contact",
+            "phone3": "Wholesale contact",
+            "working_hours": "Working hours",
+            "saturday": "Saturday",
+            "sunday": "Sunday",
+            "see_directions": "See directions on the map"
+        }
+    },
+    "search": {
+        "title": "Search",
+        "description": "Search our store",
+        "no_results": "No results",
+        "no_results_message": "We did not find any results for your search, try adjusting the criteria."
+    },
+    "filters": {
+        "messages": {
+            "no_results_found": "No results found",
+            "clear": "Clear",
+            "close": "Close",
+            "reset": "Reset",
+            "start_typing": "Start typing...",
+            "select_all": "Select all",
+            "deselect_all": "Deselect all"
+        },
+        "labels": {
+            "price": "Price",
+            "price_range": "Price range"
+        },
+        "placeholders": {
+            "types": "Type",
+            "categories": "Categories"
+        },
+        "actions": {
+            "reset": "Reset filters"
+        }
+    },
+    "page": {
+        "about": {
+            "title": "About us",
+            "subtitle": "Welcome to the Small Tree world of teas",
+            "content": {
+                "first": "Welcome to the first Belgrade tea salon. Salon de The was born out of love and is completely dedicated to the enjoyment of tea. We have made an effort to create a comfortable, cozy place where you can relax and enjoy the forgotten sound of records, the taste of carefully selected cakes, and the aroma of irresistible tea combinations.",
+                "second": "All our teas will be served to you in a completely unique way in the most diverse accessories, giving you the opportunity to experience the magic of tea preparation yourself. Tea is a small work of art and requires a skilled hand. Alone or in the company of loved ones and pets, you will enjoy a smoke-free space, conversation, or a moment of peace, flipping through books that marked some past times.",
+                "third": "At Salon de The, you can choose gifts, buy tea, or organize your own 'Tea Party' gathering. We enjoy organizing birthdays and celebrations. Treat yourself or a loved one to a memorable celebration. Our tea room is an ideal place for holding seminars, lectures, and presentations. For more information, contact us via our email office@smalltree.rs. We are in love with tea, we love it for many reasons, allow us to share this passion with you."
+            }
+        }
+    },
+    "payments": {
+        "failed": {
+            "title": "Payment failed - card not charged",
+            "description": "The payment could not be successfully processed. Please try again or report the issue to the site administration.",
+            "action": "Back to payment"
+        },
+        "success": {
+            "title": "Payment successful - card charged",
+            "description": "Your order has been successfully created and your card has been charged. You will receive a confirmation email shortly."
+        }
     }
 }
