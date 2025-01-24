@@ -36,12 +36,10 @@ class OrderController extends Controller
             if ($order->payment_method === OrderPaymentMethod::CARD) {
                 $form = (new \App\Actions\PaymentAction)->execute(order: $order, merchantService: $merchantService);
 
-                session()->put('payment', [
+                return back()->with(['payment' => [
                     'pay_with_card' => true,
                     'paymentData' => $form,
-                ]);
-
-                return back();
+                ]]);
             }
         } catch (\Exception $e) {
             return back()->with(['error' => $e->getMessage()]);

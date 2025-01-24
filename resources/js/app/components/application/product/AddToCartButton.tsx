@@ -31,8 +31,8 @@ const AddToCartButton = ({
 
     const { post, setData } = useForm({
         product_id: product?.id,
-        price: product?.price,
-        real_price: 0,
+        price: product?.discount?.price ?? product?.price,
+        real_price: product?.price,
         variation_id: productVariantId,
         quantity: quantity ?? 1,
     });

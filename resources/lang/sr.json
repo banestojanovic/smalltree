@@ -372,5 +372,52 @@
             "title": "Uspešno plaćanje - kartica je zadužena",
             "description": "Vaša porudžbina je uspešno kreirana i vaša kartica je zadužena. Uskoro ćete dobiti potvrdu na vaš email."
         }
+    },
+    "mails": {
+        "orders": {
+            "created": {
+                "subject": "Uspešna porudžbina",
+                "title": "Uspešno ste izvršili porudžbinu",
+                "subtitle": "Hvala Vam na poverenju! Vaša porudžbina će biti obrađena i uskoro će biti poslata.",
+                "user_details": "Vaši podaci",
+                "shipping_details": "Detalji isporuke",
+                "order_id": "Broj porudžbine",
+                "order_details": "Detalji porudžbine",
+                "payment_method": "Način plaćanja",
+                "subtotal": "Međuzbir",
+                "tax": "PDV",
+                "shipping": "Troškovi dostave",
+                "discount": "Popust",
+                "total": "Ukupno",
+                "price_per_piece": "Cena po komadu",
+                "quantity": "Količina",
+                "price": "Cena"
+            },
+            "paid": {
+                "subject": "Uspešno plaćanje",
+                "title": "Uspešno ste izvršili plaćanje - Kartica je zadužena",
+                "subtitle": "Hvala Vam na poverenju!",
+                "details": "Detalji transakcije"
+            },
+            "failed": {
+                "subject": "Neuspešno plaćanje",
+                "title": "Plaćanje nije uspelo - Kartica nije zadužena",
+                "subtitle": "Hvala Vam na poverenju!",
+                "details": "Detalji transakcije"
+            },
+            "payment_details": {
+                "customer_name": "Ime kupca",
+                "customer_email": "Email kupca",
+                "amount": "Iznos",
+                "currency": "Valuta",
+                "auth_code": "Kod autorizacije",
+                "timestamp": "Vreme transakcije",
+                "oid": "Broj porudžbine",
+                "response_code": "Kod odgovora",
+                "trans_id": "ID transakcije",
+                "proc_return_code": "Kod povratka procesora",
+                "md_status": "Status 3D Secure"
+            }
+        }
     }
 }

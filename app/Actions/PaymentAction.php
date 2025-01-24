@@ -14,7 +14,7 @@ class PaymentAction
 
             \Cubes\Nestpay\Payment::PROP_AMOUNT => $order->total,
             \Cubes\Nestpay\Payment::PROP_CURRENCY => \Cubes\Nestpay\Payment::CURRENCY_RSD,
-            \Cubes\Nestpay\Payment::PROP_BILLTONAME => config('mail.from.name', 'Small Tree'),
+            \Cubes\Nestpay\Payment::PROP_BILLTONAME => request('first_name').' '.request('last_name'),
             \Cubes\Nestpay\Payment::PROP_EMAIL => config('mail.from.address', 'office@smalltree.rs'),
 
             \Cubes\Nestpay\Payment::PROP_LANG => app()->getLocale(),

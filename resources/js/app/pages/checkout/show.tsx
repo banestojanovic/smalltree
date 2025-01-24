@@ -17,7 +17,6 @@ const CheckoutIndex = () => {
 
     const cart = usePage<PageProps<{ cart: App.Data.CartData }>>().props.cart;
     const global = usePage<PageProps<{ global: App.Data.GlobalData }>>().props.global;
-    const payment = usePage<PageProps<{ flash?: PageProps['payment'] }>>().props.payment;
 
     const [loading, setLoading] = useState<boolean>(false);
     const [paymentData, setPaymentData] = useState<Record<string, string> | null>(null);
@@ -47,14 +46,14 @@ const CheckoutIndex = () => {
 
         post(route('orders.store'), {
             preserveScroll: 'errors',
-            onSuccess: () => {
+            onSuccess: (response) => {
                 setLoading(false);
-                if (payment?.pay_with_card && payment?.paymentData) {
-                    setPaymentData(payment?.paymentData);
+                if (response?.props?.payment?.pay_with_card && response?.props?.payment?.paymentData) {
+                    setPaymentData(response.props.payment.paymentData);
 
                     setTimeout(() => {
                         paymentForm.current?.submit();
-                    }, 250);
+                    });
                 }
             },
         });

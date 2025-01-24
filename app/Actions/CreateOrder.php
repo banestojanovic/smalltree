@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Events\OrderCreated;
 use App\Models\Order;
 use App\Models\User;
 use App\OrderPaymentMethod;
@@ -25,7 +26,7 @@ class CreateOrder
         $totalAmount = $cart->products->sum(fn ($product) => $product->pivot->price * $product->pivot->quantity);
         $totalDiscount = $cart->products->sum(fn ($product) => ($product->pivot->real_price - $product->pivot->price) * $product->pivot->quantity);
 
-        $payWithCard = request('payment_method') === OrderPaymentMethod::CARD;
+        $payWithCard = (int) request('payment_method') === OrderPaymentMethod::CARD->value;
 
         $order = Order::create([
             'user_id' => $user->id,
@@ -41,6 +42,10 @@ class CreateOrder
         ]);
 
         (new UpdateOrderProducts)->execute($order, $cart);
+
+        if (! $payWithCard) {
+            OrderCreated::dispatch($order);
+        }
 
         return $order;
     }

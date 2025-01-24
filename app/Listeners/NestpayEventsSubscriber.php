@@ -2,21 +2,20 @@
 
 namespace App\Listeners;
 
-use App\Models\Order;
-use App\Models\Cart;
-use App\OrderStatus;
 use App\CartStatus;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Queue\InteractsWithQueue;
-
-use Cubes\Nestpay\Laravel\NestpayPaymentProcessedSuccessfullyEvent;
-use Cubes\Nestpay\Laravel\NestpayPaymentProcessedFailedEvent;
-use Cubes\Nestpay\Laravel\NestpayPaymentProcessedErrorEvent;
-
-use Cubes\Nestpay\Payment;
-
+use App\Data\OrderData;
 use App\Mail\NestpayPaymentMail;
+use App\Mail\NewOrder;
+use App\Mail\PaymentAttemtped;
+use App\Models\Cart;
+use App\Models\Order;
+use App\OrderStatus;
+use Cubes\Nestpay\Laravel\NestpayPaymentProcessedErrorEvent;
+use Cubes\Nestpay\Laravel\NestpayPaymentProcessedFailedEvent;
+use Cubes\Nestpay\Laravel\NestpayPaymentProcessedSuccessfullyEvent;
+use Cubes\Nestpay\Payment;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Support\Facades\Mail;
 
 class NestpayEventsSubscriber
 {
@@ -27,8 +26,7 @@ class NestpayEventsSubscriber
     {
         $payment = $event->getPayment();
 
-        //CUSTOMER HAS PAID, DO RELATED STUFF HERE
-        $order = Order::where('id', $payment->getProperty(Payment::PROP_INVOICENUMBER))->firstOrFail();
+        $order = Order::where('id', $payment->getProperty(Payment::PROP_INVOICENUMBER))->with(['user', 'shippingAddress', 'items.product.cover'])->firstOrFail();
         $cart = Cart::where('id', $order->cart_id)->firstOrFail();
 
         $order->status = OrderStatus::PAID;
@@ -37,11 +35,8 @@ class NestpayEventsSubscriber
         $cart->status = CartStatus::FULFILLED;
         $cart->save();
 
-        //sending email
-        \Mail::to(
-            $payment->getProperty(Payment::PROP_EMAIL),
-            $payment->getProperty(Payment::PROP_BILLTONAME)
-        )->send(new NestpayPaymentMail($payment));
+        Mail::to($order->user->email)->send(new PaymentAttemtped(payment: $payment));
+        Mail::to($order->user->email)->send(new NewOrder(order: OrderData::optional($order)));
     }
 
     /**
@@ -55,11 +50,7 @@ class NestpayEventsSubscriber
         $order->status = OrderStatus::CANCELLED;
         $order->save();
 
-        //sending email
-        \Mail::to(
-            $payment->getProperty(Payment::PROP_EMAIL),
-            $payment->getProperty(Payment::PROP_BILLTONAME)
-        )->send(new NestpayPaymentMail($payment));
+        Mail::to($order->user->email)->send(new PaymentAttemtped(payment: $payment));
     }
 
     /**
@@ -67,7 +58,7 @@ class NestpayEventsSubscriber
      */
     public function nestpayPaymentProcessedErrorEvent(NestpayPaymentProcessedErrorEvent $event)
     {
-        $payment = $event->getPayment(); //COULD BE NULL!!!
+        $payment = $event->getPayment();
         if ($payment) {
             $order = Order::where('id', $payment->getProperty(Payment::PROP_INVOICENUMBER))->firstOrFail();
             $order->status = OrderStatus::CANCELLED;
@@ -78,8 +69,6 @@ class NestpayEventsSubscriber
 
     /**
      * Register the listeners for the subscriber.
-     *
-     * @param  \Illuminate\Events\Dispatcher  $events
      */
     public function subscribe(Dispatcher $events)
     {
