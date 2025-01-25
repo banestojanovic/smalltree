@@ -1,4 +1,5 @@
 import { Label } from '@/app/components/ui/label';
+import { cn } from '@/lib/utils';
 
 interface FieldGroupProps {
     name?: string;
@@ -6,14 +7,15 @@ interface FieldGroupProps {
     error?: string;
     required?: boolean;
     children: React.ReactNode;
+    className?: string;
 }
 
-export default function FieldGroup({ label, name, error, required, children }: FieldGroupProps) {
+export default function FieldGroup({ label, name, error, required, children, className }: FieldGroupProps) {
     return (
-        <div className="relative space-y-2">
+        <div className={cn(`relative space-y-2`, className)}>
             {label && (
                 <Label htmlFor={name} className={`text-sm font-normal`}>
-                    <span>{label}</span>
+                    <div className={`inline-block`}>{label}</div>
                     {required && <span className="text-red-400">*</span>}
                 </Label>
             )}

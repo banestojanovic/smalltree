@@ -2,12 +2,14 @@
 
 namespace App\Actions;
 
+use App\Data\CartData;
+use App\Data\CartOrderData;
 use App\Events\OrderCreated;
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\User;
 use App\OrderPaymentMethod;
 use App\OrderStatus;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class CreateOrder
@@ -39,6 +41,16 @@ class CreateOrder
             'total' => $totalAmount + request('shipping') ?? 0,
             'status' => $payWithCard ? OrderStatus::PENDING : OrderStatus::CREATED,
             'payment_method' => request('payment_method'),
+            'cart' => CartOrderData::optional($cart),
+            'data' => [
+                'note' => request('note'),
+                'shipping' => [
+                    'address' => request('address') ?? null,
+                    'city' => request('city') ?? null,
+                    'postal_code' => request('postal_code') ?? null,
+                    'phone' => request('phone') ?? null,
+                ],
+            ],
         ]);
 
         (new UpdateOrderProducts)->execute($order, $cart);

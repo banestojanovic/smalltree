@@ -23,6 +23,7 @@ class OrderController extends Controller
             'city' => 'required',
             'postal_code' => 'required',
             'payment_method' => 'required|integer',
+            'terms' => 'required|accepted',
         ]);
 
         if ($validation->fails()) {
@@ -36,10 +37,12 @@ class OrderController extends Controller
             if ($order->payment_method === OrderPaymentMethod::CARD) {
                 $form = (new \App\Actions\PaymentAction)->execute(order: $order, merchantService: $merchantService);
 
-                return back()->with(['payment' => [
-                    'pay_with_card' => true,
-                    'paymentData' => $form,
-                ]]);
+                return back()->with([
+                    'payment' => [
+                        'pay_with_card' => true,
+                        'paymentData' => $form,
+                    ]
+                ]);
             }
         } catch (\Exception $e) {
             return back()->with(['error' => $e->getMessage()]);

@@ -123,11 +123,11 @@
                                                             <div class="fluid-img"
                                                                  style="font-size:0pt; line-height:0pt; text-align:left;">
                                                                 <a
-                                                                        href="{{ route('products.show', ['slug' => $item->product->slug]) }}"
-                                                                        target="_blank"><img
-                                                                            src="{{ $item->product->cover->original_url }}"
-                                                                            border="0" height="120"
-                                                                            alt="" /></a>
+                                                                    href="{{ route('products.show', ['slug' => $item->product->slug]) }}"
+                                                                    target="_blank"><img
+                                                                        src="{{ $item->product->cover->original_url }}"
+                                                                        border="0" height="120"
+                                                                        alt="" /></a>
                                                             </div>
                                                         </th>
                                                     @endif
@@ -249,19 +249,22 @@
                                                                             20%
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td class="title-20 lh-30 a-right mt-left"
-                                                                            style="width: 100%; font-size:16px; color:#282828; font-family:'PT Sans', Arial, sans-serif; min-width:auto !important; line-height: 30px; text-align:right;">
-                                                                            <strong>{{__('mails.orders.created.shipping')}}
-                                                                                :</strong>
-                                                                        </td>
-                                                                        <td class="img mw-15"
-                                                                            style="font-size:0pt; line-height:0pt; text-align:left;"></td>
-                                                                        <td class="title-20 lh-30 mt-right"
-                                                                            style="font-size:16px; padding-left: 10px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 30px;">
-                                                                            {{ number_format($order->shipping, 2) }}rsd
-                                                                        </td>
-                                                                    </tr>
+                                                                    @if($order->shipping > 0)
+                                                                        <tr>
+                                                                            <td class="title-20 lh-30 a-right mt-left"
+                                                                                style="width: 100%; font-size:16px; color:#282828; font-family:'PT Sans', Arial, sans-serif; min-width:auto !important; line-height: 30px; text-align:right;">
+                                                                                <strong>{{__('mails.orders.created.shipping')}}
+                                                                                    :</strong>
+                                                                            </td>
+                                                                            <td class="img mw-15"
+                                                                                style="font-size:0pt; line-height:0pt; text-align:left;"></td>
+                                                                            <td class="title-20 lh-30 mt-right"
+                                                                                style="font-size:16px; padding-left: 10px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 30px;">
+                                                                                {{ number_format($order->shipping, 2) }}
+                                                                                rsd
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endif
                                                                     @if ($order->discount > 0)
                                                                         <tr>
                                                                             <td class="title-20 lh-30 a-right mt-left"
@@ -273,7 +276,8 @@
                                                                                 style="font-size:0pt; line-height:0pt; text-align:left;"></td>
                                                                             <td class="title-20 lh-30 mt-right"
                                                                                 style="font-size:16px; padding-left: 10px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 30px;">
-                                                                                -{{ number_format($order->discount, 2) }}rsd
+                                                                                -{{ number_format($order->discount, 2) }}
+                                                                                rsd
                                                                             </td>
                                                                         </tr>
                                                                     @endif

@@ -31,6 +31,8 @@ Route::get('/kontakt', [\App\Http\Controllers\ContactUsController::class, 'show'
 Route::post('/kontakt', [\App\Http\Controllers\ContactUsController::class, 'store'])->name('contact.store');
 
 Route::get('/o-nama', [\App\Http\Controllers\PageController::class, 'aboutUs'])->name('page.about.show');
+Route::get('/uslovi-koriscenja', [\App\Http\Controllers\PageController::class, 'terms'])->name('page.terms.show');
+Route::get('/politika-privatnosti', [\App\Http\Controllers\PageController::class, 'privacyPolicy'])->name('page.privacy_policy.show');
 
 Route::get('/placanje-neuspesno', [\App\Http\Controllers\PaymentStatusController::class, 'paymentFailed'])->name('payment_failed.show');
 
@@ -40,6 +42,6 @@ Route::get('/{type}', [\App\Http\Controllers\SearchController::class, 'search'])
 
 if (Schema::hasTable('pages')) {
     \App\Models\Page::all()->each(function ($page) {
-        Route::get($page->slug, [\App\Http\Controllers\PageController::class, 'show']);
+        Route::get($page->slug, [\App\Http\Controllers\PageController::class, 'show'])->name('pages.show');
     });
 }

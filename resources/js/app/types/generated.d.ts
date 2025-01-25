@@ -48,6 +48,26 @@ id: number;
 session: string;
 products: Array<App.Data.CartProductData> | null;
 };
+export type CartOrderData = {
+subtotal: number;
+total: number;
+discount: number;
+shipping: number;
+id: number;
+session: string;
+products: Array<App.Data.CartOrderProductData> | null;
+};
+export type CartOrderProductData = {
+quantity: number;
+total: number;
+chosenId: number;
+variation: App.Data.VariationValueData | null;
+id: number;
+name: string;
+sku: string;
+variations: Array<App.Data.ProductVariationData> | null;
+pivot: any | null;
+};
 export type CartProductData = {
 quantity: number;
 total: number;

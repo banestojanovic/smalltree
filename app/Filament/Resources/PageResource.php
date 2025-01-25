@@ -49,6 +49,7 @@ class PageResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->url(fn ($record) => route('pages.show', $record))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->sortable(),

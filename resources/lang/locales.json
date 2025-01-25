@@ -422,6 +422,17 @@
                 "payment_method": {
                     "cart": "Kreditna kartica",
                     "upon_delivery": "Plaćanje pouzećem"
+                },
+                "order": {
+                    "status": {
+                        "pending": "Na čekanju",
+                        "created": "Kreirano",
+                        "paid": "Plaćeno",
+                        "cancelled": "Otkazano",
+                        "declined": "Odbijeno",
+                        "sent": "Poslato",
+                        "completed": "Završeno"
+                    }
                 }
             },
             "menu": {
@@ -586,7 +597,9 @@
                         "last_name": "Prezime",
                         "address": "Adresa",
                         "city": "Grad",
-                        "postal_code": "Poštanski broj"
+                        "postal_code": "Poštanski broj",
+                        "terms": "Prihvatam",
+                        "note": "Napomena"
                     },
                     "placeholders": {
                         "email": "Vaš email...",
@@ -596,11 +609,16 @@
                         "company": "Kompanija",
                         "address": "Adresa...",
                         "city": "Grad...",
-                        "postal_code": "Poštanski broj..."
+                        "postal_code": "Poštanski broj...",
+                        "note": "Napomena..."
                     }
                 },
                 "actions": {
-                    "confirm": "Potvrdi porudžbinu"
+                    "confirm": "Potvrdi porudžbinu",
+                    "redirect": {
+                        "title": "Preusmeravanje",
+                        "description": "Prelazak na stranicu za plaćanje..."
+                    }
                 },
                 "payment_methods": {
                     "credit_card": "Kreditna kartica",
@@ -608,7 +626,13 @@
                 },
                 "payment_method": "Način plaćanja",
                 "order_summary": "Rezime porudžbine",
-                "fill_with_test_data": "Popuni test podacima"
+                "fill_with_test_data": "Popuni test podacima",
+                "additional": {
+                    "tax_disclaimer": "PDV uračunat u cenu i nema skrivenih troškova"
+                },
+                "terms_and_conditions": "uslove korišćenja",
+                "privacy_policy": "politiku privatnosti",
+                "separator": "i"
             },
             "posts": {
                 "blogs": "Blogovi",
@@ -740,6 +764,14 @@
                         "second": "Svi naši čajevi biće Vam posluženi na potpuno jedinstven način u najrazličitijem priboru, pružajući vam mogućnost da sami osetite čaroliju pripreme čaja. Čaj je malo umetničko delo i traži veštu ruku.Sami ili u društvu dragih osoba i kućnih ljubimaca, uživaćete u prostoru bez duvanskog dima, ćaskanju ili momentu mira, listajući knjige koje su obeležile neka prošla vremena.",
                         "third": "U Salon de The možete odabrati poklone, kupiti čaj ili organizovati svoje „Tea Party“ okupljanje. Organizacija rođendana i proslava je nešto u čemu uživamo. Priredite sebi ili voljenoj osobi proslavu za pamćenje.Prostor naše čajdžinice je idealno mesto za održavanje seminara, predavanja i prezentacija. Za sve dodatne informacije, kontaktirajte nas putem našeg maila office@smalltree.rs.Mi smo zaljubljeni u čaj, volimo ga iz mnogo razloga, dozvolite nam da tu strast podelimo sa Vama."
                     }
+                },
+                "privacy_policy": {
+                    "title": "Politika privatnosti",
+                    "subtitle": "Politika privatnosti SmallTree prodavnice"
+                },
+                "terms": {
+                    "title": "Uslovi korišćenja",
+                    "subtitle": "Uslovi korišćenja SmallTree prodavnice"
                 }
             },
             "payments": {
@@ -799,6 +831,15 @@
                         "md_status": "Status 3D Secure"
                     }
                 }
+            },
+            "shipping_information": {
+                "title": "Informacije o dostavi",
+                "paragraph1": "Za sve porudžbine preko 5000 dinara isporuka je besplatna. Isporuka se vrši kurirskom službom GLS za pošiljke čiji trošak snosi pošiljalac-„Small Tree doo“ na teritoriji Beograda i Srbije. Kupac će o pošiljci biti obavešten putem sms poruke.",
+                "paragraph2": "Wolt – dostava na teritoriji Beograda, mogućnost isporuke robe za 30 minuta. Poručivanje i dostava čajeva se vrši isključivo putem Wolt aplikacije.",
+                "paragraph3": "DExpress- isporuka na teritoriji Srbije. Cena dostave od 360 dinara, zavisno od težine paketa. Isporuka je danas za sutra, može potrajati 2 do 3 radna dana",
+                "paragraph4": "Post Express- isporuka na teritoriji Beograda ili na lični zahtev kupca.",
+                "paragraph5": "Yandex- isporuka na teritoriji Beograda, danas za danas.",
+                "description": "Molimo vas da važeće cene proverite na sajtu kurirske službe."
             }
         }
     }

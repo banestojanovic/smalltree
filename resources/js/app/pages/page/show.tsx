@@ -11,9 +11,9 @@ const PageShowPage = ({ page }: { page: App.Data.PageData }) => {
     return (
         <>
             <Head title={page.name} />
-            <div className="container my-7 sm:my-10">
+            <div className="container mt-7 max-w-4xl space-y-6 sm:mt-16 lg:space-y-10">
                 <Typography as="h2"> {page.name}</Typography>
-                <div className="prose my-7" dangerouslySetInnerHTML={{ __html: sanitizedContent }}></div>
+                <div className="prose lg:prose-lg my-7" dangerouslySetInnerHTML={{ __html: sanitizedContent }}></div>
             </div>
         </>
     );

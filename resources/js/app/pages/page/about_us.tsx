@@ -16,7 +16,7 @@ const PageShowPage = () => {
                     <Typography as="h2" className={`sm:text-3xl`}>
                         {t('page.about.title')}
                     </Typography>
-                    <Typography as="p" className={`mt-2 leading-normal text-foreground/80 sm:mt-4`}>
+                    <Typography as="p" className={`text-foreground/80 mt-2 leading-normal sm:mt-4`}>
                         {t('page.about.subtitle')}
                     </Typography>
                 </div>

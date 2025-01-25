@@ -43,6 +43,6 @@ class CartProductData extends Data
         $this->total = $this->quantity * ($this->pivot->price);
         $this->chosenId = $this->pivot->product_variation_id ?? $this->id;
 
-        $this->variation = $this->variations->where('price', $this->pivot->price)->first()?->variations[0] ?? null;
+        $this->variation = $this->variations->where('id', $this->chosenId)->first()?->variations[0] ?? null;
     }
 }
