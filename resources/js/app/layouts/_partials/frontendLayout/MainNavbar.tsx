@@ -10,7 +10,7 @@ export default function TopNavbar() {
     const { t } = useTranslation();
     return (
         <>
-            <div className="bg-white">
+            <div className="hidden bg-white md:block">
                 <div className="container">
                     <div className="flex h-12 items-center justify-between sm:h-16">
                         <div className="hidden items-center justify-between sm:flex">
@@ -45,7 +45,7 @@ export default function TopNavbar() {
                                     </motion.span>
                                 </NavLink>
 
-                                <NavLink href={route('contact.show')} active={false}>
+                                <NavLink href={route('contact.show')} active={route().current('contact.show')}>
                                     <motion.span initial={{ x: 30 }} animate={{ x: 0 }} transition={{ delay: 0.14 }}>
                                         {t('menu.top.contact')}
                                     </motion.span>

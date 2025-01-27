@@ -60,6 +60,52 @@ const ContactUsPage = () => {
                 <Typography as="h3">{t('contact.title')}</Typography>
                 <Typography as="p">{t('contact.subtitle')}</Typography>
 
+                <div className="mt-6 mb-16 grid grid-cols-1 gap-7 sm:mt-12 sm:mb-32 md:grid-cols-2 lg:grid-cols-3">
+                    <ShopAddressCard
+                        shop={{
+                            name: 'Salon De The',
+                            address: 'Svetog Save 12, Beograd',
+                            data: [{ phone: '063 40 46 96' }, { email: 'office@smalltree.rs' }, { working_hours: '10 – 22 h' }, { saturday: '09 - 16 h' }, { sunday: 'Neradni dan' }],
+                            img: '/storage/site/locations/location-1.png',
+                            latitude: '44.8014506981761',
+                            longitude: '20.467196357670886',
+                            direction:
+                                'https://www.google.com/maps/place/Salon+de+th%C3%A9+by+Small+Tree/@44.8012924,20.4645997,17z/data=!3m1!4b1!4m6!3m5!1s0x475a700a36c7f3e9:0xca244ed82b9c2d6b!8m2!3d44.8012886!4d20.4671746!16s%2Fg%2F11b5pj9g43?entry=ttu&g_ep=EgoyMDI1MDExNS4wIKXMDSoASAFQAw%3D%3D',
+                        }}
+                    />
+                    <ShopAddressCard
+                        shop={{
+                            name: 'Tržni centar Ušće',
+                            address: 'Bulevar Mihajla Pupina 4, Beograd',
+                            store_position: 'Prizemlje, nivo 0. Ulaz sa Brankovog mosta ispred lokala Go Sushi i IQOSI',
+                            data: [{ phone: '063 40 46 96' }, { email: 'office@smalltree.rs' }, { working_hours: '10 – 22 h' }],
+                            img: '/storage/site/locations/location-2.png',
+                            latitude: '44.81558910915537',
+                            longitude: '20.43684835437302',
+                            direction:
+                                'https://www.google.com/maps/place/U%C5%A0%C4%86E+Shopping+Center/@44.8155166,20.4311953,17z/data=!3m1!4b1!4m6!3m5!1s0x475a655bae3423a7:0xd9fb62470be09800!8m2!3d44.8155129!4d20.4360662!16s%2Fg%2F11x97z8_n?entry=ttu&g_ep=EgoyMDI1MDExNS4wIKXMDSoASAFQAw%3D%3D',
+                        }}
+                    />
+                    <ShopAddressCard
+                        shop={{
+                            name: 'Veleprodaja - Small Tree DOO',
+                            address: 'Jurija Gagarina 115/111, 11070 Beograd, Novi Beograd',
+                            data: [
+                                { mb: '20662999' },
+                                { pib: '106702340' },
+                                { code: '4711; trgovina na veliko i malo' },
+                                { email: 'office@smalltree.rs' },
+                                { phone: '011 382 04 66' },
+                                { phone2: '063 404 905' },
+                                { phone3: '063 711 91 91' },
+                            ],
+                            img: '/storage/site/locations/location-3.png',
+                            latitude: '44.80215996074898',
+                            longitude: '20.391877369714173',
+                        }}
+                    />
+                </div>
+
                 <div className="grid grid-cols-1 gap-10 md:grid-cols-2 2xl:gap-20">
                     <section>
                         <form onSubmit={submit}>
@@ -114,52 +160,6 @@ const ContactUsPage = () => {
                         </div>
                     </section>
                 </div>
-
-                <div className="ms:mt-32 mt-16 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
-                    <ShopAddressCard
-                        shop={{
-                            name: 'Salon De The',
-                            address: 'Svetog Save 12, Beograd',
-                            data: [{ phone: '063 40 46 96' }, { email: 'office@smalltree.rs' }, { working_hours: '10 – 22 h' }, { saturday: '09 - 16 h' }, { sunday: 'Neradni dan' }],
-                            img: '/storage/site/locations/location-1.png',
-                            latitude: '44.8014506981761',
-                            longitude: '20.467196357670886',
-                            direction:
-                                'https://www.google.com/maps/place/Salon+de+th%C3%A9+by+Small+Tree/@44.8012924,20.4645997,17z/data=!3m1!4b1!4m6!3m5!1s0x475a700a36c7f3e9:0xca244ed82b9c2d6b!8m2!3d44.8012886!4d20.4671746!16s%2Fg%2F11b5pj9g43?entry=ttu&g_ep=EgoyMDI1MDExNS4wIKXMDSoASAFQAw%3D%3D',
-                        }}
-                    />
-                    <ShopAddressCard
-                        shop={{
-                            name: 'Tržni centar Ušće',
-                            address: 'Bulevar Mihajla Pupina 4, Beograd',
-                            store_position: 'Prizemlje, nivo 0. Ulaz sa Brankovog mosta ispred lokala Go Sushi i IQOSI',
-                            data: [{ phone: '063 40 46 96' }, { email: 'office@smalltree.rs' }, { working_hours: '10 – 22 h' }],
-                            img: '/storage/site/locations/location-2.png',
-                            latitude: '44.81558910915537',
-                            longitude: '20.43684835437302',
-                            direction:
-                                'https://www.google.com/maps/place/U%C5%A0%C4%86E+Shopping+Center/@44.8155166,20.4311953,17z/data=!3m1!4b1!4m6!3m5!1s0x475a655bae3423a7:0xd9fb62470be09800!8m2!3d44.8155129!4d20.4360662!16s%2Fg%2F11x97z8_n?entry=ttu&g_ep=EgoyMDI1MDExNS4wIKXMDSoASAFQAw%3D%3D',
-                        }}
-                    />
-                    <ShopAddressCard
-                        shop={{
-                            name: 'Veleprodaja - Small Tree DOO',
-                            address: 'Jurija Gagarina 115/111, 11070 Beograd, Novi Beograd',
-                            data: [
-                                { mb: '20662999' },
-                                { pib: '106702340' },
-                                { code: '4711; trgovina na veliko i malo' },
-                                { email: 'office@smalltree.rs' },
-                                { phone: '011 382 04 66' },
-                                { phone2: '063 404 905' },
-                                { phone3: '063 711 91 91' },
-                            ],
-                            img: '/storage/site/locations/location-3.png',
-                            latitude: '44.80215996074898',
-                            longitude: '20.391877369714173',
-                        }}
-                    />
-                </div>
             </div>
         </>
     );
@@ -189,20 +189,20 @@ const ShopAddressCard = ({ shop }: ShopAddressCardProps) => {
                     </CardTitle>
                 </CardHeader>
 
-                <div className={`mt-4 space-y-0.5 text-md font-light`}>
+                <div className={`text-md mt-4 space-y-0.5 font-light`}>
                     <dl>
-                        <dd className="line-clamp-4 font-title">{shop.address}</dd>
+                        <dd className="font-title line-clamp-4">{shop.address}</dd>
                     </dl>
                     {shop?.store_position && (
                         <dl>
-                            <dd className="line-clamp-4 font-title">{shop.store_position}</dd>
+                            <dd className="font-title line-clamp-4">{shop.store_position}</dd>
                         </dl>
                     )}
                     {shop.data.map((items) =>
                         Object.entries(items).map(([key, item]) => (
                             <dl key={key} className={`flex space-x-1`}>
                                 <dt className="font-title">{t(`contact.data.${key}`)}:</dt>
-                                <dd className="line-clamp-4 font-title">
+                                <dd className="font-title line-clamp-4">
                                     {key === 'phone' || key === 'phone2' || key === 'phone3' ? (
                                         <a href={`tel:${formatPhoneNumber(item)}`} className={'underline'}>
                                             {item}
@@ -221,7 +221,7 @@ const ShopAddressCard = ({ shop }: ShopAddressCardProps) => {
                 <Dialog>
                     <DialogTrigger asChild>
                         <CardFooter className="mt-4 flex p-0">
-                            <Button variant="link" className="px-0 font-title text-base underline">
+                            <Button variant="link" className="font-title px-0 text-base underline">
                                 {t('contact.data.see_directions')}
                             </Button>
                         </CardFooter>

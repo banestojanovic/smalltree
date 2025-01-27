@@ -21,7 +21,7 @@ const Promotions = ({
         <section className="mt-10 h-full overflow-hidden sm:mt-20">
             <div className="grid md:grid-cols-2">
                 {promoPackages?.map((promoPackage, index) => (
-                    <motion.div key={index} initial={{ x: index % 2 !== 0 ? `20%` : `-20%` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.3 }}>
+                    <motion.div key={index} initial={{ x: index % 2 !== 0 ? `20%` : `-20%` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.3 }} viewport={{ once: true }}>
                         <PromotionCard
                             title={promoPackage?.title?.sr ?? t('homepage.promotions.tea_of_the_month')}
                             description={promoPackage?.subtitle?.sr ?? t('homepage.promotions.tea_of_the_month_description')}

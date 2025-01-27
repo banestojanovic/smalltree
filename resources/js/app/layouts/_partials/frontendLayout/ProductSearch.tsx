@@ -50,12 +50,14 @@ const ProductSearch = () => {
     const handleClickOutside = (event: MouseEvent) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
             setIsDropdownOpen(false);
+            setQuery('');
         }
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'Escape') {
             setIsDropdownOpen(false);
+            setQuery('');
         }
     };
 
@@ -80,16 +82,7 @@ const ProductSearch = () => {
         <div className="relative mx-auto mr-4 w-full" ref={dropdownRef}>
             <div className="flex items-center">
                 <div className={`hidden items-center lg:gap-x-1.5 xl:flex`}>
-                    <span>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-5`}>
-                            <path
-                                d="M8.64815 16.7963C13.1482 16.7963 16.7963 13.1482 16.7963 8.64815C16.7963 4.14805 13.1482 0.5 8.64815 0.5C4.14805 0.5 0.5 4.14805 0.5 8.64815C0.5 13.1482 4.14805 16.7963 8.64815 16.7963Z"
-                                stroke="black"
-                            />
-                            <path d="M14.5742 14.5741L20.5001 20.5" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </span>
-                    <Label htmlFor={`productSearch`} className="mr-2 font-normal">
+                    <Label htmlFor={`productSearch`} className="sr-only mr-2 font-normal">
                         {t('menu.top.search')}
                     </Label>
                 </div>
@@ -105,6 +98,18 @@ const ProductSearch = () => {
                             placeholder={t('menu.top.search_in_products')}
                             className="border-border bg-input placeholder:text-foreground w-full text-sm shadow-none placeholder:italic lg:ml-4"
                         />
+
+                        {!isLoading && (
+                            <span className={`absolute top-2.5 right-0`}>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-5`}>
+                                    <path
+                                        d="M8.64815 16.7963C13.1482 16.7963 16.7963 13.1482 16.7963 8.64815C16.7963 4.14805 13.1482 0.5 8.64815 0.5C4.14805 0.5 0.5 4.14805 0.5 8.64815C0.5 13.1482 4.14805 16.7963 8.64815 16.7963Z"
+                                        stroke="black"
+                                    />
+                                    <path d="M14.5742 14.5741L20.5001 20.5" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </span>
+                        )}
 
                         {isLoading && (
                             <span className={`absolute top-2.5 right-0`}>
@@ -126,6 +131,7 @@ const ProductSearch = () => {
                                             className={cn('hover:bg-accent cursor-pointer px-4 py-4', query === product.name && 'bg-gray-200')}
                                             onClick={() => {
                                                 setIsDropdownOpen(false);
+                                                setQuery('');
                                                 router.get(route('products.show', product.slug));
                                             }}
                                             initial={{ y: 50 }}

@@ -91,7 +91,7 @@ const ProductSearch = ({ variant }: { variant?: string }) => {
                 }}
             >
                 <SheetTrigger asChild>
-                    <Button variant="ghost" className={`mx-auto flex px-2.5 ${variant === 'circled' ? 'size-10 rounded-full' : ''}`}>
+                    <Button variant="ghost" className={`mx-auto flex h-10 px-2.5 ${variant === 'circled' ? 'size-10 rounded-full' : ''}`}>
                         <span>
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`size-5!`}>
                                 <path
@@ -128,11 +128,11 @@ const ProductSearch = ({ variant }: { variant?: string }) => {
                                         onChange={handleSearch}
                                         onKeyDown={(event) => (event.key === 'Enter' ? gotoSearchPage() : '')}
                                         placeholder={t('menu.top.search_in_products')}
-                                        className="w-full border-border bg-input text-sm shadow-none placeholder:italic placeholder:text-foreground"
+                                        className="border-border bg-input placeholder:text-foreground w-full text-sm shadow-none placeholder:italic"
                                     />
 
                                     {isLoading && (
-                                        <span className={`absolute right-2 top-2.5`}>
+                                        <span className={`absolute top-2.5 right-2`}>
                                             <svg className="size-4 animate-spin" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
@@ -144,11 +144,11 @@ const ProductSearch = ({ variant }: { variant?: string }) => {
                                     <div>
                                         {results.length < 1 && <div className="flex w-full items-center gap-x-2 px-4 text-sm">{t('menu.top.no_result_found')}</div>}
                                         {results.length >= 1 && (
-                                            <ul className="divide-y divide-input">
+                                            <ul className="divide-input divide-y">
                                                 {results.map((product: App.Data.ProductData, index: number) => (
                                                     <motion.li
                                                         key={product.id}
-                                                        className={cn('cursor-pointer p-4 hover:bg-accent', query === product.name && 'bg-gray-200')}
+                                                        className={cn('hover:bg-accent cursor-pointer p-4', query === product.name && 'bg-gray-200')}
                                                         onClick={() => {
                                                             setIsDropdownOpen(false);
                                                             setSheetOpen(false);
@@ -171,7 +171,7 @@ const ProductSearch = ({ variant }: { variant?: string }) => {
                                                                     <span className={`font-normal`}>rsd</span>
                                                                 </div>
                                                                 {product?.discount?.price && (
-                                                                    <div className={`flex items-center space-x-px text-xs text-foreground/50 line-through`}>
+                                                                    <div className={`text-foreground/50 flex items-center space-x-px text-xs line-through`}>
                                                                         <span>{formatNumber(product?.discount?.price)}</span>
                                                                         <span>rsd</span>
                                                                     </div>

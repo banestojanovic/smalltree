@@ -23,7 +23,7 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
 
     return (
         <div>
-            <motion.div className="h-full" initial={{ y: 50 }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.3 }}>
+            <motion.div className="h-full" initial={{ y: 50 }} animate={{ y: 0 }} transition={{ type: 'spring', duration: 0.3 }}>
                 <Swiper
                     spaceBetween={10}
                     thumbs={{ swiper: thumbsSwiper }}
@@ -40,7 +40,7 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
                                 <SwiperSlide key={photo?.id}>
                                     <div className="relative">
                                         {product.discount && (
-                                            <span className="absolute right-4 top-4 rounded-md bg-primary px-4 py-1.5 text-sm text-white">
+                                            <span className="bg-primary absolute top-4 right-4 rounded-md px-4 py-1.5 text-sm text-white">
                                                 {t('order.on_action')} {product?.discount?.percentage ? `${product.discount.percentage}%` : ''}
                                             </span>
                                         )}

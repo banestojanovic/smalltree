@@ -27,7 +27,7 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
 
     return (
         <div className="bg-background min-h-screen">
-            <div className="border-primary bg-primary relative flex h-[6px] w-full border-t-[6px]"></div>
+            <div className="border-primary bg-primary relative flex h-[6px] w-full border-t-[6px] max-md:mt-10"></div>
             <TopNavbar />
             <MainNavbar />
 
@@ -39,13 +39,13 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
 
             <main>{children}</main>
 
-            <section>
+            <section className={`${route().current() !== 'home.index' ? 'max-lg:hidden' : ''}`}>
                 <PromotionsFull promoPackages={promoPackages} />
 
                 {route().current() !== 'posts.index' && route().current() !== 'posts_by_category.index' && route().current() !== 'posts.show' && <TopPosts posts={posts} />}
             </section>
 
-            <footer>
+            <footer className={`${route().current() !== 'home.index' ? 'max-lg:pt-24' : ''}`}>
                 <TeaShopBenefits />
                 <FooterNavlinks />
             </footer>

@@ -1,11 +1,23 @@
 import ProductCard from '@/app/components/application/product/ProductCard';
 import Pagination from '@/app/components/ui/pagination';
 import { PaginatedData } from '@/app/types';
+import { router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const ProductsList = ({ products }: { products: PaginatedData<App.Data.ProductData> }) => {
     const { t } = useTranslation();
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        const handleStart = () => setIsLoading(true);
+        const handleFinish = () => setIsLoading(false);
+
+        router.on('start', handleStart);
+        router.on('finish', handleFinish);
+    }, []);
 
     return (
         products && (
@@ -17,17 +29,20 @@ const ProductsList = ({ products }: { products: PaginatedData<App.Data.ProductDa
                                 <motion.article
                                     key={product.id}
                                     initial={{ y: `${index + 50}px` }}
-                                    whileInView={{ y: 0 }}
+                                    animate={{ y: 0 }}
                                     transition={{ type: 'spring', duration: (index + 1) / 4 }}
-                                    className={`flex`}
+                                    className={`relative flex ${isLoading ? 'animate-pulse' : ''}`}
                                 >
-                                    <ProductCard product={product} />
+                                    <>
+                                        {isLoading && <span className="bg-background/40 absolute inset-0 z-20 size-full" />}
+                                        <ProductCard product={product} />
+                                    </>
                                 </motion.article>
                             ))}
                         </div>
                     ) : (
                         <div className={`space-y-2`}>
-                            <div className="w-full font-title text-2xl">{t('search.no_results')}.</div>
+                            <div className="font-title w-full text-2xl">{t('search.no_results')}.</div>
                             <p className={`leading-normal`}>{t('search.no_results_message')}</p>
                         </div>
                     )}

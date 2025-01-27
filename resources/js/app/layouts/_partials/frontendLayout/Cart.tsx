@@ -150,7 +150,7 @@ export default function Cart() {
                             <div className="text-foreground mt-6 text-lg">{t('cart.cart_empty')}</div>
                             <SheetClose asChild>
                                 <Button asChild className="h-10 w-full text-base uppercase" type="submit">
-                                    <Link href={route('home')}>{t('cart.continue_shopping')}</Link>
+                                    <span>{t('cart.continue_shopping')}</span>
                                 </Button>
                             </SheetClose>
                         </div>
