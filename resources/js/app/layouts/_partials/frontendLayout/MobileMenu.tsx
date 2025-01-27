@@ -1,6 +1,7 @@
 import NavLink from '@/app/components/NavLink';
 import { Button } from '@/app/components/ui/button';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/app/components/ui/sheet';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -8,6 +9,45 @@ export default function MobileMenu() {
     const [open, setOpen] = useState(false);
 
     const { t } = useTranslation();
+
+    const menu = [
+        {
+            id: 'home',
+            title: t('menu.top.home'),
+            link: route('home'),
+            active: route().current('home'),
+        },
+        {
+            id: 'teas',
+            title: t('menu.top.teas'),
+            link: route('search.type', { type: 'cajevi' }),
+            active: route().current('search.type', { type: 'cajevi' }),
+        },
+        {
+            id: 'accessories',
+            title: t('menu.top.accessories'),
+            link: route('search.type', { type: 'dodaci' }),
+            active: route().current('search.type', { type: 'dodaci' }),
+        },
+        {
+            id: 'promotions',
+            title: t('menu.top.promotions'),
+            link: route('search.show'),
+            active: route().current('search.show'),
+        },
+        {
+            id: 'blog',
+            title: t('menu.top.blog'),
+            link: route('posts.index'),
+            active: route().current('posts.index'),
+        },
+        {
+            id: 'contact',
+            title: t('menu.top.contact'),
+            link: route('contact.show'),
+            active: route().current('contact.show'),
+        },
+    ];
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
@@ -31,41 +71,15 @@ export default function MobileMenu() {
                 </SheetHeader>
                 <SheetDescription className="sr-only">{t('menu.menu')}</SheetDescription>
                 <div className="mt-6 flex flex-col space-y-4 text-sm uppercase">
-                    <SheetClose asChild>
-                        <NavLink href={route('home')} active={route().current('home')}>
-                            {t('menu.top.home')}
-                        </NavLink>
-                    </SheetClose>
-
-                    <SheetClose asChild>
-                        <NavLink href={route('search.type', { type: 'cajevi' })} active={route().current('search.type', { type: 'cajevi' })}>
-                            {t('menu.top.teas')}
-                        </NavLink>
-                    </SheetClose>
-
-                    <SheetClose asChild>
-                        <NavLink href={route('search.type', { type: 'dodaci' })} active={route().current('search.type', { type: 'dodaci' })}>
-                            {t('menu.top.accessories')}
-                        </NavLink>
-                    </SheetClose>
-
-                    <SheetClose asChild>
-                        <NavLink href={route('search.show')} active={route().current('search.show')}>
-                            {t('menu.top.promotions')}
-                        </NavLink>
-                    </SheetClose>
-
-                    <SheetClose asChild>
-                        <NavLink href={route('posts.index')} active={route().current('posts.index')}>
-                            {t('menu.top.blog')}
-                        </NavLink>
-                    </SheetClose>
-
-                    <SheetClose asChild>
-                        <NavLink href={route('contact.show')} active={false}>
-                            {t('menu.top.contact')}
-                        </NavLink>
-                    </SheetClose>
+                    {menu.map((item, index: number) => (
+                        <SheetClose asChild key={item.id}>
+                            <NavLink href={item.link} active={item.active}>
+                                <motion.span initial={{ y: 30 }} animate={{ y: 0 }} transition={{ delay: index * 0.05 }}>
+                                    {item.title}
+                                </motion.span>
+                            </NavLink>
+                        </SheetClose>
+                    ))}
                 </div>
             </SheetContent>
         </Sheet>
