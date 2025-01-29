@@ -276,8 +276,7 @@
                                                                                 style="font-size:0pt; line-height:0pt; text-align:left;"></td>
                                                                             <td class="title-20 lh-30 mt-right"
                                                                                 style="font-size:16px; padding-left: 10px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 30px;">
-                                                                                -{{ number_format($order->discount, 2) }}
-                                                                                rsd
+                                                                                {{ number_format($order->discount, 2) }}rsd
                                                                             </td>
                                                                         </tr>
                                                                     @endif
