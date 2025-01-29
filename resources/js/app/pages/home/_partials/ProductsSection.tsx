@@ -28,7 +28,7 @@ const ProductsSection = ({
                     </Typography>
                 )}
                 {subtitle && (
-                    <Typography as="p" className={`mt-2 leading-normal text-foreground/80 sm:mt-4`}>
+                    <Typography as="p" className={`text-foreground/80 mt-2 leading-normal sm:mt-4`}>
                         {subtitle}
                     </Typography>
                 )}
@@ -36,7 +36,14 @@ const ProductsSection = ({
                 <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
                     {products && products.length > 0 ? (
                         products.map((product, index) => (
-                            <motion.div key={product.id} initial={{ y: `${index + 50}px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: (index + 1) / 4 }} className={`flex`}>
+                            <motion.div
+                                key={product.id}
+                                initial={{ y: `${index + 50}px` }}
+                                whileInView={{ y: 0 }}
+                                transition={{ type: 'spring', duration: (index + 1) / 5 }}
+                                viewport={{ once: true }}
+                                className={`flex`}
+                            >
                                 <ProductCard product={product} key={product.id} />
                             </motion.div>
                         ))

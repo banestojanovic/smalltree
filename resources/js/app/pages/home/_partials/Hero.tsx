@@ -10,7 +10,7 @@ const Hero = ({ hero }: { hero: { title: string; subtitle: string; image: string
     const transition = { type: 'spring', duration: 0.3 };
 
     return (
-        <section className="relative h-full bg-cover bg-center" style={{ backgroundImage: `url(${hero.image})` }}>
+        <section className="relative h-full bg-cover bg-top xl:bg-[center_top_-6rem]" style={{ backgroundImage: `url(${hero.image})` }}>
             <div className="absolute inset-0 z-0 bg-black opacity-30"></div>
 
             <div className="relative z-10 h-full max-lg:py-12 lg:h-[395px]">
@@ -32,8 +32,8 @@ const Hero = ({ hero }: { hero: { title: string; subtitle: string; image: string
                         )}
                         <motion.div initial={{ y: `30%` }} animate={{ y: '0' }} transition={transition}>
                             <div className="relative -mx-0.5 mt-7 inline-flex overflow-hidden rounded-lg p-0.5">
-                                <span className="absolute inline-flex size-full rounded-lg bg-primary opacity-50 motion-safe:animate-ping"></span>
-                                <Button asChild type={`button`} className={`relative z-10 h-12 hover:bg-primary hover:brightness-95`}>
+                                <span className="bg-primary absolute inline-flex size-full rounded-lg opacity-50 motion-safe:animate-ping"></span>
+                                <Button asChild type={`button`} className={`hover:bg-primary relative z-10 h-12 hover:brightness-95`}>
                                     <Link href={route('search.show')}>{t('homepage.hero.action')}</Link>
                                 </Button>
                             </div>

@@ -1,7 +1,8 @@
 import InputError from '@/app/components/InputError';
 import { Button } from '@/app/components/ui/button';
 import { Typography } from '@/app/components/ui/typography';
-import { Link, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
+import { motion } from 'framer-motion';
 import { FormEventHandler } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -24,12 +25,14 @@ const NewsletterSubscription = () => {
     return (
         <div className="space-y-2">
             <Typography as="h4" className="mb-5 leading-8">
-                {t('newsletter.title')}
+                <motion.span initial={{ y: 50 }} animate={{ y: 0 }} transition={{ type: 'spring', duration: 0.3, delay: 0.05 }} viewport={{ once: true }}>
+                    {t('newsletter.title')}
+                </motion.span>
             </Typography>
 
             <form onSubmit={submit}>
                 <div className={`relative flex w-full flex-col gap-2 lg:flex-row lg:items-center`}>
-                    <div className={`relative flex w-full items-center rounded-lg bg-white px-2 pl-10 ring-primary ring-offset-1 has-focus:ring-3`}>
+                    <div className={`ring-primary relative flex w-full items-center rounded-lg bg-white px-2 pl-10 ring-offset-1 has-focus:ring-3`}>
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" className={`absolute left-4`}>
                             <path d="M5.14575 7.0415C12.5595 14.3941 13.176 14.1319 20.8541 7.0415" stroke="black" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round" />
                             <path
@@ -46,7 +49,7 @@ const NewsletterSubscription = () => {
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
                             placeholder={t('newsletter.email_placeholder')}
-                            className="h-12 w-full border-none bg-transparent text-sm text-foreground shadow-none outline-hidden placeholder:italic placeholder:text-foreground focus-visible:ring-0"
+                            className="text-foreground placeholder:text-foreground h-12 w-full border-none bg-transparent text-sm shadow-none outline-hidden placeholder:italic focus-visible:ring-0"
                         />
                     </div>
                     <Button type="submit" className={`h-12 px-8`}>
@@ -65,13 +68,13 @@ const NewsletterSubscription = () => {
                     {t('footer.follow_us')}
                 </Typography>
                 <div className={`space-x-3 text-sm`}>
-                    <Link href="https://instagram.com" className="hover:underline">
+                    <a href="https://www.instagram.com/smalltree_svetcaja" target={`_blank`} rel={`noreferrer`} className="hover:underline">
                         {t('footer.instagram')}
-                    </Link>
+                    </a>
                     <span>&</span>
-                    <Link href="https://facebook.com" className="hover:underline">
+                    <a href="https://www.facebook.com/smalltreecajdzinica" target={`_blank`} rel={`noreferrer`} className="hover:underline">
                         {t('footer.facebook')}
-                    </Link>
+                    </a>
                 </div>
             </div>
         </div>

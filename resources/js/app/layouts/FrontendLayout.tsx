@@ -45,7 +45,7 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
                 {route().current() !== 'posts.index' && route().current() !== 'posts_by_category.index' && route().current() !== 'posts.show' && <TopPosts posts={posts} />}
             </section>
 
-            <footer className={`${route().current() !== 'home.index' ? 'max-lg:pt-24' : ''}`}>
+            <footer className={`${route().current() !== 'home.index' ? 'max-lg:pt-12' : ''}`}>
                 <TeaShopBenefits />
                 <FooterNavlinks />
             </footer>

@@ -14,16 +14,14 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
     return (
         <Card key={product.id} className="relative flex w-full flex-col justify-between border-none shadow-none transition hover:scale-[1.01] hover:shadow-sm">
             {product.discount && (
-                <span className="absolute right-2 top-2 rounded-md bg-primary px-4 py-1.5 text-xs text-white">
+                <span className="bg-primary absolute top-2 right-2 rounded-md px-4 py-1.5 text-xs text-white">
                     {t('order.on_action')} {product?.discount?.percentage ? `${product.discount.percentage}%` : ''}
                 </span>
             )}
             <CardHeader className="flex w-full pb-5">
-                {product.cover?.original_url && (
-                    <Link href={route('products.show', { slug: product.slug })}>
-                        <img className="h-60 w-full rounded-lg object-contain p-2 sm:h-56" src={product.cover.original_url} alt={product.name} />
-                    </Link>
-                )}
+                <Link href={route('products.show', { slug: product.slug })}>
+                    <img className="h-60 w-full rounded-lg object-contain p-2 sm:h-56" src={product?.cover?.original_url ?? 'storage/site/images/placeholder.webp'} alt={product.name} />
+                </Link>
                 <div className={`space-y-2`}>
                     {product?.category && (
                         <CardDescription className={`text-sm`}>

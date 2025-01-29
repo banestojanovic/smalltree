@@ -8,6 +8,7 @@ import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import { motion } from 'framer-motion';
 import { FormEventHandler, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -57,8 +58,16 @@ const ContactUsPage = () => {
         <>
             <Head title="Contact us" />
             <div className="container py-10 sm:py-20">
-                <Typography as="h3">{t('contact.title')}</Typography>
-                <Typography as="p">{t('contact.subtitle')}</Typography>
+                <Typography as="h3">
+                    <motion.div initial={{ y: 50 }} animate={{ y: 0 }} transition={{ type: 'spring', duration: 0.3, delay: 0.1 }} viewport={{ once: true }}>
+                        {t('contact.title')}
+                    </motion.div>
+                </Typography>
+                <Typography as="p">
+                    <motion.div initial={{ y: 50 }} animate={{ y: 0 }} transition={{ type: 'spring', duration: 0.3, delay: 0.2 }} viewport={{ once: true }}>
+                        {t('contact.subtitle')}
+                    </motion.div>
+                </Typography>
 
                 <div className="mt-6 mb-16 grid grid-cols-1 gap-7 sm:mt-12 sm:mb-32 md:grid-cols-2 lg:grid-cols-3">
                     <ShopAddressCard
@@ -109,6 +118,11 @@ const ContactUsPage = () => {
                 <div className="grid grid-cols-1 gap-10 md:grid-cols-2 2xl:gap-20">
                     <section>
                         <form onSubmit={submit}>
+                            <Typography as="h3">
+                                <motion.div initial={{ y: 50 }} animate={{ y: 0 }} transition={{ type: 'spring', duration: 0.3, delay: 0.1 }} viewport={{ once: true }}>
+                                    {t('contact.form.title')}
+                                </motion.div>
+                            </Typography>
                             <div className="mt-7 space-y-7">
                                 <div className={`space-y-7 lg:w-3/4`}>
                                     <FieldGroup label={t('contact.form.labels.name')} name="name" error={errors.name} required>
@@ -139,24 +153,60 @@ const ContactUsPage = () => {
 
                     <section>
                         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                            <figure className={`rounded-lg bg-white p-1.5`}>
+                            <motion.figure
+                                className={`rounded-lg bg-white p-1.5`}
+                                initial={{ y: 50 }}
+                                animate={{ y: 0 }}
+                                transition={{ type: 'spring', duration: 0.3, delay: 0.05 }}
+                                viewport={{ once: true }}
+                            >
                                 <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-1.jpg" alt="Slika salona" />
-                            </figure>
-                            <figure className={`rounded-lg bg-white p-1.5`}>
+                            </motion.figure>
+                            <motion.figure
+                                initial={{ y: 50 }}
+                                animate={{ y: 0 }}
+                                transition={{ type: 'spring', duration: 0.3, delay: 0.05 }}
+                                viewport={{ once: true }}
+                                className={`rounded-lg bg-white p-1.5`}
+                            >
                                 <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-2.jpg" alt="Slika salona" />
-                            </figure>
-                            <figure className={`rounded-lg bg-white p-1.5`}>
+                            </motion.figure>
+                            <motion.figure
+                                initial={{ y: 50 }}
+                                animate={{ y: 0 }}
+                                transition={{ type: 'spring', duration: 0.3, delay: 0.05 }}
+                                viewport={{ once: true }}
+                                className={`rounded-lg bg-white p-1.5`}
+                            >
                                 <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-3.jpg" alt="Slika salona" />
-                            </figure>
-                            <figure className={`rounded-lg bg-white p-1.5`}>
+                            </motion.figure>
+                            <motion.figure
+                                initial={{ y: 50 }}
+                                animate={{ y: 0 }}
+                                transition={{ type: 'spring', duration: 0.3, delay: 0.05 }}
+                                viewport={{ once: true }}
+                                className={`rounded-lg bg-white p-1.5`}
+                            >
                                 <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-4.jpg" alt="Slika salona" />
-                            </figure>
-                            <figure className={`rounded-lg bg-white p-1.5`}>
+                            </motion.figure>
+                            <motion.figure
+                                initial={{ y: 50 }}
+                                animate={{ y: 0 }}
+                                transition={{ type: 'spring', duration: 0.3, delay: 0.05 }}
+                                viewport={{ once: true }}
+                                className={`rounded-lg bg-white p-1.5`}
+                            >
                                 <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-5.jpg" alt="Slika salona" />
-                            </figure>
-                            <figure className={`rounded-lg bg-white p-1.5`}>
+                            </motion.figure>
+                            <motion.figure
+                                initial={{ y: 50 }}
+                                animate={{ y: 0 }}
+                                transition={{ type: 'spring', duration: 0.3, delay: 0.05 }}
+                                viewport={{ once: true }}
+                                className={`rounded-lg bg-white p-1.5`}
+                            >
                                 <img className={'w-full rounded-lg object-cover lg:h-[290px]'} src="/storage/site/salon/salon-6.jpg" alt="Slika salona" />
-                            </figure>
+                            </motion.figure>
                         </div>
                     </section>
                 </div>
@@ -177,98 +227,100 @@ const ShopAddressCard = ({ shop }: ShopAddressCardProps) => {
     };
 
     return (
-        <Card className={`p-0`}>
-            <img className="h-60 w-full rounded-lg object-cover p-2 sm:h-72" src={shop.img} alt="shop map" />
+        <motion.div initial={{ y: 50 }} animate={{ y: 0 }} transition={{ type: 'spring', duration: 0.3, delay: 0.2 }} viewport={{ once: true }}>
+            <Card className={`p-0`}>
+                <img className="h-60 w-full rounded-lg object-cover p-2 sm:h-72" src={shop.img} alt="shop map" />
 
-            <CardContent className={`p-6`}>
-                <CardHeader className={`p-0`}>
-                    <CardTitle className={`p-0`}>
-                        <Typography as="h3" className={`font-medium`}>
-                            {shop.name}
-                        </Typography>
-                    </CardTitle>
-                </CardHeader>
+                <CardContent className={`p-6`}>
+                    <CardHeader className={`p-0`}>
+                        <CardTitle className={`p-0`}>
+                            <Typography as="h3" className={`font-medium`}>
+                                {shop.name}
+                            </Typography>
+                        </CardTitle>
+                    </CardHeader>
 
-                <div className={`text-md mt-4 space-y-0.5 font-light`}>
-                    <dl>
-                        <dd className="font-title line-clamp-4">{shop.address}</dd>
-                    </dl>
-                    {shop?.store_position && (
+                    <div className={`text-md mt-4 space-y-0.5 font-light`}>
                         <dl>
-                            <dd className="font-title line-clamp-4">{shop.store_position}</dd>
+                            <dd className="font-title line-clamp-4">{shop.address}</dd>
                         </dl>
-                    )}
-                    {shop.data.map((items) =>
-                        Object.entries(items).map(([key, item]) => (
-                            <dl key={key} className={`flex space-x-1`}>
-                                <dt className="font-title">{t(`contact.data.${key}`)}:</dt>
-                                <dd className="font-title line-clamp-4">
-                                    {key === 'phone' || key === 'phone2' || key === 'phone3' ? (
-                                        <a href={`tel:${formatPhoneNumber(item)}`} className={'underline'}>
-                                            {item}
-                                        </a>
-                                    ) : key === 'email' ? (
-                                        <a href={`mailto:${item}`}>{item}</a>
-                                    ) : (
-                                        item
-                                    )}
-                                </dd>
+                        {shop?.store_position && (
+                            <dl>
+                                <dd className="font-title line-clamp-4">{shop.store_position}</dd>
                             </dl>
-                        )),
-                    )}
-                </div>
+                        )}
+                        {shop.data.map((items) =>
+                            Object.entries(items).map(([key, item]) => (
+                                <dl key={key} className={`flex space-x-1`}>
+                                    <dt className="font-title">{t(`contact.data.${key}`)}:</dt>
+                                    <dd className="font-title line-clamp-4">
+                                        {key === 'phone' || key === 'phone2' || key === 'phone3' ? (
+                                            <a href={`tel:${formatPhoneNumber(item)}`} className={'underline'}>
+                                                {item}
+                                            </a>
+                                        ) : key === 'email' ? (
+                                            <a href={`mailto:${item}`}>{item}</a>
+                                        ) : (
+                                            item
+                                        )}
+                                    </dd>
+                                </dl>
+                            )),
+                        )}
+                    </div>
 
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <CardFooter className="mt-4 flex p-0">
-                            <Button variant="link" className="font-title px-0 text-base underline">
-                                {t('contact.data.see_directions')}
-                            </Button>
-                        </CardFooter>
-                    </DialogTrigger>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <CardFooter className="mt-4 flex p-0">
+                                <Button variant="link" className="font-title px-0 text-base underline">
+                                    {t('contact.data.see_directions')}
+                                </Button>
+                            </CardFooter>
+                        </DialogTrigger>
 
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>{shop.address}</DialogTitle>
-                            <DialogDescription className={`flex items-center space-x-1`}>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                                    <path d="M426.92-187.54v-221.67l54.46-155.56q2.7-4.85 6.43-7.73 3.73-2.88 11.57-2.88h285.85q6.72 0 11.51 2.88 4.8 2.88 6.49 7.73l54.46 155.56v221.67q0 7.1-4.83 11.93-4.84 4.84-11.94 4.84h-6.46q-7.09 0-11.93-4.84-4.84-4.83-4.84-11.93v-50.92H466.92v50.92q0 7.1-4.83 11.93-4.84 4.84-11.94 4.84h-6.46q-7.09 0-11.93-4.84-4.84-4.83-4.84-11.93Zm49.23-254h332.31L774.31-540h-264l-34.16 98.46Zm-13.84 35.39v132.3-132.3Zm63.07 98.46q15.04 0 25.22-10.18 10.17-10.17 10.17-25.21 0-15.04-10.17-25.21-10.18-10.17-25.22-10.17-15.03 0-25.21 10.17Q490-358.12 490-343.08q0 15.04 10.17 25.21 10.18 10.18 25.21 10.18Zm233.85 0q15.04 0 25.21-10.18 10.18-10.17 10.18-25.21 0-15.04-10.18-25.21-10.17-10.17-25.21-10.17-15.04 0-25.21 10.17-10.17 10.17-10.17 25.21 0 15.04 10.17 25.21 10.17 10.18 25.21 10.18ZM182.31-180v-12.31L250-260q-56.15 0-101.92-24.62-45.77-24.61-45.77-75.38v-340q0-40.62 59.77-60.31Q221.85-780 342.31-780q121.84 0 180.92 19.46 59.08 19.46 59.08 60.54v53.85h-40V-700h-400v280h213.84v240H182.31Zm20-144.62q15.04 0 25.21-10.17 10.17-10.17 10.17-25.21 0-15.04-10.17-25.21-10.17-10.17-25.21-10.17-15.04 0-25.21 10.17-10.18 10.17-10.18 25.21 0 15.04 10.18 25.21 10.17 10.17 25.21 10.17Zm260 50.77h360v-132.3h-360v132.3Z" />
-                                </svg>
-                                <a
-                                    href={shop?.direction ? shop.direction : `https://www.google.com/maps/place/${parseFloat(shop.latitude)},${parseFloat(shop.longitude)}`}
-                                    target={`_blank`}
-                                    rel={`noreferrer`}
-                                    className={`underline`}
-                                >
-                                    {t('footer.see_directions')}
-                                </a>
-                            </DialogDescription>
-                        </DialogHeader>
-                        <div className={`h-72 w-full`}>
-                            <APIProvider apiKey={`AIzaSyAvcVTi-sOrkQdEOJ-QIazagXeiBLc6gU4`}>
-                                <Map
-                                    className={`size-full`}
-                                    defaultCenter={{
-                                        lat: parseFloat(shop.latitude),
-                                        lng: parseFloat(shop.longitude),
-                                    }}
-                                    defaultZoom={14}
-                                    gestureHandling={'greedy'}
-                                    disableDefaultUI={true}
-                                >
-                                    <Marker
-                                        position={{
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>{shop.address}</DialogTitle>
+                                <DialogDescription className={`flex items-center space-x-1`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                        <path d="M426.92-187.54v-221.67l54.46-155.56q2.7-4.85 6.43-7.73 3.73-2.88 11.57-2.88h285.85q6.72 0 11.51 2.88 4.8 2.88 6.49 7.73l54.46 155.56v221.67q0 7.1-4.83 11.93-4.84 4.84-11.94 4.84h-6.46q-7.09 0-11.93-4.84-4.84-4.83-4.84-11.93v-50.92H466.92v50.92q0 7.1-4.83 11.93-4.84 4.84-11.94 4.84h-6.46q-7.09 0-11.93-4.84-4.84-4.83-4.84-11.93Zm49.23-254h332.31L774.31-540h-264l-34.16 98.46Zm-13.84 35.39v132.3-132.3Zm63.07 98.46q15.04 0 25.22-10.18 10.17-10.17 10.17-25.21 0-15.04-10.17-25.21-10.18-10.17-25.22-10.17-15.03 0-25.21 10.17Q490-358.12 490-343.08q0 15.04 10.17 25.21 10.18 10.18 25.21 10.18Zm233.85 0q15.04 0 25.21-10.18 10.18-10.17 10.18-25.21 0-15.04-10.18-25.21-10.17-10.17-25.21-10.17-15.04 0-25.21 10.17-10.17 10.17-10.17 25.21 0 15.04 10.17 25.21 10.17 10.18 25.21 10.18ZM182.31-180v-12.31L250-260q-56.15 0-101.92-24.62-45.77-24.61-45.77-75.38v-340q0-40.62 59.77-60.31Q221.85-780 342.31-780q121.84 0 180.92 19.46 59.08 19.46 59.08 60.54v53.85h-40V-700h-400v280h213.84v240H182.31Zm20-144.62q15.04 0 25.21-10.17 10.17-10.17 10.17-25.21 0-15.04-10.17-25.21-10.17-10.17-25.21-10.17-15.04 0-25.21 10.17-10.18 10.17-10.18 25.21 0 15.04 10.18 25.21 10.17 10.17 25.21 10.17Zm260 50.77h360v-132.3h-360v132.3Z" />
+                                    </svg>
+                                    <a
+                                        href={shop?.direction ? shop.direction : `https://www.google.com/maps/place/${parseFloat(shop.latitude)},${parseFloat(shop.longitude)}`}
+                                        target={`_blank`}
+                                        rel={`noreferrer`}
+                                        className={`underline`}
+                                    >
+                                        {t('footer.see_directions')}
+                                    </a>
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className={`h-72 w-full`}>
+                                <APIProvider apiKey={`AIzaSyAvcVTi-sOrkQdEOJ-QIazagXeiBLc6gU4`}>
+                                    <Map
+                                        className={`size-full`}
+                                        defaultCenter={{
                                             lat: parseFloat(shop.latitude),
                                             lng: parseFloat(shop.longitude),
                                         }}
-                                    />
-                                </Map>
-                            </APIProvider>
-                        </div>
-                    </DialogContent>
-                </Dialog>
-            </CardContent>
-        </Card>
+                                        defaultZoom={14}
+                                        gestureHandling={'greedy'}
+                                        disableDefaultUI={true}
+                                    >
+                                        <Marker
+                                            position={{
+                                                lat: parseFloat(shop.latitude),
+                                                lng: parseFloat(shop.longitude),
+                                            }}
+                                        />
+                                    </Map>
+                                </APIProvider>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
+                </CardContent>
+            </Card>
+        </motion.div>
     );
 };
 

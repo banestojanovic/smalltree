@@ -315,6 +315,7 @@
         "message_received": "Hvala. Primili smo vašu poruku.",
         "message_not_sent": "Poruka nije poslata. Molimo pokušajte ponovo.",
         "form": {
+            "title": "Pošaljite nam poruku",
             "labels": {
                 "name": "Ime",
                 "email": "Email",

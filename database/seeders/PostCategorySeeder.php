@@ -15,20 +15,10 @@ class PostCategorySeeder extends Seeder
     public function run(): void
     {
         $categories = collect([
-            'Crni čaj',
-            'Zeleni čaj',
-            'Beli čaj',
-            'Voćni čaj',
-            'Oolong čaj',
-            'Pu erh čaj',
-            'Herbalni čaj',
-            'Rooibos i biljni čajevi',
-            'Matcha',
-            'Yerba Mate čaj',
-            'Kombucha čaj',
-            'Mate',
-            'Ayurvedic čaj',
-            'Med',
+            'Sve o čajevima',
+            'Lifestyle',
+            'Recepti',
+            'Zdravlje',
         ]);
 
         $categories->each(function ($category) {

@@ -31,7 +31,7 @@ class PostData extends Data
         #[DataCollectionOf(PostCategoryData::class)]
         public ?Collection $categories,
     ) {
-        $this->excerpt = Str::words($this->content, 20);
+        $this->excerpt = Str::words($this->content, 18);
         $this->category = $this->categories?->first();
     }
 }

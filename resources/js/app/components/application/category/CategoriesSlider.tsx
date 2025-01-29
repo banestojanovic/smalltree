@@ -60,6 +60,7 @@ const CategoriesSlider = () => {
                             delay: 0.5,
                             ease: [0, 0.71, 0.2, 1.01],
                         }}
+                        viewport={{ once: true }}
                     >
                         {categories?.map((category, index) => (
                             <motion.div
@@ -69,7 +70,7 @@ const CategoriesSlider = () => {
                                 transition={{ type: 'spring', duration: (index + 1) / 10 }}
                             >
                                 <Link href={route('categories.show', { category: category.slug })} className="flex flex-col items-center">
-                                    <span className="group inline-flex size-24 items-center justify-center rounded-full bg-white transition hover:bg-primary/5 lg:size-32">
+                                    <span className="group hover:bg-primary/5 inline-flex size-24 items-center justify-center rounded-full bg-white transition lg:size-32">
                                         <Avatar className="size-20 border border-gray-300 transition group-hover:scale-110 lg:size-28">
                                             <AvatarImage src={category.cover?.original_url} className="object-cover" />
                                             <AvatarFallback className="text-lg">{category.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
@@ -83,7 +84,7 @@ const CategoriesSlider = () => {
 
                     <Button
                         onClick={() => scroll('right')}
-                        className="absolute right-0 top-[40px] z-10 flex size-5 items-center justify-center rounded-full bg-white p-4 lg:relative lg:-top-5 lg:right-auto"
+                        className="absolute top-[40px] right-0 z-10 flex size-5 items-center justify-center rounded-full bg-white p-4 lg:relative lg:-top-5 lg:right-auto"
                         variant={`ghost`}
                         disabled={!canScrollRight}
                     >

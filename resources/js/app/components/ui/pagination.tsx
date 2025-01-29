@@ -13,7 +13,14 @@ export default function Pagination({ links = [] }: PaginationProps) {
     return (
         <div className="flex flex-wrap gap-2">
             {links?.map((link, index) => (
-                <motion.div key={index} initial={{ y: `${index + 50}px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: (index + 1) / 6 }} className={`flex`}>
+                <motion.div
+                    key={index}
+                    initial={{ y: `${index + 50}px` }}
+                    whileInView={{ y: 0 }}
+                    transition={{ type: 'spring', duration: (index + 1) / 6 }}
+                    viewport={{ once: true }}
+                    className={`flex`}
+                >
                     {link?.url === null ? <PageInactive key={link.label} label={link.label} /> : <PaginationItem key={link.label} {...link} />}
                 </motion.div>
             ))}

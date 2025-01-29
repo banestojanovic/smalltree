@@ -28,7 +28,7 @@ class ContactUsController extends Controller
         }
 
         try {
-            Mail::to('djex808@gmail.com')->send(new ContactUsMail(data: request()->all()));
+            Mail::to(config('app.app.admin_mail'))->send(new ContactUsMail(data: request()->all()));
         } catch (\Exception $e) {
             return back()->with(['error' => $e->getMessage()]);
         }

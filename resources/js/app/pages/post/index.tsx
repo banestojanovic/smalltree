@@ -30,10 +30,10 @@ const PostIndexPage = ({
             <Head title={t('posts.stories')} />
             <div className="container mt-7 space-y-10 sm:mt-10">
                 <section className="mt-5 sm:mt-10">
-                    <motion.div initial={{ y: `-20px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.2 }}>
+                    <motion.div initial={{ y: `-20px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.2 }} viewport={{ once: true }}>
                         <Typography as="h2">{category?.name ? category.name : t('blog.title')}</Typography>
                     </motion.div>
-                    <motion.div initial={{ y: `20px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.2 }}>
+                    <motion.div initial={{ y: `20px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.2 }} viewport={{ once: true }}>
                         <Typography as="p" className="mt-3">
                             {category?.description ? category.description : t('blog.subtitle')}
                         </Typography>
@@ -54,7 +54,7 @@ const PostIndexPage = ({
                         }}
                     >
                         {categories.map((category, index: number) => (
-                            <motion.div key={category.id} initial={{ x: 50 }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: (index + 1) / 4 }}>
+                            <motion.div key={category.id} initial={{ x: 50 }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: (index + 1) / 6 }} viewport={{ once: true }}>
                                 <ToggleGroupItem variant="outline" value={category.slug} aria-label="Toggle bold" key={category.id} className={`transition active:scale-95`}>
                                     {category.name}
                                 </ToggleGroupItem>
@@ -67,7 +67,13 @@ const PostIndexPage = ({
                     <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                         {posts.data && posts.data.length > 0 ? (
                             posts.data.map((post, index: number) => (
-                                <motion.div key={post.id} initial={{ y: `${index + 50}px` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: (index + 1) / 4 }}>
+                                <motion.div
+                                    key={post.id}
+                                    initial={{ y: `${index + 50}px` }}
+                                    whileInView={{ y: 0 }}
+                                    transition={{ type: 'spring', duration: (index + 1) / 6 }}
+                                    viewport={{ once: true }}
+                                >
                                     <PostCard post={post} />
                                 </motion.div>
                             ))

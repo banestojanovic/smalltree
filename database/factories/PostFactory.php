@@ -28,8 +28,23 @@ class PostFactory extends Factory
     public function gallery()
     {
         return $this->afterCreating(function (Post $post) {
-            for ($i = 1; $i <= 4; $i++) {
-                $img = rand(1, 4);
+            for ($i = 1; $i <= 7; $i++) {
+                $img = rand(1, 7);
+
+                $post->addMediaFromDisk("posts/$img.webp", 'dummy')
+                    ->preservingOriginal()
+                    ->withProperties(['uuid' => Str::uuid()])
+                    ->setOrder($i)
+                    ->toMediaCollection(Disk::PostImages, Disk::PostImages);
+            }
+        });
+    }
+
+    public function galleryLatest()
+    {
+        return $this->afterCreating(function (Post $post) {
+            for ($i = 1; $i <= 3; $i++) {
+                $img = rand(5, 7);
 
                 $post->addMediaFromDisk("posts/$img.webp", 'dummy')
                     ->preservingOriginal()

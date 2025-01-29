@@ -20,7 +20,13 @@ const Promotions = ({
             <div className="container">
                 <div className="grid gap-4 md:grid-cols-12">
                     {productOfTheMonth && (
-                        <motion.div initial={{ x: `-20%` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.3 }} className={`col-span-12 md:col-span-6 lg:col-span-5`}>
+                        <motion.div
+                            initial={{ x: `-20%` }}
+                            whileInView={{ x: 0 }}
+                            transition={{ type: 'spring', duration: 0.3 }}
+                            className={`col-span-12 md:col-span-6 lg:col-span-5`}
+                            viewport={{ once: true }}
+                        >
                             <PromotionCard
                                 title={productOfTheMonth?.title ?? t('homepage.promotions.tea_of_the_month')}
                                 description={productOfTheMonth?.subtitle ?? t('homepage.promotions.tea_of_the_month_description')}
@@ -50,7 +56,13 @@ const Promotions = ({
                     )}
 
                     {specialOffer && (
-                        <motion.div initial={{ x: `20%` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.3 }} className={`col-span-12 md:col-span-6 lg:col-span-7`}>
+                        <motion.div
+                            initial={{ x: `20%` }}
+                            whileInView={{ x: 0 }}
+                            transition={{ type: 'spring', duration: 0.3 }}
+                            viewport={{ once: true }}
+                            className={`col-span-12 md:col-span-6 lg:col-span-7`}
+                        >
                             <PromotionCard
                                 title={specialOffer?.title ?? t('homepage.promotions.tea_of_the_month')}
                                 description={specialOffer?.subtitle ?? t('homepage.promotions.tea_of_the_month_description')}

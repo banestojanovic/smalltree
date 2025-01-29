@@ -105,7 +105,7 @@ const ProductsListFilters = ({
             <div className="container">
                 <div className="flex w-full flex-wrap items-center gap-4">
                     {route().current() !== 'categories.show' && (
-                        <motion.div initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.2 }}>
+                        <motion.div initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.2 }} viewport={{ once: true }}>
                             <MultiSelect
                                 options={formattedTypes}
                                 onValueChange={(value) => setData('selectedTypes', value ?? [])}
@@ -116,7 +116,7 @@ const ProductsListFilters = ({
                     )}
 
                     {route().current() !== 'categories.show' && (
-                        <motion.div initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.5 }}>
+                        <motion.div initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.5 }} viewport={{ once: true }}>
                             <MultiSelect
                                 options={formattedCategories}
                                 onValueChange={(value) => setData('selectedCategories', value ?? [])}
@@ -150,7 +150,7 @@ const ProductsListFilters = ({
 
                     {attributes.length > 0 &&
                         attributes.map((attribute, index) => (
-                            <motion.div key={attribute.id} initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: (index + 3) / 4 }}>
+                            <motion.div key={attribute.id} initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: (index + 3) / 4 }} viewport={{ once: true }}>
                                 <MultiSelect
                                     options={
                                         attribute?.values?.map((attribute_value) => ({
@@ -175,7 +175,7 @@ const ProductsListFilters = ({
                             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                             // @ts-expect-error
                             (attribute?.searchType && data.selectedTypes?.includes(attribute.searchType)) || data.selectedTypes?.length < 1 ? (
-                                <motion.div key={attribute.id} initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: (index + 3) / 4 }}>
+                                <motion.div key={attribute.id} initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: (index + 3) / 4 }} viewport={{ once: true }}>
                                     <Button
                                         variant={`outlined-white`}
                                         className={`h-12 space-x-4`}
@@ -189,8 +189,8 @@ const ProductsListFilters = ({
                                     >
                                         <span>{attribute?.searchLabel ?? attribute.name}</span>
 
-                                        <span className={`relative inline-flex size-5 items-center justify-between rounded-full border border-foreground/40 p-0.5`}>
-                                            {data.contains?.[attribute.slug]?.[0] ? <span className={`absolute left-px inline-flex size-4 shrink-0 rounded-full bg-primary`}></span> : ''}
+                                        <span className={`border-foreground/40 relative inline-flex size-5 items-center justify-between rounded-full border p-0.5`}>
+                                            {data.contains?.[attribute.slug]?.[0] ? <span className={`bg-primary absolute left-px inline-flex size-4 shrink-0 rounded-full`}></span> : ''}
                                         </span>
                                     </Button>
                                 </motion.div>
@@ -199,14 +199,14 @@ const ProductsListFilters = ({
                             ),
                         )}
 
-                    <motion.div initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 1.2 }}>
+                    <motion.div initial={{ x: `50px` }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 1.2 }} viewport={{ once: true }}>
                         <DropdownMenu open={rangeMenuOpen} onOpenChange={setRangeMenuOpen}>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="outlined-white" className={`h-12`} onClick={() => setRangeMenuOpen(true)}>
                                     {t('filters.labels.price')}
 
                                     {data.priceRange && data.priceRange?.length ? (
-                                        <Badge variant="outline" className="border-none px-0 text-xs text-muted-foreground">
+                                        <Badge variant="outline" className="text-muted-foreground border-none px-0 text-xs">
                                             ${data.priceRange[0] ?? 0} - ${data.priceRange[1] ?? 0}
                                         </Badge>
                                     ) : (
@@ -226,12 +226,12 @@ const ProductsListFilters = ({
                             <DropdownMenuContent className="min-w-80">
                                 <div className="p-3">
                                     <div className={`flex justify-between`}>
-                                        <h2 className="mb-4 font-title text-lg font-semibold">{t('filters.labels.price_range')}</h2>
+                                        <h2 className="font-title mb-4 text-lg font-semibold">{t('filters.labels.price_range')}</h2>
 
                                         <Button
                                             variant={`link`}
                                             size={`circle`}
-                                            className={`mr-2 text-muted-foreground underline hover:text-foreground`}
+                                            className={`text-muted-foreground hover:text-foreground mr-2 underline`}
                                             onClick={() => {
                                                 setData('priceRange', []);
                                                 setRangeMenuOpen(false);
@@ -240,7 +240,7 @@ const ProductsListFilters = ({
                                             <span className="">{t('filters.messages.reset')}</span>
                                         </Button>
                                     </div>
-                                    <div className={`flex flex-col space-y-2.5 text-muted-foreground`}>
+                                    <div className={`text-muted-foreground flex flex-col space-y-2.5`}>
                                         <Slider
                                             className="mt-4"
                                             defaultValue={query.priceRange ?? [0, 10000]}

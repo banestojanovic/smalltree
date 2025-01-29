@@ -1,10 +1,9 @@
-import { Head } from '@inertiajs/react';
-import { ReactNode } from 'react';
-
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import ProductDetails from '@/app/pages/product/_partials/ProductDetails';
 import SimilarProducts from '@/app/pages/product/_partials/SimilarProducts';
 import { PageProps } from '@/app/types';
+import { Head } from '@inertiajs/react';
+import { ReactNode } from 'react';
 
 const ProductShowPage = ({ product }: PageProps<{ product: App.Data.ProductData }>) => {
     return (

@@ -16,7 +16,7 @@ const TopPosts = ({ posts }: PageProps<{ posts?: App.Data.PostData[] }>) => {
                 <Typography as="h2" className={`sm:text-3xl`}>
                     {t('homepage.sections.posts.title')}
                 </Typography>
-                <Typography as="p" className={`mt-2 leading-normal text-foreground/80 sm:mt-4`}>
+                <Typography as="p" className={`text-foreground/80 mt-2 leading-normal sm:mt-4`}>
                     {t('homepage.sections.posts.subtitle')}
                 </Typography>
 
@@ -27,6 +27,7 @@ const TopPosts = ({ posts }: PageProps<{ posts?: App.Data.PostData[] }>) => {
                             initial={{ y: `${index + 50}px` }}
                             whileInView={{ y: 0 }}
                             transition={{ type: 'spring', duration: (index + 1) / 4 }}
+                            viewport={{ once: true }}
                             className={`flex ${index === 0 ? 'max-lg:col-span-full' : ''}`}
                         >
                             <PostCard post={post} />

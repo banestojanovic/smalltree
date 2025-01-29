@@ -11,8 +11,6 @@ import { Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import StickyBox from 'react-sticky-box';
-import VariationValueData = App.Data.VariationValueData;
-import ProductVariationData = App.Data.ProductVariationData;
 
 const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }>) => {
     const { t } = useTranslation();
@@ -20,8 +18,8 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
     const [selectedVariation, setSelectedVariation] = useState<string | null>(product?.variations?.[1]?.variations?.[0]?.id.toString() ?? null);
     const [itemQuantity, setItemQuantity] = useState(1);
 
-    const matchingVariation = product?.variations?.find((variation: ProductVariationData) =>
-        variation?.variations?.some((variationDetail: VariationValueData) => variationDetail?.pivot?.variation_value_id == selectedVariation),
+    const matchingVariation = product?.variations?.find((variation: App.Data.ProductVariationData) =>
+        variation?.variations?.some((variationDetail: App.Data.VariationValueData) => variationDetail?.pivot?.variation_value_id == selectedVariation),
     );
 
     return (
@@ -32,7 +30,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         <PhotoSlider product={product} />
                     </StickyBox>
                 </div>
-                <div className="mt-7 lg:mt-0">
+                <div className="mt-7 overflow-hidden lg:mt-0">
                     <motion.div className="mb-2 flex flex-wrap items-center gap-x-3" initial={{ y: -50 }} animate={{ y: 0 }} transition={{ type: 'spring', duration: 0.3 }} viewport={{ once: true }}>
                         {product.categories?.map((category: App.Data.CategoryData, index) =>
                             index === 0 ? (
@@ -67,7 +65,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                                 {Object.keys(product?.grouped_variations ?? {}).map((group) => (
                                     <div key={group} className={'flex flex-col flex-wrap space-y-1'}>
                                         <div className={'flex gap-2'}>
-                                            {product?.grouped_variations[group].map((variation: VariationValueData, index: number) => (
+                                            {product?.grouped_variations[group].map((variation: App.Data.VariationValueData, index: number) => (
                                                 <motion.div
                                                     key={variation.id}
                                                     initial={{ x: 50 }}
@@ -89,7 +87,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                     )}
 
                     <div className="mt-10 flex gap-2 md:gap-5 lg:items-center">
-                        <motion.div className="flex items-center gap-3 md:gap-x-5">
+                        <div className="flex items-center gap-3 md:gap-x-5">
                             <motion.div
                                 initial={{ x: 50 }}
                                 whileInView={{ x: 0 }}
@@ -131,7 +129,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                                     <Plus />
                                 </Button>
                             </motion.div>
-                        </motion.div>
+                        </div>
 
                         <motion.div initial={{ x: 50 }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.5 }} viewport={{ once: true }}>
                             <AddToCartButton
@@ -178,8 +176,8 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
 
                                 {attributes.map((attribute: App.Data.AttributeValueData) => (
                                     <Typography as="div" className="mt-0 flex items-center gap-x-2" key={attribute.id}>
-                                        <div className="flex items-center justify-end gap-x-2 self-end text-right max-sm:text-base">
-                                            <span dangerouslySetInnerHTML={{ __html: attribute.attribute?.icon ?? '' }} />
+                                        <div className="flex items-center justify-end gap-x-2 self-end text-right max-sm:text-xs">
+                                            <span className={`max-md:[&>svg]:size-5`} dangerouslySetInnerHTML={{ __html: attribute.attribute?.icon ?? '' }} />
                                             <span className="w-full">{Array.isArray(attribute.value) ? attribute.value.join(' | ') : attribute.value} </span>
                                         </div>
                                     </Typography>
@@ -192,7 +190,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                                 value && (
                                     <motion.div
                                         key={group}
-                                        className="max-xxs:space-y-2 xxs:flex-row xxs:justify-between flex w-full flex-col items-center border-b border-gray-300 pb-4"
+                                        className="max-xxs:space-y-2 xxs:flex-row xxs:justify-between xs:items-center flex w-full flex-col border-b border-gray-300 pb-4"
                                         initial={{ y: 50 }}
                                         whileInView={{ y: 0 }}
                                         transition={{ type: 'spring', duration: 0.3 }}
@@ -203,7 +201,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                                         </Typography>
 
                                         <Typography as="div" className="mt-0 flex items-center gap-x-2">
-                                            <div className="flex items-center justify-end gap-x-2 self-end text-right text-xs">
+                                            <div className="max-xs:text-xs flex items-center justify-end gap-x-2 self-start text-right">
                                                 <span className="w-full">{value} </span>
                                             </div>
                                         </Typography>

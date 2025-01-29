@@ -293,6 +293,7 @@
                 "message_received": "Thank you. We have received your message.",
                 "message_not_sent": "Message not sent. Please try again.",
                 "form": {
+                    "title": "Send us a message",
                     "labels": {
                         "name": "Name",
                         "email": "Email",
@@ -695,6 +696,7 @@
                 "message_received": "Hvala. Primili smo vašu poruku.",
                 "message_not_sent": "Poruka nije poslata. Molimo pokušajte ponovo.",
                 "form": {
+                    "title": "Pošaljite nam poruku",
                     "labels": {
                         "name": "Ime",
                         "email": "Email",
