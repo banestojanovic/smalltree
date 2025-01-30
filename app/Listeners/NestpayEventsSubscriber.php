@@ -6,7 +6,7 @@ use App\CartStatus;
 use App\Data\OrderData;
 use App\Mail\NestpayPaymentMail;
 use App\Mail\NewOrder;
-use App\Mail\PaymentAttemtped;
+use App\Mail\PaymentAttempted;
 use App\Models\Cart;
 use App\Models\Order;
 use App\OrderStatus;
@@ -35,7 +35,7 @@ class NestpayEventsSubscriber
         $cart->status = CartStatus::FULFILLED;
         $cart->save();
 
-        Mail::to($order->user->email)->send(new PaymentAttemtped(payment: $payment));
+        Mail::to($order->user->email)->send(new PaymentAttempted(payment: $payment));
         Mail::to($order->user->email)->send(new NewOrder(order: OrderData::optional($order)));
     }
 
@@ -50,7 +50,7 @@ class NestpayEventsSubscriber
         $order->status = OrderStatus::CANCELLED;
         $order->save();
 
-        Mail::to($order->user->email)->send(new PaymentAttemtped(payment: $payment));
+        Mail::to($order->user->email)->send(new PaymentAttempted(payment: $payment));
     }
 
     /**

@@ -11,7 +11,7 @@ const Hero = ({ hero }: { hero: { title: string; subtitle: string; image: string
 
     return (
         <section className="relative h-full bg-cover bg-top xl:bg-[center_top_-6rem]" style={{ backgroundImage: `url(${hero.image})` }}>
-            <div className="absolute inset-0 z-0 bg-black opacity-30"></div>
+            <div className="absolute inset-0 z-0 bg-black opacity-45"></div>
 
             <div className="relative z-10 h-full max-lg:py-12 lg:h-[395px]">
                 <div className="container flex h-full items-center text-white">
