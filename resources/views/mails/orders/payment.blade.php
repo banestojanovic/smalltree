@@ -70,7 +70,7 @@
                                                         @if(!empty($payment['currency']))
                                                             <tr>
                                                                 <td style="font-size: 14px; line-height:24px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width: auto !important; padding-bottom: 10px;">{{__('mails.orders.payment_details.currency')}}</td>
-                                                                <td style="font-size: 14px; line-height:24px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:right; min-width: auto !important; padding-bottom: 10px;">{{$payment['currency']}}</td>
+                                                                <td style="font-size: 14px; line-height:24px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:right; min-width: auto !important; padding-bottom: 10px;">RSD</td>
                                                             </tr>
                                                         @endif
                                                         @if(!empty($payment['EXTRA_TRXDATE']))
@@ -88,7 +88,7 @@
                                                         @if(!empty($payment['Response']))
                                                             <tr>
                                                                 <td style="font-size: 14px; line-height:24px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width: auto !important; padding-bottom: 10px;">{{__('mails.orders.payment_details.response_code')}}</td>
-                                                                <td style="font-size: 14px; line-height:24px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:right; min-width: auto !important; padding-bottom: 10px;">{{$payment['Response']}}</td>
+                                                                <td style="font-size: 14px; line-height:24px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:right; min-width: auto !important; padding-bottom: 10px;">{{$payment['Response'] === 'Approved' ? 'Odobreno' : 'Odbijeno'}}</td>
                                                             </tr>
                                                         @endif
                                                         @if(!empty($payment['AuthCode']))

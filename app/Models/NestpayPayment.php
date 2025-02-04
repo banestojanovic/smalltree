@@ -113,6 +113,26 @@ class NestpayPayment extends Model
         return $this->MaskedPan;
     }
 
+    public function getResponseCodeAttribute()
+    {
+        return $this->Response;
+    }
+
+    public function getProcCodeAttribute()
+    {
+        return $this->ProcReturnCode;
+    }
+
+    public function getAuthAttrCodeAttribute()
+    {
+        return $this->AuthCode;
+    }
+
+    public function getMdAttribute()
+    {
+        return $this->mdStatus;
+    }
+
     protected static function booted(): void
     {
         \Illuminate\Database\Eloquent\Model::shouldBeStrict(false);

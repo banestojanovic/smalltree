@@ -153,6 +153,10 @@ processed: number;
 invoice: string;
 card: string;
 oid: string;
+authAttrCode: string | null;
+procCode: string | null;
+responseCode: string | null;
+md: string | null;
 masked: string;
 };
 export type PostCategoryData = {

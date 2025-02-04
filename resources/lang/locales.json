@@ -421,7 +421,7 @@
                     }
                 },
                 "payment_method": {
-                    "cart": "Kreditna kartica",
+                    "cart": "Platna kartica",
                     "upon_delivery": "Plaćanje pouzećem"
                 },
                 "order": {
@@ -622,7 +622,7 @@
                     }
                 },
                 "payment_methods": {
-                    "credit_card": "Kreditna kartica",
+                    "credit_card": "Platna kartica",
                     "upon_delivery": "Plaćanje pouzećem"
                 },
                 "payment_method": "Način plaćanja",

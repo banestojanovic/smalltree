@@ -112,8 +112,21 @@ const OrderSummaryPage = ({ order }: { order: App.Data.OrderData }) => {
                                             {order?.payment?.processed && (
                                                 <>
                                                     <p>{order.payment.card}</p>
-                                                    <p>{order.payment.masked}</p>
-                                                    <p>Transakcija: {order.payment.oid}</p>
+                                                    <p>
+                                                        {t('mails.orders.payment_details.oid')}: {order.payment.oid}
+                                                    </p>
+                                                    <p>
+                                                        {t('mails.orders.payment_details.response_code')}: {order.payment.responseCode === 'Approved' ? 'Odobreno' : 'Odbijeno'}
+                                                    </p>
+                                                    <p>
+                                                        {t('mails.orders.payment_details.auth_code')}: {order.payment.authAttrCode}
+                                                    </p>
+                                                    <p>
+                                                        {t('mails.orders.payment_details.proc_return_code')}: {order.payment.procCode}
+                                                    </p>
+                                                    <p>
+                                                        {t('mails.orders.payment_details.md_status')}: {order.payment.md}
+                                                    </p>
                                                 </>
                                             )}
                                         </dd>

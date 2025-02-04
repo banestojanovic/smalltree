@@ -102,11 +102,11 @@ const CheckoutIndex = () => {
                 <div className="py-7 lg:pt-20">
                     <h2 className="sr-only">{t('checkout.checkout')}</h2>
 
-                    {/*{global?.env === 'local' && (*/}
-                    {/*    <Button variant={'outlined-white'} type={'button'} onClick={fillWithTestData} className={`absolute top-4`}>*/}
-                    {/*        {t('checkout.fill_with_test_data')}*/}
-                    {/*    </Button>*/}
-                    {/*)}*/}
+                    {global?.env === 'local' && (
+                        <Button variant={'outlined-white'} type={'button'} onClick={fillWithTestData} className={`absolute top-4`}>
+                            {t('checkout.fill_with_test_data')}
+                        </Button>
+                    )}
 
                     {paymentData && (
                         <form ref={paymentForm} action={import.meta.env.VITE_NESTPAY_MERCHANT_3DGATE_URL} method="POST" className="hidden">
@@ -219,8 +219,8 @@ const CheckoutIndex = () => {
 
                                     <div className="grid gap-7 md:flex md:items-center">
                                         <div className="w-full">
-                                            <FieldGroup label="City" name="city" error={errors.city} required>
-                                                <Input id="city" placeholder="City" value={data.city} onChange={(e) => setData('city', e.target.value)} />
+                                            <FieldGroup label={t('checkout.form.labels.city')} name="city" error={errors.city} required>
+                                                <Input id="city" placeholder={t('checkout.form.placeholders.city')} value={data.city} onChange={(e) => setData('city', e.target.value)} />
                                             </FieldGroup>
                                         </div>
                                         <div className="w-full">
@@ -235,7 +235,7 @@ const CheckoutIndex = () => {
                                         </div>
                                     </div>
 
-                                    <FieldGroup label={t('checkout.form.labels.note')} name="note" error={errors.note} required>
+                                    <FieldGroup label={t('checkout.form.labels.note')} name="note" error={errors.note}>
                                         <Textarea id="address" placeholder={t('checkout.form.placeholders.note')} value={data.note} onChange={(e) => setData('note', e.target.value)} />
                                     </FieldGroup>
 
@@ -247,10 +247,6 @@ const CheckoutIndex = () => {
                                                 <span className={`inline-block`}>{t('checkout.form.labels.terms')}</span>
                                                 <a href={route('page.terms.show')} target={`_blank`} className={`text-primary underline`}>
                                                     {t('checkout.terms_and_conditions')}
-                                                </a>
-                                                <span>{t('checkout.separator')}</span>
-                                                <a href={route('page.privacy_policy.show')} target={`_blank`} className={`text-primary underline`}>
-                                                    {t('checkout.privacy_policy')}
                                                 </a>
                                             </Label>
                                             {errors?.terms && <div className="absolute -bottom-5 left-2 text-xs text-red-500">{errors.terms}</div>}

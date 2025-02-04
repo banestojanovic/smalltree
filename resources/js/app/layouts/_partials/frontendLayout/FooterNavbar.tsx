@@ -178,20 +178,20 @@ const FooterNavlinks = () => {
                             </Typography>
                         </div>
 
-                        <div className="flex items-start space-x-2">
-                            <img className="block w-10" src="/storage/site/banks/maestro.png" alt="Maestro Card" />
-                            <img className="block w-10" src="/storage/site/banks/master.png" alt="Master Card" />
-                            <img className="block w-10" src="/storage/site/banks/dina.png" alt="Dina Card" />
-                            <img className="block w-10" src="/storage/site/banks/visa.png" alt="Visa Card" />
-                            <img className="block w-8" src="/storage/site/banks/american.png" alt="American Express Card" />
-                            <a href="https://www.bancaintesa.rs" target="_blank">
-                                <img className="block w-44" src="/storage/site/banks/intesa.png" alt="Banca Intesa" />
+                        <div className="flex flex-wrap items-start gap-2">
+                            <img className="block w-12" src="/storage/site/banks/maestro.png" alt="Maestro Card" />
+                            <img className="block w-14" src="/storage/site/banks/master.png" alt="Master Card" />
+                            <img className="block w-14" src="/storage/site/banks/dina.png" alt="Dina Card" />
+                            <img className="block w-14" src="/storage/site/banks/visa.png" alt="Visa Card" />
+                            <img className="block w-10" src="/storage/site/banks/american.png" alt="American Express Card" />
+                            <a href="https://www.bancaintesa.rs" target="_blank" rel={`noreferrer`}>
+                                <img className="block w-40" src="/storage/site/banks/intesa.png" alt="Banca Intesa" />
                             </a>
-                            <a href="https://www.mastercard.rs/sr-rs/korisnici/pronadite-karticu.html " target="_blank">
-                                <img className="block w-28" src="/storage/site/banks/master_id.png" alt="Master ID Check" />
+                            <a href="https://www.mastercard.rs/sr-rs/korisnici/pronadite-karticu.html " target="_blank" rel={`noreferrer`}>
+                                <img className="block w-24" src="/storage/site/banks/master_id.png" alt="Master ID Check" />
                             </a>
-                            <a href="https://rs.visa.com/pay-with-visa/security-and-assistance/protected-everywhere.html" target="_blank">
-                                <img className="block w-10" src="/storage/site/banks/visa_secure.png" alt="Visa Secure" />
+                            <a href="https://rs.visa.com/pay-with-visa/security-and-assistance/protected-everywhere.html" target="_blank" rel={`noreferrer`}>
+                                <img className="block w-8" src="/storage/site/banks/visa_secure.png" alt="Visa Secure" />
                             </a>
                         </div>
                     </div>

@@ -2,6 +2,25 @@ Poštovani čajoljupci,
 
 Uslovima kupovine definisali smo pravila koja će vama osigurati kupovinu a nama obezbediti vaše zadovoljstvo.
 
+**Osnovni podaci o firmi:**
+
+- Naziv: SMALL TREE DOO BEOGRAD (NOVI BEOGRAD)
+- Adresa: Jurija Gagarina 115, 11070, Novi Beograd
+- Šifra delatnosti: 4711 - Trgovina na malo u nespecijalizovanim prodavnicama, pretežno hranom, pićima i duvanom
+- Matični broj: 20662999
+- Poreski broj: 106702340
+- Web adresa: smalltree.rs
+- Kontakt telefon: 063 7119191
+- Kontakt e-mail: office@smalltree.rs
+
+**Kontakt podaci - korisnički servis:**
+
+- Adresa: Jurija Gagarina 115, 11070, Novi Beograd
+- Web adresa: smalltree.rs
+- Kontakt telefon 1: 063 7119191
+- Kontakt telefon 2: 063 404905
+- Kontakt e-mail: office@smalltree.rs
+
 **Opšti uslovi:**
 
 1. Nakon prijema porudžbine, izvršićemo potvrdu vaše porudžbine putem maila ili telefonom
@@ -15,6 +34,15 @@ Uslovima kupovine definisali smo pravila koja će vama osigurati kupovinu a nama
 7. **Small Tree d.o.o.** može izmeniti ove Uslove u bilo kom trenutku izmenama u ovom tekstu. Trebalo bi da posetite ovu
    stranicu s vremena na vreme i proverite ažurne Uslove, jer ste njima zakonski vezani. Pojedine odredbe ovih Uslova
    mogu biti nadjačane eksplicitnim zakonskim aktima ili saopštenjima istaknutim na drugim stranicama ovog sajta.
+
+### Politika privatnosti
+U ime **Small Tree d.o.o.** obavezujemo se da ćemo čuvati privatnost svih naših kupaca. Prikupljamo samo neophodne, osnovne podatke o kupcima/ korisnicima i podatke neophodne za poslovanje i informisanje korisnika u skladu sa dobrim poslovnim običajima i u cilju pružanja kvalitetne usluge. Dajemo kupcima mogućnost izbora uključujući
+mogućnost odluke da li žele ili ne da se izbrišu sa mailing lista koje se koriste za marketinške kampanje. Svi podaci o korisnicima/kupcima se strogo čuvaju i dostupni su
+samo zaposlenima kojima su ti podaci nužni za obavljanje posla. Svi zaposleni **Small Tree d.o.o.** (i poslovni partneri) odgovorni su za poštovanje načela zaštite privatnosti.
+
+Svi lični podaci koje ste u obavezi da navedete kako bismo izvršili isporuku poručenog proizvoda koriste se isključivo i samo u tu svrhu.
+Obavezujemo se da poštujemo zakon R. Srbije i da vaše lične podatke nećemo koristiti u bilo koje druge svrhe.
+
 
 ### Dostava
 
@@ -76,7 +104,7 @@ nepažljivog skladištenja robe.**
 
 Hvala vam što pijete Small Tree čajeve.
 
-### POVRAĆAJ SREDSTAVA
+### Povraćaj sredstava
 
 U slučaju vraćanja robe i povraćaja sredstava kupcu koji je prethodno platio nekom od platnih kartica, delimično ili u
 celosti, a bez obzira na razlog vraćanja, **Small Tree d.o.o.** je u obavezi da povraćaj vrši isključivo preko VISA, EC/MC
@@ -101,7 +129,8 @@ Osim ako je eksplicitno drugačije naznačeno ovde ili na nekoj drugoj stranici 
 izričito, prećutno, odricanjem ili na drugi način, vam ne daje pravo da koristite bilo koji deo intelektualne svojine
 koju ste pronašli na Sajtu.
 
-## Informacije
+### Informacije
+
 Svi materijali, povratne informacije ili druge vrste informacija koje dostavite ovom Sajtu ili u kompaniji **Small Tree
 d.o.o.** povodom ovog sajta ("Informacije") neće biti smatrani za poverljive ili vlasničke. **Small Tree d.o.o.** će biti
 isključivi vlasnik svih informacija prikupljenih na Sajtu ili u vezi sa njim. **Small Tree d.o.o.** nema nikakve obaveze u
@@ -110,7 +139,7 @@ reprodukcija, modifikacija, objavljivanje, (re)distribucija, javno prikazivanje 
 Zabranjeno je postavljati ili prenositi na Sajt ili sa njega bilo kakve protivzakonite, preteće, klevetničke,
 ponižavajuće, obscene, pornografske ili druge materijale koji krše bilo koje zakone.
 
-### IZJAVA O KONVERZIJI
+### Izjava o konverziji
 
 Sva plaćanja biće izvršena u lokalnoj valuti Republike Srbije – dinar (RSD). Za informativni prikaz cena u drugim
 valutama koristi se srednji kurs Narodne Banke Srbije. Iznos za koji će biti zadužena Vaša platna kartica biće izražen u

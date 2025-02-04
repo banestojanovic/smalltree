@@ -41,7 +41,7 @@ class OrderController extends Controller
                     'payment' => [
                         'pay_with_card' => true,
                         'paymentData' => $form,
-                    ]
+                    ],
                 ]);
             }
         } catch (\Exception $e) {

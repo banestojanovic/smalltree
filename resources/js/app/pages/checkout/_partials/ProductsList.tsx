@@ -92,13 +92,6 @@ const ProductsLists = ({ cart }: { cart: App.Data.CartData }) => {
                             </span>
                         </div>
                     )}
-                    <div className="flex items-center justify-between">
-                        <span>{t('order.tax')}</span>
-                        <span className={`space-x-px`}>
-                            <span className="font-semibold">20</span>
-                            <span className={`font-normal`}>%</span>
-                        </span>
-                    </div>
                     {cart && cart?.discount > 0 && (
                         <div className="flex items-center justify-between">
                             <span>{t('order.discount')}</span>
