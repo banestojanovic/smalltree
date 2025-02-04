@@ -33,7 +33,7 @@ const ProductsSection = ({
                     </Typography>
                 )}
 
-                <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
+                <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4">
                     {products && products.length > 0 ? (
                         products.map((product, index) => (
                             <motion.div

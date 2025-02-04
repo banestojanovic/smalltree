@@ -24,7 +24,7 @@ const CategoriesSlider = () => {
     const scroll = (direction: 'left' | 'right') => {
         const container = scrollContainerRef.current;
         if (container) {
-            const scrollAmount = direction === 'left' ? -400 : 400;
+            const scrollAmount = direction === 'left' ? -560 : 560;
             container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
     };
