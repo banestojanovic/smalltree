@@ -45,7 +45,11 @@ class ContentImport implements ToCollection, WithHeadingRow
                 $this->importThumbnail($product, $row['url_slika']);
             }
 
-            $product->categories()->attach(array_filter(explode(',', $row['kat'])));
+            try {
+                $product->categories()->attach(array_filter(explode(',', $row['kat'])));
+            } catch (\Exception $e) {
+                // do nothing
+            }
 
             // attributes.
             $country = $this->importValue(1, ucwords(strtolower(trim($row['zemlja_porekla']))));
