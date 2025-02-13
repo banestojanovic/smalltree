@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/app/components/ui/avatar';
 import { Button } from '@/app/components/ui/button';
 import { PageProps } from '@/app/types';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Link, usePage } from '@inertiajs/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { motion } from 'framer-motion';
@@ -63,22 +64,39 @@ const CategoriesSlider = () => {
                         viewport={{ once: true }}
                     >
                         {categories?.map((category, index) => (
-                            <motion.div
-                                key={category.id}
-                                initial={{ transform: index <= 3 ? `translateX(${index - 100}px)` : `translateX(${index + 100}px)` }}
-                                animate={{ transform: 'translateX(0px)' }}
-                                transition={{ type: 'spring', duration: (index + 1) / 10 }}
-                            >
-                                <Link href={route('categories.show', { category: category.slug })} className="flex flex-col items-center">
-                                    <span className="group hover:bg-primary/5 inline-flex size-24 items-center justify-center rounded-full bg-white transition lg:size-32">
-                                        <Avatar className="size-20 border border-gray-300 transition group-hover:scale-110 lg:size-28">
-                                            <AvatarImage src={category.cover?.original_url} className="object-cover" />
-                                            <AvatarFallback className="text-lg">{category.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
-                                        </Avatar>
-                                    </span>
-                                    <span className="mt-2 text-center text-xs sm:text-sm">{category.name}</span>
-                                </Link>
-                            </motion.div>
+                            <HoverCard key={category.id} openDelay={50} closeDelay={0}>
+                                <motion.div
+                                    initial={{ transform: index <= 3 ? `translateX(${index - 100}px)` : `translateX(${index + 100}px)` }}
+                                    animate={{ transform: 'translateX(0px)' }}
+                                    transition={{ type: 'spring', duration: (index + 1) / 10 }}
+                                >
+                                    <HoverCardTrigger asChild>
+                                        <Link href={route('categories.show', { category: category.slug })} className="flex flex-col items-center">
+                                            <span className="group hover:bg-primary/5 inline-flex size-24 items-center justify-center rounded-full bg-white transition lg:size-32">
+                                                <Avatar className="size-20 border border-gray-300 transition group-hover:scale-110 lg:size-28">
+                                                    <AvatarImage src={category.cover?.original_url} className="object-cover" />
+                                                    <AvatarFallback className="text-lg">{category.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
+                                                </Avatar>
+                                            </span>
+                                            <span className="mt-2 text-center text-xs sm:text-sm">{category.name}</span>
+                                        </Link>
+                                    </HoverCardTrigger>
+                                </motion.div>
+
+                                {category?.descendants && category?.descendants?.length > 0 ? (
+                                    <HoverCardContent sideOffset={-26} className={`p-0`}>
+                                        <div className="my-2 flex flex-col">
+                                            {category.descendants.map((subcategory) => (
+                                                <Link key={subcategory.id} href={route('categories.show', { category: subcategory.slug })} className="hover:bg-accent px-4 py-3">
+                                                    {subcategory.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </HoverCardContent>
+                                ) : (
+                                    ''
+                                )}
+                            </HoverCard>
                         ))}
                     </motion.div>
 

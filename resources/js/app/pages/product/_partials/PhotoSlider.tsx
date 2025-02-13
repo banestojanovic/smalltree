@@ -1,6 +1,5 @@
 import { Button } from '@/app/components/ui/button';
 import { PageProps } from '@/app/types';
-import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -39,6 +38,11 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
                             photo?.original_url && (
                                 <SwiperSlide key={photo?.id}>
                                     <div className="relative">
+                                        {product?.tag && (
+                                            <span className={`bg-ternary absolute top-4 rounded-md px-4 py-1.5 text-sm text-white ${product?.discount ? 'left-4' : 'right-4'}`}>
+                                                {product.tag.name}
+                                            </span>
+                                        )}
                                         {product.discount && (
                                             <span className="bg-primary absolute top-4 right-4 rounded-md px-4 py-1.5 text-sm text-white">
                                                 {t('order.on_action')} {product?.discount?.percentage ? `${product.discount.percentage}%` : ''}

@@ -24,6 +24,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
+use Spatie\Tags\Tag;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements HasMedia, Sortable
@@ -106,6 +107,11 @@ class Product extends Model implements HasMedia, Sortable
         return $this->belongsToMany(Category::class);
     }
 
+    public function productTags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'taggables', 'taggable_id', 'tag_id');
+    }
+
     public function attributes(): BelongsToMany
     {
         return $this->belongsToMany(AttributeValue::class);
@@ -143,6 +149,17 @@ class Product extends Model implements HasMedia, Sortable
                 ->orderByDesc('starts_at')
                 ->limit(1)
         );
+    }
+
+    public function scopeOrderByTag($query): void
+    {
+        $query->orderByDesc(function ($query) {
+            $query->select('tag_id')
+                ->from('taggables')
+                ->whereColumn('taggables.taggable_id', 'products.id')
+                ->where('tag_id', 1)
+                ->limit(1);
+        });
     }
 
     public function scopeActive($query)

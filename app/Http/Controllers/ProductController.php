@@ -10,7 +10,7 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = ProductData::from(Product::query()
-            ->with(['variations.discount', 'photos', 'discount', 'cover', 'categories', 'attributes.attribute'])
+            ->with(['variations.discount', 'photos', 'discount', 'cover', 'categories', 'productTags', 'attributes.attribute'])
             ->active()
             ->where('slug', $slug)
             ->firstOrFail()
@@ -29,6 +29,9 @@ class ProductController extends Controller
             ])
             ->active()
             ->whereHas('categories', function ($q) use ($categoryIds) {
+                if (count($categoryIds) > 1) {
+                    $categoryIds = array_slice($categoryIds, -1, 1);
+                }
                 $q->whereIn('categories.id', $categoryIds);
             })
             ->take(4)

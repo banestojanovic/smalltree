@@ -94,7 +94,7 @@ class ProductResource extends Resource
                         ->searchable()
                         ->relationship(name: 'categories', titleAttribute: 'name'),
 
-                    Forms\Components\SpatieTagsInput::make('tags'),
+                    Forms\Components\SpatieTagsInput::make('tags')->type('product'),
 
                     Forms\Components\SpatieMediaLibraryFileUpload::make('images')
                         ->openable()

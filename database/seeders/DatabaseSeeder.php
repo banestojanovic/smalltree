@@ -40,6 +40,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@test.com',
         ]);
 
+        Tag::create(['name' => 'Novo u ponudi', 'type' => 'product']);
+
         (new CategorySeeder)->run();
 
         ProductType::factory()->count(3)
@@ -59,7 +61,6 @@ class DatabaseSeeder extends Seeder
 
         $posts->each(function ($post) {
             $post->categories()->attach(PostCategory::inRandomOrder()->first()->id);
-            $post->attachTags(Tag::inRandomOrder()->limit(3)->get()->pluck('name')->toArray());
         });
 
         $latestPosts = Post::factory()->count(3)
@@ -74,7 +75,8 @@ class DatabaseSeeder extends Seeder
     <h2>Temperatura i Sezonske Varijacije</h2>
     <p>Temperatura igra presudnu ulogu u razvoju ukusa čaja. Hladniji periodi usporavaju rast biljke, što rezultira koncentrisanijim ukusom. Zbog toga su prolećne berbe često najcenjenije, jer listovi rastu sporije nakon zimskog perioda. Letnji čajevi, sa druge strane, često imaju blaži ukus zbog bržeg rasta u toplijim uslovima. Dnevne temperaturne varijacije takođe utiču na razvoj arome - veće razlike između dnevnih i noćnih temperatura doprinose razvoju kompleksnijih ukusa.</p>',
             ],
-                ['name' => 'Otkrijte očaravajući svet indijskog čaja',
+                [
+                    'name' => 'Otkrijte očaravajući svet indijskog čaja',
                     'content' => '<h2>1. Istorija indijskog čaja</h2>
 <p>Iako čaj potiče iz Kine, Indija je danas jedan od najvećih proizvođača i izvoznika čaja na svetu. Britanci su u 19. veku započeli masovnu kultivaciju čaja u Indiji, kako bi smanjili zavisnost od kineskog izvoza. Tako su regije Assam, Darjeeling i Nilgiri postale poznate po vrhunskim čajevima koji danas osvajaju svet.</p>
 
@@ -127,14 +129,13 @@ class DatabaseSeeder extends Seeder
     <p>Kuvani čaj nije samo ukusan, već nudi i brojne zdravstvene prednosti. Đumbir i cimet pomažu u jačanju imuniteta i imaju antiinflamatorna svojstva. Karanfilić je prirodni antiseptik i može pomoći kod problema sa varenjem. Citrusno voće obezbeđuje vitamin C, dok med ima antibakterijska svojstva. Topli napitak takođe pomaže u održavanju hidratacije tokom hladnih zimskih dana.</p>
 
     <h2>Serviranje i Prezentacija</h2>
-    <p>Način serviranja kuvanog čaja može značajno uticati na celokupno iskustvo. Koristite providne staklene šolje kako biste pokazali bogatu boju napitka. Ukrasite svežim štapićem cimeta, kriškom pomorandže ili zvezdom anisa. Za posebne prilike, dodajte kandiranu koru citrusnog voća na ivicu čaše. Služite toplo, ali ne prevruće, kako bi se arome najbolje osetile.</p>'
-                    ],
+    <p>Način serviranja kuvanog čaja može značajno uticati na celokupno iskustvo. Koristite providne staklene šolje kako biste pokazali bogatu boju napitka. Ukrasite svežim štapićem cimeta, kriškom pomorandže ili zvezdom anisa. Za posebne prilike, dodajte kandiranu koru citrusnog voća na ivicu čaše. Služite toplo, ali ne prevruće, kako bi se arome najbolje osetile.</p>',
+                ],
             ))
             ->galleryLatest()->create();
 
         $latestPosts->each(function ($post) {
             $post->categories()->attach(PostCategory::inRandomOrder()->first()->id);
-            $post->attachTags(Tag::inRandomOrder()->limit(3)->get()->pluck('name')->toArray());
         });
 
         Excel::import(new ContentImport, storage_path('app/public/import/content.xlsx'));
@@ -161,7 +162,6 @@ class DatabaseSeeder extends Seeder
         $products = Product::all();
         $products->each(function ($product) {
             $product->categories()->attach(Category::inRandomOrder()->first()->id);
-            $product->attachTags(Tag::inRandomOrder()->limit(3)->get()->pluck('name')->toArray());
 
             $product->attributes()->sync([
                 AttributeValue::where('attribute_id', 1)->inRandomOrder()->first()->id,
@@ -181,7 +181,6 @@ class DatabaseSeeder extends Seeder
 
         $posts->each(function ($post) {
             $post->categories()->attach(Category::inRandomOrder()->first()->id);
-            $post->attachTags(Tag::inRandomOrder()->limit(3)->get()->pluck('name')->toArray());
         });
     }
 

@@ -29,32 +29,5 @@ class PostCategorySeeder extends Seeder
                 ))
                 ->create();
         });
-
-        $teaTags = collect([
-            'Loose Leaf Tea',
-            'Organic Tea',
-            'Caffeinated Teas',
-            'Decaf Options',
-            'Tea Health Tips',
-            'Tea Brewing Guide',
-            'Matcha',
-            'Chai',
-            'Iced Tea',
-            'Tea Time Snacks',
-            'Tea Collectibles',
-            'Tea Tastings',
-            'Teapot Maintenance',
-            'Eco-Friendly Teas',
-            'Artisanal Blends',
-            'Tea for Sleep',
-            'Tea for Energy',
-            'Exotic Tea Blends',
-            'Traditional Tea Rituals',
-            'Tea Subscription Boxes',
-        ]);
-
-        $teaTags->each(function ($tag) {
-            Tag::create(['name' => $tag]);
-        });
     }
 }

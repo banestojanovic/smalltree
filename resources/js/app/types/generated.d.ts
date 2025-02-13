@@ -91,6 +91,7 @@ name: string;
 slug: string;
 description: string | null;
 cover: any | null;
+descendants: Array<App.Data.CategoryData> | null;
 };
 export type DiscountData = {
 id: number;
@@ -184,6 +185,7 @@ grouped_variations: any | Array<any> | null;
 grouped_attributes: any | Array<any> | null;
 additional: Array<any> | null;
 category: App.Data.CategoryData | null;
+tag: App.Data.TagData | null;
 id: number;
 name: string;
 slug: string;
@@ -202,6 +204,7 @@ attributes: Array<App.Data.AttributeValueData> | null;
 categories: Array<App.Data.CategoryData> | null;
 discount: App.Data.DiscountData | null;
 discounts: Array<App.Data.DiscountData> | null;
+productTags: Array<App.Data.TagData> | null;
 };
 export type ProductTypeData = {
 id: number;
@@ -226,6 +229,10 @@ export type SubscriberData = {
 id: number;
 email: string;
 status: App.SubscriberStatus | null;
+};
+export type TagData = {
+id: number;
+name: string;
 };
 export type UserData = {
 id: number | null;

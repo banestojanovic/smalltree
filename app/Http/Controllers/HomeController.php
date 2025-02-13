@@ -18,7 +18,7 @@ class HomeController extends Controller
         $promotedSets = $promotion_settings->promoted_product_sets;
 
         $popularProducts = ProductData::collect(Product::query()
-            ->with('variations.discount', 'discount', 'cover', 'categories')
+            ->with('variations.discount', 'discount', 'cover', 'categories', 'productTags')
             ->with([
                 'variations' => function ($query) {
                     $query->with('variations')
@@ -33,7 +33,7 @@ class HomeController extends Controller
             ->get());
 
         $staffRecommendedProducts = ProductData::collect(Product::query()
-            ->with('variations.discount', 'discount', 'cover', 'categories')
+            ->with('variations.discount', 'discount', 'cover', 'categories', 'productTags')
             ->with([
                 'variations' => function ($query) {
                     $query->with('variations')
@@ -41,13 +41,14 @@ class HomeController extends Controller
                 },
             ])
             ->active()
+            ->orderByTag()
             ->when(! empty($promotedProducts), fn ($q) => $q->orderByRaw('FIELD(id, '.implode(',', $promotedProducts).') DESC'))
             ->when(empty($promotedProducts), fn ($q) => $q->inRandomOrder())
             ->limit(8)
             ->get());
 
         $teaSets = ProductData::collect(Product::query()
-            ->with('variations.discount', 'discount', 'cover', 'categories')
+            ->with('variations.discount', 'discount', 'cover', 'categories', 'productTags')
             ->with([
                 'variations' => function ($query) {
                     $query->with('variations')
