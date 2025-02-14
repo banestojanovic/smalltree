@@ -26,8 +26,8 @@ class ProductData extends Data
     #[Computed]
     public ?CategoryData $category;
 
-    #[Computed]
-    public ?TagData $tag;
+//    #[Computed]
+//    public ?TagData $tag;
 
     public function __construct(
         public int $id,
@@ -51,7 +51,7 @@ class ProductData extends Data
         public ?Collection $categories,
         public ?DiscountData $discount,
         #[DataCollectionOf(DiscountData::class)]
-        public ?DataCollection $discounts,
+        public ?Collection $discounts,
 //        #[DataCollectionOf(TagData::class)]
 //        public ?Collection $productTags,
     ) {
