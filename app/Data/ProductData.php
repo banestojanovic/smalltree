@@ -15,19 +15,19 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class ProductData extends Data
 {
     #[Computed]
-    public \Illuminate\Support\Collection|array|null $grouped_variations = null;
+    public \Illuminate\Support\Collection|array|null $grouped_variations;
 
     #[Computed]
-    public \Illuminate\Support\Collection|array|null $grouped_attributes = null;
+    public \Illuminate\Support\Collection|array|null $grouped_attributes;
 
     #[Computed]
-    public ?array $additional = null;
+    public ?array $additional;
 
     #[Computed]
-    public ?CategoryData $category = null;
+    public ?CategoryData $category;
 
     #[Computed]
-    public ?TagData $tag = null;
+    public ?TagData $tag;
 
     public function __construct(
         public int $id,
@@ -51,9 +51,9 @@ class ProductData extends Data
         public ?Collection $categories,
         public ?DiscountData $discount,
         #[DataCollectionOf(DiscountData::class)]
-        public ?Collection $discounts,
-        #[DataCollectionOf(TagData::class)]
-        public ?Collection $productTags,
+        public ?DataCollection $discounts,
+//        #[DataCollectionOf(TagData::class)]
+//        public ?Collection $productTags,
     ) {
         $this->grouped_variations = $this->variations?->flatMap(fn ($variation) => $variation->variations)->groupBy('variation.name') ?? [];
         $this->grouped_attributes = $this->attributes?->groupBy('attribute.name') ?? [];
@@ -64,6 +64,6 @@ class ProductData extends Data
         ];
 
         $this->category = $categories?->last();
-        $this->tag = $this->productTags?->first();
+//        $this->tag = $this->productTags?->first();
     }
 }
