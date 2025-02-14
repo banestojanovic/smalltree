@@ -14,19 +14,19 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class ProductData extends Data
 {
     #[Computed]
-    public \Illuminate\Support\Collection|array|null $grouped_variations;
+    public \Illuminate\Support\Collection|array|null $grouped_variations = null;
 
     #[Computed]
-    public \Illuminate\Support\Collection|array|null $grouped_attributes;
+    public \Illuminate\Support\Collection|array|null $grouped_attributes = null;
 
     #[Computed]
-    public ?array $additional;
+    public ?array $additional = null;
 
     #[Computed]
-    public ?CategoryData $category;
+    public ?CategoryData $category = null;
 
     #[Computed]
-    public ?TagData $tag;
+    public ?TagData $tag = null;
 
     public function __construct(
         public int $id,
