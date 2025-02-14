@@ -8,61 +8,68 @@ use Illuminate\Database\Eloquent\Collection;
 use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductData extends Data
 {
     #[Computed]
-    public \Illuminate\Support\Collection|array|null $grouped_variations = null;
+    public \Illuminate\Support\Collection|array|null $grouped_variations;
 
     #[Computed]
-    public \Illuminate\Support\Collection|array|null $grouped_attributes = null;
+    public \Illuminate\Support\Collection|array|null $grouped_attributes;
 
     #[Computed]
-    public ?array $additional = null;
+    public ?array $additional;
 
     #[Computed]
-    public ?CategoryData $category = null;
+    public ?CategoryData $category;
 
     #[Computed]
-    public ?TagData $tag = null;
+    public ?TagData $tag;
 
     public function __construct(
         public int $id,
         public string $name,
         public string $slug,
         public string $sku,
-        public ?float $price,
-        public ?float $base_price,
-        public ?int $stock,
+        public float|Optional $price,
+        public float|Optional $base_price,
+        public int|Optional $stock,
         public ProductStockStatus $stock_status,
-        public ?string $description,
-        public ?ProductStatus $status,
-        public ?array $data,
-        public ?Media $cover,
-        public ?MediaCollection $photos,
+        public string|Optional $description,
+        public ProductStatus|Optional $status,
+        public array|Optional $data,
+        public Media|Optional $cover,
+        public MediaCollection|Optional $photos,
         #[DataCollectionOf(ProductVariationData::class)]
-        public ?Collection $variations,
+        public Collection|Optional $variations,
         #[DataCollectionOf(AttributeValueData::class)]
-        public ?Collection $attributes,
+        public Collection|Optional $attributes,
         #[DataCollectionOf(CategoryData::class)]
-        public ?Collection $categories,
-        public ?DiscountData $discount,
+        public Collection|Optional $categories,
+        public DiscountData|Optional $discount,
         #[DataCollectionOf(DiscountData::class)]
-        public ?Collection $discounts,
+        public Collection|Optional $discounts,
         #[DataCollectionOf(TagData::class)]
-        public ?Collection $productTags = null,
+        public Collection|Optional $productTags,
     ) {
-        $this->grouped_variations = $variations?->flatMap(fn ($variation) => $variation->variations)->groupBy('variation.name') ?? [];
-        $this->grouped_attributes = $attributes?->groupBy('attribute.name') ?? [];
+        $this->grouped_variations = $variations->flatMap(fn ($variation) => $variation->variations)->groupBy('variation.name') ?? [];
+        if ($this->attributes instanceof Collection) {
+            $this->grouped_attributes = $this->attributes->groupBy('attribute.name');
+        }
 
         $this->additional = [
             __('Sastojci') => $data['ingredients'] ?? '',
             __('Najbolje upotrebiti do') => $data['valid_until'] ?? '',
         ];
 
-        $this->category = $this->categories?->last();
-        $this->tag = $this->productTags?->first();
+        if ($this->categories instanceof Collection) {
+            $this->category = $this->categories->last();
+        }
+        if ($this->productTags instanceof Collection) {
+            $this->tag = $this->productTags->first();
+        }
     }
 }
