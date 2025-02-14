@@ -44,7 +44,7 @@ const Promotions = ({
                                         whileTap={{ scale: 0.9 }}
                                         className="flex items-center justify-end"
                                     >
-                                        {productOfTheMonth.product.variations && productOfTheMonth.product.variations.length > 0 ? (
+                                        {productOfTheMonth?.product?.variations && productOfTheMonth?.product?.variations.length > 0 ? (
                                             <ProductQuickViewModal product={productOfTheMonth.product} />
                                         ) : (
                                             <AddToCartButton variant="secondary" product={productOfTheMonth.product} productVariantId={null} />
@@ -80,7 +80,7 @@ const Promotions = ({
                                         whileTap={{ scale: 0.9 }}
                                         className="flex items-center justify-end"
                                     >
-                                        {specialOffer.product.variations && specialOffer.product.variations.length > 0 ? (
+                                        {specialOffer?.product?.variations && specialOffer?.product?.variations.length > 0 ? (
                                             <ProductQuickViewModal product={specialOffer.product} />
                                         ) : (
                                             <AddToCartButton variant="secondary" product={specialOffer.product} productVariantId={null} />

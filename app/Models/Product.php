@@ -164,7 +164,7 @@ class Product extends Model implements HasMedia, Sortable
 
     public function scopeActive($query)
     {
-        return $query->where('status', ProductStatus::ACTIVE);
+        return $query->where('status', ProductStatus::ACTIVE)->where('stock_status', ProductStockStatus::IN_STOCK);
     }
 
     public function scopeIsAvailable($query)

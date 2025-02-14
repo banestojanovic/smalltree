@@ -96,6 +96,18 @@ class ProductResource extends Resource
 
                     Forms\Components\SpatieTagsInput::make('tags')->type('product'),
 
+                    Forms\Components\Section::make('data')->schema([
+                        Forms\Components\Select::make('data.similar_products')->label('Povezani proizvodi')
+                            ->preload()
+                            ->multiple()
+                            ->options(fn () => Product::query()->pluck('name', 'id')),
+
+                        Forms\Components\TextInput::make('data.default_variant')->label('Podrazumevana varijanta'),
+                        Forms\Components\TextInput::make('data.ingredients')->label('Sastojci'),
+                        Forms\Components\TextInput::make('data.tax_class')->label('Poreska klasa'),
+                        Forms\Components\TextInput::make('data.valid_until')->label('Validan do'),
+                    ])->compact(),
+
                     Forms\Components\SpatieMediaLibraryFileUpload::make('images')
                         ->openable()
                         ->reorderable()

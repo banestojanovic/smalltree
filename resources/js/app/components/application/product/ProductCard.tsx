@@ -21,7 +21,7 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
             {product?.tag && <span className={`bg-ternary absolute top-2 rounded-md px-4 py-1.5 text-xs text-white ${product?.discount ? 'left-2' : 'right-2'}`}>{product.tag.name}</span>}
             <CardHeader className="flex w-full pb-5">
                 <Link href={route('products.show', { slug: product.slug })}>
-                    <img className="h-60 w-full rounded-lg object-contain p-2 sm:h-56" src={product?.cover?.original_url ?? 'storage/site/images/placeholder.webp'} alt={product.name} />
+                    <img className="h-60 w-full rounded-lg object-contain p-2 sm:h-56" src={product?.cover?.original_url ?? '/storage/site/images/placeholder.webp'} alt={product.name} />
                 </Link>
                 <div className={`space-y-2`}>
                     {product?.category && (

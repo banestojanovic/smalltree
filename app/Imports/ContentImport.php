@@ -25,21 +25,35 @@ class ContentImport implements ToCollection, WithHeadingRow
                 continue;
             }
 
+            $data = [
+                'ingredients' => trim($row['sastojci']),
+                'default_variant' => trim($row['prodajna_jedinica']),
+                'tax_class' => trim($row['poreska_klasa']),
+                'valid_until' => trim($row['najbolje_upotrebiti_do']),
+            ];
+
+            if ($row['naziv_proizvoda'] === 'Rose White Monkey') {
+                $data['similar_products'] = [37, 39];
+            }
+
             $product = Product::create([
-                'name' => trim(str_replace(['FTGFOP1', 'TGFOP', 'SFTGFOP1', '"'], '', $row['naziv_proizvoda'])),
+                'name' => trim($row['naziv_proizvoda']),
                 'product_type_id' => $row['type'] ?? 1,
                 'sku' => trim($row['sifra_proizvoda_prodavca']),
                 'description' => trim($row['opis']),
                 'price' => (int) trim($row['prodajna_cena']),
                 'stock_status' => ProductStockStatus::IN_STOCK,
                 'status' => ProductStatus::ACTIVE,
-                'data' => [
-                    'ingredients' => trim($row['sastojci']),
-                    'default_variant' => trim($row['prodajna_jedinica']),
-                    'tax_class' => trim($row['poreska_klasa']),
-                    'valid_until' => trim($row['najbolje_upotrebiti_do']),
-                ],
+                'data' => $data,
             ]);
+
+            if (in_array($product->name, ['Earl Grey Superior', 'Bora Bora'])) {
+                $product->stock_status === ProductStockStatus::OUT_OF_STOCK;
+                $product->save();
+            }
+
+            if ($product->name === 'Rose White Monkey') {
+            }
 
             if (! empty($row['url_slika'])) {
                 $this->importThumbnail($product, $row['url_slika']);
@@ -85,13 +99,13 @@ class ContentImport implements ToCollection, WithHeadingRow
             return;
         }
 
-        //        $manager = new ImageManager(new Driver);
-        //        $image = $manager->read(file_get_contents($url));
-        //
-        //        $webpImage = $image->encode(new WebpEncoder(quality: 100));
+//        $manager = new ImageManager(new Driver);
+//        $image = $manager->read(file_get_contents($url));
+//
+//        $webpImage = $image->encode(new WebpEncoder(quality: 100));
 
         $filePath = "dummy/server/{$product->id}.webp";
-        //        Storage::disk('public')->put($filePath, $webpImage);
+//        Storage::disk('public')->put($filePath, $webpImage);
 
         $product->addMediaFromDisk($filePath, 'public')
             ->preservingOriginal()
@@ -133,6 +147,6 @@ class ContentImport implements ToCollection, WithHeadingRow
             return 'Južna Afrika';
         }
 
-        return str_replace(['x', 'X'], 'Nema', $country);
+        return preg_replace('/\b[xX]\b/', 'Nema', $country);
     }
 }

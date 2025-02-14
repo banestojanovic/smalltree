@@ -75,6 +75,10 @@ class CategorySeeder extends Seeder
             ['name' => 'Infuzeri i dodaci za pripremu čaja', 'parent_id' => 13],
 
             ['name' => 'Shou Mei', 'parent_id' => 4],
+
+            ['name' => 'Pu erh superior', 'parent_id' => 2],
+
+            ['name' => 'Aromatizovani voćni čaj', 'parent_id' => 8],
         ]);
 
         $categories->each(function ($category) {

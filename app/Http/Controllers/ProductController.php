@@ -18,7 +18,13 @@ class ProductController extends Controller
 
         $categoryIds = $product->categories?->pluck('id')->toArray();
 
+        info(print_r($categoryIds, true));
+        $similarProductsIds = $product->data['similar_products'] ?? null;
+
         $similarProducts = ProductData::collect(Product::query()
+            ->when(! empty($similarProductsIds), function ($query) use ($similarProductsIds) {
+                $query->whereIn('id', $similarProductsIds);
+            })
             ->whereNot('id', $product->id)
             ->with(['variations.discount', 'discount', 'cover', 'categories'])
             ->with([
@@ -28,11 +34,13 @@ class ProductController extends Controller
                 },
             ])
             ->active()
-            ->whereHas('categories', function ($q) use ($categoryIds) {
-                if (count($categoryIds) > 1) {
-                    $categoryIds = array_slice($categoryIds, -1, 1);
-                }
-                $q->whereIn('categories.id', $categoryIds);
+            ->when(empty($similarProductsIds), function ($query) use ($categoryIds) {
+                $query->whereHas('categories', function ($q) use ($categoryIds) {
+                    if (count($categoryIds) > 1) {
+                        $categoryIds = array_slice($categoryIds, -1, 1);
+                    }
+                    $q->whereIn('categories.id', $categoryIds);
+                });
             })
             ->take(4)
             ->inRandomOrder()
