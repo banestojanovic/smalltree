@@ -42,12 +42,12 @@ class HandleInertiaRequests extends Middleware
         $promotion_settings = new PromotionSettings;
 //        $promoPackages = (new \App\Support\Product)->transformPromoPackages($promotion_settings->promo_packages);
 
-        $posts = PostData::collect(Post::query()
-            ->with('cover', 'categories')
-            ->orderBy('created_at', 'desc')
-            ->active()
-            ->take(3)
-            ->get());
+//        $posts = PostData::collect(Post::query()
+//            ->with('cover', 'categories')
+//            ->orderBy('created_at', 'desc')
+//            ->active()
+//            ->take(3)
+//            ->get());
 
         return [
             ...parent::share($request),
@@ -64,7 +64,7 @@ class HandleInertiaRequests extends Middleware
                 'categories' => CategoryData::collect(Category::with('cover', 'descendants')->whereNull('parent_id')->get()),
                 'env' => config('app.env'),
                 'promoPackages' => [],
-                'posts' => $posts,
+                'posts' => [],
             ]),
             'flash' => fn () => [
                 'success' => session()->get('success'),
