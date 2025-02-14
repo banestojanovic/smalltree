@@ -62,7 +62,9 @@ class ProductData extends Data
             __('Najbolje upotrebiti do') => $data['valid_until'] ?? '',
         ];
 
-        $this->category = $categories?->last();
+        if ($this->categories) {
+            $this->category = $this->categories->last();
+        }
         $this->tag = $this->productTags?->first();
     }
 }

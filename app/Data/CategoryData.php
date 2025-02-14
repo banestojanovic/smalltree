@@ -16,6 +16,6 @@ class CategoryData extends Data
         public ?string $description,
         public ?Media $cover,
         #[DataCollectionOf(CategoryData::class)]
-        public ?Collection $descendants,
+        public ?Collection $descendants = null,
     ) {}
 }
