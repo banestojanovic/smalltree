@@ -52,7 +52,7 @@ class ProductData extends Data
         #[DataCollectionOf(DiscountData::class)]
         public ?Collection $discounts,
         #[DataCollectionOf(TagData::class)]
-        public ?Collection $productTags,
+        public ?Collection $productTags = null,
     ) {
         $this->grouped_variations = $variations?->flatMap(fn ($variation) => $variation->variations)->groupBy('variation.name') ?? [];
         $this->grouped_attributes = $attributes?->groupBy('attribute.name') ?? [];
