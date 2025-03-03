@@ -16,6 +16,7 @@
                 "trashed": "Trashed"
             },
             "stock_status": {
+                "title": "Stock status",
                 "out_of_stock": "Out of stock",
                 "in_stock": "In stock"
             }
@@ -372,6 +373,11 @@
         "success": {
             "title": "Payment successful - card charged",
             "description": "Your order has been successfully created and your card has been charged. You will receive a confirmation email shortly."
+        }
+    },
+    "admin": {
+        "product": {
+            "stock": "Stock"
         }
     }
 }

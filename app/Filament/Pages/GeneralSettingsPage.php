@@ -44,6 +44,7 @@ class GeneralSettingsPage extends SettingsPage
                             ->panelLayout('grid')
                             ->appendFiles()
                             ->disk(Disk::Attachments)
+                            ->maxSize(1024)
                             ->columnSpanFull(),
                     ]),
                 ])->contained(false),

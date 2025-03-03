@@ -18,6 +18,7 @@
                         "trashed": "Trashed"
                     },
                     "stock_status": {
+                        "title": "Stock status",
                         "out_of_stock": "Out of stock",
                         "in_stock": "In stock"
                     }
@@ -375,6 +376,11 @@
                     "title": "Payment successful - card charged",
                     "description": "Your order has been successfully created and your card has been charged. You will receive a confirmation email shortly."
                 }
+            },
+            "admin": {
+                "product": {
+                    "stock": "Stock"
+                }
             }
         }
     },
@@ -397,6 +403,7 @@
                         "trashed": "Izbrisano"
                     },
                     "stock_status": {
+                        "title": "Na stanju",
                         "out_of_stock": "Nema na stanju",
                         "in_stock": "Na stanju"
                     }
@@ -842,6 +849,11 @@
                 "paragraph4": "Post Express- isporuka na teritoriji Beograda ili na lični zahtev kupca.",
                 "paragraph5": "Yandex- isporuka na teritoriji Beograda, danas za danas.",
                 "description": "Molimo vas da važeće cene proverite na sajtu kurirske službe."
+            },
+            "admin": {
+                "product": {
+                    "stock": "Lager"
+                }
             }
         }
     }

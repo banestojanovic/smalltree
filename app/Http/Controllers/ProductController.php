@@ -58,6 +58,7 @@ class ProductController extends Controller
         $query = request('query');
 
         $products = Product::where('name', 'like', '%'.$query.'%')
+            ->active()
             ->with('cover', 'discount')
             ->take(10)
             ->get();

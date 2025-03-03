@@ -37,7 +37,7 @@
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td class="btn-20 btn-secondary c-white l-white" bgcolor="#f3189e"
-                                                    style="font-size:16px; line-height:24px; mso-padding-alt:15px 35px; font-family:'PT Sans', Arial, sans-serif; text-align:center; font-weight:bold; text-transform:uppercase; min-width:auto !important; border-radius:10px; background: #26694a; color:#ffffff;">
+                                                    style="font-size:16px; line-height:24px; mso-padding-alt:15px 35px; font-family:'PT Sans', Arial, sans-serif; text-align:center; font-weight:bold; text-transform:uppercase; min-width:auto !important; border-radius:10px; background: #519355; color:#ffffff;">
                                                     <a href="#" target="_blank" class="link c-white"
                                                        style="display: block; padding: 15px 35px; text-decoration:none; color:#ffffff;">
                                                         <span class="link c-white"
@@ -65,11 +65,11 @@
                                                         <tr>
                                                             <td class="text-16"
                                                                 style="font-size:16px; line-height:20px; color:#6e6e6e; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important;">
-                                                                {{ $order->user->name }}
+                                                                {{ $order->user['first_name'] . ' ' . $order->user['last_name'] }}
                                                                 <br />
-                                                                {{ $order->shipping_address->phone }}
+                                                                {{ $order->user['phone'] }}
                                                                 <br />
-                                                                {{ $order->user->email }}
+                                                                {{ $order->user['email'] }}
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -88,11 +88,11 @@
                                                         <tr>
                                                             <td class="text-16"
                                                                 style="font-size:16px; line-height:20px; color:#6e6e6e; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important;">
-                                                                {{ $order->shipping_address->address_line_1 }}
+                                                                {{ $order->shippingAddress['address_line_1'] }}
                                                                 <br />
-                                                                {{ $order->shipping_address->city }}
+                                                                {{ $order->shippingAddress['city'] }}
                                                                 ,
-                                                                {{ $order->shipping_address->postal_code }}
+                                                                {{ $order->shippingAddress['postal_code'] }}
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -112,20 +112,20 @@
                                         </table>
                                     </td>
                                 </tr>
-                                @foreach($order->items as $item)
+                                @foreach($order->items as $product)
                                     <tr>
                                         <td class="pb-30" style="padding-bottom: 30px;">
                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                 <tr>
-                                                    @if($item->product->cover)
-                                                        <th class="column-top" valign="top" width="110"
+                                                    @if($product['cover'])
+                                                        <th class="column-top" valign="top" width="230"
                                                             style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top;">
                                                             <div class="fluid-img"
                                                                  style="font-size:0pt; line-height:0pt; text-align:left;">
                                                                 <a
-                                                                    href="{{ route('products.show', ['slug' => $item->product->slug]) }}"
+                                                                    href="{{ route('products.show', ['slug' => $product['slug']]) }}"
                                                                     target="_blank"><img
-                                                                        src="{{ $item->product->cover->original_url }}"
+                                                                        src="{{ $product['cover']['original_url'] }}"
                                                                         border="0" height="120"
                                                                         alt="" /></a>
                                                             </div>
@@ -139,37 +139,33 @@
                                                             <tr>
                                                                 <td class="title-20 pb-10"
                                                                     style="font-size:20px; line-height:24px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; padding-bottom: 10px;">
-                                                                    <strong>{{ $item->product->name}}</strong>
+                                                                    <strong>{{ $product['name']}}</strong>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="text-16 lh-26 c-black"
                                                                     style="font-size:16px; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 26px; color:#282828;">
-                                                                    @if($item->price !== $item->real_price)
+                                                                    @if($product['pivot']['price'] !== $product['pivot']['real_price'])
                                                                         <strong>{{ __('mails.orders.created.price_per_piece') }}
-                                                                            :</strong>
-                                                                        <span>{{ number_format($item->price, 2) }}rsd</span>
+                                                                            :</strong> {{ $product['pivot']['price'] }}
                                                                         <span style="text-decoration: line-through;">
-                                                                            {{ number_format($item->real_price, 2) }}</span>
+                                                                            {{ $product['pivot']['real_price'] }}</span>
                                                                     @else
-                                                                        <strong>{{ __('mails.orders.created.price_per_piece') }}
-                                                                            :</strong>{{ number_format($item->real_price, 2) }}
-                                                                        rsd
+                                                                        <span style="text-decoration: line-through;">{{ __('mails.orders.created.price_per_piece') }}
+                                                                            :</span> {{ $product['pivot']['real_price'] }}
                                                                     @endif
                                                                     <br />
                                                                     <strong>{{ __('mails.orders.created.quantity') }}
-                                                                        :</strong> {{ $item->quantity }}
+                                                                        :</strong> {{ $product['pivot']['quantity'] }}
                                                                     <br />
-                                                                    @if($item->price !== $item->real_price)
+                                                                    @if($product['pivot']['price'] !== $product['pivot']['real_price'])
                                                                         <strong>{{ __('mails.orders.created.price') }}
-                                                                            :</strong>
-                                                                        <span>{{ number_format($item->price * $item->quantity, 2) }}rsd</span>
+                                                                            :</strong> {{ $product['pivot']['price'] * $product['pivot']['quantity'] }}
                                                                         <span style="text-decoration: line-through;">
-                                                                                {{ number_format($item->real_price * $item->quantity, 2) }}rsd</span>
+                                                                                {{ $product['pivot']['real_price'] * $product['pivot']['quantity'] }}</span>
                                                                     @else
                                                                         <strong>{{ __('mails.orders.created.price') }}
-                                                                            :</strong> {{ number_format($item->price * $item->quantity, 2) }}
-                                                                        rsd
+                                                                            :</strong> {{ $product['pivot']['price'] * $product['pivot']['quantity'] }}
                                                                     @endif
                                                                 </td>
                                                             </tr>
@@ -233,53 +229,22 @@
                                                                             style="width: 100%; font-size:0pt; line-height:0pt; text-align:left;"></td>
                                                                         <td class="title-20 lh-30 mt-right"
                                                                             style="padding-left: 10px; font-size:16px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 30px;">
-                                                                            {{ number_format($order->amount, 2) }}rsd
+                                                                            {{ $order->amount }}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="title-20 lh-30 a-right mt-left"
                                                                             style="width: 100%; font-size:16px; color:#282828; font-family:'PT Sans', Arial, sans-serif; min-width:auto !important; line-height: 30px; text-align:right;">
-                                                                            <strong>{{__('mails.orders.created.tax')}}
+                                                                            <strong>{{__('mails.orders.created.shipping')}}
                                                                                 :</strong>
                                                                         </td>
                                                                         <td class="img mw-15"
                                                                             style="font-size:0pt; line-height:0pt; text-align:left;"></td>
                                                                         <td class="title-20 lh-30 mt-right"
                                                                             style="font-size:16px; padding-left: 10px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 30px;">
-                                                                            20%
+                                                                            {{ $order->shipping }}
                                                                         </td>
                                                                     </tr>
-                                                                    @if($order->shipping > 0)
-                                                                        <tr>
-                                                                            <td class="title-20 lh-30 a-right mt-left"
-                                                                                style="width: 100%; font-size:16px; color:#282828; font-family:'PT Sans', Arial, sans-serif; min-width:auto !important; line-height: 30px; text-align:right;">
-                                                                                <strong>{{__('mails.orders.created.shipping')}}
-                                                                                    :</strong>
-                                                                            </td>
-                                                                            <td class="img mw-15"
-                                                                                style="font-size:0pt; line-height:0pt; text-align:left;"></td>
-                                                                            <td class="title-20 lh-30 mt-right"
-                                                                                style="font-size:16px; padding-left: 10px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 30px;">
-                                                                                {{ number_format($order->shipping, 2) }}
-                                                                                rsd
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endif
-                                                                    @if ($order->discount > 0)
-                                                                        <tr>
-                                                                            <td class="title-20 lh-30 a-right mt-left"
-                                                                                style="width: 100%; font-size:16px; color:#282828; font-family:'PT Sans', Arial, sans-serif; min-width:auto !important; line-height: 30px; text-align:right;">
-                                                                                <strong>{{__('mails.orders.created.discount')}}
-                                                                                    :</strong>
-                                                                            </td>
-                                                                            <td class="img mw-15"
-                                                                                style="font-size:0pt; line-height:0pt; text-align:left;"></td>
-                                                                            <td class="title-20 lh-30 mt-right"
-                                                                                style="font-size:16px; padding-left: 10px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 30px;">
-                                                                                {{ number_format($order->discount, 2) }}rsd
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endif
                                                                 </table>
                                                             </td>
                                                         </tr>
@@ -305,12 +270,12 @@
                                                                     <tr>
                                                                         <td class="btn-20 btn-secondary c-white l-white"
                                                                             bgcolor="#f3189e"
-                                                                            style="font-size:16px; line-height:24px; mso-padding-alt:15px 35px; font-family:'PT Sans', Arial, sans-serif; text-align:center; font-weight:bold; text-transform:uppercase; min-width:auto !important; border-radius:10px; background: #26694a; color:#ffffff;">
+                                                                            style="font-size:16px; line-height:24px; mso-padding-alt:15px 35px; font-family:'PT Sans', Arial, sans-serif; text-align:center; font-weight:bold; text-transform:uppercase; min-width:auto !important; border-radius:10px; background: #519355; color:#ffffff;">
                                                                             <a href="#" target="_blank"
                                                                                class="link c-white"
                                                                                style="display: block; padding: 15px 35px; text-decoration:none; color:#ffffff;">
                                                                                 <span class="link c-white"
-                                                                                      style="text-decoration:none; color:#ffffff; text-transform: uppercase;">{{ __('mails.orders.created.total') }}: {{ number_format($order->total, 2) }}rsd</span>
+                                                                                      style="text-decoration:none; color:#ffffff; text-transform: uppercase;">{{ __('mails.orders.created.total') }}: {{ number_format($order->total, 2) }} rsd</span>
                                                                             </a>
                                                                         </td>
                                                                     </tr>

@@ -60,11 +60,9 @@ class ProductVariationsRelationManager extends RelationManager
                     ->default(fn ($livewire) => $livewire->ownerRecord->price)
                     ->maxLength(255),
                 Forms\Components\TextInput::make('stock')
-                    ->required()
                     ->default(fn ($livewire) => $livewire->ownerRecord->stock)
                     ->maxLength(255),
                 Forms\Components\Select::make('stock_status')
-                    ->required()
                     ->options(ProductStockStatus::class),
             ]);
     }

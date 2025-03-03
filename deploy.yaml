@@ -2,7 +2,7 @@ import:
   - recipe/laravel.php
 
 config:
-  remote_user: user
+  remote_user: master_pjsevwmwxc
   repository: 'git@github.com:banestojanovic/smalltree.git'
 
 hosts:

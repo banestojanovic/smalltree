@@ -56,7 +56,7 @@ class ProductResource extends Resource
                         Forms\Components\TextInput::make('price')
                             ->numeric()
                             ->rules(['regex:/^\d{1,6}(\.\d{0,2})?$/'])
-                            ->prefix('$'),
+                            ->prefix('RSD'),
                         Forms\Components\TextInput::make('stock')
                             ->numeric(),
                         Forms\Components\Select::make('stock_status')
@@ -163,12 +163,22 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->money('rsd')
                     ->sortable(),
+                Tables\Columns\ToggleColumn::make('stock_status')
+                    ->label(__('enums.product.stock_status.title'))
+                    ->onIcon('heroicon-o-check-circle')
+                    ->offIcon('heroicon-o-x-circle')
+                    ->getStateUsing(function ($record) {
+                        return (bool) $record->stock_status->value;
+                    })
+                    ->updateStateUsing(function ($record, $state) {
+                        $record->stock_status = $state ? 1 : 0;
+                        $record->save();
+
+                        return $state;
+                    }),
                 Tables\Columns\TextColumn::make('stock')
+                    ->label(__('admin.product.stock'))
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('stock_status')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('status')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
