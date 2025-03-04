@@ -183,6 +183,7 @@
         "shipping_address": "Adresa za dostavu",
         "billing_address": "Adresa za naplatu",
         "payment_method": "Način plaćanja",
+        "payment_details": "Detalji transakcije",
         "shipping_method": "Način dostave",
         "subtotal": "Međuzbir",
         "before_tax": "Pre poreza",
@@ -398,7 +399,7 @@
     },
     "payments": {
         "failed": {
-            "title": "Plaćanje nije uspelo - kartica nije zadužena",
+            "title": "Plaćanje nije uspešno - kartica nije zadužena",
             "description": "Plaćanje nije moglo biti uspešno izvršeno. Molimo pokušajte ponovo ili prijavite problem administraciji sajta.",
             "action": "Nazad na plaćanje"
         },
@@ -433,9 +434,15 @@
                 "subtitle": "Hvala Vam na poverenju!",
                 "details": "Detalji transakcije"
             },
+            "payment_failed": {
+                "subject": "Porudžbina nije kreirana",
+                "title": "Porudžbina nije kreirana jer plaćanje nije uspešno izvršeno",
+                "subtitle": "Hvala Vam na poverenju!",
+                "details": "Detalji transakcije"
+            },
             "failed": {
                 "subject": "Neuspešno plaćanje",
-                "title": "Plaćanje nije uspelo - Kartica nije zadužena",
+                "title": "Plaćanje nije uspešno - Kartica nije zadužena",
                 "subtitle": "Hvala Vam na poverenju!",
                 "details": "Detalji transakcije"
             },

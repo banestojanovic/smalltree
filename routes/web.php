@@ -34,7 +34,7 @@ Route::get('/o-nama', [\App\Http\Controllers\PageController::class, 'aboutUs'])-
 Route::get('/uslovi-koriscenja', [\App\Http\Controllers\PageController::class, 'terms'])->name('page.terms.show');
 Route::get('/politika-privatnosti', [\App\Http\Controllers\PageController::class, 'privacyPolicy'])->name('page.privacy_policy.show');
 
-Route::get('/placanje-neuspesno', [\App\Http\Controllers\PaymentStatusController::class, 'paymentFailed'])->name('payment_failed.show');
+Route::get('/placanje-neuspesno/{payment}', [\App\Http\Controllers\PaymentStatusController::class, 'paymentFailed'])->name('payment_failed.show');
 
 Route::get('/{type}', [\App\Http\Controllers\SearchController::class, 'search'])
     ->where('type', 'cajevi|pribor|dodaci|ostalo')

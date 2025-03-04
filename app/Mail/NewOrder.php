@@ -17,7 +17,7 @@ class NewOrder extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public object $order)
+    public function __construct(public object $order, public bool $success = true)
     {
         //
     }
@@ -28,7 +28,7 @@ class NewOrder extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('mails.orders.created.subject'),
+            subject: $this->success ? __('mails.orders.created.subject') : __('mails.orders.payment_failed.subject'),
         );
     }
 

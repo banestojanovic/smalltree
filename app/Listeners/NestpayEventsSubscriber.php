@@ -46,11 +46,12 @@ class NestpayEventsSubscriber
     {
         $payment = $event->getPayment();
 
-        $order = Order::where('id', $payment->getProperty(Payment::PROP_INVOICENUMBER))->firstOrFail();
+        $order = Order::where('id', $payment->getProperty(Payment::PROP_INVOICENUMBER))->with(['user', 'shippingAddress', 'items.product.cover'])->firstOrFail();
         $order->status = OrderStatus::CANCELLED;
         $order->save();
 
         Mail::to($order->user->email)->send(new PaymentAttempted(payment: $payment));
+        Mail::to($order->user->email)->send(new NewOrder(order: OrderData::optional($order), success: false));
     }
 
     /**

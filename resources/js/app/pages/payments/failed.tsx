@@ -6,7 +6,7 @@ import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import { useTranslation } from 'react-i18next';
 
-const Error = () => {
+const Error = ({order}: {order: App.Data.OrderData}) => {
     const { t } = useTranslation();
 
     return (
@@ -20,6 +20,28 @@ const Error = () => {
                     <Typography as="p" className={`text-foreground/80 mt-2 leading-normal sm:mt-4`}>
                         {t('payments.failed.description')}
                     </Typography>
+
+                    <div className={`mt-4`}>
+                        <dt className="font-medium">{t('order.payment_details')}</dt>
+                        <dd className="mt-2 space-y-1 text-sm">
+                            {order?.payment?.processed && (
+                                <>
+                                    <p>
+                                        {t('mails.orders.payment_details.oid')}: {order.payment.oid}
+                                    </p>
+                                    <p>
+                                        {t('mails.orders.payment_details.response_code')}: {order.payment.responseCode === 'Approved' ? 'Odobreno' : 'Odbijeno'}
+                                    </p>
+                                    <p>
+                                        {t('mails.orders.payment_details.proc_return_code')}: {order.payment.procCode}
+                                    </p>
+                                    <p>
+                                        {t('mails.orders.payment_details.md_status')}: {order.payment.md}
+                                    </p>
+                                </>
+                            )}
+                        </dd>
+                    </div>
 
                     <Button asChild className={`mt-4`}>
                         <Link href={route('checkout.show')}>{t('payments.failed.action')}</Link>

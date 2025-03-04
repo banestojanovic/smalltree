@@ -63,6 +63,7 @@ class ProductVariationsRelationManager extends RelationManager
                     ->default(fn ($livewire) => $livewire->ownerRecord->stock)
                     ->maxLength(255),
                 Forms\Components\Select::make('stock_status')
+                    ->required()
                     ->options(ProductStockStatus::class),
             ]);
     }

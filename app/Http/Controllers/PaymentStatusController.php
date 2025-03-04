@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\OrderData;
 use App\Models\Order;
-use App\Models\User;
 use App\OrderStatus;
 use Cubes\Nestpay\MerchantService;
 use Cubes\Nestpay\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaymentStatusController extends Controller
 {
@@ -70,12 +71,15 @@ class PaymentStatusController extends Controller
             }
         }
 
-        return redirect()->route('payment_failed.show');
+        return redirect()->route('payment_failed.show', ['payment' => $payment->id]);
     }
 
     public function paymentFailed(Request $request): \Inertia\Response|\Inertia\ResponseFactory
     {
+        $payment = DB::table('nestpay_payments')->where('id', request('payment'))->firstOrFail();
 
-        return inertia('payments/failed')->with('error', 'placanje neuspesno');
+        return inertia('payments/failed', [
+            'order' => OrderData::optional(Order::with('payment', 'items.product.cover', 'user', 'shippingAddress')->where('id', $payment->INVOICENUMBER)->firstOrFail()),
+        ])->with('error', 'placanje neuspesno');
     }
 }

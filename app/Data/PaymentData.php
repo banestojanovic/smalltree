@@ -10,7 +10,7 @@ class PaymentData extends Data
         public int $id,
         public int $processed,
         public string $invoice,
-        public string $card,
+        public ?string $card,
         public string $oid,
         public ?string $authAttrCode,
         public ?string $procCode,

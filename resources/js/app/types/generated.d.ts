@@ -152,7 +152,7 @@ export type PaymentData = {
 id: number;
 processed: number;
 invoice: string;
-card: string;
+card: string | null;
 oid: string;
 authAttrCode: string | null;
 procCode: string | null;

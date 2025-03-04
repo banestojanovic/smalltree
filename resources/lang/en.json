@@ -172,6 +172,7 @@
         "shipping_address": "Shipping address",
         "billing_address": "Billing address",
         "payment_method": "Payment method",
+        "payment_details": "Detalji plaćanja",
         "shipping_method": "Shipping method",
         "subtotal": "Subtotal",
         "before_tax": "Before tax",
