@@ -12,6 +12,7 @@ use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class PostResource extends Resource
@@ -96,6 +97,13 @@ class PostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->recordClasses(function (Model $record) {
+                if ($record->deleted_at) {
+                    return 'opacity-50';
+                }
+
+                return null;
+            })
             ->reorderable('order_column')
             ->columns([
                 Tables\Columns\ImageColumn::make('cover.original_url')->circular(),
@@ -117,10 +125,19 @@ class PostResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('force_delete')
+                    ->label('Force Delete')
+                    ->icon('heroicon-o-trash')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->action(function ($record) {
+                        $record->forceDelete();
+                    })
+                    ->visible(fn ($record) => $record->trashed()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -83,4 +83,14 @@ class Post extends Model implements HasMedia, Sortable
     {
         return $this->created_at?->format('F j, Y'); // e.g., "November 23, 2024"
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($post) {
+            $post->status = PostStatus::TRASHED;
+            $post->saveQuietly();
+        });
+    }
 }
