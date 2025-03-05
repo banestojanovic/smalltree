@@ -18,7 +18,6 @@ class ProductController extends Controller
 
         $categoryIds = $product->categories?->pluck('id')->toArray();
 
-        info(print_r($categoryIds, true));
         $similarProductsIds = $product->data['similar_products'] ?? null;
 
         $similarProducts = ProductData::collect(Product::query()

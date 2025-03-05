@@ -55,8 +55,6 @@ class CombineLanguageFiles extends Command
 
         File::put($outputFile, json_encode($combined, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-        $this->info("Combined language files into: $outputFile");
-
         return 0;
     }
 }

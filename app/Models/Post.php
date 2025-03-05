@@ -81,7 +81,7 @@ class Post extends Model implements HasMedia, Sortable
 
     public function getDateCreatedAttribute(): string
     {
-        return $this->created_at?->format('F j, Y'); // e.g., "November 23, 2024"
+        return $this->created_at?->format('F j, Y');
     }
 
     protected static function boot()
