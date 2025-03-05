@@ -23,6 +23,7 @@ interface PageDataProps {
     title?: string;
     description?: string;
     slug?: string;
+    isCategory?: boolean;
 }
 
 const ProductsSearchPage = ({
@@ -44,9 +45,30 @@ const ProductsSearchPage = ({
 }) => {
     const { t } = useTranslation();
 
+    console.log(pageData);
     return (
         <>
-            <Head title={t('products.products_search')} />
+            {pageData?.isCategory ? (
+                <Head>
+                    <title>{pageData?.title ?? t('products.products_search')}</title>
+                    <meta name="description" content={pageData?.description ?? ''} />
+                    <meta name="keywords" content={window.location.href} />
+                    <meta name="robots" content="index, follow" />
+
+                    <link rel="canonical" href={window.location.href} />
+
+                    <meta property="og:title" content={pageData?.title ?? t('products.products_search')} />
+                    <meta property="og:description" content={pageData?.description ?? ''} />
+                    <meta property="og:url" content={window.location.href} />
+                    <meta property="og:type" content="category" />
+
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:title" content={pageData?.title ?? t('products.products_search')} />
+                    <meta name="twitter:description" content={pageData.description ?? ''} />
+                </Head>
+            ) : (
+                <Head title={t('products.products_search')} />
+            )}
 
             <CategoriesSlider />
 

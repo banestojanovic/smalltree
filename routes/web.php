@@ -21,8 +21,8 @@ Route::get('/placanje', [\App\Http\Controllers\CheckoutController::class, 'show'
 Route::post('/orders', [\App\Http\Controllers\OrderController::class, 'store'])->name('orders.store');
 Route::get('/orders/{uuid}', [\App\Http\Controllers\OrderController::class, 'summary'])->name('orders.summary');
 
-Route::get('/blog', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
-Route::get('/blog/{category}', [\App\Http\Controllers\PostController::class, 'index'])->name('posts_by_category.index');
+Route::get('/magazin', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
+Route::get('/magazin/{category}', [\App\Http\Controllers\PostController::class, 'index'])->name('posts_by_category.index');
 Route::get('/clanak/{slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 
 Route::post('/subscribers', [\App\Http\Controllers\SubscriberController::class, 'store'])->name('subscribers.store');

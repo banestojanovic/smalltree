@@ -125,6 +125,7 @@ class SearchController extends Controller
                 'title' => $title,
                 'description' => $description,
                 'slug' => request('category') ?? request('slug') ?? '',
+                'isCategory' => (bool) request('category'),
             ],
             'products' => $products,
             'variations' => $variations,

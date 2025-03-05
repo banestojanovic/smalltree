@@ -11,7 +11,7 @@ createServer((page) =>
     createInertiaApp({
         page,
         render: ReactDOMServer.renderToString,
-        title: (title) => `${title} - ${appName}`,
+        title: (title) => (title ? `${appName} - ${title}` : appName),
         resolve: (name) => resolvePageComponent(`./app/pages/${name}.tsx`, import.meta.glob('./app/pages/**/*.tsx')),
         setup: ({ App, props }) => {
             /* eslint-disable */

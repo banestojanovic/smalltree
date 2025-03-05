@@ -10,7 +10,27 @@ const PostShowPage = ({ post, recommendedPosts }: { post: App.Data.PostData; rec
     const { t } = useTranslation();
     return (
         <>
-            <Head title={post.name} />
+            <Head>
+                <title>{post.name}</title>
+
+                <meta name="description" content={post?.content ?? 'Default description'} />
+                <meta name="keywords" content={`${post.name}, magazin, o čajevima`} />
+                <meta name="robots" content="index, follow" />
+
+                <link rel="canonical" href={route('posts.show', post.slug)} />
+
+                <meta property="og:title" content={post.name} />
+                <meta property="og:description" content={post?.content ?? 'Default description'} />
+                <meta property="og:url" content={route('posts.show', post.slug)} />
+                <meta property="og:type" content="post" />
+                <meta property="og:image" content={post?.cover?.original_url} />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={post.name} />
+                <meta name="twitter:description" content={post.content ?? 'Default description'} />
+                <meta name="twitter:image" content={post?.cover?.original_url} />
+            </Head>
+
             <div>
                 <div className="container mt-7 max-w-4xl space-y-6 sm:mt-16 lg:space-y-10">
                     {post.cover?.original_url && (

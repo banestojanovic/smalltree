@@ -9,7 +9,7 @@ import i18n from './i18n';
 const appName = import.meta.env.VITE_APP_NAME || 'Smalltree';
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => (title ? `${appName} - ${title}` : appName),
     resolve: (name) => resolvePageComponent(`./app/pages/${name}.tsx`, import.meta.glob('./app/pages/**/*.tsx')),
     setup({ el, App, props }) {
         const root = import.meta.env.SSR ? hydrateRoot : createRoot;

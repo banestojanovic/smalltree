@@ -455,7 +455,7 @@
                     "teas": "Čajevi",
                     "accessories": "Pribor za čaj",
                     "promotions": "Promocije",
-                    "blog": "Blog",
+                    "blog": "Magazin",
                     "contact": "Kontakt",
                     "search": "Pretraga",
                     "search_in_products": "Krenite da kucate...",
@@ -463,7 +463,7 @@
                     "loading": "Učitavanje"
                 },
                 "footer": {
-                    "blog": "Blog",
+                    "blog": "Magazin",
                     "about": "O nama",
                     "contact": "Kontakt",
                     "privacy_policy": "Politika privatnosti",
@@ -654,8 +654,8 @@
                 "share_with_social_network": "Podelite članak na društvenim mrežama:"
             },
             "blog": {
-                "title": "Blog",
-                "subtitle": "Čitajte naše priče i blogove o čajevima, zdravlju i načinu života"
+                "title": "Magazin",
+                "subtitle": "Čitajte naše magazin sa pričama i blogovima o čajevima, zdravlju i načinu života"
             },
             "subscription": {
                 "you_are_subscribed": "Uspešno ste se prijavili"
