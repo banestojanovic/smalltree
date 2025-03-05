@@ -131,11 +131,11 @@ class ProductResource extends Resource
                             ->optionsLimit(1)
                             ->maxItems(1)
                             ->preload()
-                            ->options($attribute->values->pluck('value', 'id')) // Directly access related values
+                            ->options($attribute->values->pluck('value', 'id'))
                             ->relationship(
                                 name: 'attributes',
                                 titleAttribute: 'value',
-                                modifyQueryUsing: fn ($query) => $query->where('attribute_id', $attribute->id) // Filter query by attribute ID
+                                modifyQueryUsing: fn ($query) => $query->where('attribute_id', $attribute->id)
                             )
                             ->createOptionForm([
                                 Forms\Components\TextInput::make('attribute_id')
@@ -157,6 +157,13 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('cover.original_url')->circular(),
                 Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('slug')
+                    ->formatStateUsing(function ($record) {
+                        return 'https://smalltree.rs/proizvod/' . $record->slug;
+                    })
+                    ->copyableState(fn ($record) => 'https://smalltree.rs/proizvod/' . $record->slug)
+                    ->copyable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('sku')
                     ->label('SKU')
