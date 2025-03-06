@@ -74,6 +74,7 @@ class HomeController extends Controller
                 ->limit(3)
                 ->get()),
         ];
+
         $specialOffer = [
             'title' => $promotion_settings->special_offer_title['sr'] ?? '',
             'subtitle' => $promotion_settings->special_offer_subtitle['sr'] ?? '',
