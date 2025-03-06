@@ -16,8 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
-            \App\Http\Middleware\HandleRedirects::class,
             \App\Http\Middleware\HandleInertiaRequests::class,
+            \App\Http\Middleware\HandleRedirects::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
             \App\Http\Middleware\StartCartSession::class,
         ]);
