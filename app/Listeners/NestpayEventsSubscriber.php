@@ -4,7 +4,6 @@ namespace App\Listeners;
 
 use App\CartStatus;
 use App\Data\OrderData;
-use App\Mail\NestpayPaymentMail;
 use App\Mail\NewOrder;
 use App\Mail\PaymentAttempted;
 use App\Models\Cart;

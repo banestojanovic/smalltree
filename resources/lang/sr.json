@@ -414,8 +414,11 @@
         "orders": {
             "created": {
                 "subject": "Uspešna porudžbina",
+                "admin_subject": "Nova porudžbina",
                 "title": "Uspešno ste izvršili porudžbinu",
+                "admin_title": "Nova porudžbina sa sajta",
                 "subtitle": "Hvala Vam na poverenju! Vaša porudžbina će biti obrađena i uskoro će biti poslata.",
+                "admin_subtitle": "Nova porudžbina je upravo kreirana na sajtu",
                 "user_details": "Vaši podaci",
                 "shipping_details": "Detalji isporuke",
                 "order_id": "Broj porudžbine",

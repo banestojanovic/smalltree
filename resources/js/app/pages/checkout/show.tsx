@@ -102,11 +102,11 @@ const CheckoutIndex = () => {
                 <div className="py-7 lg:pt-20">
                     <h2 className="sr-only">{t('checkout.checkout')}</h2>
 
-                    {/*{global?.env === 'local' && (*/}
-                    {/*    <Button variant={'outlined-white'} type={'button'} onClick={fillWithTestData} className={`absolute top-4`}>*/}
-                    {/*        {t('checkout.fill_with_test_data')}*/}
-                    {/*    </Button>*/}
-                    {/*)}*/}
+                    {global?.env === 'local' && (
+                        <Button variant={'outlined-white'} type={'button'} onClick={fillWithTestData} className={`absolute top-4`}>
+                            {t('checkout.fill_with_test_data')}
+                        </Button>
+                    )}
 
                     {paymentData && (
                         <form
