@@ -62,6 +62,7 @@ class HomeController extends Controller
             ->limit(4)
             ->get());
 
+        
         $teaOfTheMonth = [
             'title' => $promotion_settings->tea_of_the_month_title['sr'] ?? '',
             'subtitle' => $promotion_settings->tea_of_the_month_subtitle['sr'] ?? '',
