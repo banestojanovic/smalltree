@@ -29,7 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandLogo(asset('site/brand/smalltree_logo.png'))
+            ->brandLogo(asset('storage/site/brand/smalltree_logo.png'))
             ->brandLogoHeight('50px')
             ->colors([
                 'primary' => Color::Green,
