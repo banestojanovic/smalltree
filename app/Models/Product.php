@@ -52,6 +52,7 @@ class Product extends Model implements HasMedia, Sortable
         'status',
         'order_column',
         'data',
+        'created_at',
     ];
 
     protected $casts = [
