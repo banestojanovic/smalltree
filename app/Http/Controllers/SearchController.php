@@ -98,6 +98,7 @@ class SearchController extends Controller
                     $query->whereHas('categories', fn ($q) => $q->whereIn('categories.id', $selectedCategories));
                 })
                 ->orderByDiscount()
+                ->orderBy('order_column')
                 ->when((request('custom') === 'na-akciji'), fn ($query) => $query->has('discount'))
                 ->paginate(16)
         );
