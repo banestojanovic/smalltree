@@ -18,7 +18,7 @@ const PromotionCardItem = ({
         </div>
         <div>
             <Typography as="h3" className="text-lg/7 text-white sm:text-xl">
-                <Link href={route('products.show', product.slug)}>{product.name}</Link>
+                <div>{product.name}</div>
             </Typography>
 
             <Typography as="h3" className="font-normal! text-white">

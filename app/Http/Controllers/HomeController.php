@@ -66,35 +66,25 @@ class HomeController extends Controller
             'title' => $promotion_settings->tea_of_the_month_title['sr'] ?? '',
             'subtitle' => $promotion_settings->tea_of_the_month_subtitle['sr'] ?? '',
             'image' => ! empty($promotion_settings->tea_of_the_month_bg_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->tea_of_the_month_bg_image[0]) : asset('storage/site/images/hero_art.webp'),
-            'product' => ProductData::optional(Product::with('variations.discount', 'discount', 'cover', 'categories')
-                ->with([
-                    'variations' => function ($query) {
-                        $query->with('variations')
-                            ->select('product_variations.*');
-                    },
-                ])
+            'products' => ProductData::collect(Product::with('cover', 'categories')
                 ->active()
                 ->when(! empty($promotion_settings->tea_of_the_month_products),
                     fn ($q) => $q->whereIn('id', $promotion_settings->tea_of_the_month_products))
                 ->inRandomOrder()
-                ->first()),
+                ->limit(3)
+                ->get()),
         ];
         $specialOffer = [
             'title' => $promotion_settings->special_offer_title['sr'] ?? '',
             'subtitle' => $promotion_settings->special_offer_subtitle['sr'] ?? '',
             'image' => ! empty($promotion_settings->special_offer_bg_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->special_offer_bg_image[0]) : asset('storage/site/images/hero_art.webp'),
-            'product' => ProductData::optional(Product::with('variations.discount', 'discount', 'cover', 'categories')
-                ->with([
-                    'variations' => function ($query) {
-                        $query->with('variations')
-                            ->select('product_variations.*');
-                    },
-                ])
+            'products' => ProductData::collect(Product::with('cover', 'categories')
                 ->active()
                 ->when(! empty($promotion_settings->special_offer_products),
                     fn ($q) => $q->whereIn('id', $promotion_settings->special_offer_products))
                 ->inRandomOrder()
-                ->first()),
+                ->limit(3)
+                ->get()),
         ];
 
         return inertia('home/index', [

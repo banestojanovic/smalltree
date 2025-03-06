@@ -13,7 +13,7 @@ interface PromotionCardProps {
 
 const PromotionCard = ({ title, description, bgImageSrc, children, cardClass, variant }: PromotionCardProps) => {
     return (
-        <Card className={`relative h-full rounded-none border-none bg-cover bg-center shadow-none ${cardClass ?? ''}`} style={{ backgroundImage: `url(${bgImageSrc})` }}>
+        <Card className={`relative h-full w-full rounded-none border-none bg-cover bg-center shadow-none ${cardClass ?? ''}`} style={{ backgroundImage: `url(${bgImageSrc})` }}>
             <div className="absolute inset-0 z-0 bg-black/45"></div>
 
             <CardContent className={`relative z-10 flex h-full w-full flex-col justify-between p-4 ${variant === 'package' ? 'items-center justify-center' : 'lg:p-8'}`}>
