@@ -26,7 +26,7 @@ const FooterNavlinks = () => {
                 'https://www.google.com/maps/place/U%C5%A0%C4%86E+Shopping+Center/@44.8155166,20.4311953,17z/data=!3m1!4b1!4m6!3m5!1s0x475a655bae3423a7:0xd9fb62470be09800!8m2!3d44.8155129!4d20.4360662!16s%2Fg%2F11x97z8_n?entry=ttu&g_ep=EgoyMDI1MDExNS4wIKXMDSoASAFQAw%3D%3D',
         },
         {
-            city: 'Veleprodaja - Beograd,',
+            city: 'Sedište firme - Beograd,',
             address: 'Jurija Gagarina 115/111',
             latitude: '44.80215996074898',
             longitude: '20.391877369714173',
