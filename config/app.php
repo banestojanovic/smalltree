@@ -125,6 +125,7 @@ return [
 
     'app' => [
         'admin_mail' => env('ADMIN_MAIL', 'demo@demo.demo'),
+        'payment_url' => env('NESTPAY_MERCHANT_3DGATE_URL', ''),
     ],
 
 ];
