@@ -6,6 +6,7 @@ Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
 Route::get('/pretraga', [\App\Http\Controllers\SearchController::class, 'search'])->name('search.show');
 Route::get('/proizvod/{slug}', [\App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
+Route::get('/product/{slug}', [\App\Http\Controllers\ProductController::class, 'showRedirect'])->name('products.show');
 Route::get('/kategorija/{category?}', [\App\Http\Controllers\SearchController::class, 'search'])->name('categories.show');
 
 Route::get('/korpa', [\App\Http\Controllers\CartController::class, 'open'])->name('cart.open');

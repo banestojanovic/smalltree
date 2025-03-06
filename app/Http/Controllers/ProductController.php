@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function show($slug)
+    public function showRedirect()
     {
         $path = trim(request()->url(), '/');
         $redirect = DB::table('redirects')->where('old_slug', $path)->first();
@@ -17,6 +17,11 @@ class ProductController extends Controller
             return redirect($redirect->new_url, 301);
         }
 
+        abort(404);
+    }
+
+    public function show($slug)
+    {
         $product = ProductData::from(Product::query()
             ->with(['variations.discount', 'photos', 'discount', 'cover', 'categories', 'productTags', 'attributes.attribute'])
             ->active()
