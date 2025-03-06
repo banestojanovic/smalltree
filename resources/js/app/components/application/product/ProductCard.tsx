@@ -19,6 +19,11 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
                 </span>
             )}
             {product?.tag && <span className={`bg-ternary absolute top-2 rounded-md px-4 py-1.5 text-xs text-white ${product?.discount ? 'left-2' : 'right-2'}`}>{product.tag.name}</span>}
+            {product?.stock_status === 0 && (
+                <span className={`bg-ternary absolute rounded-md px-4 py-1.5 text-xs text-white ${product?.discount ? 'left-2' : 'right-2'} ${product?.discount && product?.tag ? 'top-4' : 'top-2'}`}>
+                    {t('product.out_of_stock')}
+                </span>
+            )}
             <CardHeader className="flex w-full pb-5">
                 <Link href={route('products.show', { slug: product.slug })}>
                     <img className="h-60 w-full rounded-lg object-contain p-2 sm:h-56" src={product?.cover?.original_url ?? '/storage/site/images/placeholder.webp'} alt={product.name} />
@@ -41,20 +46,22 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
 
             <CardFooter className="mt-auto flex items-center justify-between">
                 <ProductPrice price={product?.price ?? 0} discountPrice={product?.discount?.price ?? null} />
-                <motion.div
-                    whileHover={{
-                        scale: 1.03,
-                        transition: { duration: 0.2 },
-                    }}
-                    whileTap={{ scale: 0.9 }}
-                    className={`inline-flex items-center justify-end`}
-                >
-                    {product.variations && product.variations.length > 0 ? (
-                        <ProductQuickViewModal product={product} />
-                    ) : (
-                        <AddToCartButton variant="secondary" product={product} productVariantId={null} />
-                    )}
-                </motion.div>
+                {product?.stock_status === 1 && (
+                    <motion.div
+                        whileHover={{
+                            scale: 1.03,
+                            transition: { duration: 0.2 },
+                        }}
+                        whileTap={{ scale: 0.9 }}
+                        className={`inline-flex items-center justify-end`}
+                    >
+                        {product.variations && product.variations.length > 0 ? (
+                            <ProductQuickViewModal product={product} />
+                        ) : (
+                            <AddToCartButton variant="secondary" product={product} productVariantId={null} />
+                        )}
+                    </motion.div>
+                )}
             </CardFooter>
         </Card>
     );

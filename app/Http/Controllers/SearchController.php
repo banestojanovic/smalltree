@@ -13,11 +13,12 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\Variation;
+use App\Settings\PromotionSettings;
 use App\VariationSearchable;
 
 class SearchController extends Controller
 {
-    public function search(): \Inertia\Response|\Inertia\ResponseFactory
+    public function search(PromotionSettings $promotion_settings): \Inertia\Response|\Inertia\ResponseFactory
     {
         $selectedAttributesValues = request('attributes') ?? [];
         $selectedVariationValues = request('variations') ?? [];
@@ -33,6 +34,16 @@ class SearchController extends Controller
             $selectedTypes = array_map('strval', $types) ?? null;
         }
 
+        $ids = [];
+        if (! empty(request('custom'))) {
+            if (request('custom') === 'smalltree-preporuka') {
+                $ids = $promotion_settings->tea_of_the_month_products;
+            }
+            if (request('custom') === 'najpopularniji') {
+                $ids = $promotion_settings->special_offer_products;
+            }
+        }
+
         $selectedCategories = request('selectedCategories') ?? [];
 
         if (! empty(request('category'))) {
@@ -45,6 +56,7 @@ class SearchController extends Controller
         $products = ProductData::collect(
             Product::with(['variations', 'discount', 'cover', 'categories', 'productTags'])
                 ->active()
+                ->when(! empty($ids), fn ($query) => $query->whereIn('id', $ids))
                 ->when(! empty($selectedTypes), fn ($query) => $query->whereIn('product_type_id', $selectedTypes))
                 ->when($contains && count($contains) > 0, function ($query) use ($contains) {
                     foreach ($contains as $attribute => $value) {
@@ -86,6 +98,7 @@ class SearchController extends Controller
                     $query->whereHas('categories', fn ($q) => $q->whereIn('categories.id', $selectedCategories));
                 })
                 ->orderByDiscount()
+                ->when((request('custom') === 'na-akciji'), fn ($query) => $query->has('discount'))
                 ->paginate(16)
         );
 

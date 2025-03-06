@@ -146,14 +146,21 @@ const ProductSearch = () => {
                                                     <span className="text-sm font-medium">{product.name}</span>
                                                 </div>
                                                 <div>
-                                                    <div className={`flex items-center space-x-px`}>
-                                                        <span className="font-semibold">{formatNumber(product?.price ?? 0)}</span>
-                                                        <span className={`font-normal`}>rsd</span>
-                                                    </div>
-                                                    {product?.discount?.price && (
-                                                        <div className={`text-foreground/50 flex items-center space-x-px text-xs line-through`}>
-                                                            <span>{formatNumber(product?.discount?.price)}</span>
-                                                            <span>rsd</span>
+                                                    {product?.discount?.price ? (
+                                                        <>
+                                                            <div className={`flex items-center space-x-px`}>
+                                                                <span className="font-semibold">{formatNumber(product?.discount.price)}</span>
+                                                                <span className={`font-normal`}>rsd</span>
+                                                            </div>
+                                                            <div className={`text-foreground/50 flex items-center space-x-px text-xs line-through`}>
+                                                                <span>{formatNumber(product?.price ?? 0)}</span>
+                                                                <span>rsd</span>
+                                                            </div>
+                                                        </>
+                                                    ) : (
+                                                        <div className={`flex items-center space-x-px`}>
+                                                            <span className="font-semibold">{formatNumber(product?.price ?? 0)}</span>
+                                                            <span className={`font-normal`}>rsd</span>
                                                         </div>
                                                     )}
                                                 </div>

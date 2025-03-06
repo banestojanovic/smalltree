@@ -16,6 +16,7 @@ use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -153,17 +154,29 @@ class ProductResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->recordClasses(function (Model $record) {
+                if ($record->deleted_at) {
+                    return 'opacity-50';
+                }
+
+                return null;
+            })
             ->reorderable('order_column')
             ->columns([
                 Tables\Columns\ImageColumn::make('cover.original_url')->circular(),
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->formatStateUsing(function ($record) {
-                        return 'https://smalltree.rs/proizvod/' . $record->slug;
+                Tables\Columns\TextColumn::make('on_discount')
+                    ->label('Na popustu')
+                    ->getStateUsing(function ($record) {
+                        $hasDiscount = $record->discounts()->where('ends_at', '>=', now())->exists();
+
+                        return $hasDiscount ? 'Da' : 'Ne';
                     })
-                    ->copyableState(fn ($record) => 'https://smalltree.rs/proizvod/' . $record->slug)
-                    ->copyable()
+                    ->badge()
+                    ->colors([
+                        'success' => 'Da',
+                        'danger' => 'Ne',
+                    ]),
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('sku')
                     ->label('SKU')
@@ -180,6 +193,19 @@ class ProductResource extends Resource
                     })
                     ->updateStateUsing(function ($record, $state) {
                         $record->stock_status = $state ? 1 : 0;
+                        $record->save();
+
+                        return $state;
+                    }),
+                Tables\Columns\ToggleColumn::make('active')
+                    ->label(__('enums.product.status.title'))
+                    ->onIcon('heroicon-o-check-circle')
+                    ->offIcon('heroicon-o-x-circle')
+                    ->getStateUsing(function ($record) {
+                        return (bool) $record->status->value;
+                    })
+                    ->updateStateUsing(function ($record, $state) {
+                        $record->status = $state ? ProductStatus::ACTIVE : ProductStatus::INACTIVE;
                         $record->save();
 
                         return $state;
@@ -202,10 +228,38 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                Tables\Filters\TernaryFilter::make('has_active_discount')
+                    ->label('Aktivni popust')
+                    ->trueLabel('Samo sa popustom')
+                    ->falseLabel('Samo bez popusta')
+                    ->placeholder('Svi proizvodi')
+                    ->queries(
+                        true: function (Builder $query) {
+                            $query->whereHas('discount', function (Builder $query) {
+                                $query->where('ends_at', '>=', now());
+                            });
+                        },
+                        false: function (Builder $query) {
+                            $query->whereDoesntHave('discount', function (Builder $query) {
+                                $query->where('ends_at', '>=', now());
+                            });
+                        },
+                        blank: fn (Builder $query) => $query,
+                    )
+                    ->default(''),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('force_delete')
+                    ->label('Force Delete')
+                    ->icon('heroicon-o-trash')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->action(function ($record) {
+                        $record->forceDelete();
+                    })
+                    ->visible(fn ($record) => $record->trashed()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

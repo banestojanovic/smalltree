@@ -61,7 +61,7 @@ class HandleInertiaRequests extends Middleware
             'cart' => CartData::optional((new Cart)->getCart()),
             'global' => fn () => GlobalData::optional([
                 'action' => session()->get('action'),
-                'categories' => CategoryData::collect(Category::with('cover', 'descendants')->whereNull('parent_id')->orderByDesc('order_column')->get()),
+                'categories' => CategoryData::collect(Category::with('cover', 'descendants')->whereNull('parent_id')->orderBy('order_column')->get()),
                 'env' => config('app.env'),
                 'promoPackages' => [],
                 'posts' => [],

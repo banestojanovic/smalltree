@@ -165,9 +165,15 @@ const FooterNavlinks = () => {
             <div className="bg-gray-darker flex h-full items-center bg-gray-200 py-7 text-sm text-white sm:py-12">
                 <div className="container flex w-full flex-col justify-center gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-3">
                     <div>
-                        © {t('footer.copyrights', { date: new Date().getFullYear() })}
-                        <a href="https://dimaso.rs" target="_blank" rel="noreferrer" className={`ml-1 hover:underline`}>
-                            Dimaso DOO
+                        <div>
+                            © {t('footer.copyrights', { date: new Date().getFullYear() })}
+                            <a href="https://dimaso.rs" target="_blank" rel="noreferrer" className={`ml-1 hover:underline`}>
+                                Dimaso DOO
+                            </a>
+                        </div>
+
+                        <a href="https://www.smalltree.rs/trust/" className={`mt-2 flex`}>
+                            <img decoding="async" style={{ width: 200 }} src="https://verify.etrustmark.rs/cert/image.php" />
                         </a>
                     </div>
 

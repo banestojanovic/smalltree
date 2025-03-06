@@ -164,7 +164,7 @@ class Product extends Model implements HasMedia, Sortable
 
     public function scopeActive($query)
     {
-        return $query->where('status', ProductStatus::ACTIVE)->where('stock_status', ProductStockStatus::IN_STOCK);
+        return $query->where('status', ProductStatus::ACTIVE);
     }
 
     public function scopeIsAvailable($query)
@@ -214,7 +214,6 @@ class Product extends Model implements HasMedia, Sortable
                 return null;
             }
 
-            return;
             if ($product->variations()->exists()) {
                 $product->variations()->with('variations')->each(function (ProductVariation $variation) use ($product) {
                     $price = $product->price;
@@ -236,27 +235,6 @@ class Product extends Model implements HasMedia, Sortable
                 });
             }
 
-            if (! $product->variations()->exists()) {
-                $variations = VariationValue::all();
-                $variations->each(function (VariationValue $variation) use ($product) {
-                    $price = $product->price;
-                    if ($product->price === 0) {
-                        return;
-                    }
-                    if ($variation->getTranslation('value', 'sr') === '50g') {
-                        $price = $product->price * 0.5;
-                    }
-                    if ($variation->getTranslation('value', 'sr') === '250g') {
-                        $price = $product->price * 2.5;
-                    }
-                    $product->variations()->create([
-                        'sku' => $product->sku,
-                        'price' => $price,
-                        'stock' => $product->stock,
-                        'stock_status' => $product->stock_status,
-                    ])->variations()->attach($variation);
-                });
-            }
         });
 
         static::saving(function (Product $product) {

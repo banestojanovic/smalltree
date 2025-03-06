@@ -109,7 +109,12 @@ const CheckoutIndex = () => {
                     {/*)}*/}
 
                     {paymentData && (
-                        <form ref={paymentForm} action={import.meta.env.VITE_NESTPAY_MERCHANT_3DGATE_URL} method="POST" className="hidden">
+                        <form
+                            ref={paymentForm}
+                            action={global?.env === 'production' ? import.meta.env.VITE_NESTPAY_MERCHANT_3DGATE_URL_PRODUCTION : import.meta.env.VITE_NESTPAY_MERCHANT_3DGATE_URL}
+                            method="POST"
+                            className="hidden"
+                        >
                             {Object.entries(paymentData).map(([key, value]) => (
                                 <input key={key} type="text" name={key} value={value ?? ''} readOnly={true} />
                             ))}

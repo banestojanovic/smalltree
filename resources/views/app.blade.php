@@ -37,6 +37,22 @@
     {{--        <script src="https://cdn.jsdelivr.net/gh/underground-works/clockwork-browser@1/dist/toolbar.js"></script>--}}
     {{--    @endif--}}
 
+    @if (app()->environment('production'))
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3DKLL8WDC"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+
+            gtag('config', 'G-B3DKLL8WDC');
+        </script>
+    @endif
+
     <!-- Scripts -->
     @routes
     @viteReactRefresh

@@ -59,92 +59,102 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                         </motion.div>
                     </Typography>
 
-                    {product?.grouped_variations && (
-                        <div className="mt-10">
-                            <ToggleGroup variant="outline" type="single" className="justify-start" value={selectedVariation ?? undefined} onValueChange={(value) => setSelectedVariation(value)}>
-                                {Object.keys(product?.grouped_variations ?? {}).map((group) => (
-                                    <div key={group} className={'flex flex-col flex-wrap space-y-1'}>
-                                        <div className={'flex gap-2'}>
-                                            {product?.grouped_variations[group].map((variation: App.Data.VariationValueData, index: number) => (
-                                                <motion.div
-                                                    key={variation.id}
-                                                    initial={{ x: 50 }}
-                                                    whileInView={{ x: 0 }}
-                                                    whileTap={{ scale: 0.95 }}
-                                                    transition={{ type: 'spring', duration: (index + 1) / 3 }}
-                                                    viewport={{ once: true }}
-                                                >
-                                                    <ToggleGroupItem variant="default" value={variation.id.toString()} aria-label="Toggle bold">
-                                                        {variation.value}
-                                                    </ToggleGroupItem>
-                                                </motion.div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))}
-                            </ToggleGroup>
-                        </div>
+                    {product?.stock_status === 1 && (
+                        <>
+                            {product?.grouped_variations && (
+                                <div className="mt-10">
+                                    <ToggleGroup
+                                        variant="outline"
+                                        type="single"
+                                        className="justify-start"
+                                        value={selectedVariation ?? undefined}
+                                        onValueChange={(value) => setSelectedVariation(value)}
+                                    >
+                                        {Object.keys(product?.grouped_variations ?? {}).map((group) => (
+                                            <div key={group} className={'flex flex-col flex-wrap space-y-1'}>
+                                                <div className={'flex gap-2'}>
+                                                    {product?.grouped_variations[group].map((variation: App.Data.VariationValueData, index: number) => (
+                                                        <motion.div
+                                                            key={variation.id}
+                                                            initial={{ x: 50 }}
+                                                            whileInView={{ x: 0 }}
+                                                            whileTap={{ scale: 0.95 }}
+                                                            transition={{ type: 'spring', duration: (index + 1) / 3 }}
+                                                            viewport={{ once: true }}
+                                                        >
+                                                            <ToggleGroupItem variant="default" value={variation.id.toString()} aria-label="Toggle bold">
+                                                                {variation.value}
+                                                            </ToggleGroupItem>
+                                                        </motion.div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </ToggleGroup>
+                                </div>
+                            )}
+
+                            <div className="mt-10 flex gap-2 md:gap-5 lg:items-center">
+                                <div className="flex items-center gap-3 md:gap-x-5">
+                                    <motion.div
+                                        initial={{ x: 50 }}
+                                        whileInView={{ x: 0 }}
+                                        whileTap={{ scale: itemQuantity <= 1 ? 1 : 0.95 }}
+                                        transition={{ type: 'spring', duration: 0.2 }}
+                                        viewport={{ once: true }}
+                                    >
+                                        <Button
+                                            type="button"
+                                            variant="outlined-white"
+                                            className={`h-11 px-3`}
+                                            disabled={itemQuantity <= 1}
+                                            onClick={() => {
+                                                setItemQuantity((q) => (q > 1 ? q - 1 : q));
+                                            }}
+                                        >
+                                            <Minus />
+                                        </Button>
+                                    </motion.div>
+                                    <motion.span className="text-2xl font-semibold" initial={{ x: 50 }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.3 }} viewport={{ once: true }}>
+                                        {itemQuantity}
+                                    </motion.span>
+                                    <motion.div
+                                        initial={{ x: 50 }}
+                                        whileInView={{ x: 0 }}
+                                        whileTap={{ scale: itemQuantity >= (product?.stock ?? 99) ? 1 : 0.95 }}
+                                        transition={{ type: 'spring', duration: 0.4 }}
+                                        viewport={{ once: true }}
+                                    >
+                                        <Button
+                                            type="button"
+                                            variant="outlined-white"
+                                            disabled={itemQuantity >= (product?.stock ?? 99)}
+                                            className={`h-11 px-3`}
+                                            onClick={() => {
+                                                setItemQuantity((q) => q + 1);
+                                            }}
+                                        >
+                                            <Plus />
+                                        </Button>
+                                    </motion.div>
+                                </div>
+
+                                <motion.div initial={{ x: 50 }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.5 }} viewport={{ once: true }}>
+                                    <AddToCartButton
+                                        product={product}
+                                        productVariantId={selectedVariation}
+                                        quantity={itemQuantity}
+                                        disabled={Object.keys(product?.variations ?? [])?.length > 0 && !selectedVariation}
+                                        variant={`default`}
+                                        className="flex h-11 items-center justify-center px-4 text-xs uppercase sm:text-base"
+                                        iconClass={`!sm:size-5 shrink-0 fill-white`}
+                                        size={`lg`}
+                                        label={t('product.add_to_cart')}
+                                    />
+                                </motion.div>
+                            </div>
+                        </>
                     )}
-
-                    <div className="mt-10 flex gap-2 md:gap-5 lg:items-center">
-                        <div className="flex items-center gap-3 md:gap-x-5">
-                            <motion.div
-                                initial={{ x: 50 }}
-                                whileInView={{ x: 0 }}
-                                whileTap={{ scale: itemQuantity <= 1 ? 1 : 0.95 }}
-                                transition={{ type: 'spring', duration: 0.2 }}
-                                viewport={{ once: true }}
-                            >
-                                <Button
-                                    type="button"
-                                    variant="outlined-white"
-                                    className={`h-11 px-3`}
-                                    disabled={itemQuantity <= 1}
-                                    onClick={() => {
-                                        setItemQuantity((q) => (q > 1 ? q - 1 : q));
-                                    }}
-                                >
-                                    <Minus />
-                                </Button>
-                            </motion.div>
-                            <motion.span className="text-2xl font-semibold" initial={{ x: 50 }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.3 }} viewport={{ once: true }}>
-                                {itemQuantity}
-                            </motion.span>
-                            <motion.div
-                                initial={{ x: 50 }}
-                                whileInView={{ x: 0 }}
-                                whileTap={{ scale: itemQuantity >= (product?.stock ?? 99) ? 1 : 0.95 }}
-                                transition={{ type: 'spring', duration: 0.4 }}
-                                viewport={{ once: true }}
-                            >
-                                <Button
-                                    type="button"
-                                    variant="outlined-white"
-                                    disabled={itemQuantity >= (product?.stock ?? 99)}
-                                    className={`h-11 px-3`}
-                                    onClick={() => {
-                                        setItemQuantity((q) => q + 1);
-                                    }}
-                                >
-                                    <Plus />
-                                </Button>
-                            </motion.div>
-                        </div>
-
-                        <motion.div initial={{ x: 50 }} whileInView={{ x: 0 }} transition={{ type: 'spring', duration: 0.5 }} viewport={{ once: true }}>
-                            <AddToCartButton
-                                product={product}
-                                productVariantId={selectedVariation}
-                                quantity={itemQuantity}
-                                disabled={Object.keys(product?.variations ?? [])?.length > 0 && !selectedVariation}
-                                variant={`default`}
-                                className="flex h-11 items-center justify-center px-4 text-xs uppercase sm:text-base"
-                                iconClass={`!sm:size-5 shrink-0 fill-white`}
-                                size={`lg`}
-                                label={t('product.add_to_cart')}
-                            />
-                        </motion.div>
-                    </div>
 
                     <Typography as="p" className="my-16 flex items-center gap-x-2">
                         <motion.span initial={{ y: 50 }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.2 }} viewport={{ once: true }}>

@@ -40,6 +40,10 @@ Route::get('/{type}', [\App\Http\Controllers\SearchController::class, 'search'])
     ->where('type', 'cajevi|pribor|dodaci|ostalo')
     ->name('search.type');
 
+Route::get('/{custom}', [\App\Http\Controllers\SearchController::class, 'search'])
+    ->where('custom', 'smalltree-preporuka|najpopularniji|na-akciji')
+    ->name('search.custom');
+
 if (Schema::hasTable('pages')) {
     \App\Models\Page::all()->each(function ($page) {
         Route::get($page->slug, [\App\Http\Controllers\PageController::class, 'show'])->name('pages.show');

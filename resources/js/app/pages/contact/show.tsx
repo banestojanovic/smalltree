@@ -74,7 +74,7 @@ const ContactUsPage = () => {
                         shop={{
                             name: 'Salon De The',
                             address: 'Svetog Save 12, Beograd',
-                            data: [{ phone: '063 40 46 96' }, { email: 'office@smalltree.rs' }, { working_hours: '10 – 22 h' }, { saturday: '09 - 16 h' }, { sunday: 'Neradni dan' }],
+                            data: [{ phone: '011 382 04 66' }, { email: 'salon.de.the.beograd@gmail.com' }, { working_hours: '9 – 21 h' }, { saturday: '09 - 16 h' }, { sunday: 'Neradni dan' }],
                             img: '/storage/site/locations/location-1.png',
                             latitude: '44.8014506981761',
                             longitude: '20.467196357670886',
@@ -97,7 +97,7 @@ const ContactUsPage = () => {
                     />
                     <ShopAddressCard
                         shop={{
-                            name: 'Veleprodaja - Small Tree DOO',
+                            name: 'Sedište firme - Small Tree DOO',
                             address: 'Jurija Gagarina 115/111, 11070 Beograd, Novi Beograd',
                             data: [
                                 { mb: '20662999' },

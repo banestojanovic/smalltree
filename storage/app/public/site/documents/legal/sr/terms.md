@@ -46,9 +46,10 @@ Obavezujemo se da poštujemo zakon R. Srbije i da vaše lične podatke nećemo k
 
 ### Dostava
 
-Isporuku poručenih proizvoda vrši kurirska služba post express-a sa kojom imamo višegodišnju saradnju. Sve cene su
-izražene sa PDV-om. Isporuku poručenih proizvoda možete očekivati u roku od 48h od trenutka porudžbine. Sve porudžbine
-primljene do 12h biće poslate istog dana. Za teritoriju Beograda isporuka za porudžbine do 12h je danas za sutra.
+Dostava se vrši kuririskim službama dexpress i GLS po njihovom trenutno važećem cenovniku.
+Ukoliko iz nekog razloga želite da vam paket isporučimo nekom drugom službom, molimo Vas da nas o tome obavestite.
+
+[Cenovnik Dexpress usluga](https://www.dexpress.rs/rs/cenovnik)
 
 Porudžbine koje primimo u petak posle 12h biće poslate u subotu. Sve ostale porudžbine će sačekati ponedeljak. Za
 porudžbine koje primimo u vreme državnih praznika, ne možemo garantovati gore navedene rokove isporuke, zbog veće

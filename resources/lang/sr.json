@@ -10,6 +10,7 @@
         },
         "product": {
             "status": {
+                "title": "Status",
                 "inactive": "Neaktivno",
                 "active": "Aktivno",
                 "draft": "Nacrt",
@@ -95,7 +96,7 @@
     },
     "homepage": {
         "hero": {
-            "action": "Pogledajte promocije"
+            "action": "Čajevi meseca"
         },
         "promotions": {
             "tea_of_the_month": "Čaj meseca",
@@ -136,6 +137,7 @@
     },
     "product": {
         "add_to_cart": "Dodaj u korpu",
+        "out_of_stock": "Nema na stanju",
         "no_products_available": "Nema dostupnih proizvoda",
         "variations": "Varijacije",
         "free_shipping_over": "Besplatna dostava za porudžbine preko",
