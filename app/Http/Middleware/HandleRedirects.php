@@ -19,6 +19,8 @@ class HandleRedirects
         $path = trim($request->url(), '/');
         $redirect = DB::table('redirects')->where('old_slug', $path)->first();
 
+        info($path);
+
         if ($redirect) {
             return redirect($redirect->new_url, 301);
         }
