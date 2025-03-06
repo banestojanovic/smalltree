@@ -65,6 +65,7 @@ class ProductResource extends Resource
                             ->required()
                             ->options(ProductStockStatus::class)
                             ->default(1),
+                        Forms\Components\DateTimePicker::make('created_at'),
                     ]),
                 ])->columnSpan(['lg' => 2]),
 
