@@ -4,11 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Data\ProductData;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     public function show($slug)
     {
+        $path = trim(request()->url(), '/');
+        $redirect = DB::table('redirects')->where('old_slug', $path)->first();
+
+        if ($redirect) {
+            return redirect($redirect->new_url, 301);
+        }
+
         $product = ProductData::from(Product::query()
             ->with(['variations.discount', 'photos', 'discount', 'cover', 'categories', 'productTags', 'attributes.attribute'])
             ->active()

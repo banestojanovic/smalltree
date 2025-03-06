@@ -17,7 +17,6 @@ class HandleRedirects
     public function handle(Request $request, Closure $next): Response
     {
         $path = trim($request->url(), '/');
-        info($path);
         $redirect = DB::table('redirects')->where('old_slug', $path)->first();
 
         if ($redirect) {
