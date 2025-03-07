@@ -31,7 +31,7 @@ class OrderCreatedListener
         if ($order->status === OrderStatus::PAID || $order->status === OrderStatus::CREATED) {
             $order->load('user', 'shippingAddress', 'items.product.cover');
             Mail::to($order->user->email)->send(new NewOrder(order: OrderData::optional($order)));
-            Mail::to('office@smalltree.rs')->send(new NewOrderAdmin(order: OrderData::optional($order)));
+            Mail::to('salon.de.the.beograd@gmail.com')->send(new NewOrderAdmin(order: OrderData::optional($order)));
 
             $cart = (new Cart)->getCart();
             if ($cart) {
