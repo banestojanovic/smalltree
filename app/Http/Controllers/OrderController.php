@@ -24,6 +24,13 @@ class OrderController extends Controller
             'postal_code' => 'required',
             'payment_method' => 'required|integer',
             'terms' => 'required|accepted',
+            'phone' => [
+                'required',
+                'regex:/^\+?[0-9\s\-]{7,15}$/', // Simple phone number check
+            ],
+        ], [
+            'phone.required' => 'Broj telefona je obavezan.',
+            'phone.regex' => 'Unesite važeći broj telefona (npr. +381601234567 ili 0601234567).',
         ]);
 
         if ($validation->fails()) {

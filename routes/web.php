@@ -2,6 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 
+// redirects.
+Route::get('/{page}', function () {
+    return redirect('/', 301);
+})->where('page', 'en|on-line-prodavnica');
+Route::get('/product-category/cajevi/matcha', function () {
+    return to_route('categories.show', ['category' => 'matcha'], 301);
+});
+Route::get('/product-category/cajevi', function () {
+    return to_route('search.type', ['type' => 'cajevi'], 301);
+});
+
+// default.
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
 Route::get('/pretraga', [\App\Http\Controllers\SearchController::class, 'search'])->name('search.show');

@@ -28,7 +28,7 @@ class NewOrderAdmin extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('mails.orders.created.admin_subject'),
+            subject: __('mails.orders.created.admin_subject').' #'.$this->order->id,
         );
     }
 
