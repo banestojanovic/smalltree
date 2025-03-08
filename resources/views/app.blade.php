@@ -3,8 +3,28 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="robots" content="index, follow">
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
+
+    @if(!in_array(\Illuminate\Support\Facades\Route::currentRouteName(), ['products.show', 'categoies.show', 'search.show', 'search.custom']))
+        <meta name="keywords"
+              content="prodaja čajeva, čaj online, prodavnica čaja Beograd, vrhunski čajevi, čaj Srbija, Small Tree čajevi, kupovina čaja, čajevi, čajevi online, čajevi Beograd, čajevi Srbija, čajevi za kupovinu, čajevi za prodaju, čajevi za ispijanje, čajevi za uživanje, čajevi za kupovinu online, čajevi za prodaju online, čajevi za ispijanje online, čajevi za uživanje online">
+        <meta name="description"
+              content="Small Tree - prodavnica čajeva u Beogradu, Srbija. Kupite vrhunske čajeve online ili posetite naš shop za jedinstveno iskustvo ispijanja čaja.">
+        <meta property="og:title" content="Small Tree - Prodaja čajeva">
+        <meta property="og:description"
+              content="Otkrijte vrhunske čajeve u Small Tree prodavnici u Beogradu ili naručite online!">
+        <meta property="og:image" content="{{ asset('storage/site/brand/smalltree_logo.png') }}">
+        <meta property="og:url" content="https://smalltree.rs">
+        <meta property="og:type" content="website">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Small Tree - Prodavnica čajeva u Beogradu">
+        <meta name="twitter:description" content="Kupite vrhunske čajeve online ili nas posetite u Beogradu!">
+        <meta name="twitter:image" content="{{ asset('storage/site/brand/smalltree_logo.png') }}">
+        <link rel="canonical" href="https://smalltree.rs">
+    @endif
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

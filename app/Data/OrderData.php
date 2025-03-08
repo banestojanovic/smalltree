@@ -36,6 +36,8 @@ class OrderData extends Data
         #[DataCollectionOf(OrderItemData::class)]
         public ?Collection $items,
         public ?PaymentData $payment,
+        public ?array $cart,
+        public ?array $data,
     ) {
         $this->date_created = $created_at?->format('D, M d, Y');
         $this->payment_method_label = $payment_method->getLabel();

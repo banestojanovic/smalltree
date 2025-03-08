@@ -108,9 +108,9 @@ const ContactUsPage = () => {
                                 { phone2: '063 404 905' },
                                 { phone3: '063 711 91 91' },
                             ],
-                            img: '/storage/site/locations/location-3.png',
-                            latitude: '44.80215996074898',
-                            longitude: '20.391877369714173',
+                            img: '',
+                            latitude: '',
+                            longitude: '',
                         }}
                     />
                 </div>
@@ -229,7 +229,7 @@ const ShopAddressCard = ({ shop }: ShopAddressCardProps) => {
     return (
         <motion.div initial={{ y: 50 }} animate={{ y: 0 }} transition={{ type: 'spring', duration: 0.3, delay: 0.2 }} viewport={{ once: true }}>
             <Card className={`p-0`}>
-                <img className="h-60 w-full rounded-lg object-cover p-2 sm:h-72" src={shop.img} alt="shop map" />
+                {shop?.img && <img className="h-60 w-full rounded-lg object-cover p-2 sm:h-72" src={shop.img} alt="shop map" />}
 
                 <CardContent className={`p-6`}>
                     <CardHeader className={`p-0`}>
@@ -269,55 +269,57 @@ const ShopAddressCard = ({ shop }: ShopAddressCardProps) => {
                         )}
                     </div>
 
-                    <Dialog>
-                        <DialogTrigger asChild>
-                            <CardFooter className="mt-4 flex p-0">
-                                <Button variant="link" className="font-title px-0 text-base underline">
-                                    {t('contact.data.see_directions')}
-                                </Button>
-                            </CardFooter>
-                        </DialogTrigger>
+                    {shop?.latitude && shop?.longitude && (
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <CardFooter className="mt-4 flex p-0">
+                                    <Button variant="link" className="font-title px-0 text-base underline">
+                                        {t('contact.data.see_directions')}
+                                    </Button>
+                                </CardFooter>
+                            </DialogTrigger>
 
-                        <DialogContent>
-                            <DialogHeader>
-                                <DialogTitle>{shop.address}</DialogTitle>
-                                <DialogDescription className={`flex items-center space-x-1`}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                                        <path d="M426.92-187.54v-221.67l54.46-155.56q2.7-4.85 6.43-7.73 3.73-2.88 11.57-2.88h285.85q6.72 0 11.51 2.88 4.8 2.88 6.49 7.73l54.46 155.56v221.67q0 7.1-4.83 11.93-4.84 4.84-11.94 4.84h-6.46q-7.09 0-11.93-4.84-4.84-4.83-4.84-11.93v-50.92H466.92v50.92q0 7.1-4.83 11.93-4.84 4.84-11.94 4.84h-6.46q-7.09 0-11.93-4.84-4.84-4.83-4.84-11.93Zm49.23-254h332.31L774.31-540h-264l-34.16 98.46Zm-13.84 35.39v132.3-132.3Zm63.07 98.46q15.04 0 25.22-10.18 10.17-10.17 10.17-25.21 0-15.04-10.17-25.21-10.18-10.17-25.22-10.17-15.03 0-25.21 10.17Q490-358.12 490-343.08q0 15.04 10.17 25.21 10.18 10.18 25.21 10.18Zm233.85 0q15.04 0 25.21-10.18 10.18-10.17 10.18-25.21 0-15.04-10.18-25.21-10.17-10.17-25.21-10.17-15.04 0-25.21 10.17-10.17 10.17-10.17 25.21 0 15.04 10.17 25.21 10.17 10.18 25.21 10.18ZM182.31-180v-12.31L250-260q-56.15 0-101.92-24.62-45.77-24.61-45.77-75.38v-340q0-40.62 59.77-60.31Q221.85-780 342.31-780q121.84 0 180.92 19.46 59.08 19.46 59.08 60.54v53.85h-40V-700h-400v280h213.84v240H182.31Zm20-144.62q15.04 0 25.21-10.17 10.17-10.17 10.17-25.21 0-15.04-10.17-25.21-10.17-10.17-25.21-10.17-15.04 0-25.21 10.17-10.18 10.17-10.18 25.21 0 15.04 10.18 25.21 10.17 10.17 25.21 10.17Zm260 50.77h360v-132.3h-360v132.3Z" />
-                                    </svg>
-                                    <a
-                                        href={shop?.direction ? shop.direction : `https://www.google.com/maps/place/${parseFloat(shop.latitude)},${parseFloat(shop.longitude)}`}
-                                        target={`_blank`}
-                                        rel={`noreferrer`}
-                                        className={`underline`}
-                                    >
-                                        {t('footer.see_directions')}
-                                    </a>
-                                </DialogDescription>
-                            </DialogHeader>
-                            <div className={`h-72 w-full`}>
-                                <APIProvider apiKey={`AIzaSyAvcVTi-sOrkQdEOJ-QIazagXeiBLc6gU4`}>
-                                    <Map
-                                        className={`size-full`}
-                                        defaultCenter={{
-                                            lat: parseFloat(shop.latitude),
-                                            lng: parseFloat(shop.longitude),
-                                        }}
-                                        defaultZoom={14}
-                                        gestureHandling={'greedy'}
-                                        disableDefaultUI={true}
-                                    >
-                                        <Marker
-                                            position={{
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>{shop.address}</DialogTitle>
+                                    <DialogDescription className={`flex items-center space-x-1`}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                            <path d="M426.92-187.54v-221.67l54.46-155.56q2.7-4.85 6.43-7.73 3.73-2.88 11.57-2.88h285.85q6.72 0 11.51 2.88 4.8 2.88 6.49 7.73l54.46 155.56v221.67q0 7.1-4.83 11.93-4.84 4.84-11.94 4.84h-6.46q-7.09 0-11.93-4.84-4.84-4.83-4.84-11.93v-50.92H466.92v50.92q0 7.1-4.83 11.93-4.84 4.84-11.94 4.84h-6.46q-7.09 0-11.93-4.84-4.84-4.83-4.84-11.93Zm49.23-254h332.31L774.31-540h-264l-34.16 98.46Zm-13.84 35.39v132.3-132.3Zm63.07 98.46q15.04 0 25.22-10.18 10.17-10.17 10.17-25.21 0-15.04-10.17-25.21-10.18-10.17-25.22-10.17-15.03 0-25.21 10.17Q490-358.12 490-343.08q0 15.04 10.17 25.21 10.18 10.18 25.21 10.18Zm233.85 0q15.04 0 25.21-10.18 10.18-10.17 10.18-25.21 0-15.04-10.18-25.21-10.17-10.17-25.21-10.17-15.04 0-25.21 10.17-10.17 10.17-10.17 25.21 0 15.04 10.17 25.21 10.17 10.18 25.21 10.18ZM182.31-180v-12.31L250-260q-56.15 0-101.92-24.62-45.77-24.61-45.77-75.38v-340q0-40.62 59.77-60.31Q221.85-780 342.31-780q121.84 0 180.92 19.46 59.08 19.46 59.08 60.54v53.85h-40V-700h-400v280h213.84v240H182.31Zm20-144.62q15.04 0 25.21-10.17 10.17-10.17 10.17-25.21 0-15.04-10.17-25.21-10.17-10.17-25.21-10.17-15.04 0-25.21 10.17-10.18 10.17-10.18 25.21 0 15.04 10.18 25.21 10.17 10.17 25.21 10.17Zm260 50.77h360v-132.3h-360v132.3Z" />
+                                        </svg>
+                                        <a
+                                            href={shop?.direction ? shop.direction : `https://www.google.com/maps/place/${parseFloat(shop.latitude)},${parseFloat(shop.longitude)}`}
+                                            target={`_blank`}
+                                            rel={`noreferrer`}
+                                            className={`underline`}
+                                        >
+                                            {t('footer.see_directions')}
+                                        </a>
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className={`h-72 w-full`}>
+                                    <APIProvider apiKey={`AIzaSyAvcVTi-sOrkQdEOJ-QIazagXeiBLc6gU4`}>
+                                        <Map
+                                            className={`size-full`}
+                                            defaultCenter={{
                                                 lat: parseFloat(shop.latitude),
                                                 lng: parseFloat(shop.longitude),
                                             }}
-                                        />
-                                    </Map>
-                                </APIProvider>
-                            </div>
-                        </DialogContent>
-                    </Dialog>
+                                            defaultZoom={14}
+                                            gestureHandling={'greedy'}
+                                            disableDefaultUI={true}
+                                        >
+                                            <Marker
+                                                position={{
+                                                    lat: parseFloat(shop.latitude),
+                                                    lng: parseFloat(shop.longitude),
+                                                }}
+                                            />
+                                        </Map>
+                                    </APIProvider>
+                                </div>
+                            </DialogContent>
+                        </Dialog>
+                    )}
                 </CardContent>
             </Card>
         </motion.div>

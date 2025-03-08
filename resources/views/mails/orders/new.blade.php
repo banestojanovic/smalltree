@@ -70,6 +70,14 @@
                                                                 {{ $order->shipping_address->phone }}
                                                                 <br />
                                                                 {{ $order->user->email }}
+                                                                @if($order->data['note'])
+                                                                    <br />
+                                                                    <strong
+                                                                        style="color: #282828; paddint-top: 6px;">{{ __('mails.orders.created.note') }}
+                                                                        :</strong>
+                                                                    <br />
+                                                                    {{ $order->data['note'] }}
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -112,7 +120,7 @@
                                         </table>
                                     </td>
                                 </tr>
-                                @foreach($order->items as $item)
+                                @foreach($order->items as $key => $item)
                                     <tr>
                                         <td class="pb-30" style="padding-bottom: 30px;">
                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -126,7 +134,7 @@
                                                                     href="{{ route('products.show', ['slug' => $item->product->slug]) }}"
                                                                     target="_blank"><img
                                                                         src="{{ $item->product->cover->original_url }}"
-                                                                        border="0" height="120"
+                                                                        border="0" width="110" height="100%"
                                                                         alt="" /></a>
                                                             </div>
                                                         </th>
@@ -145,6 +153,11 @@
                                                             <tr>
                                                                 <td class="text-16 lh-26 c-black"
                                                                     style="font-size:16px; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 26px; color:#282828;">
+                                                                    @if(!empty($order->cart['products'][$key]['variation']))
+                                                                        <strong>{{$order->cart['products'][$key]['variation']['variation']['name']}}
+                                                                            :</strong> {{ $order->cart['products'][$key]['variation']['value']  }}
+                                                                        <br />
+                                                                    @endif
                                                                     @if($item->price !== $item->real_price)
                                                                         <strong>{{ __('mails.orders.created.price_per_piece') }}
                                                                             :</strong>
@@ -276,7 +289,8 @@
                                                                                 style="font-size:0pt; line-height:0pt; text-align:left;"></td>
                                                                             <td class="title-20 lh-30 mt-right"
                                                                                 style="font-size:16px; padding-left: 10px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; line-height: 30px;">
-                                                                                {{ number_format($order->discount, 2) }}rsd
+                                                                                {{ number_format($order->discount, 2) }}
+                                                                                rsd
                                                                             </td>
                                                                         </tr>
                                                                     @endif

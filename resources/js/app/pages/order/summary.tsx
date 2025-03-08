@@ -47,7 +47,7 @@ const OrderSummaryPage = ({ order }: { order: App.Data.OrderData }) => {
 
                             <h3 className="sr-only">{t('order.summary.products')}</h3>
                             {order?.items?.map(
-                                (item) =>
+                                (item, index) =>
                                     item?.product && (
                                         <div key={item.id} className="flex space-x-6 py-10">
                                             {item?.product?.cover?.original_url && (
@@ -66,6 +66,15 @@ const OrderSummaryPage = ({ order }: { order: App.Data.OrderData }) => {
                                                 </div>
                                                 <div className="mt-6 flex flex-1 items-end">
                                                     <dl className="xxs:flex-row xxs:divide-x flex flex-col gap-1 space-x-1 text-sm sm:space-x-4">
+                                                        {/* @ts-expect-error TS2339: Property 'products' does not exist on type 'any[]' */}
+                                                        {order?.cart?.products?.[index]?.variation && (
+                                                            <div className="xxs:pr-2 flex sm:pr-6">
+                                                                {/* @ts-expect-error TS2339: Property 'products' does not exist on type 'any[]' */}
+                                                                <dt className="font-medium">{order?.cart?.products?.[index]?.variation?.variation?.name}:</dt>
+                                                                {/* @ts-expect-error TS2339: Property 'products' does not exist on type 'any[]' */}
+                                                                <dd className="ml-2">{order?.cart?.products?.[index]?.variation?.value}</dd>
+                                                            </div>
+                                                        )}
                                                         <div className="xxs:pr-2 flex sm:pr-6">
                                                             <dt className="font-medium">{t('order.summary.quantity')}:</dt>
                                                             <dd className="ml-2">{item.quantity}</dd>

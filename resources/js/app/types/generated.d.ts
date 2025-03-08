@@ -129,6 +129,8 @@ shipping_address: App.Data.AddressData | null;
 user: App.Data.UserData | null;
 items: Array<App.Data.OrderItemData> | null;
 payment: App.Data.PaymentData | null;
+cart: Array<any> | null;
+data: Array<any> | null;
 };
 export type OrderItemData = {
 id: number;

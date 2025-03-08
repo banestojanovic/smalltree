@@ -45,6 +45,7 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->when(auth()->user()->role !== UserRole::SUPER_ADMIN, fn ($q) => $q->whereNot('role', UserRole::SUPER_ADMIN)))
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),

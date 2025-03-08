@@ -55,7 +55,11 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
 
                     <Typography as="div" className="mt-6 font-bold sm:text-2xl">
                         <motion.div initial={{ y: 50 }} animate={{ y: 0 }} transition={{ type: 'spring', duration: 0.6 }} viewport={{ once: true }}>
-                            <ProductPrice variant={'single'} price={matchingVariation?.price ?? product.price ?? 0} discountPrice={matchingVariation?.discount?.price ?? null} />
+                            <ProductPrice
+                                variant={'single'}
+                                price={matchingVariation?.price ?? product.price ?? 0}
+                                discountPrice={matchingVariation?.discount?.price ?? product?.discount?.price ?? null}
+                            />
                         </motion.div>
                     </Typography>
 
