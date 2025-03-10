@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\CartStatus;
 use App\Data\OrderData;
 use App\Mail\NewOrder;
+use App\Mail\NewOrderAdmin;
 use App\Mail\PaymentAttempted;
 use App\Models\Cart;
 use App\Models\Order;
@@ -36,6 +37,7 @@ class NestpayEventsSubscriber
 
         Mail::to($order->user->email)->send(new PaymentAttempted(payment: $payment));
         Mail::to($order->user->email)->send(new NewOrder(order: OrderData::optional($order)));
+        Mail::to('salon.de.the.beograd@gmail.com')->send(new NewOrderAdmin(order: OrderData::optional($order)));
     }
 
     /**

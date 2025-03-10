@@ -352,18 +352,18 @@
                                                                 style="font-size:14px; font-family:'PT Sans', Arial, sans-serif; min-width:auto !important; line-height: 24px; text-align:center; color:#000000; padding-bottom: 20px;">
                                                                 Svetog Save 12, 11000, Beograd
                                                                 <br />
-                                                                <a href="tel:+38163404696" target="_blank"
+                                                                <a href="tel:+3810113820466" target="_blank"
                                                                    class="link c-white"
                                                                    style="text-decoration:none; color:#000000;"><span
                                                                         class="link c-black"
-                                                                        style="text-decoration:none; color:#000000;">063 40 46 96</span></a>
+                                                                        style="text-decoration:none; color:#000000;">011 382 04 66</span></a>
                                                                 <br />
-                                                                <a href="mailto:office@smalltree.rs" target="_blank"
+                                                                <a href="mailto:salon.de.the.beograd@gmail.com" target="_blank"
                                                                    class="link c-white"
                                                                    style="text-decoration:none; color:#000000;"><span
                                                                         class="link c-white"
-                                                                        style="text-decoration:none; color:#000000;">office@smalltree.rs</span></a>
-                                                                - <a href="https://flpshop.rs" target="_blank"
+                                                                        style="text-decoration:none; color:#000000;">salon.de.the.beograd@gmail.com</span></a>
+                                                                - <a href="https://smalltree.rs" target="_blank"
                                                                      class="link c-white"
                                                                      style="text-decoration:none; color:#000000;"><span
                                                                         class="link c-white"
