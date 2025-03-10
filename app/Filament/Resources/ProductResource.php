@@ -6,6 +6,7 @@ use App\Filament\Resources\DiscountRelationManagerResource\RelationManagers\Disc
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductVariationResource\RelationManagers\ProductVariationsRelationManager;
 use App\Models\Attribute;
+use App\Models\Category;
 use App\Models\Product;
 use App\ProductStatus;
 use App\ProductStockStatus;
@@ -163,6 +164,7 @@ class ProductResource extends Resource
                 return null;
             })
             ->reorderable('order_column')
+            ->defaultSort('order_column')
             ->columns([
                 Tables\Columns\ImageColumn::make('cover.original_url')->circular(),
                 Tables\Columns\TextColumn::make('on_discount')
@@ -229,6 +231,17 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                Tables\Filters\SelectFilter::make('categories')
+                    ->label('Kategorije')
+                    ->options(fn () => Category::query()->whereNull('parent_id')->pluck('name', 'id')->toArray())
+                    ->placeholder('Sve kategorije')
+                    ->query(function ($query, $state) {
+                        if ($state['values']) {
+                            $query->whereHas('categories', fn ($query) => $query->whereIn('categories.id', (array) $state['values']));
+                        }
+                    })
+                    ->multiple()
+                    ->default(null),
                 Tables\Filters\TernaryFilter::make('has_active_discount')
                     ->label('Aktivni popust')
                     ->trueLabel('Samo sa popustom')
