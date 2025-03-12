@@ -70,14 +70,6 @@
                                                                 {{ $order->shipping_address->phone }}
                                                                 <br />
                                                                 {{ $order->user->email }}
-                                                                @if($order->data['note'])
-                                                                    <br />
-                                                                    <strong
-                                                                        style="color: #282828; paddint-top: 6px;">{{ __('mails.orders.created.note') }}
-                                                                        :</strong>
-                                                                    <br />
-                                                                    {{ $order->data['note'] }}
-                                                                @endif
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -204,6 +196,48 @@
                                         </table>
                                     </td>
                                 </tr>
+                                @if($order->data['note'])
+                                    <tr>
+                                        <td class="pb-30" style="padding-bottom: 30px;">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <th class="column-top" valign="top" width="120"
+                                                        style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top;">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="title-20 pb-10"
+                                                                    style="font-size:16px; line-height:24px; color:#282828; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important; padding-bottom: 10px;">
+                                                                    <strong
+                                                                        style="color: #282828; paddint-top: 6px;">{{ __('mails.orders.created.note') }}
+                                                                        :</strong>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-16"
+                                                                    style="font-size:16px; line-height:16px; color:#6e6e6e; font-family:'PT Sans', Arial, sans-serif; text-align:left; min-width:auto !important;">
+                                                                    {{ $order->data['note'] }}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </th>
+                                                    <th class="column-top mpb-15" valign="top" width="30"
+                                                        style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top;"></th>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pt-10 pb-40" style="padding-top: 10px; padding-bottom: 40px;">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td class="img" height="1" bgcolor="#ebebeb"
+                                                        style="font-size:0pt; line-height:0pt; text-align:left;">&nbsp;
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td class="pb-30" style="padding-bottom: 30px;">
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">

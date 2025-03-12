@@ -432,7 +432,7 @@
                 "price_per_piece": "Cena po komadu",
                 "quantity": "Količina",
                 "price": "Cena",
-                "note": "Komentar"
+                "note": "Napomena"
             },
             "paid": {
                 "subject": "Uspešno plaćanje",

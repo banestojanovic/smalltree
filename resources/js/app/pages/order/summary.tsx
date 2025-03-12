@@ -142,6 +142,17 @@ const OrderSummaryPage = ({ order }: { order: App.Data.OrderData }) => {
                                     </div>
                                 </dl>
 
+                                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                                {/*@ts-expect-error */}
+                                {order?.data?.note && (
+                                    <dl className="space-y-3 border-t border-gray-200 py-10 text-sm">
+                                        <dt className="font-medium">{t('mails.orders.created.note')}</dt>
+                                        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                                        {/*@ts-expect-error */}
+                                        <dd>{order.data.note}</dd>
+                                    </dl>
+                                )}
+
                                 <h3 className="sr-only">{t('order.summary.summary')}</h3>
 
                                 <dl className="space-y-6 border-t border-gray-200 pt-10 text-sm">
