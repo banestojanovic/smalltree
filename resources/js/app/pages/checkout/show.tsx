@@ -68,8 +68,10 @@ const CheckoutIndex = () => {
                     setPaymentData(response.props.payment.paymentData);
 
                     setTimeout(() => {
-                        paymentForm.current?.submit();
-                    });
+                        requestAnimationFrame(() => {
+                            paymentForm.current?.submit();
+                        });
+                    }, 10);
                 }
             },
             onError: () => {
