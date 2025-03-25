@@ -8,7 +8,11 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '../../ui/typography';
 
-const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) => {
+interface AdditionalProps {
+    isNew?: boolean;
+}
+
+const ProductCard = ({ product, additional }: { product: PageProps<App.Data.ProductData>; additional?: AdditionalProps }) => {
     const { t } = useTranslation();
 
     return (
@@ -18,7 +22,9 @@ const ProductCard = ({ product }: PageProps<{ product: App.Data.ProductData }>) 
                     {t('order.on_action')} {product?.discount?.percentage ? `${product.discount.percentage}%` : ''}
                 </span>
             )}
-            {product?.tag && <span className={`bg-ternary absolute top-2 rounded-md px-4 py-1.5 text-xs text-white ${product?.discount ? 'left-2' : 'right-2'}`}>{product.tag.name}</span>}
+            {(product?.tag || additional?.isNew) && (
+                <span className={`bg-ternary absolute top-2 rounded-md px-4 py-1.5 text-xs text-white ${product?.discount ? 'left-2' : 'right-2'}`}>{product?.tag?.name || t('labels.new')}</span>
+            )}
             {product?.stock_status === 0 && (
                 <span className={`bg-ternary absolute rounded-md px-4 py-1.5 text-xs text-white ${product?.discount ? 'left-2' : 'right-2'} ${product?.discount && product?.tag ? 'top-4' : 'top-2'}`}>
                     {t('product.out_of_stock')}

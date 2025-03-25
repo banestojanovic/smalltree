@@ -73,6 +73,25 @@ class PromotionSettingsPage extends SettingsPage
                             ->disk(Disk::Attachments)
                             ->columnSpanFull(),
                     ]),
+                    Forms\Components\Tabs\Tab::make('Novo')->schema([
+                        Forms\Components\TextInput::make('new_title.sr')
+                            ->label('Title'),
+                        Forms\Components\TextInput::make('new_subtitle.sr')
+                            ->label('Title'),
+                        Forms\Components\Select::make('new_products')
+                            ->label('Promoted Products')
+                            ->options(fn () => Product::all()->pluck('name', 'id')->toArray())
+                            ->multiple(),
+                        Forms\Components\FileUpload::make('new_bg_image')
+                            ->openable()
+                            ->reorderable()
+                            ->multiple()
+                            ->image()
+                            ->panelLayout('grid')
+                            ->appendFiles()
+                            ->disk(Disk::Attachments)
+                            ->columnSpanFull(),
+                    ]),
                     Forms\Components\Tabs\Tab::make('Promovisani pribor')->schema([
                         Forms\Components\Select::make('promoted_product_sets')
                             ->label('Pribor za čaj')

@@ -36,6 +36,9 @@ class SearchController extends Controller
 
         $ids = [];
         if (! empty(request('custom'))) {
+            if (request('custom') === 'novo') {
+                $ids = $promotion_settings->new_products;
+            }
             if (request('custom') === 'smalltree-preporuka') {
                 $ids = $promotion_settings->tea_of_the_month_products;
             }
@@ -140,6 +143,7 @@ class SearchController extends Controller
                 'description' => $description,
                 'slug' => request('category') ?? request('slug') ?? '',
                 'isCategory' => (bool) request('category'),
+                'isNew' => (bool) request('custom') == 'novo',
             ],
             'products' => $products,
             'variations' => $variations,

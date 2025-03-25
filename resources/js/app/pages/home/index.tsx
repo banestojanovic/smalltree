@@ -12,6 +12,7 @@ const Home = ({
     popularProducts,
     staffRecommendedProducts,
     teaSets,
+    newProducts,
     specialOffer,
     productOfTheMonth,
     hero,
@@ -19,6 +20,7 @@ const Home = ({
     popularProducts?: App.Data.ProductData[];
     staffRecommendedProducts?: App.Data.ProductData[];
     teaSets?: App.Data.ProductData[];
+    newProducts: { title: string; subtitle: string; image: string; products: App.Data.ProductData[] };
     specialOffer: { title: string; subtitle: string; image: string; products: App.Data.ProductData[] };
     productOfTheMonth: { title: string; subtitle: string; image: string; products: App.Data.ProductData[] };
     hero: { title: string; subtitle: string; image: string };
@@ -39,7 +41,7 @@ const Home = ({
                     link: route('search.type', { type: 'cajevi' }),
                 }}
             />
-            <Promotions specialOffer={specialOffer} productOfTheMonth={productOfTheMonth} />
+            <Promotions newProducts={newProducts} specialOffer={specialOffer} productOfTheMonth={productOfTheMonth} />
             <ProductsSection
                 products={staffRecommendedProducts}
                 title={t('homepage.sections.recommended.title')}

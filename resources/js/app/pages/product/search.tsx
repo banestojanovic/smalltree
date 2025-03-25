@@ -24,6 +24,7 @@ interface PageDataProps {
     description?: string;
     slug?: string;
     isCategory?: boolean;
+    isNew?: boolean;
 }
 
 const ProductsSearchPage = ({
@@ -94,7 +95,7 @@ const ProductsSearchPage = ({
 
             <ProductsListFilters pageData={pageData} attributes={attributes} radioAttributes={radioAttributes} variations={variations} types={types} query={query} />
 
-            <ProductsList products={products} />
+            <ProductsList products={products} additional={pageData} />
         </>
     );
 };

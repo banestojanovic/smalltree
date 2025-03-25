@@ -62,6 +62,18 @@ class HomeController extends Controller
             ->limit(4)
             ->get());
 
+        $newProducts = [
+            'title' => $promotion_settings->new_title['sr'] ?? '',
+            'subtitle' => $promotion_settings->new_subtitle['sr'] ?? '',
+            'image' => ! empty($promotion_settings->new_bg_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->new_bg_image[0]) : asset('storage/site/images/hero_art.webp'),
+            'products' => ProductData::collect(Product::with('cover', 'categories')
+                ->active()
+                ->when(! empty($promotion_settings->new_products),
+                    fn ($q) => $q->whereIn('id', $promotion_settings->new_products))
+                ->inRandomOrder()
+                ->limit(3)
+                ->get()),
+        ];
 
         $teaOfTheMonth = [
             'title' => $promotion_settings->tea_of_the_month_title['sr'] ?? '',
@@ -85,7 +97,7 @@ class HomeController extends Controller
                 ->when(! empty($promotion_settings->special_offer_products),
                     fn ($q) => $q->whereIn('id', $promotion_settings->special_offer_products))
                 ->inRandomOrder()
-                ->limit(3)
+                ->limit(9)
                 ->get()),
         ];
 
@@ -93,6 +105,7 @@ class HomeController extends Controller
             'popularProducts' => $popularProducts,
             'staffRecommendedProducts' => $staffRecommendedProducts,
             'teaSets' => $teaSets,
+            'newProducts' => $newProducts,
             'productOfTheMonth' => $teaOfTheMonth,
             'specialOffer' => $specialOffer,
             'hero' => [

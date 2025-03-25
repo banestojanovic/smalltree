@@ -480,5 +480,8 @@
         "product": {
             "stock": "Lager"
         }
+    },
+    "labels": {
+        "new": "Novo"
     }
 }

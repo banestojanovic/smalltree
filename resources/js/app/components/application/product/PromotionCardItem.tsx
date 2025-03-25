@@ -11,13 +11,13 @@ const PromotionCardItem = ({
 }>) => (
     <div className="flex items-start gap-x-3">
         <div className="">
-            <Avatar className="size-14 bg-white">
+            <Avatar className="size-10 bg-white">
                 <AvatarImage src={product.cover?.original_url} className="object-cover" />
                 <AvatarFallback>{product.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
             </Avatar>
         </div>
         <div>
-            <Typography as="h3" className="text-lg/7 text-white sm:text-xl">
+            <Typography as="h3" className="text-lg/7 text-white sm:text-lg/6">
                 <div>{product.name}</div>
             </Typography>
 

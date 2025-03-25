@@ -54,7 +54,7 @@ Route::get('/{type}', [\App\Http\Controllers\SearchController::class, 'search'])
     ->name('search.type');
 
 Route::get('/{custom}', [\App\Http\Controllers\SearchController::class, 'search'])
-    ->where('custom', 'smalltree-preporuka|najpopularniji|na-akciji')
+    ->where('custom', 'smalltree-preporuka|najpopularniji|na-akciji|novo')
     ->name('search.custom');
 
 if (Schema::hasTable('pages')) {

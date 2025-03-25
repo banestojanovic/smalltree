@@ -6,7 +6,11 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const ProductsList = ({ products }: { products: PaginatedData<App.Data.ProductData> }) => {
+interface AdditionalProps {
+    isNew?: boolean;
+}
+
+const ProductsList = ({ products, additional }: { products: PaginatedData<App.Data.ProductData>; additional?: AdditionalProps }) => {
     const { t } = useTranslation();
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -35,7 +39,7 @@ const ProductsList = ({ products }: { products: PaginatedData<App.Data.ProductDa
                                 >
                                     <>
                                         {isLoading && <span className="bg-background/40 absolute inset-0 z-20 size-full" />}
-                                        <ProductCard product={product} />
+                                        <ProductCard product={product} additional={additional} />
                                     </>
                                 </motion.article>
                             ))}
