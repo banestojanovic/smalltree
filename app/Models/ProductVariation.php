@@ -51,7 +51,7 @@ class ProductVariation extends Model
 
     public function discount(): HasOne
     {
-        return $this->hasOne(Discount::class);
+        return $this->hasOne(Discount::class)->where('starts_at', '<=', now())->where('ends_at', '>=', now());
     }
 
     public function product(): BelongsTo
