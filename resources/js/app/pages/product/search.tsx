@@ -46,6 +46,7 @@ const ProductsSearchPage = ({
 }) => {
     const { t } = useTranslation();
 
+    console.log(products)
     return (
         <>
             {pageData?.isCategory ? (

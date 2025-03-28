@@ -132,7 +132,7 @@ class Product extends Model implements HasMedia, Sortable
 
     public function discount(): HasOne
     {
-        return $this->hasOne(Discount::class)->where('ends_at', '>=', now());
+        return $this->hasOne(Discount::class)->where('starts_at', '<=', now())->where('ends_at', '>=', now());
     }
 
     public function discounts(): HasMany

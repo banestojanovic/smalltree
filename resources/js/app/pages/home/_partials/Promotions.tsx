@@ -71,7 +71,7 @@ const Promotions = ({
                     )}
 
                     {specialOffer && (
-                        <motion.div initial={{ y: `-20%` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.3 }} className={`col-span-12`} viewport={{ once: true }}>
+                        <motion.div initial={{ y: `20%` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.3 }} className={`col-span-12`} viewport={{ once: true }}>
                             <Link href={route('search.custom', { custom: 'smalltree-preporuka' })}>
                                 <PromotionCard
                                     title={specialOffer?.title ?? t('homepage.promotions.tea_of_the_month')}

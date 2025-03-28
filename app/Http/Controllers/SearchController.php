@@ -57,7 +57,7 @@ class SearchController extends Controller
         }
 
         $products = ProductData::collect(
-            Product::with(['variations', 'discount', 'cover', 'categories', 'productTags'])
+            Product::with(['variations', 'variations.discount', 'discount', 'cover', 'categories', 'productTags'])
                 ->active()
                 ->when(! empty($ids), fn ($query) => $query->whereIn('id', $ids))
                 ->when(! empty($selectedTypes), fn ($query) => $query->whereIn('product_type_id', $selectedTypes))
