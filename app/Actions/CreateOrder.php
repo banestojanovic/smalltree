@@ -2,10 +2,8 @@
 
 namespace App\Actions;
 
-use App\Data\CartData;
 use App\Data\CartOrderData;
 use App\Events\OrderCreated;
-use App\Models\Address;
 use App\Models\Order;
 use App\Models\User;
 use App\OrderPaymentMethod;

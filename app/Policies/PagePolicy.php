@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Models\Page;
 use App\Models\User;
 use App\UserRole;
-use Illuminate\Auth\Access\Response;
 
 class PagePolicy
 {

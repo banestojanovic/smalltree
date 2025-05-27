@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\PostCategory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
-use Spatie\Tags\Tag;
 
 class PostCategorySeeder extends Seeder
 {

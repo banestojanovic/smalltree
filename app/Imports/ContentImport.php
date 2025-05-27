@@ -99,13 +99,13 @@ class ContentImport implements ToCollection, WithHeadingRow
             return;
         }
 
-//        $manager = new ImageManager(new Driver);
-//        $image = $manager->read(file_get_contents($url));
-//
-//        $webpImage = $image->encode(new WebpEncoder(quality: 100));
+        //        $manager = new ImageManager(new Driver);
+        //        $image = $manager->read(file_get_contents($url));
+        //
+        //        $webpImage = $image->encode(new WebpEncoder(quality: 100));
 
         $filePath = "dummy/server/{$product->id}.webp";
-//        Storage::disk('public')->put($filePath, $webpImage);
+        //        Storage::disk('public')->put($filePath, $webpImage);
 
         $product->addMediaFromDisk($filePath, 'public')
             ->preservingOriginal()

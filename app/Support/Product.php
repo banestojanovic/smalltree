@@ -3,14 +3,13 @@
 namespace App\Support;
 
 use App\Data\ProductData;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class Product
 {
     public function transformProductPackagesArray(array $promoPackages): array
     {
-        //app|todo maybe should be cached.
+        // app|todo maybe should be cached.
         $productIds = collect($promoPackages)
             ->pluck('products')
             ->flatten()

@@ -16,6 +16,8 @@ class GeneralSettings extends Settings
 
     public array $hero_subtitle;
 
+    public array $notification;
+
     public static function group(): string
     {
         return 'general';

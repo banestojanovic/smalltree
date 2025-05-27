@@ -109,6 +109,8 @@ categories: Array<App.Data.CategoryData> | null;
 promoPackages: Array<any> | null;
 posts: Array<App.Data.PostData> | null;
 additional: Array<any> | null;
+notification: string | null;
+notificationDismissed: boolean | null;
 };
 export type OrderData = {
 payment_method_label: string;

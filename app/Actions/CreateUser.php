@@ -2,9 +2,7 @@
 
 namespace App\Actions;
 
-use App\Models\Order;
 use App\Models\User;
-use App\OrderStatus;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 

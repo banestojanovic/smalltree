@@ -43,7 +43,7 @@ class UpdateOrderProducts
             }
         }
 
-        //app|todo move to the order complete event.
-//        $cart->update(['status' => CartStatus::INACTIVE]);
+        // app|todo move to the order complete event.
+        //        $cart->update(['status' => CartStatus::INACTIVE]);
     }
 }

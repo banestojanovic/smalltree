@@ -9,6 +9,7 @@ use App\Data\PostData;
 use App\Data\UserData;
 use App\Models\Category;
 use App\Models\Post;
+use App\Settings\GeneralSettings;
 use App\Settings\PromotionSettings;
 use App\Support\Cart;
 use Illuminate\Http\Request;
@@ -40,14 +41,14 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $promotion_settings = new PromotionSettings;
-//        $promoPackages = (new \App\Support\Product)->transformPromoPackages($promotion_settings->promo_packages);
+        //        $promoPackages = (new \App\Support\Product)->transformPromoPackages($promotion_settings->promo_packages);
 
-//        $posts = PostData::collect(Post::query()
-//            ->with('cover', 'categories')
-//            ->orderBy('created_at', 'desc')
-//            ->active()
-//            ->take(3)
-//            ->get());
+        //        $posts = PostData::collect(Post::query()
+        //            ->with('cover', 'categories')
+        //            ->orderBy('created_at', 'desc')
+        //            ->active()
+        //            ->take(3)
+        //            ->get());
 
         return [
             ...parent::share($request),
@@ -65,6 +66,8 @@ class HandleInertiaRequests extends Middleware
                 'env' => config('app.env'),
                 'promoPackages' => [],
                 'posts' => [],
+                'notification' => (new GeneralSettings)?->notification[app()->getLocale()] ?? null,
+                'notificationDismissed' => session()->get('notification.dismissed', false),
             ]),
             'flash' => fn () => [
                 'success' => session()->get('success'),

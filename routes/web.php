@@ -16,6 +16,8 @@ Route::get('/product-category/cajevi', function () {
 // default.
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
+Route::post('/notifikacije/ukloni', [\App\Http\Controllers\NotificationsController::class, 'dismiss'])->name('notifications.dismiss');
+
 Route::get('/pretraga', [\App\Http\Controllers\SearchController::class, 'search'])->name('search.show');
 Route::get('/proizvod/{slug}', [\App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 Route::get('/product/{slug}', [\App\Http\Controllers\ProductController::class, 'showRedirect'])->name('products.showOld');

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class DiscountsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'discount';
+    protected static string $relationship = 'discountManager';
 
     public function form(Form $form): Form
     {

@@ -18,5 +18,7 @@ class GlobalData extends Data
         #[DataCollectionOf(PostData::class)]
         public ?Collection $posts,
         public ?array $additional,
+        public ?string $notification,
+        public ?bool $notificationDismissed,
     ) {}
 }

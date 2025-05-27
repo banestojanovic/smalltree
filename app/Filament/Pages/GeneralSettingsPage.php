@@ -28,6 +28,8 @@ class GeneralSettingsPage extends SettingsPage
                                 ->label('Site Name')
                                 ->required(),
                             Forms\Components\Toggle::make('site_active'),
+                            Forms\Components\Textarea::make('notification.sr')
+                                ->label('Notifikacija na sajtu'),
                         ]),
                     ]),
                     Forms\Components\Tabs\Tab::make('Hero')->schema([

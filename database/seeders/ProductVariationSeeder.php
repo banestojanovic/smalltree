@@ -15,7 +15,7 @@ class ProductVariationSeeder extends Seeder
         $products = Product::all();
 
         $products->each(function (Product $product) {
-            //50g
+            // 50g
             $variation = $product->variations()->create([
                 'sku' => $product->sku,
                 'price' => $product->price / 2,
@@ -24,7 +24,7 @@ class ProductVariationSeeder extends Seeder
 
             $variation->variations()->attach(1);
 
-            //100g
+            // 100g
             $variation = $product->variations()->create([
                 'sku' => $product->sku,
                 'price' => $product->price,
@@ -33,7 +33,7 @@ class ProductVariationSeeder extends Seeder
 
             $variation->variations()->attach(2);
 
-            //250g
+            // 250g
             $variation = $product->variations()->create([
                 'sku' => $product->sku,
                 'price' => $product->price * 2.5,
