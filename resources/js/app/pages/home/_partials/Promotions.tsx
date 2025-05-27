@@ -53,7 +53,7 @@ const Promotions = ({
                             viewport={{ once: true }}
                             className={`col-span-12 md:col-span-6 lg:col-span-7`}
                         >
-                            <Link href={route('search.custom', { custom: 'najpopularniji' })}>
+                            <Link href={route('search.custom', { custom: 'smalltree-preporuka' })}>
                                 <PromotionCard
                                     title={productOfTheMonth?.title ?? t('homepage.promotions.tea_of_the_month')}
                                     description={productOfTheMonth?.subtitle ?? t('homepage.promotions.tea_of_the_month_description')}
@@ -72,7 +72,7 @@ const Promotions = ({
 
                     {specialOffer && (
                         <motion.div initial={{ y: `20%` }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.3 }} className={`col-span-12`} viewport={{ once: true }}>
-                            <Link href={route('search.custom', { custom: 'smalltree-preporuka' })}>
+                            <Link href={route('search.custom', { custom: 'najpopularniji' })}>
                                 <PromotionCard
                                     title={specialOffer?.title ?? t('homepage.promotions.tea_of_the_month')}
                                     description={specialOffer?.subtitle ?? t('homepage.promotions.tea_of_the_month_description')}
