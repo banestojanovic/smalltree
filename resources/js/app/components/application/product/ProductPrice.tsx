@@ -12,7 +12,7 @@ const ProductPrice = ({ price, discountPrice, variant }: { price: number; discou
                         <span className={`${variant === 'light' ? 'font-light' : 'font-semibold'}`}>{formatNumber(discountPrice)}</span>
                         <span className={`font-light ${variant === 'single' ? 'text-base' : ''}`}>rsd</span>
                     </span>
-                    <span className={cn(`ml-3 font-medium line-through ${variant === 'light' ? 'text-white' : 'text-foreground/50 text-sm'} ${variant === 'single' ? 'text-base' : ''}`)}>
+                    <span className={cn(`ml-3 font-medium line-through ${variant === 'light' ? 'text-white text-sm' : 'text-foreground/50 text-sm'} ${variant === 'single' ? 'text-base' : ''}`)}>
                         {formatNumber(price)} rsd
                     </span>
                 </div>

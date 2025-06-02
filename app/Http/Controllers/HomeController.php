@@ -57,6 +57,7 @@ class HomeController extends Controller
             ])
             ->where('product_type_id', 2)
             ->active()
+            ->with('discount')
             ->when(! empty($promotedSets), fn ($q) => $q->orderByRaw('FIELD(id, '.implode(',', $promotedSets).') DESC'))
             ->when(empty($promotedSets), fn ($q) => $q->inRandomOrder())
             ->limit(4)
@@ -68,6 +69,7 @@ class HomeController extends Controller
             'image' => ! empty($promotion_settings->new_bg_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->new_bg_image[0]) : asset('storage/site/images/hero_art.webp'),
             'products' => ProductData::collect(Product::with('cover', 'categories')
                 ->active()
+                ->with('discount')
                 ->when(! empty($promotion_settings->new_products),
                     fn ($q) => $q->whereIn('id', $promotion_settings->new_products))
                 ->inRandomOrder()
@@ -81,6 +83,7 @@ class HomeController extends Controller
             'image' => ! empty($promotion_settings->tea_of_the_month_bg_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->tea_of_the_month_bg_image[0]) : asset('storage/site/images/hero_art.webp'),
             'products' => ProductData::collect(Product::with('cover', 'categories')
                 ->active()
+                ->with('discount')
                 ->when(! empty($promotion_settings->tea_of_the_month_products),
                     fn ($q) => $q->whereIn('id', $promotion_settings->tea_of_the_month_products))
                 ->inRandomOrder()
@@ -94,6 +97,7 @@ class HomeController extends Controller
             'image' => ! empty($promotion_settings->special_offer_bg_image) ? Storage::disk(Disk::Attachments)->url($promotion_settings->special_offer_bg_image[0]) : asset('storage/site/images/hero_art.webp'),
             'products' => ProductData::collect(Product::with('cover', 'categories')
                 ->active()
+                ->with('discount')
                 ->when(! empty($promotion_settings->special_offer_products),
                     fn ($q) => $q->whereIn('id', $promotion_settings->special_offer_products))
                 ->inRandomOrder()
