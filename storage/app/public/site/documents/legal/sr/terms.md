@@ -34,6 +34,7 @@ Uslovima kupovine definisali smo pravila koja će vama osigurati kupovinu a nama
 7. **Small Tree d.o.o.** može izmeniti ove Uslove u bilo kom trenutku izmenama u ovom tekstu. Trebalo bi da posetite ovu
    stranicu s vremena na vreme i proverite ažurne Uslove, jer ste njima zakonski vezani. Pojedine odredbe ovih Uslova
    mogu biti nadjačane eksplicitnim zakonskim aktima ili saopštenjima istaknutim na drugim stranicama ovog sajta.
+8. Uvažavajući potrebu za usklađivanjem svog poslovanja ne samo sa zakonima, već i sa osnovnim moralnim principima i standardima, Small Tree doo kao trgovac postupa u skladu sa kodeksom poslovne etike: [Kodeks poslovne etike](/storage/site/documents/kodeks-poslovne-etike.pdf).
 
 ### Politika privatnosti
 U ime **Small Tree d.o.o.** obavezujemo se da ćemo čuvati privatnost svih naših kupaca. Prikupljamo samo neophodne, osnovne podatke o kupcima/ korisnicima i podatke neophodne za poslovanje i informisanje korisnika u skladu sa dobrim poslovnim običajima i u cilju pružanja kvalitetne usluge. Dajemo kupcima mogućnost izbora uključujući
@@ -104,6 +105,41 @@ kupovini. Pravo na reklamaciju od strane Small Tree d.o.o, potrošač gubi u slu
 nepažljivog skladištenja robe.**
 
 Hvala vam što pijete Small Tree čajeve.
+
+
+### Vansudsko rešavanje potrošačkih sporova
+
+Potrošački spor može se rešiti postupkom vansudskog rešavanja
+potrošačkih sporova. Kao trgovac smo dužni da vas obavestimo da smo po
+zakonu obavezni da učestvujemo u ovom postupku. Vansudsko rešavanje
+potrošačkih sporova obavlja se na transparentan, efikasan, brz i
+pravičan način pred telom za vansudsko rešavanje potrošačkih sporova.
+Ministarstvo sačinjava listu tela i javno je objavljuje. Dostupna je na
+adresi  https://vansudsko.must.gov.rs/adrbodies
+
+Postupak pred telom može da pokrene potrošač samo ukoliko je prethodno
+izjavio reklamaciju ili prigovor trgovcu. Potrošač protekom jedne godine
+od dana (bezuspešnog) podnošenja reklamacije gubi pravo na podnošenje
+predloga za vansudsko rešavanje spora.
+Vansudsko rešavanje potrošačkog spora može da traje najduže 90 dana od
+dana podnošenja predloga.
+
+Vansudsko rešavanje potrošačkih sporova, ne primenjuje se, pored
+ostalog:
+* u potrošačkim sporovima koji su predmet Zakona o zaštiti potrošača,
+ako je vansudsko rešavanje sporova uređeno posebnim zakonom, a naročito
+u oblasti pružanja elektronskih komunikacionih usluga, poštanskih
+usluga, finansijskih usluga, osim finansijskih pogodbi, usluga
+putovanja;
+* za rešavanje sporova po procedurama koje je ustanovio sam trgovac;
+* na neposredne pregovore između potrošača i trgovca;
+* na pokušaj mirenja strana povodom spora u parničnom postupku;
+* u postupcima koje je trgovac pokrenuo protiv potrošača.
+
+Svaka stranka u postupku vansudskog rešavanja potrošačkog spora plaća
+svoje troškove (troškovi zastupanja, putni troškovi i sl.). Rad tela za
+vansudsko rešavanje potrošačkog spora je besplatan za stranke u postupku
+vansudskog rešavanja potrošačkog spora.
 
 ### Povraćaj sredstava
 
