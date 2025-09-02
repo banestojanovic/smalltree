@@ -16,7 +16,6 @@ const Promotions = ({
 }>) => {
     const { t } = useTranslation();
 
-    console.log(specialOffer);
     return (
         <section className="mt-10 h-full overflow-hidden sm:mt-20">
             <div className="container">
