@@ -46,7 +46,6 @@ const ProductsSearchPage = ({
 }) => {
     const { t } = useTranslation();
 
-    console.log(products)
     return (
         <>
             {pageData?.isCategory ? (
@@ -89,6 +88,25 @@ const ProductsSearchPage = ({
                             </motion.div>
                         )}
                     </div>
+
+                    {pageData?.slug === 'korporativni-pokloni' && (
+                        <div className="container mx-auto mt-5">
+                            <div className={`grid grid-cols-4 gap-2 sm:gap-4`}>
+                                <figure className={`rounded bg-white p-1.5`}>
+                                    <img src="/storage/site/other/kp-1.jpg" alt="Primer korporativnog poklona" className={`aspect-square rounded object-cover`} />
+                                </figure>
+                                <figure className={`rounded bg-white p-1.5`}>
+                                    <img src="/storage/site/other/kp-2.jpg" alt="Primer korporativnog poklona" className={`aspect-square rounded object-cover`} />
+                                </figure>
+                                <figure className={`rounded bg-white p-1.5`}>
+                                    <img src="/storage/site/other/kp-3.jpg" alt="Primer korporativnog poklona" className={`aspect-square rounded object-cover`} />
+                                </figure>
+                                <figure className={`rounded bg-white p-1.5`}>
+                                    <img src="/storage/site/other/kp-4.jpg" alt="Primer korporativnog poklona" className={`aspect-square rounded object-cover`} />
+                                </figure>
+                            </div>
+                        </div>
+                    )}
                 </section>
             ) : (
                 ''

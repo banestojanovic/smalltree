@@ -39,18 +39,18 @@ export default function PhotoSlider({ product }: PageProps<{ product: App.Data.P
                                 <SwiperSlide key={photo?.id}>
                                     <div className="relative">
                                         {product?.tag && (
-                                            <span className={`bg-ternary absolute top-4 rounded-md px-4 py-1.5 text-sm text-white ${product?.discount ? 'left-4' : 'right-4'}`}>
+                                            <span className={`absolute top-2 rounded-md bg-yellow-600 px-4 py-1.5 text-xs text-white ${product?.discount ? 'left-2' : 'right-2'}`}>
                                                 {product.tag.name}
                                             </span>
                                         )}
                                         {product.discount && (
-                                            <span className="bg-primary absolute top-4 right-4 rounded-md px-4 py-1.5 text-sm text-white">
+                                            <span className="bg-primary absolute top-2 right-2 rounded-md px-4 py-1.5 text-sm text-white">
                                                 {t('order.on_action')} {product?.discount?.percentage ? `${product.discount.percentage}%` : ''}
                                             </span>
                                         )}
                                         {product?.stock_status === 0 && (
                                             <span
-                                                className={`bg-ternary absolute rounded-md px-4 py-1.5 text-xs text-white ${product?.discount ? 'left-2' : 'right-2'} ${product?.discount && product?.tag ? 'top-4' : 'top-2'}`}
+                                                className={`bg-ternary absolute rounded-md px-4 py-1.5 text-xs text-white ${product?.discount || product?.tag ? 'left-2' : 'right-2'} ${product?.discount && product?.tag ? 'top-2' : 'top-2'}`}
                                             >
                                                 {t('product.out_of_stock')}
                                             </span>
