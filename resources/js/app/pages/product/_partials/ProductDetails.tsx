@@ -170,7 +170,7 @@ const ProductDetails = ({ product }: PageProps<{ product: App.Data.ProductData }
                             </svg>
                         </motion.span>
                         <motion.span initial={{ y: 50 }} whileInView={{ y: 0 }} transition={{ type: 'spring', duration: 0.3 }} viewport={{ once: true }}>
-                            {t('product.free_shipping_over')} 5,000rsd
+                            {t('product.free_shipping_over')} 7,000rsd
                         </motion.span>
                     </Typography>
 

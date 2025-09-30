@@ -256,7 +256,7 @@
             "shopping_benefits": {
                 "shop_with_us": "Shop with us",
                 "benefit_of_buying": "Benefits of buying SmallTree teas",
-                "benefit1": "Free shipping for all orders over 5,000",
+                "benefit1": "Free shipping for all orders over 7,000",
                 "benefit2": "14-day money-back guarantee",
                 "benefit3": "Secure shopping"
             },
@@ -668,7 +668,7 @@
             "shopping_benefits": {
                 "shop_with_us": "Kupovina kod nas",
                 "benefit_of_buying": "Prednosti kupovine SmallTree čajeva",
-                "benefit1": "Besplatna dostava za sve porudžbine preko 5,000",
+                "benefit1": "Besplatna dostava za sve porudžbine preko 7,000",
                 "benefit2": "Povraćaj novca u roku od 14 dana od plaćanja",
                 "benefit3": "Sigurna kupovina"
             },
@@ -857,7 +857,7 @@
             },
             "shipping_information": {
                 "title": "Informacije o dostavi",
-                "paragraph1": "Za sve porudžbine preko 5000 dinara isporuka je besplatna. Isporuka se vrši kurirskom službom GLS za pošiljke čiji trošak snosi pošiljalac-„Small Tree doo“ na teritoriji Beograda i Srbije. Kupac će o pošiljci biti obavešten putem sms poruke.",
+                "paragraph1": "Za sve porudžbine preko 7000 dinara isporuka je besplatna. Isporuka se vrši kurirskom službom GLS za pošiljke čiji trošak snosi pošiljalac-„Small Tree doo“ na teritoriji Beograda i Srbije. Kupac će o pošiljci biti obavešten putem sms poruke.",
                 "paragraph2": "Wolt – dostava na teritoriji Beograda, mogućnost isporuke robe za 30 minuta. Poručivanje i dostava čajeva se vrši isključivo putem Wolt aplikacije.",
                 "paragraph3": "DExpress- isporuka na teritoriji Srbije. Cena dostave od 360 dinara, zavisno od težine paketa. Isporuka je danas za sutra, može potrajati 2 do 3 radna dana",
                 "paragraph4": "Post Express- isporuka na teritoriji Beograda ili na lični zahtev kupca.",
