@@ -122,6 +122,7 @@ class ProductResource extends Resource
                         ->disk(Disk::ProductImages)
                         ->collection(Disk::ProductImages)
                         ->columnSpanFull(),
+                    
                 ])->columnSpan(['lg' => 1]),
 
                 Forms\Components\Section::make('Attributes')->columns(2)->schema(function () {
