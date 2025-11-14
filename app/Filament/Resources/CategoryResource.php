@@ -47,11 +47,13 @@ class CategoryResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
 
-                Forms\Components\SpatieMediaLibraryFileUpload::make('cover')
+                Forms\Components\SpatieMediaLibraryFileUpload::make('images')
                     ->openable()
                     ->reorderable()
+                    ->multiple()
                     ->image()
                     ->appendFiles()
+                    ->panelLayout('grid')
                     ->disk(Disk::CategoryImages)
                     ->collection(Disk::CategoryImages)
                     ->columnSpanFull(),

@@ -25,6 +25,11 @@ interface PageDataProps {
     slug?: string;
     isCategory?: boolean;
     isNew?: boolean;
+    category?: App.Data.CategoryData;
+}
+
+interface ImageProps {
+    original_url: string;
 }
 
 const ProductsSearchPage = ({
@@ -89,21 +94,14 @@ const ProductsSearchPage = ({
                         )}
                     </div>
 
-                    {pageData?.slug === 'korporativni-pokloni' && (
+                    {pageData?.category && pageData.category?.images?.length > 1 && (
                         <div className="container mx-auto mt-5">
                             <div className={`grid grid-cols-4 gap-2 sm:gap-4`}>
-                                <figure className={`rounded bg-white p-1.5`}>
-                                    <img src="/storage/site/other/kp-1.jpg" alt="Primer korporativnog poklona" className={`aspect-square rounded object-cover`} />
-                                </figure>
-                                <figure className={`rounded bg-white p-1.5`}>
-                                    <img src="/storage/site/other/kp-2.jpg" alt="Primer korporativnog poklona" className={`aspect-square rounded object-cover`} />
-                                </figure>
-                                <figure className={`rounded bg-white p-1.5`}>
-                                    <img src="/storage/site/other/kp-3.jpg" alt="Primer korporativnog poklona" className={`aspect-square rounded object-cover`} />
-                                </figure>
-                                <figure className={`rounded bg-white p-1.5`}>
-                                    <img src="/storage/site/other/kp-4.jpg" alt="Primer korporativnog poklona" className={`aspect-square rounded object-cover`} />
-                                </figure>
+                                {pageData.category.images.slice(1).map((image: ImageProps, index: number) => (
+                                    <figure key={index} className={`rounded bg-white p-1.5`}>
+                                        <img src={image?.original_url ?? null} alt="Primer korporativnog poklona" className={`aspect-square rounded object-cover`} />
+                                    </figure>
+                                ))}
                             </div>
                         </div>
                     )}

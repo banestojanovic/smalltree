@@ -91,6 +91,7 @@ name: string;
 slug: string;
 description: string | null;
 cover: any | null;
+images: any | null;
 descendants: Array<App.Data.CategoryData> | null;
 };
 export type DiscountData = {

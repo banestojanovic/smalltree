@@ -144,6 +144,7 @@ class SearchController extends Controller
                 'slug' => request('category') ?? request('slug') ?? '',
                 'isCategory' => (bool) request('category'),
                 'isNew' => request('custom') === 'novo',
+                'category' => isset($category) && (bool) request('category') ? $category->load('images') : null,
             ],
             'products' => $products,
             'variations' => $variations,

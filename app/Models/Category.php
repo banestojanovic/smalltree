@@ -6,6 +6,7 @@ use App\Support\Disk;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -48,6 +49,11 @@ class Category extends Model implements HasMedia, Sortable
     public function cover(): MorphOne
     {
         return $this->morphOne(Media::class, 'model')->where('collection_name', Disk::CategoryImages)->orderBy('order_column');
+    }
+
+    public function images(): MorphMany
+    {
+        return $this->morphMany(Media::class, 'model')->where('collection_name', Disk::CategoryImages)->orderBy('order_column');
     }
 
     public function products(): BelongsToMany
