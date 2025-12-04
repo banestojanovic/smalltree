@@ -52,7 +52,7 @@ Route::get('/politika-privatnosti', [\App\Http\Controllers\PageController::class
 Route::get('/placanje-neuspesno/{payment}', [\App\Http\Controllers\PaymentStatusController::class, 'paymentFailed'])->name('payment_failed.show');
 
 Route::get('/{type}', [\App\Http\Controllers\SearchController::class, 'search'])
-    ->where('type', 'cajevi|pribor|dodaci|ostalo')
+    ->where('type', 'cajevi|pribor|dodaci|promocije|ostalo')
     ->name('search.type');
 
 Route::get('/{custom}', [\App\Http\Controllers\SearchController::class, 'search'])

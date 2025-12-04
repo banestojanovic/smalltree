@@ -28,6 +28,9 @@ class ProductData extends Data
     #[Computed]
     public ?TagData $tag;
 
+    #[Computed]
+    public ?string $tagColorClass;
+
     public function __construct(
         public int $id,
         public string $name,
@@ -64,5 +67,15 @@ class ProductData extends Data
 
         $this->category = $categories?->last();
         $this->tag = $this->productTags?->first();
+
+        if ($this->tag?->slug === 'kratkotrajna-ponuda') {
+            $this->tagColorClass = 'bg-lime-600';
+        } elseif ($this->tag?->slug === 'novo-u-ponudi') {
+            $this->tagColorClass = 'bg-rose-600';
+        } elseif ($this->tag?->slug === 'ponovo-dostupno') {
+            $this->tagColorClass = 'bg-teal-600';
+        } else {
+            $this->tagColorClass = 'bg-yellow-600';
+        }
     }
 }

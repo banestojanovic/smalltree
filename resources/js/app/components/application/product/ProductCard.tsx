@@ -23,7 +23,7 @@ const ProductCard = ({ product, additional }: { product: PageProps<App.Data.Prod
                 </span>
             )}
             {(product?.tag || additional?.isNew) && (
-                <span className={`absolute top-2 rounded-md bg-yellow-600 px-4 py-1.5 text-xs text-white ${product?.discount ? 'left-2' : 'right-2'}`}>{product?.tag?.name || t('labels.new')}</span>
+                <span className={`absolute top-2 rounded-md ${product?.tagColorClass ?? 'bg-yellow-600'} px-4 py-1.5 text-xs text-white ${product?.discount ? 'left-2' : 'right-2'}`}>{product?.tag?.name || t('labels.new')}</span>
             )}
             {product?.stock_status === 0 && (
                 <span

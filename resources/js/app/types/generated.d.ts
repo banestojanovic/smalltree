@@ -191,6 +191,7 @@ grouped_attributes: any | Array<any> | null;
 additional: Array<any> | null;
 category: App.Data.CategoryData | null;
 tag: App.Data.TagData | null;
+tagColorClass: string | null;
 id: number;
 name: string;
 slug: string;
@@ -238,6 +239,7 @@ status: App.SubscriberStatus | null;
 export type TagData = {
 id: number;
 name: string;
+slug: string;
 };
 export type UserData = {
 id: number | null;

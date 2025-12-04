@@ -103,6 +103,13 @@ class SearchController extends Controller
                 ->orderByDiscount()
                 ->orderBy('order_column')
                 ->when((request('custom') === 'na-akciji'), fn ($query) => $query->has('discount'))
+                ->when((request('type') === 'promocije'), function ($query) {
+                    return $query->where(function ($q) {
+                        $q->has('discount')->orWhere(function ($q2) {
+                            $q2->withAnyTags(['novo-u-ponudi', 'kratkotrajna-ponuda'], 'product');
+                        });
+                    });
+                })
                 ->paginate(16)
         );
 

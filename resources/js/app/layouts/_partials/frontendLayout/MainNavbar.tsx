@@ -33,7 +33,7 @@ export default function TopNavbar() {
                                     </motion.span>
                                 </NavLink>
 
-                                <NavLink href={route('search.show')} active={route().current('search.show')}>
+                                <NavLink href={route('search.type', { type: 'promocije' })} active={route().current('search.type', { type: 'promocije' })}>
                                     <motion.span initial={{ x: 30 }} animate={{ x: 0 }} transition={{ delay: 0.1 }}>
                                         {t('menu.top.promotions')}
                                     </motion.span>
