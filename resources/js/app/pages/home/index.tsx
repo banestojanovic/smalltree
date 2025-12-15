@@ -29,7 +29,7 @@ const Home = ({
 
     return (
         <>
-            <span className={`bg-lime-600 bg-rose-600 bg-teal-600`}></span>
+            <span className={`bg-lime-700 bg-rose-800`}></span>
             <Head title={t('enums.page.titles.home')} />
             <Hero hero={hero} />
             <CategoriesSlider />

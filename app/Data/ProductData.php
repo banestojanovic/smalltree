@@ -69,11 +69,11 @@ class ProductData extends Data
         $this->tag = $this->productTags?->first();
 
         if ($this->tag?->slug === 'kratkotrajna-ponuda') {
-            $this->tagColorClass = 'bg-lime-600';
+            $this->tagColorClass = 'bg-lime-700';
         } elseif ($this->tag?->slug === 'novo-u-ponudi') {
-            $this->tagColorClass = 'bg-rose-600';
+            $this->tagColorClass = 'bg-rose-800';
         } elseif ($this->tag?->slug === 'ponovo-dostupno') {
-            $this->tagColorClass = 'bg-teal-600';
+            $this->tagColorClass = 'bg-primary';
         } else {
             $this->tagColorClass = 'bg-yellow-600';
         }
