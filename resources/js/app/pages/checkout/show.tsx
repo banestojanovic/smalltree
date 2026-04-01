@@ -5,12 +5,14 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import FieldGroup from '@/app/components/ui/FieldGroup';
 import { Input } from '@/app/components/ui/input';
 import { Label } from '@/app/components/ui/label';
+import { Progress } from '@/app/components/ui/progress';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
 import { Textarea } from '@/app/components/ui/textarea';
 import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import ProductsList from '@/app/pages/checkout/_partials/ProductsList';
 import { PageProps } from '@/app/types';
+import useNumberFormatter from '@/functions';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { FormEventHandler, ReactNode, useRef, useState } from 'react';
@@ -22,6 +24,13 @@ const CheckoutIndex = () => {
 
     const cart = usePage<PageProps<{ cart: App.Data.CartData }>>().props.cart;
     const global = usePage<PageProps<{ global: App.Data.GlobalData }>>().props.global;
+    const formatNumber = useNumberFormatter();
+
+    const FREE_SHIPPING_THRESHOLD = 8000;
+    const subtotal = cart?.subtotal ?? 0;
+    const freeShippingProgress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
+    const remainingForFreeShipping = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
+    const hasFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
 
     const [loading, setLoading] = useState<boolean>(false);
     const [redirecting, setRedirecting] = useState<boolean>(false);
@@ -287,6 +296,20 @@ const CheckoutIndex = () => {
 
                             <Card className={'rounded-md border-none shadow-none'}>
                                 <CardContent className={`p-2 md:p-10`}>
+                                    <div className="border-ternary bg-ternary/5 mb-6 rounded-lg border p-4">
+                                        <p className="text-ternary text-sm font-medium">
+                                            {hasFreeShipping ? (
+                                                t('cart.free_shipping_unlocked')
+                                            ) : (
+                                                <>
+                                                    {t('cart.free_shipping_remaining_prefix')} <strong>{formatNumber(remainingForFreeShipping)} rsd</strong>{' '}
+                                                    {t('cart.free_shipping_remaining_suffix')}
+                                                </>
+                                            )}
+                                        </p>
+                                        <Progress className="bg-ternary/15 mt-3 h-2" value={freeShippingProgress} />
+                                    </div>
+
                                     <ProductsList cart={cart} />
 
                                     <div className={`mt-10`}>

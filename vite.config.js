@@ -5,6 +5,10 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import run from 'vite-plugin-run';
 
+const appUrl = process.env.APP_URL || 'https://smalltree.test';
+const appHost = new URL(appUrl).hostname;
+const appProtocol = new URL(appUrl).protocol.replace(':', '');
+
 export default defineConfig({
     plugins: [
         tailwindcss(),
@@ -27,6 +31,19 @@ export default defineConfig({
             },
         ]),
     ],
+    server: {
+        host: appHost,
+        port: 5173,
+        strictPort: true,
+        cors: {
+            origin: appUrl,
+            credentials: true,
+        },
+        hmr: {
+            host: appHost,
+            protocol: appProtocol === 'https' ? 'wss' : 'ws',
+        },
+    },
     resolve: {
         alias: {
             '@lang': path.resolve('resources/lang'),

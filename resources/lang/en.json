@@ -159,6 +159,9 @@
         "check_out": "Checkout",
         "remove": "Remove",
         "pay_now": "Pay now",
+        "free_shipping_unlocked": "You have unlocked free shipping.",
+        "free_shipping_remaining_prefix": "Add",
+        "free_shipping_remaining_suffix": "more to unlock free shipping.",
         "alert": {
             "title": "Are you sure?",
             "description": "Are you sure you want to remove this product from the cart?",

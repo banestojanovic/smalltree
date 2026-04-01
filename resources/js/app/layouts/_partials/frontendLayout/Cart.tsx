@@ -1,4 +1,5 @@
 import { Button } from '@/app/components/ui/button';
+import { Progress } from '@/app/components/ui/progress';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/app/components/ui/sheet';
 import RemoveFromCartButton from '@/app/layouts/_partials/frontendLayout/RemoveFromCartButton';
 import UpdateCartQuantity from '@/app/layouts/_partials/frontendLayout/UpdateCartQuantity';
@@ -16,6 +17,12 @@ export default function Cart() {
     const { t } = useTranslation();
 
     const formatNumber = useNumberFormatter();
+
+    const FREE_SHIPPING_THRESHOLD = 8000;
+    const subtotal = cart?.subtotal ?? 0;
+    const freeShippingProgress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
+    const remainingForFreeShipping = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
+    const hasFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
 
     useEffect(() => {
         if (global?.action === 'cart.updated') {
@@ -91,6 +98,20 @@ export default function Cart() {
                             </div>
 
                             <div className={`border-input mt-10 flex flex-col space-y-10 border-t pt-10 pb-6`}>
+                                <div className="border-ternary bg-ternary/5 rounded-lg border p-4">
+                                    <p className="text-ternary text-sm font-medium">
+                                        {hasFreeShipping ? (
+                                            t('cart.free_shipping_unlocked')
+                                        ) : (
+                                            <>
+                                                {t('cart.free_shipping_remaining_prefix')} <strong>{formatNumber(remainingForFreeShipping)} rsd</strong>{' '}
+                                                {t('cart.free_shipping_remaining_suffix')}
+                                            </>
+                                        )}
+                                    </p>
+                                    <Progress className="bg-ternary/15 mt-3 h-2" value={freeShippingProgress} />
+                                </div>
+
                                 <div className={`w-full space-y-6`}>
                                     {cart && cart?.subtotal > 0 && (
                                         <div className="flex items-center justify-between">

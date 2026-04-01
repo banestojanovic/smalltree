@@ -7,7 +7,6 @@ import { PageProps } from '@/app/types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useForm, usePage } from '@inertiajs/react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { PropsWithChildren, ReactNode } from 'react';
 import FlashMessages from '../components/ui/FlashMessages';
 import MainNavbar from './_partials/frontendLayout/MainNavbar';
@@ -44,41 +43,32 @@ export default function FrontendLayout({ header, children }: PropsWithChildren<{
 
     return (
         <div className="bg-background relative min-h-screen">
-            <AnimatePresence>
+            <div className={`border-primary bg-primary relative w-full border-y-[3px] max-md:mt-10 ${notification && !notificationDismissed ? 'py-1' : 'h-[6px]'}`}>
                 {notification && !notificationDismissed && (
-                    <motion.div
-                        className={`fixed bottom-4 left-1/2 z-50 w-11/12 -translate-x-1/2 lg:max-w-7xl`}
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 10, opacity: 1 }}
-                        exit={{ y: 20, opacity: 0 }}
-                        transition={{ type: 'spring' }}
-                    >
-                        <Alert className={`bg-primary`}>
-                            <AlertDescription className={`flex items-center justify-between text-white lg:text-base`}>
-                                <span>{notification}</span>
-                                <Button type={`button`} variant={`ghost`} onClick={dismissNotification}>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-x-icon lucide-x"
-                                    >
-                                        <path d="M18 6 6 18" />
-                                        <path d="m6 6 12 12" />
-                                    </svg>
-                                </Button>
-                            </AlertDescription>
-                        </Alert>
-                    </motion.div>
+                    <Alert className="mx-auto max-w-7xl border-none bg-transparent px-3 py-0">
+                        <AlertDescription className="flex items-center justify-between gap-2 text-xs text-white sm:text-sm">
+                            <span className="">{notification}</span>
+                            <Button type="button" variant="ghost" onClick={dismissNotification} className="hover:text-primary size-6 p-0 text-white hover:bg-white">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-x-icon lucide-x"
+                                >
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                </svg>
+                            </Button>
+                        </AlertDescription>
+                    </Alert>
                 )}
-            </AnimatePresence>
-            <div className="border-primary bg-primary relative flex h-[6px] w-full border-t-[6px] max-md:mt-10"></div>
+            </div>
             <TopNavbar />
             <MainNavbar />
 

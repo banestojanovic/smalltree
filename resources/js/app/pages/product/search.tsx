@@ -2,7 +2,7 @@ import CategoriesSlider from '@/app/components/application/category/CategoriesSl
 import { Typography } from '@/app/components/ui/typography';
 import FrontendLayout from '@/app/layouts/FrontendLayout';
 import { PaginatedData } from '@/app/types';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -50,6 +50,7 @@ const ProductsSearchPage = ({
     query: queryProps;
 }) => {
     const { t } = useTranslation();
+    const isMatchaCategory = Boolean(pageData?.isCategory && pageData?.slug?.toLowerCase().includes('matcha'));
 
     return (
         <>
@@ -93,6 +94,17 @@ const ProductsSearchPage = ({
                             </motion.div>
                         )}
                     </div>
+
+                    {isMatchaCategory && (
+                        <div className="container mx-auto mt-4">
+                            <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
+                                <span className="font-medium">Pomoć pri izboru mače:</span>{' '}
+                                <Link href="/clanak/kako-odabrati-macamatcha-caj" className="underline underline-offset-2 hover:no-underline">
+                                    Pročitajte vodič iz magazina
+                                </Link>
+                            </div>
+                        </div>
+                    )}
 
                     {pageData?.category && pageData.category?.images?.length > 1 && (
                         <div className="container mx-auto mt-5">
